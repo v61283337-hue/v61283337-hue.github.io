@@ -80,7 +80,7 @@
     <button onclick="openSection('ukus')">UK vs American English</button>
     <button onclick="openSection('slang')">English Slang Only 😈</button>
   </div>
-
+<button onclick="openSection('grammar')">Say vs Tell & Common Grammar 🧠</button>
   <!-- UK vs US -->
   <div class="card hidden" id="ukus">
     <h2>UK vs American English</h2>
@@ -94,7 +94,34 @@
 
     <button onclick="goBack()">⬅ Back</button>
   </div>
+<div class="card hidden" id="grammar">
+  <h2>Common Grammar Confusions</h2>
 
+  <h3>Say vs Tell</h3>
+  <p><strong>Say</strong> → words</p>
+  <p><strong>Tell</strong> → person</p>
+
+  <p>❌ She said me the truth</p>
+  <p>✅ She told me the truth</p>
+  <p>✅ She said she was tired</p>
+
+  <h3>Won’t vs Will Not</h3>
+  <p><strong>Won’t</strong> = will not (irregular)</p>
+
+  <p>❌ I’ll not go</p>
+  <p>✅ I won’t go</p>
+  <p>✅ I will not go</p>
+
+  <h3>Did / Didn’t + Base Verb (V1)</h3>
+  <p>After <strong>did / didn’t</strong>, use base verb</p>
+
+  <p>❌ I didn’t went</p>
+  <p>❌ I didn’t gone</p>
+  <p>✅ I didn’t go</p>
+  <p>✅ Did you eat?</p>
+
+  <button onclick="goBack()">⬅ Back</button>
+</div>
   <!-- SLANG -->
   <div class="card hidden" id="slang">
     <h2>English Slang (Real Life)</h2>
@@ -118,7 +145,7 @@
 <footer>
   © 2025 Real English IRL
 </footer>
-
+document.getElementById('grammar').classList.add('hidden');
 <script>
   function openSection(id) {
     document.getElementById('menu').classList.add('hidden');
