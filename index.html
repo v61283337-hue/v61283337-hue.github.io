@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Real English IRL</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn real UK and American English plus slang people actually use. No boring textbook English.">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f3f4f6;
+      color: #111;
+    }
+    header {
+      background: #111827;
+      color: white;
+      padding: 24px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    main {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+    button {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      margin-bottom: 12px;
+    }
+    button:hover {
+      background: #1e40af;
+    }
+    .hidden {
+      display: none;
+    }
+    h2 {
+      color: #2563eb;
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Real English IRL</h1>
+  <p>English people actually use — UK 🇬🇧 & US 🇺🇸</p>
+</header>
+
+<main>
+
+  <!-- MENU -->
+  <div class="card" id="menu">
+    <h2>Pick a lesson 👇</h2>
+    <button onclick="openSection('ukus')">UK vs American English</button>
+    <button onclick="openSection('slang')">English Slang Only 😈</button>
+  </div>
+
+  <!-- UK vs US -->
+  <div class="card hidden" id="ukus">
+    <h2>UK vs American English</h2>
+
+    <p><strong>UK:</strong> flat → <strong>US:</strong> apartment</p>
+    <p><strong>UK:</strong> lift → <strong>US:</strong> elevator</p>
+    <p><strong>UK:</strong> petrol → <strong>US:</strong> gas</p>
+    <p><strong>UK:</strong> biscuit → <strong>US:</strong> cookie</p>
+
+    <p>Same language. Different vibes.</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- SLANG -->
+  <div class="card hidden" id="slang">
+    <h2>English Slang (Real Life)</h2>
+
+    <p><strong>UK:</strong> knackered = very tired</p>
+    <p><strong>US:</strong> wiped = very tired</p>
+
+    <p><strong>UK:</strong> mate = friend</p>
+    <p><strong>US:</strong> bro = friend</p>
+
+    <p><strong>US:</strong> no cap = no lie</p>
+    <p><strong>US:</strong> cooked = done / finished / in trouble</p>
+
+    <p>This is casual English. Don’t use it in exams.</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 Real English IRL
+</footer>
+
+<script>
+  function openSection(id) {
+    document.getElementById('menu').classList.add('hidden');
+    document.getElementById(id).classList.remove('hidden');
+  }
+
+  function goBack() {
+    document.getElementById('ukus').classList.add('hidden');
+    document.getElementById('slang').classList.add('hidden');
+    document.getElementById('menu').classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>
