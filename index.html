@@ -3,253 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <title>Real English IRL</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Learn real UK and American English plus slang people actually use. No boring textbook English.">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
-      margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #f3f4f6;
-      color: #111;
-    }
-    header {
-      background: #111827;
-      color: white;
-      padding: 24px;
-      text-align: center;
-    }
-    header h1 {
+      background: #111;
+      color: #eee;
       margin: 0;
-      font-size: 2rem;
+      padding: 0;
     }
     main {
-      padding: 20px;
-      max-width: 900px;
+      max-width: 800px;
       margin: auto;
+      padding: 20px;
+    }
+    h2, h3, h4 {
+      color: #fff;
     }
     .card {
-      background: white;
+      background: #1c1c1c;
       padding: 20px;
-      border-radius: 14px;
+      border-radius: 12px;
       margin-bottom: 20px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
     button {
-      width: 100%;
-      padding: 16px;
-      font-size: 1.1rem;
+      background: #3b82f6;
+      color: #fff;
       border: none;
-      border-radius: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
       cursor: pointer;
-      background: #2563eb;
-      color: white;
-      margin-bottom: 12px;
+      margin: 6px 0;
+      font-size: 16px;
     }
     button:hover {
-      background: #1e40af;
+      background: #2563eb;
     }
     .hidden {
       display: none;
     }
-    h2 {
-      color: #2563eb;
-      margin-top: 0;
+    hr {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 20px 0;
     }
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      opacity: 0.6;
+    p {
+      line-height: 1.6;
     }
   </style>
 </head>
 
 <body>
-
-<header>
-  <h1>Real English IRL</h1>
-  <p>English people actually use — UK 🇬🇧 & US 🇺🇸</p>
-</header>
-
 <main>
 
   <!-- MENU -->
   <div class="card" id="menu">
-    <h2>Pick a lesson 👇</h2>
-    <button onclick="openSection('ukus')">UK vs American English</button>
-    <button onclick="openSection('slang')">English Slang Only 😈</button>
+    <h2>Real English (Not Textbook)</h2>
+    <p>Learn how people actually speak — mistakes, slang, pronunciation.</p>
+
+    <button onclick="openSection('slang')">🔥 Slang</button>
+    <button onclick="openSection('phonetics')">🗣️ Phonetics (UK vs US)</button>
+    <button onclick="openSection('mistakes')">❌ Common Mistakes</button>
+    <button onclick="openSection('grammar')">📘 Say vs Tell</button>
+    <button onclick="openSection('modern')">⚡ Acronyms & Contractions</button>
   </div>
-<button onclick="openSection('mistakes')">Common English Mistakes 🚫</button>
+
+  <!-- SLANG -->
+  <div class="card hidden" id="slang">
+    <h2>🔥 Modern Slang (Real Life)</h2>
+
+    <h3>I’m cooked</h3>
+    <p><strong>Meaning:</strong> You’re in serious trouble.</p>
+    <p>❌ I am cooked because I did not do homework.</p>
+    <p>✅ I’m cooked 💀 I didn’t do my homework.</p>
+
+    <h3>It’s over</h3>
+    <p>Something is completely ruined.</p>
+    <p>✅ I failed the exam. It’s over bro.</p>
+
+    <h3>Lowkey / Highkey</h3>
+    <p><strong>Lowkey</strong> = secretly<br><strong>Highkey</strong> = very obviously</p>
+    <p>✅ I lowkey like English.</p>
+    <p>✅ I highkey hate exams.</p>
+
+    <h3>Valid</h3>
+    <p>Reasonable. Makes sense.</p>
+    <p>✅ Skipping that class was risky but honestly… valid.</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- PHONETICS -->
+  <div class="card hidden" id="phonetics">
+    <h2>🗣️ Phonetics (How It’s Actually Said)</h2>
+
+    <h3>Flower</h3>
+    <p><strong>US:</strong> flau-uh</p>
+    <p><strong>UK:</strong> flau-uh (shorter, softer ending)</p>
+
+    <h3>Water</h3>
+    <p><strong>US:</strong> wah-der</p>
+    <p><strong>UK:</strong> waw-tuh</p>
+
+    <h3>Did you eat?</h3>
+    <p><strong>Real speech:</strong> did-ja eat?</p>
+
+    <h3>Going to</h3>
+    <p><strong>Real speech:</strong> gonna</p>
+
+    <h3>Want to</h3>
+    <p><strong>Real speech:</strong> wanna</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- MISTAKES (LONGEST) -->
+  <div class="card hidden" id="mistakes">
+    <h2>❌ Common English Mistakes (Read This)</h2>
+<h3>“I doesn’t know” ❌</h3>
+
+<p>❌ I doesn’t know.</p>
+<p>✅ I don’t know.</p>
+
+<p>
+<strong>Why this is wrong:</strong><br>
+<strong>Does</strong> already has the <em>-s</em> for third person,
+so the verb after it must stay in its base form.
+</p>
+
+<p>
+When you use <strong>do / does</strong>, the main verb loses all endings.
+</p>
+
+<p>❌ He doesn’t <strong>knows</strong>.</p>
+<p>✅ He doesn’t <strong>know</strong>.</p>
+
+<p>
+Think of it like this:<br>
+<strong>Does</strong> is doing all the grammar work — the verb just chills.
+</p>
+    <h3>Did a mistake</h3>
+    <p>❌ I did a mistake.</p>
+    <p>✅ I made a mistake.</p>
+
+    <h3>I am agree</h3>
+    <p>❌ I am agree.</p>
+    <p>✅ I agree.</p>
+
+    <h3>He explained me</h3>
+    <p>❌ He explained me the rule.</p>
+    <p>✅ He explained it to me.</p>
+
+    <h3>Double past</h3>
+    <p>❌ I didn’t went.</p>
+    <p>✅ I didn’t go.</p>
+
+    <h3>Boring vs Bored</h3>
+    <p>❌ I am boring.</p>
+    <p>✅ I am bored.</p>
+
+    <button onclick="goBack()">⬅ Back</button>
+  </div>
+
+  <!-- SAY vs TELL -->
   <div class="card hidden" id="grammar">
-  <h2>Common Grammar Confusions (Big Ones)</h2>
+    <h2>📘 Say vs Tell (All Uses)</h2>
 
-<h3>1️⃣ Say vs Tell (Clear & Proper Explanation)</h3>
+    <p><strong>Say</strong> → focuses on the words.</p>
+    <p><strong>Tell</strong> → focuses on the listener.</p>
 
+    <h3>Say</h3>
+    <p>✅ She said she was tired.</p>
+    <p>✅ She said to me that she was busy.</p>
+
+    <h3>Tell</h3>
+    <p>✅ She told me the truth.</p>
+    <p>❌ She told to me the truth.</p>
+
+    <h3>Common Errors</h3>
+    <p>❌ She said me the truth.</p>
+    <p>❌ He told he was late.</p>
+
+    <p><strong>Rule:</strong> Person → tell. No person → say.</p>
 <p>
-<strong>Say</strong> and <strong>tell</strong> both report speech, but they are used differently.
-Learners often mix them up because many languages use one verb for both.
+Think of it like this:
 </p>
 
 <p>
-<strong>Say</strong> focuses on <em>what was said</em> — the words, the message, or the idea.
+<strong>Say</strong> answers the question: <em>“What was said?”</em><br>
+<strong>Tell</strong> answers the question: <em>“Who was told?”</em>
 </p>
 
 <p>
-<strong>Tell</strong> focuses on <em>who receives the information</em> — the listener.
+That’s why these two sentences feel different to native speakers.
 </p>
 
-<h4>How “Say” Works</h4>
+<h4>Say — when the listener is not important</h4>
 <p>
-Use <strong>say</strong> when the listener is not important or not mentioned.
+Use <strong>say</strong> when you care more about the message than the person.
 </p>
 
-<p>✅ She <strong>said</strong> she was tired.</p>
-<p>✅ He <strong>said</strong> “I’ll call you later.”</p>
+<p>✅ She said she doesn’t know.</p>
+<p>✅ He said it was too late.</p>
 
 <p>
-If you mention the person, use <strong>to</strong>.
+You can add a person after <strong>say</strong>, but you must use <strong>to</strong>.
 </p>
 
 <p>✅ She said <strong>to me</strong> that she was busy.</p>
 
-<h4>How “Tell” Works</h4>
+<h4>Tell — when the listener matters</h4>
 <p>
-<strong>Tell</strong> almost always needs a person directly after it.
+<strong>Tell</strong> is used when the listener is important information.
 </p>
 
-<p>✅ She <strong>told me</strong> the truth.</p>
-<p>✅ He <strong>told us</strong> a story.</p>
+<p>✅ She told <strong>me</strong> the truth.</p>
+<p>✅ He told <strong>us</strong> the answer.</p>
 
 <p>
-Do NOT use <em>to</em> after <strong>tell</strong>.
+Do not use <strong>to</strong> after <strong>tell</strong>.
 </p>
 
 <p>❌ She told <strong>to me</strong> the truth.</p>
 
-<h4>Common Mistakes</h4>
-<p>❌ She <strong>said me</strong> the truth.</p>
-<p>❌ He <strong>told</strong> he was late.</p>
+<h4>Very Common Mistakes</h4>
+<p>❌ She said me the answer.</p>
+<p>❌ He told he doesn’t know.</p>
 
-<p>✅ She <strong>told me</strong> the truth.</p>
-<p>✅ He <strong>said</strong> he was late.</p>
+<p>✅ She told me the answer.</p>
+<p>✅ He said he doesn’t know.</p>
 
-<h4>Quick Rule to Remember</h4>
+<h4>Quick Memory Trick</h4>
 <p>
-If there is a person → use <strong>tell</strong>.<br>
+If you see a person immediately after the verb → use <strong>tell</strong>.<br>
 If there is no person → use <strong>say</strong>.
 </p>
-
-<hr>
-
-  <button onclick="goBack()">⬅ Back</button>
-  </div>
-
-  <button onclick="goBack()">⬅ Back</button>
-</div>
-    <p><strong>UK:</strong> flat → <strong>US:</strong> apartment</p>
-    <p><strong>UK:</strong> lift → <strong>US:</strong> elevator</p>
-    <p><strong>UK:</strong> petrol → <strong>US:</strong> gas</p>
-    <p><strong>UK:</strong> biscuit → <strong>US:</strong> cookie</p>
-
-    <p>Same language. Different vibes.</p>
-
     <button onclick="goBack()">⬅ Back</button>
   </div>
-<div class="card hidden" id="grammar">
-  <h2>Common Grammar Confusions</h2>
 
-  
-  <button onclick="goBack()">⬅ Back</button>
-</div>
-  <!-- SLANG -->
-  <div class="card hidden" id="slang">
-    <h2>English Slang (Real Life)</h2>
+  <!-- ACRONYMS & CONTRACTIONS -->
+  <div class="card hidden" id="modern">
+    <h2>⚡ Acronyms & Real-Life Contractions</h2>
 
-    <p><strong>UK:</strong> knackered = very tired</p>
-    <p><strong>US:</strong> wiped = very tired</p>
+    <h3>LOL</h3>
+    <p>Pronounced: lol (not letters)</p>
 
-    <p><strong>UK:</strong> mate = friend</p>
-    <p><strong>US:</strong> bro = friend</p>
+    <h3>IDK</h3>
+    <p>Pronounced: eye-dee-kay or “I dunno”</p>
 
-    <p><strong>US:</strong> no cap = no lie</p>
-    <p><strong>US:</strong> cooked = done / finished / in trouble</p>
+    <h3>Gonna</h3>
+    <p>Going to → gonna</p>
 
-    <p>This is casual English. Don’t use it in exams.</p>
+    <h3>Wanna</h3>
+    <p>Want to → wanna</p>
+
+    <h3>Gotcha</h3>
+    <p>Got you → gotcha</p>
 
     <button onclick="goBack()">⬅ Back</button>
   </div>
 
 </main>
-<div class="card hidden" id="mistakes">
-  <h2>Common English Mistakes (Real Life)</h2>
 
-  <h3>1️⃣ “Did a mistake” ❌</h3>
-  <p>In English, we don’t <em>do</em> mistakes. We <em>make</em> them.</p>
-
-  <p>❌ I <strong>did a mistake</strong>.</p>
-  <p>✅ I <strong>made a mistake</strong>.</p>
-
-  <p>❌ She did many mistakes.</p>
-  <p>✅ She made many mistakes.</p>
-
-  <hr>
-
-  <h3>2️⃣ “I am boring” ❌</h3>
-  <p>
-    <strong>Boring</strong> = causes boredom<br>
-    <strong>Bored</strong> = feels boredom
-  </p>
-
-  <p>❌ I am boring.</p>
-  <p>✅ I am bored.</p>
-
-  <p>✅ This movie is boring.</p>
-
-  <hr>
-
-  <h3>3️⃣ “He explained me” ❌</h3>
-  <p>
-    <strong>Explain</strong> needs <em>it</em> before the person.
-  </p>
-
-  <p>❌ He explained me the rule.</p>
-  <p>✅ He explained <strong>it to me</strong>.</p>
-
-  <hr>
-
-  <h3>4️⃣ “I am agree” ❌</h3>
-  <p>
-    <strong>Agree</strong> is a verb, not an adjective.
-  </p>
-
-  <p>❌ I am agree.</p>
-  <p>✅ I agree.</p>
-
-  <p>❌ I am not agree.</p>
-  <p>✅ I don’t agree.</p>
-
-  <button onclick="goBack()">⬅ Back</button>
-</div>
-<footer>
-  © 2025 Real English IRL
-</footer>
-document.getElementById('grammar').classList.add('hidden');
 <script>
   function openSection(id) {
     document.getElementById('menu').classList.add('hidden');
+    document.querySelectorAll('.card').forEach(card => {
+      if (card.id !== 'menu') card.classList.add('hidden');
+    });
     document.getElementById(id).classList.remove('hidden');
   }
-function goBack() {
-  document.getElementById('menu').classList.remove('hidden');
 
-  document.getElementById('ukus').classList.add('hidden');
-  document.getElementById('slang').classList.add('hidden');
-  document.getElementById('grammar').classList.add('hidden');
-  document.getElementById('mistakes').classList.add('hidden');
-}
-  
+  function goBack() {
+    document.getElementById('menu').classList.remove('hidden');
+    document.querySelectorAll('.card').forEach(card => {
+      if (card.id !== 'menu') card.classList.add('hidden');
+    });
+  }
 </script>
 
 </body>
-</html>
+                        </html>
