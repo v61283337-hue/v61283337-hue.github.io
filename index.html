@@ -1,182 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Real English</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real English | Brain Rot to Oxford</title>
+    <style>
+        :root {
+            --bg: #050505;
+            --card-bg: #111111;
+            --accent: #00f2ff;
+            --accent-2: #7000ff;
+            --text: #ffffff;
+            --text-dim: #a0a0a0;
+        }
 
-<style>
-  body {
-    margin: 0;
-    padding: 30px;
-    font-family: system-ui, sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #eee;
-  }
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-  h1 {
-    text-align: center;
-    font-size: 2.6rem;
-    margin-bottom: 5px;
-  }
+        /* Hero Section */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a3a 0%, #050505 100%);
+            padding: 20px;
+        }
 
-  .subtitle {
-    text-align: center;
-    color: #bbb;
-    max-width: 750px;
-    margin: 0 auto 40px;
-  }
+        h1 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            margin: 0;
+            background: linear-gradient(to right, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
 
-  .course {
-    background: linear-gradient(135deg, #1e1e2f, #141421);
-    border-radius: 18px;
-    margin-bottom: 22px;
-    border: 1px solid #2a2a40;
-    box-shadow: 0 0 18px rgba(0,0,0,.4);
-  }
+        .hero-sub {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-top: 10px;
+        }
 
-  .course-header {
-    padding: 22px;
-    cursor: pointer;
-  }
+        /* Navigation Grid */
+        .container {
+            max-width: 1100px;
+            margin: -50px auto 100px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-  .course-header h2 {
-    margin: 0;
-    font-size: 1.3rem;
-  }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-  .course-header:hover {
-    background: rgba(255,255,255,0.03);
-  }
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+        }
 
-  .content {
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
-    padding: 0 22px;
-  }
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-  .content.open {
-    max-height: 2000px;
-    opacity: 1;
-    padding-bottom: 22px;
-  }
+        /* Modal / Content Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
 
-  .content p {
-    line-height: 1.6;
-    color: #ddd;
-  }
+        .overlay-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-  h3 {
-    margin-top: 20px;
-    color: #fff;
-  }
+        .close-btn {
+            position: sticky;
+            top: 0;
+            background: var(--accent);
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            float: right;
+        }
 
-  button {
-    margin-top: 14px;
-    background: none;
-    border: 1px solid #555;
-    color: #ccc;
-    padding: 6px 14px;
-    border-radius: 10px;
-    cursor: pointer;
-  }
+        .example-box {
+            background: #1a1a1a;
+            border-left: 4px solid var(--accent-2);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 10px 10px 0;
+        }
 
-  button:hover {
-    color: white;
-    border-color: #aaa;
-  }
-</style>
+        .crazy-label {
+            color: #ff4d4d;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
 
-<script>
-  function toggle(id) {
-    const all = document.querySelectorAll('.content');
-    all.forEach(c => {
-      if (c.id !== id) c.classList.remove('open');
-    });
-    document.getElementById(id).classList.toggle('open');
-  }
-</script>
+        b { color: var(--accent); }
+        .phonetic-grid { display: flex; gap: 20px; border-top: 1px solid #333; padding-top: 10px; }
+    </style>
 </head>
-
 <body>
 
-<h1>Real English 🧠</h1>
-<p class="subtitle">
-Learn how people actually speak — slang, pronunciation, mistakes, and real-life English.
-</p>
+<header>
+    <h1>REAL ENGLISH</h1>
+    <p class="hero-sub">Forget the textbooks. Learn the chaotic, beautiful, and confusing language people actually use.</p>
+</header>
 
-<!-- SLANG -->
-<div class="course">
-  <div class="course-header" onclick="toggle('slang')">
-    <h2>🔥 Slang</h2>
-  </div>
-  <div class="content" id="slang">
-    <p><b>I'm cooked</b> → I'm in trouble.</p>
-    <p><b>No cap</b> → No lie.</p>
-    <p><b>Mid</b> → Average / boring.</p>
-    <button onclick="toggle('slang')">⬅ Back</button>
-  </div>
+<div class="container">
+    <div class="card" onclick="openSection('slang')">
+        <h2>🔥 Slang</h2>
+        <p>Modern brain-rot and street talk you need to know.</p>
+    </div>
+
+    <div class="card" onclick="openSection('mistakes')">
+        <h2>❌ Common Fails</h2>
+        <p>Why "I didn't knew" makes native speakers' ears bleed.</p>
+    </div>
+
+    <div class="card" onclick="openSection('phonetics')">
+        <h2>🗣️ Pronunciation</h2>
+        <p>UK vs US and the magic of "Connected Speech".</p>
+    </div>
+<div class="card" onclick="openSection('saytell')">
+    <h2>🗣️ Say vs Tell</h2>
+    <p>Master the most common verb confusion in English.</p>
 </div>
 
-<!-- SAY VS TELL -->
-<div class="course">
-  <div class="course-header" onclick="toggle('saytell')">
-    <h2>📘 Say vs Tell</h2>
-  </div>
-  <div class="content" id="saytell">
-    <h3>SAY</h3>
-    <p>Focuses on words.</p>
-    <p>✅ She <b>said</b> she was tired.</p>
-    <p>❌ She said me she was tired.</p>
-
-    <h3>TELL</h3>
-    <p>Needs a listener.</p>
-    <p>✅ She <b>told me</b> the truth.</p>
-    <p>❌ She told the truth.</p>
-
-    <h3>Common mistake</h3>
-    <p>❌ He said me</p>
-    <p>✅ He told me</p>
-
-    <button onclick="toggle('saytell')">⬅ Back</button>
-  </div>
+<div class="card" onclick="openSection('acronyms')">
+    <h2>⚡ Acronyms</h2>
+    <p>Texting like a native: IDK, TTYL, and more.</p>
 </div>
 
-<!-- PRONUNCIATION -->
-<div class="course">
-  <div class="course-header" onclick="toggle('phonetics')">
-    <h2>🗣️ Pronunciation / Phonetics</h2>
-  </div>
-  <div class="content" id="phonetics">
-    <p><b>flower</b></p>
-    <p>US: flau·er</p>
-    <p>UK: flau·uh</p>
-    <p><b>didn’t</b> ≠ “dint”</p>
-    <button onclick="toggle('phonetics')">⬅ Back</button>
-  </div>
+    <div class="card" onclick="openSection('homophones')">
+        <h2>👯 Homophones</h2>
+        <p>They sound the same, but you're writing them wrong.</p>
+    </div>
+
+    <div class="card" onclick="openSection('homonyms')">
+        <h2>🧩 Homonyms</h2>
+        <p>One word, five meanings. Total chaos.</p>
+    </div>
+
+    <div class="card" onclick="openSection('pos')">
+        <h2>⚙️ Parts of Speech</h2>
+        <p>The engine under the hood of every sentence.</p>
+    </div>
 </div>
 
-<!-- MISTAKES -->
-<div class="course">
-  <div class="course-header" onclick="toggle('mistakes')">
-    <h2>❌ Common Mistakes</h2>
-  </div>
-  <div class="content" id="mistakes">
-    <p>❌ I doesn’t know</p>
-    <p>✅ I don’t know</p>
-    <p>Reason: “does” already carries the verb.</p>
-    <p>❌ did + V3</p>
-    <p>✅ did + base verb</p>
-    <button onclick="toggle('mistakes')">⬅ Back</button>
-  </div>
+<div id="overlay" class="overlay">
+    <div class="overlay-content">
+        <button class="close-btn" onclick="closeSection()">CLOSE ×</button>
+        <div id="section-data"></div>
+    </div>
 </div>
 
-<!-- ACRONYMS -->
-<div class="course">
-  <div class="course-header" onclick="toggle('acronyms')">
-    <h2>⚡ Acronyms & Contractions</h2>
-  </div>
-  <div class="content" id="acronyms">
-    <p><b>IDK</b> = I don’t know</p>
-    <p><b>IMO</b> = in my opinion</p>
+<script>
+    const content = {
+        slang: `
+            <h1>🔥 Modern Slang</h1>
+            <div class="example-box">
+                <p><b>Rizz</b> (n): Charisma. "He's got that unspoken rizz."</p>
+                <p><b>Delulu</b> (adj): Delusional. "Thinking he'll text back is pure delulu."</p>
+                <p><b>Left on Read</b>: When someone sees your message but doesn't reply.</p>
+            </div>
+            <p class="crazy-label">Crazy Example:</p>
+            <p>"No cap, his fit was mid but his rizz was high-key goated." <br> <i>(Translation: Honestly, his outfit was boring but his charisma was very impressive.)</i></p>
+        `,
+        mistakes: `
+            <h1>❌ Common Mistakes</h1>
+            <p><b>The "Did" Trap:</b> Never use Past Tense (V2/V3) after "Did".</p>
+            <div class="example-box">
+                <p>❌ I didn't <b>went</b>.</p>
+                <p>✅ I didn't <b>go</b>.</p>
+            </div>
+            <p><b>Stative Verbs:</b> "I am liking it" is technically wrong. Use "I like it".</p>
+            <p class="crazy-label">Crazy Mistake:</p>
+            <p>Saying "I am boring" (You are a boring person) instead of "I am bored" (You are feeling bored).</p>
+        `,
+        phonetics: `
+            <h1>🗣️ Pronunciation & Connected Speech</h1>
+            <h3>UK vs US</h3>
+            <div class="phonetic-grid">
+                <div><b>Water</b><br>US: Wah-der<br>UK: Wo-tah</div>
+                <div><b>Schedule</b><br>US: Sched-ool<br>UK: Shed-yool</div>
+            </div>
+            <h3>Connected Speech (How we actually talk)</h3>
+            <div class="example-box">
+                <p>"What are you..." → <b>"Whatcha..."</b></p>
+                <p>"I'm going to..." → <b>"Imma..."</b></p>
+                <p>"Give me..." → <b>"Gimme..."</b></p>
+            </div>
+            <p class="crazy-label">Crazy Example:</p>
+            <p>"Whatcha gonna do?" instead of "What are you going to do?"</p>
+        `,
+        homophones: `
+            <h1>👯 Confusing Homophones</h1>
+            <p>Sound identical, different spelling.</p>
+            <p><b>Their / There / They're</b></p>
+            <div class="example-box">
+                <p><b>Their</b> house is over <b>there</b>, and <b>they're</b> not home.</p>
+            </div>
+            <p><b>Your / You're</b></p>
+            <p><b>Weather / Whether</b></p>
+            <p class="crazy-label">Crazy Example:</p>
+            <p>"The <b>heir</b> needs some fresh <b>air</b> for his <b>hair</b>."</p>
+        `,
+      saytell: `
+    <h1>🗣️ Say vs Tell: The Master Rules</h1>
+    <div class="example-box">
+        <p><b>SAY:</b> Focuses on the words. (Say + Something)</p>
+        <p>✅ She <b>said</b> "Hello".</p>
+        <p><b>TELL:</b> Focuses on the receiver. (Tell + Someone + Something)</p>
+        <p>✅ She <b>told me</b> the secret.</p>
+    </div>
+    <h3>Special Uses:</h3>
+    <ul>
+        <li><b>Tell</b> a lie / <b>Tell</b> the truth</li>
+        <li><b>Tell</b> a story / <b>Tell</b> a joke</li>
+        <li><b>Say</b> a prayer / <b>Say</b> goodbye</li>
+    </ul>
+    <p class="crazy-label">Crazy Example:</p>
+    <p>"I <b>said</b> I wouldn't <b>tell</b> you what he <b>said</b>, but I'll <b>tell</b> you anyway!"</p>
+`,
+acronyms: `
+    <h1>⚡ Modern Acronyms</h1>
+    <p>Essential for texting and social media.</p>
+    <div class="example-box">
+        <p><b>IDK:</b> I Don't Know</p>
+        <p><b>IMO / IMHO:</b> In My (Honest) Opinion</p>
+        <p><b>POV:</b> Point Of View</p>
+        <p><b>SMH:</b> Shaking My Head (disappointment)</p>
+        <p><b>NGL:</b> Not Gonna Lie</p>
+        <p><b>ISTG:</b> I Swear To God</p>
+    </div>
+    <p class="crazy-label">Crazy Example:</p>
+    <p>"POV: NGL, IDK how he did that, fr fr."<br>
+    <i>(Point of view: Not gonna lie, I don't know how he did that, for real for real.)</i></p>
+`
+
+        homonyms: `
+            <h1>🧩 Homonyms</h1>
+            <p>Same spelling, totally different meanings.</p>
+            <p><b>Bark</b>: The sound a dog makes / The skin of a tree.</p>
+            <p><b>Mean</b>: Not nice / An average / To signify.</p>
+            <p class="crazy-label">The Craziest Homonym Sentence:</p>
+            <div class="example-box">
+                <p>"Buffalo buffalo Buffalo buffalo buffalo buffalo Buffalo buffalo."</p>
+                <p><i>(Yes, this is a grammatically correct sentence about bison from New York!)</i></p>
+            </div>
+        `,
+        pos: `
+            <h1>⚙️ Parts of Speech</h1>
+            <p><b>Nouns:</b> Objects/People (Pizza, Legend)</p>
+            <p><b>Verbs:</b> Actions (Run, Yeet, Exist)</p>
+            <p><b>Adjectives:</b> Descriptors (Sus, Shiny)</p>
+            <p class="crazy-label">Crazy Example (The "Noun-Verb" flip):</p>
+            <p>"I'm going to <b>Google</b> how to <b>table</b> this <b>table</b>." <br> <i>(Using Google as a verb and Table as a verb!)</i></p>
+        `
+    };
+
+    function openSection(section) {
+        document.getElementById('section-data').innerHTML = content[section];
+        document.getElementById('overlay').style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Stop scrolling
+    }
+
+    function closeSection() {
+        document.getElementById('overlay').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Enable scrolling
+    }
+</script>
+
+</body>
+</html>
+
