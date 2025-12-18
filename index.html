@@ -3,602 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura English | Level Up Your Speech 🧠</title>
+    <title>Aura English | The Ultimate Hub 🧠</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #6366f1;
             --secondary: #a855f7;
             --accent: #22d3ee;
             --danger: #f43f5e;
-            --bg: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --bg: #05070a;
+            --card-bg: rgba(15, 23, 42, 0.8);
         }
 
         body {
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.15) 0, transparent 50%);
             color: #f8fafc;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* HERO SECTION */
+        /* AMAZING HOME PAGE HERO */
         .hero {
-            height: 70vh;
+            height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             padding: 20px;
-            background: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            position: relative;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 12vw, 6rem);
+            font-size: clamp(3.5rem, 15vw, 7rem);
             margin: 0;
-            background: linear-gradient(to right, var(--accent), var(--primary), var(--secondary));
+            line-height: 0.9;
+            background: linear-gradient(to bottom right, #fff 30%, var(--accent), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.5));
-            letter-spacing: -2px;
+            font-weight: 800;
+            letter-spacing: -4px;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: #94a3b8;
-            max-width: 700px;
-            margin-top: 15px;
+            max-width: 600px;
+            margin-top: 20px;
         }
 
-        .scroll-hint {
-            margin-top: 40px;
-            animation: bounce 2s infinite;
-            color: var(--accent);
-            font-weight: bold;
+        .hero-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(120px);
+            opacity: 0.3;
+            z-index: -1;
         }
 
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-
-        /* GRID SYSTEM */
+        /* GRID LAYOUT */
         .container {
             max-width: 1300px;
-            margin: -60px auto 100px;
+            margin: -100px auto 100px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
-            padding: 0 30px;
+            padding: 0 25px;
         }
 
         .card {
             background: var(--card-bg);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 40px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-12px) scale(1.02);
+            transform: translateY(-15px) scale(1.02);
             border-color: var(--accent);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             background: rgba(30, 41, 59, 0.9);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
-        .card h2 { margin: 0 0 10px 0; font-size: 1.8rem; color: var(--accent); }
-        .card p { color: #cbd5e1; margin: 0; }
+        .card h2 {
+            font-size: 2rem;
+            margin: 0 0 15px 0;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* MODAL SYSTEM */
+        .card p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* OVERLAY / MODAL */
         .overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(2, 6, 23, 0.98);
             display: none;
-            z-index: 9999;
+            z-index: 10000;
             overflow-y: auto;
-            padding: 60px 20px;
+            padding: 80px 20px;
+            box-sizing: border-box;
         }
 
         .modal {
             max-width: 900px;
             margin: 0 auto;
-            animation: slideUp 0.4s ease;
+            background: #111827;
+            padding: 50px;
+            border-radius: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-
         .close-btn {
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            color: white;
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 14px 30px;
-            border-radius: 12px;
+            padding: 15px 35px;
+            border-radius: 100px;
             cursor: pointer;
             font-weight: 800;
-            margin-bottom: 30px;
-            text-transform: uppercase;
+            margin-bottom: 40px;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--accent);
+            transform: translateX(-5px);
         }
 
         /* CONTENT STYLING */
-        .content-body h1 { font-size: 3rem; color: var(--accent); margin-bottom: 10px; }
-        .tagline { color: var(--secondary); font-weight: bold; margin-bottom: 30px; display: block; }
+        .content-header h1 { font-size: 4rem; margin: 0; color: var(--accent); }
+        .tagline { color: var(--secondary); font-size: 1.2rem; font-weight: bold; margin-bottom: 40px; display: block; }
         
         .info-section {
             background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 20px;
-            border-left: 6px solid var(--primary);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-left: 8px solid var(--primary);
         }
 
-        .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px; }
+        .info-section h3 { color: var(--accent); margin-top: 0; font-size: 1.6rem; }
+
+        .aura-check {
+            background: linear-gradient(45deg, rgba(168, 85, 247, 0.1), rgba(34, 211, 238, 0.1));
+            border: 2px dashed var(--secondary);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
         .wrong { color: var(--danger); font-weight: bold; }
         .right { color: var(--accent); font-weight: bold; }
-        .aura-check { border: 2px dashed var(--secondary); padding: 15px; border-radius: 15px; margin-top: 20px; background: rgba(168, 85, 247, 0.1); }
+        b { color: #fff; }
+
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
 
     </style>
 </head>
 <body>
 
 <div class="hero">
-    <h1>AURA ENGLISH ⚡</h1>
-    <p>The internet's most chaotic guide to speaking like a legend. We don't do boring grammar; we do <b>Pure Aura.</b></p>
-    <div class="scroll-hint">CLICK A TOPIC TO LEVEL UP ↓</div>
+    <div class="hero-glow"></div>
+    <h1>AURA<br>ENGLISH</h1>
+    <p>Forget the textbooks. Master the English that actually gets you noticed. Pure value. Pure Aura.</p>
 </div>
 
 <div class="container">
-    <div class="card" onclick="openBox('saytell')"><h2>📘 Say vs Tell</h2><p>Stop mixing up the two most used verbs.</p></div>
-    <div class="card" onclick="openBox('slang')"><h2>🔥 Slang</h2><p>Brain rot, Gen-Alpha, and Street talk.</p></div>
-    <div class="card" onclick="openBox('mistakes')"><h2>❌ Epic Fails</h2><p>Grammar mistakes that ruin your vibe.</p></div>
-    <div class="card" onclick="openBox('pos')"><h2>⚙️ Parts of Speech</h2><p>The logic behind the magic.</p></div>
-    <div class="card" onclick="openBox('acronyms')"><h2>⚡ Acronyms</h2><p>Texting code for the modern age.</p></div>
-    <div class="card" onclick="openBox('homophones')"><h2>👯 Homophones</h2><p>Identical sounds, different worlds.</p></div>
-    <div class="card" onclick="openBox('homonyms')"><h2>🧩 Homonyms</h2><p>One word, infinite chaos.</p></div>
-    <div class="card" onclick="openBox('connected')"><h2>🔗 Connected Speech</h2><p>How natives actually sound (Whatcha?).</p></div>
-    <div class="card" onclick="openBox('formal')"><h2>🚫 Formal Phrasings</h2><p>Phrases that make you sound like a bot.</p></div>
-    <div class="card" onclick="openBox('phrasal')"><h2>🔄 Phrasal Verbs</h2><p>Get up, Get out, Get over it.</p></div>
-    <div class="card" onclick="openBox('prepositions')"><h2>📍 Prepositions</h2><p>In, On, At — and why they're hard.</p></div>
+    <div class="card" onclick="openBox('prepositions')">
+        <h2>📍 Prepositions</h2>
+        <p>Deep dive into At, In, On and the "hidden" logic natives use.</p>
+    </div>
+    <div class="card" onclick="openBox('pos')">
+        <h2>⚙️ Parts of Speech</h2>
+        <p>The full blueprint: From abstract nouns to functional shifting.</p>
+    </div>
+    <div class="card" onclick="openBox('connected')">
+        <h2>🔗 Connected Speech</h2>
+        <p>Why natives sound like they're singing one long word.</p>
+    </div>
+    <div class="card" onclick="openBox('saytell')">
+        <h2>📘 Say vs Tell</h2>
+        <p>Complete mastery of the most confusing verb pair in history.</p>
+    </div>
+    <div class="card" onclick="openBox('slang')">
+        <h2>🔥 Street Slang</h2>
+        <p>2025 Brain-rot dictionary and modern social lingo.</p>
+    </div>
+    <div class="card" onclick="openBox('mistakes')">
+        <h2>❌ Epic Fails</h2>
+        <p>The "Did" trap, Borrow vs Lend, and advice vs advise.</p>
+    </div>
+    <div class="card" onclick="openBox('tenses')">
+        <h2>⏳ The Tense Universe</h2>
+        <p>Every timeline explained with logic, not just formulas.</p>
+    </div>
+    <div class="card" onclick="openBox('phrasal')">
+        <h2>🔄 Phrasal Verbs</h2>
+        <p>The Get, Take, and Look dynasties broken down.</p>
+    </div>
+    <div class="card" onclick="openBox('formal')">
+        <h2>🚫 Formal Fails</h2>
+        <p>Stop sounding like a robot. Modern business phrasing.</p>
+    </div>
 </div>
 
 <div id="overlay" class="overlay">
     <div class="modal">
-        <button class="close-btn" onclick="closeBox()">← Back to Universe</button>
-        <div id="content-body" class="content-body"></div>
+        <button class="close-btn" onclick="closeBox()">← ESCAPE TO HOME</button>
+        <div id="content-body"></div>
     </div>
 </div>
 
 <script>
     const data = {
-        saytell: `
-            <h1>Say vs Tell</h1>
-            <span class="tagline">The "Receiver" Rule</span>
-            <div class="info-section">
-                <h3>The Core Difference</h3>
-                <p><b>SAY:</b> Focuses on the words spoken. You don't need a person after "Say".</p>
-                <p><b>TELL:</b> Focuses on the person hearing it. You <b>must</b> have a receiver (me, him, them).</p>
-                <div class="example-grid">
-                    <div><span class="wrong">❌</span> He said me he was tired.</div>
-                    <div><span class="right">✅</span> He <b>told me</b> he was tired.</div>
-                </div>
-            </div>
-            <div class="aura-check">
-                <b>Aura Tip:</b> Use "Tell" for information, "Say" for quotes. <br>
-                <i>"He <b>said</b> 'I'm leaving', then <b>told</b> us the reason."</i>
-            </div>
-        `,
-        slang: `
-            <h1>Slang & Brain Rot</h1>
-            <span class="tagline">Speak 2025 English</span>
-            <div class="info-section">
-                <p><b>Cooked:</b> When you are in big trouble. "Bro, I didn't study for the math exam, I'm cooked."</p>
-                <p><b>Rizz:</b> Charisma / Romantic charm. "He's got that unspoken rizz."</p>
-                <p><b>Mid:</b> Very average. Not bad, but not good. "That new movie was mid."</p>
-                <p><b>Glazing:</b> Over-complimenting someone to a cringe level.</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Example:</b><br>
-                "Stop glazing that mid streamer, his aura is literally in the negatives, no cap."
-            </div>
-        `,
-        mistakes: `
-            <h1>Common Epic Fails</h1>
-            <span class="tagline">The Ear-Bleeders</span>
-            <div class="info-section">
-                <h3>The "Did" Mistake</h3>
-                <p>After "Did" or "Didn't", the verb <b>must</b> return to its base form. No past tense allowed!</p>
-                <p><span class="wrong">❌</span> I didn't <b>went</b>.</p>
-                <p><span class="right">✅</span> I didn't <b>go</b>.</p>
-                <hr>
-                <h3>Borrow vs Lend</h3>
-                <p><b>Borrow:</b> You take it. (Can I borrow $5?)</p>
-                <p><b>Lend:</b> You give it. (Can you lend me $5?)</p>
-            </div>
-        `,
-        pos: `
-            <h1>Parts of Speech</h1>
-            <span class="tagline">The Grammar Engine</span>
-            <div class="info-section">
-                <p><b>Nouns:</b> Names of things. (Pizza, Freedom, Sigma)</p>
-                <p><b>Verbs:</b> The action. (Run, Exist, Yeet)</p>
-                <p><b>Adjectives:</b> Describe the noun. (A <b>sus</b> person)</p>
-                <p><b>Adverbs:</b> Describe the verb. (He ran <b>quickly</b>)</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Fact:</b> In English, we can "Verb" a "Noun".<br>
-                "I'm going to <b>table</b> this discussion." (Using 'Table' as a verb!)
-            </div>
-        `,
-        connected: `
-            <h1>Connected Speech</h1>
-            <span class="tagline">Why you don't understand movies</span>
-            <div class="info-section">
-                <p>Natives don't speak word-by-word. We "smoosh" words together.</p>
-                <ul>
-                    <li><b>Whatcha:</b> What are you... ("Whatcha doin?")</li>
-                    <li><b>Gimme:</b> Give me...</li>
-                    <li><b>Ima:</b> I am going to... ("Ima head out")</li>
-                    <li><b>Wudja:</b> Would you...</li>
-                </ul>
-            </div>
-            <div class="aura-check">
-                <b>The "N" Rule:</b> "Rock and Roll" sounds like "Rock 'n' Roll". The "D" in "and" usually vanishes!
-            </div>
-        `,
-        formal: `
-            <h1>Formal Phrases to Avoid</h1>
-            <span class="tagline">Don't sound like a 1920s Bot</span>
-            <div class="info-section">
-                <p><span class="wrong">❌</span> "Please revert back at your earliest convenience." (Too robotic)</p>
-                <p><span class="right">✅</span> "Let me know when you can." (Natural Aura)</p>
-                <p><span class="wrong">❌</span> "To whom it may concern."</p>
-                <p><span class="right">✅</span> "Hi [Name]," or "Team,"</p>
-            </div>
-        `,
         prepositions: `
-            <h1>Prepositions📍</h1>
-            <span class="tagline">In, On, At Chaos</span>
+            <div class="content-header">
+                <h1>Prepositions 📍</h1>
+                <span class="tagline">The "Funnel" Logic & Transport Hacks</span>
+            </div>
             <div class="info-section">
-                <p><b>AT:</b> Specific points. (At 5:00 PM, At the door)</p>
-                <p><b>ON:</b> Surfaces/Days. (On Monday, On the table)</p>
-                <p><b>IN:</b> Enclosed spaces/Months. (In July, In the car)</p>
+                <h3>1. The Time & Space Funnel</h3>
+                <p>Natives visualize prepositions as a funnel from General to Specific.</p>
+                <ul>
+                    <li><b>IN (General/Big):</b> Centuries, Years, Months, Cities, Countries. <br><i>"In 2025," "In December," "In Tokyo."</i></li>
+                    <li><b>ON (Middle/Lines):</b> Days, Streets, Surfaces. <br><i>"On Monday," "On 5th Avenue," "On the floor."</i></li>
+                    <li><b>AT (Specific/Points):</b> Exact times and addresses. <br><i>"At 9:00 AM," "At the entrance," "At 123 Main St."</i></li>
+                </ul>
+                
+            </div>
+            <div class="info-section">
+                <h3>2. The Transport "Stand Up" Rule</h3>
+                <p>Why do we say "In the car" but "On the bus"?</p>
+                <ul>
+                    <li><b>Use ON:</b> If you can physically stand up and walk around inside it. <br><i>On a bus, On a plane, On a train, On a ship.</i></li>
+                    <li><b>Use IN:</b> If you have to crouch or sit immediately. <br><i>In a car, In a taxi, In a helicopter.</i></li>
+                </ul>
             </div>
             <div class="aura-check">
-                <b>Mistake Alert:</b> We say "In the car" but "On the bus". Why? If you can stand up and walk around, use "ON". If you have to crouch, use "IN".
-            </div>
-        `,
-        phrasal: `
-            <h1>Phrasal Verbs</h1>
-            <span class="tagline">Verb + Preposition = New Meaning</span>
-            <div class="info-section">
-                <p><b>Break up:</b> End a relationship.</p>
-                <p><b>Break down:</b> Start crying or a car stops working.</p>
-                <p><b>Look up to:</b> Respect someone.</p>
-                <p><b>Look down on:</b> Think you are better than someone.</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Example:</b> "My car <b>broke down</b> right after we <b>broke up</b>, so I had to <b>make up</b> a story for my boss."
-            </div>
-        `,
-        acronyms: `
-            <h1>Acronyms ⚡</h1>
-            <span class="tagline">Modern Hieroglyphics</span>
-            <div class="info-section">
-                <p><b>FR:</b> For Real (Truth)</p>
-                <p><b>NGL:</b> Not Gonna Lie</p>
-                <p><b>SMH:</b> Shaking My Head (Disbelief)</p>
-                <p><b>TFW:</b> That Feel When...</p>
-                <p><b>AFAIK:</b> As Far As I Know</p>
-            </div>
-        `,
-        homophones: `
-            <h1>Homophones 👯</h1>
-            <span class="tagline">Sound-alikes</span>
-            <div class="info-section">
-                <p><b>Allowed / Aloud:</b> You're not <b>allowed</b> to read <b>aloud</b> in the library.</p>
-                <p><b>Weather / Whether:</b> I don't know <b>whether</b> the <b>weather</b> will be nice.</p>
-                <p><b>Break / Brake:</b> Use the <b>brake</b> before you <b>break</b> the car.</p>
-            </div>
-        `,
-        homonyms: `
-            <h1>Homonyms 🧩</h1>
-            <span class="tagline">Same word, different soul</span>
-            <div class="info-section">
-                <p><b>Tire:</b> A rubber wheel / To get sleepy.</p>
-                <p><b>Subject:</b> A topic / To force someone into something.</p>
-                <p><b>Object:</b> A thing / To disagree.</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Sentence:</b> "I <b>object</b> to that <b>object</b> being the <b>subject</b> of our <b>subject</b>."
-            </div>
-        `
-                mistakes: `
-            <h1>The Epic Fail List ❌</h1>
-            <span class="tagline">Mistakes that make you lose "Aura" instantly.</span>
-            <div class="info-section">
-                <h3>1. The "Did" Disaster</h3>
-                <p>After <b>did</b> or <b>didn't</b>, the verb MUST be in the base form. Never use past tense twice!</p>
-                <p><span class="wrong">❌</span> I didn't <b>knew</b> it.</p>
-                <p><span class="right">✅</span> I didn't <b>know</b> it.</p>
-            </div>
-            <div class="info-section">
-                <h3>2. Advice vs Advise</h3>
-                <p><b>Advice (Noun):</b> The thing you give. "Thanks for the advice."</p>
-                <p><b>Advise (Verb):</b> The action of giving it. "I advise you to study."</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Mistake:</b> "I am boring" vs "I am bored." <br>
-                If you say "I am boring," you are telling people you are a boring person. If you are tired of something, say "I am bored!"
+                <b>Crazy Fact:</b> You are <b>at</b> the cinema (the location), but you are <b>in</b> the cinema (inside the room watching). Aura level: Expert.
             </div>
         `,
 
         pos: `
-            <h1>Parts of Speech ⚙️</h1>
-            <span class="tagline">The Engine of the English Language.</span>
-            <div class="info-section">
-                <p><b>Nouns:</b> Objects/People (Pizza, Legend, Aura).</p>
-                <p><b>Verbs:</b> Actions (Yeet, Run, Imagine).</p>
-                <p><b>Adjectives:</b> Descriptors (Sus, Shiny, Blue).</p>
-                <p><b>Adverbs:</b> How you do it (Quickly, High-key).</p>
+            <div class="content-header">
+                <h1>Parts of Speech ⚙️</h1>
+                <span class="tagline">The 8 Pillars of Advanced Syntax</span>
             </div>
             <div class="info-section">
-                <h3>The "Verb-ing" Noun Trick</h3>
-                <p>Natives turn nouns into verbs to sound cool: "I'll <b>Uber</b> there," "Don't <b>friend</b> me," "Just <b>Google</b> it."</p>
-            </div>
-        `,
-
-        acronyms: `
-            <h1>The Texting Code ⚡</h1>
-            <span class="tagline">How to text like a native (Gen Z / Gen Alpha edition).</span>
-            <div class="info-section">
-                <p><b>FR:</b> For Real (Used to agree).</p>
-                <p><b>NGL:</b> Not Gonna Lie (Honesty).</p>
-                <p><b>IYKYK:</b> If You Know, You Know (Inside jokes).</p>
-                <p><b>SMH:</b> Shaking My Head (Disappointment).</p>
-                <p><b>TBA / TBC:</b> To be announced / To be confirmed.</p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Text:</b> "NGL, that movie was mid, smh fr."
-            </div>
-        `,
-
-        homophones: `
-            <h1>Homophones: The Soundalikes 👯</h1>
-            <span class="tagline">Same sound, totally different worlds.</span>
-            <div class="info-section">
-                <p><b>There / Their / They're:</b></p>
+                <h3>1. Beyond the Basics</h3>
+                <p>You know Nouns and Verbs, but have you mastered these?</p>
                 <ul>
-                    <li>Go over <b>there</b>.</li>
-                    <li>It is <b>their</b> house.</li>
-                    <li><b>They're</b> (They are) coming now.</li>
+                    <li><b>Abstract Nouns:</b> Ideas you can't touch but have huge Aura. (Loyalty, Courage, Chaos).</li>
+                    <li><b>Stative Verbs:</b> Verbs that describe states, not actions. They almost NEVER use "-ing". <br>❌ "I am needing coffee." ✅ "I need coffee."</li>
+                    <li><b>Relative Pronouns:</b> The glue of complex sentences (Who, Which, That).</li>
                 </ul>
-                <hr>
-                <p><b>Break / Brake:</b> Use the <b>brake</b> to stop, or you will <b>break</b> the car.</p>
-                <p><b>Allowed / Aloud:</b> You aren't <b>allowed</b> to talk <b>aloud</b>.</p>
             </div>
-        `,
-
-        homonyms: `
-            <h1>Homonyms: One Word, Many Souls 🧩</h1>
-            <span class="tagline">Same spelling, completely different meanings.</span>
             <div class="info-section">
-                <p><b>Fine:</b> "I am <b>fine</b>" (Good) vs "I paid a <b>fine</b>" (Penalty).</p>
-                <p><b>Row:</b> "A <b>row</b> of seats" (Line) vs "To <b>row</b> a boat" (Action) vs "Having a <b>row</b>" (Argument/Fight).</p>
-            </div>
-            <div class="aura-check">
-                <b>The Brain Breaker:</b> "The <b>bandage</b> was <b>wound</b> around the <b>wound</b>." <br>
-                (The first 'wound' is 'wrapped', the second is 'injury').
+                <h3>2. Functional Shifting</h3>
+                <p>In English, words can switch jobs without changing spelling. This is called "Verbing" a Noun.</p>
+                <p>• "The <b>impact</b> was huge" (Noun) → "How will this <b>impact</b> you?" (Verb)</p>
+                <p>• "Check the <b>interface</b>" (Noun) → "We need to <b>interface</b> with them" (Verb)</p>
             </div>
         `,
 
         connected: `
-            <h1>Connected Speech 🔗</h1>
-            <span class="tagline">Why textbooks sound different from movies.</span>
-            <div class="info-section">
-                <h3>Reductions (The Lazy Rule)</h3>
-                <p>• "What are you..." → <b>Whatcha</b></p>
-                <p>• "I am going to..." → <b>Imma</b></p>
-                <p>• "Want to..." → <b>Wanna</b></p>
-                <p>• "Could have..." → <b>Coulda</b></p>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Sentence:</b> "Whatcha gonna do? Coulda told me!" <br>
-                <i>(Translation: What are you going to do? You could have told me!)</i>
-            </div>
-        `,
-
-        phrasal: `
-            <h1>Phrasal Verbs 🔄</h1>
-            <span class="tagline">One small preposition changes everything.</span>
-            <div class="info-section">
-                <h3>The Power of "UP"</h3>
-                <ul>
-                    <li><b>Give up:</b> Quit.</li>
-                    <li><b>Make up:</b> Invent a story or become friends again.</li>
-                    <li><b>Look up:</b> Search for info.</li>
-                    <li><b>Show up:</b> Arrive.</li>
-                </ul>
-            </div>
-            <div class="aura-check">
-                <b>Crazy Example:</b> "He <b>made up</b> a story about why he didn't <b>show up</b>, but I didn't <b>give up</b> until he <b>gave in</b>."
-            </div>
-        `
-
-    };
-
-    function openBox( id) {
-        document.getElementById('content-body').innerHTML = data[id];
-        document.getElementById('overlay').style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeBox(id) {
-        document.getElementById('overlay').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-
-
-<script>
-    // This is your database. Every key (like 'slang') must match the card's onclick.
-    const data = {
-        slang: `
-            <h1>The Brain Rot Dictionary 🔥</h1>
-            <span class="tagline">Speak 2025 English fluently.</span>
-            <div class="info-section">
-                <p><b>Cooked:</b> In total trouble. "I didn't study, I'm cooked."</p>
-                <p><b>Aura:</b> Your coolness level. "Helping people gives you +1000 aura."</p>
-                <p><b>Rizz:</b> Romantic charisma. "He's got that unspoken rizz."</p>
-                <p><b>Glazing:</b> Over-complimenting someone. "Stop glazing the boss."</p>
-            </div>
-            <div class="aura-check"><b>Crazy Example:</b> "No cap, your fit is mid, you're losing aura fr."</div>
-        `,
-        saytell: `
-            <h1>Say vs Tell Masterclass 📘</h1>
-            <span class="tagline">The "Receiver" Rule explained.</span>
-            <div class="info-section">
-                <h3>The Difference</h3>
-                <p><b>TELL:</b> Needs a person. (Tell <u>me</u>, Tell <u>him</u>).</p>
-                <p><b>SAY:</b> Needs words. (Say <u>hello</u>, Say <u>that it's over</u>).</p>
+            <div class="content-header">
+                <h1>Connected Speech 🔗</h1>
+                <span class="tagline">The Art of Word-Merging</span>
             </div>
             <div class="info-section">
-                <h3>The "Tell" Exceptions</h3>
-                <p>Always use "Tell" for: Truth, Lies, Stories, Jokes, and Time.</p>
-            </div>
-        `,
-                prepositions: `
-            <h1>The Preposition Power-Guide 📍</h1>
-            <span class="tagline">From basic placement to advanced logic.</span>
-            
-            <div class="info-section">
-                <h3>1. The Time & Space Pyramid</h3>
-                <p>Think of prepositions as a funnel: General (Top) to Specific (Bottom).</p>
-                <ul>
-                    <li><b>IN (The General):</b> Used for big things. Months, Years, Centuries, Cities, Countries. <br><i>"In 2025," "In December," "In Paris."</i></li>
-                    <li><b>ON (The Specific):</b> Used for surfaces and days. <br><i>"On Monday," "On the floor," "On Oxford Street."</i></li>
-                    <li><b>AT (The Ultra-Specific):</b> Used for exact points and addresses. <br><i>"At 5:30 PM," "At the entrance," "At 221B Baker Street."</i></li>
-                </ul>
-            </div>
-            
-            
-
-            <div class="info-section">
-                <h3>2. The Transport Logic (In vs On)</h3>
-                <p>Natives use a "Physicality Rule" for transport:</p>
-                <ul>
-                    <li><b>Use ON</b> if you can walk around while the vehicle is moving (Public/Large). <br><i>"On a bus," "On a train," "On a plane," "On a cruise ship."</i></li>
-                    <li><b>Use IN</b> if you have to sit down and cannot stand up straight (Private/Small). <br><i>"In a car," "In a taxi," "In a helicopter."</i></li>
-                </ul>
-            </div>
-
-            <div class="info-section">
-                <h3>3. Advanced Tricky Pairs</h3>
-                <p>• <b>Arrive IN</b> (Cities/Countries) vs. <b>Arrive AT</b> (Buildings/Events).</p>
-                <p>• <b>Angry WITH</b> (People) vs. <b>Angry ABOUT</b> (Situations).</p>
-                <p>• <b>Interested IN</b> vs. <b>Good AT</b>.</p>
-            </div>
-            <div class="aura-check"><b>Aura Master Tip:</b> Never say "I'll see you on next Monday." If you use 'Next', 'Last', or 'Every', the preposition vanishes! <br>✅ "I'll see you next Monday."</div>
-        `,
-
-        pos: `
-            <h1>Advanced Parts of Speech ⚙️</h1>
-            <span class="tagline">The Blueprint of Sophisticated English.</span>
-            
-            <div class="info-section">
-                <h3>The 8 Pillars (Deep Dive)</h3>
-                <p><b>1. NOUNS:</b> Not just objects, but <i>Abstract Nouns</i> (Freedom, Loyalty, Aura). These can't be touched but run the world.</p>
-                <p><b>2. PRONOUNS:</b> Beyond 'He/She'. <i>Relative Pronouns</i> (Who, Which, That) connect thoughts. "The man <b>who</b> rizzes."</p>
-                <p><b>3. VERBS:</b> <i>Stative Verbs</i> (Like, Love, Believe) usually cannot be 'Continuous'. <br>❌ I am believing you. ✅ I believe you.</p>
-                <p><b>4. ADJECTIVES:</b> The order matters! <i>Opinion-Size-Age-Color-Origin.</i> <br>✅ "A beautiful, large, old, black, Italian car."</p>
-            </div>
-
-            <div class="info-section">
-                <h3>5. Adverbs: The "Vibe" Modifier</h3>
-                <p>Adverbs don't just describe verbs; they describe other adverbs. <br><i>"He speaks <b>insanely</b> quickly."</i></p>
-            </div>
-
-            <div class="info-section">
-                <h3>6. The "Verbing" Phenomenon (Functional Shift)</h3>
-                <p>English is unique because words change jobs without changing spelling.</p>
-                <ul>
-                    <li><b>The "Impact" Shift:</b> "That was a big <b>impact</b>" (Noun) → "It will <b>impact</b> your aura" (Verb).</li>
-                    <li><b>The "Interface" Shift:</b> "The user <b>interface</b>" (Noun) → "We need to <b>interface</b> with the team" (Verb).</li>
-                </ul>
-            </div>
-        `,
-
-        connected: `
-            <h1>Connected Speech Masterclass 🔗</h1>
-            <span class="tagline">Why 10 words sound like 1 word.</span>
-
-            <div class="info-section">
-                <h3>1. Catenation (Linking)</h3>
-                <p>When a word ends in a consonant and the next starts with a vowel, they join into one sound.</p>
+                <h3>1. Catenation (Consonant-to-Vowel)</h3>
+                <p>When one word ends in a consonant and the next starts with a vowel, the sound links.</p>
                 <p><i>"An apple a day"</i> sounds like <b>"A-napple-a-day"</b>.</p>
-                <p><i>"Wait a minute"</i> sounds like <b>"Way-ta-mi-nit"</b>.</p>
             </div>
-
             <div class="info-section">
-                <h3>2. Elision (The "Disappearing" Sounds)</h3>
-                <p>In fast speech, the 't' and 'd' at the end of words often vanish if the next word starts with a consonant.</p>
+                <h3>2. Assimilation (Sound Morphing)</h3>
+                <p>When sounds touch, they change completely to make it easier to say.</p>
                 <ul>
-                    <li><b>"Next door"</b> → "Neks-door"</li>
-                    <li><b>"Sandwich"</b> → "San-wich"</li>
-                    <li><b>"Best friend"</b> → "Bes-friend"</li>
+                    <li><b>D + Y = J sound:</b> "Did you..." → "Di-dja"</li>
+                    <li><b>T + Y = CH sound:</b> "Don't you..." → "Don-cha"</li>
+                    <li><b>S + Y = SH sound:</b> "Bless you..." → "Ble-shu"</li>
                 </ul>
             </div>
-
-            <div class="info-section">
-                <h3>3. Assimilation (Sound Morphing)</h3>
-                <p>Some sounds change completely when they touch.</p>
-                <p>• <b>D + Y = J:</b> "Did you..." → "Di-dja"</p>
-                <p>• <b>T + Y = CH:</b> "Meet you..." → "Mee-chu"</p>
-                <p>• <b>S + Y = SH:</b> "Bless you..." → "Ble-shu"</p>
-            </div>
-
             <div class="aura-check">
-                <b>The Ultimate Test:</b> <br>
-                Try saying: "Could you have told him?" <br>
+                <b>Crazy Example:</b> Try saying "Could you have told him?" fast. <br>
                 Natives say: <b>"Cudja-uv-tol-dim?"</b>
             </div>
-        `
-
         `,
+
+        saytell: `
+            <div class="content-header">
+                <h1>Say vs Tell 📘</h1>
+                <span class="tagline">Reported Speech Masterclass</span>
+            </div>
+            <div class="info-section">
+                <h3>1. The Golden Rule</h3>
+                <p><b>TELL</b> is about information transfer to a <u>person</u>. You need a receiver.</p>
+                <p>✅ "Tell <b>me</b>," "Tell <b>him</b>," "Tell <b>the audience</b>."</p>
+                <p><b>SAY</b> is about the words themselves. No person needed.</p>
+                <p>✅ "He <b>said</b> hello."</p>
+            </div>
+            <div class="info-section">
+                <h3>2. The Fixed Collocations</h3>
+                <p>You MUST use <b>Tell</b> for these, even if there is no person mentioned:</p>
+                <p>• Tell the truth • Tell a lie • Tell a story • Tell a joke • Tell the time • Tell the difference</p>
+            </div>
+        `,
+
+        slang: `
+            <div class="content-header">
+                <h1>Street Slang 🔥</h1>
+                <span class="tagline">Gen-Alpha & Gen-Z Dictionary (2025)</span>
+            </div>
+            <div class="info-section">
+                <p><b>Cooked:</b> In a hopeless or failed situation. "I failed the test, I'm cooked."</p>
+                <p><b>Glazing:</b> Over-complimenting someone to an annoying degree.</p>
+                <p><b>Aura:</b> Your presence and coolness. "He lost 500 aura for that trip."</p>
+                <p><b>Mewing:</b> Not talking (usually to keep a sharp jawline).</p>
+                <p><b>Delulu:</b> Delusional. "Thinking she likes you is delulu."</p>
+            </div>
+            <div class="aura-check">
+                <b>Texting Style:</b> "NGL (Not Gonna Lie), that fit is mid, no cap."
+            </div>
+        `,
+
+        mistakes: `
+            <div class="content-header">
+                <h1>Epic Fails ❌</h1>
+                <span class="tagline">Common Errors and How to Kill Them</span>
+            </div>
+            <div class="info-section">
+                <h3>1. The "Did" Trap</h3>
+                <p>After "Did" or "Didn't," the verb MUST be in the base form. Do not use past tense twice.</p>
+                <p><span class="wrong">❌</span> I didn't <b>went</b>.</p>
+                <p><span class="right">✅</span> I didn't <b>go</b>.</p>
+            </div>
+            <div class="info-section">
+                <h3>2. Borrow vs Lend</h3>
+                <p><b>Borrow:</b> You TAKE the item. "Can I borrow your pen?"</p>
+                <p><b>Lend:</b> You GIVE the item. "Can you lend me your pen?"</p>
+            </div>
+            <div class="aura-check">
+                <b>The "I'm Boring" Fail:</b><br>
+                "I am boring" = You are a person who is not interesting.<br>
+                "I am bored" = You are currently feeling tired of something.
+            </div>
+        `,
+
+        tenses: `
+            <div class="content-header">
+                <h1>The Tense Universe ⏳</h1>
+                <span class="tagline">Every Timeline Explained</span>
+            </div>
+            <div class="info-section">
+                <h3>1. Present Perfect (The Bridge)</h3>
+                <p>Connects past to now. "I <b>have lived</b> here for 5 years." (And I still do!)</p>
+                <h3>2. Past Continuous (The Background)</h3>
+                <p>Describes a long action interrupted by a short one. "I <b>was eating</b> when the phone rang."</p>
+                <h3>3. Future: Will vs Going To</h3>
+                <p><b>Will:</b> Snap decisions. "The bell rang? I'll get it."</p>
+                <p><b>Going To:</b> Plans. "I'm going to travel in June."</p>
+            </div>
+        `,
+
+        phrasal: `
+            <div class="content-header">
+                <h1>Phrasal Verbs 🔄</h1>
+                <span class="tagline">Verb + Particle = New Reality</span>
+            </div>
+            <div class="info-section">
+                <h3>The "GET" Dynasty</h3>
+                <p>• <b>Get over:</b> Recover from something.</p>
+                <p>• <b>Get along:</b> Have a good relationship.</p>
+                <p>• <b>Get away with:</b> Escape punishment.</p>
+            </div>
+            <div class="info-section">
+                <h3>The "TAKE" Dynasty</h3>
+                <p>• <b>Take off:</b> Airplane leaving / Removing clothes.</p>
+                <p>• <b>Take after:</b> Look or act like a parent.</p>
+            </div>
+        `,
+
         formal: `
-            <h1>Phrases to Avoid 🚫</h1>
-            <span class="tagline">Stop sounding like a robot.</span>
+            <div class="content-header">
+                <h1>Formal Fails 🚫</h1>
+                <span class="tagline">Stop Sounding Like a Corporate Robot</span>
+            </div>
             <div class="info-section">
                 <p>❌ "Please be advised that..." → ✅ "Just so you know..."</p>
                 <p>❌ "To whom it may concern..." → ✅ "Hi Team,"</p>
-                <p>❌ "Kindly revert..." → ✅ "Let me know..."</p>
+                <p>❌ "Thanking you in anticipation..." → ✅ "Thanks for the help!"</p>
             </div>
-        `,
-        // Ensure every section has a comma after the closing ` until the last one!
+            <div class="aura-check">
+                <b>The "Revert" Mistake:</b><br>
+                Don't say "Please revert back." Revert means to go back to a previous state. Just say "Please get back to me."
+            </div>
+        `
     };
 
-    // THE ONLY TWO FUNCTIONS YOU NEED:
-    function openBox( id) {
+    function openBox(id) {
         const contentBody = document.getElementById('content-body');
         const overlay = document.getElementById('overlay');
-        
         if (data[id]) {
             contentBody.innerHTML = data[id];
             overlay.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Stops background scroll
-            overlay.scrollTop = 0; // Starts reader at the top
+            document.body.style.overflow = 'hidden';
+            overlay.scrollTop = 0;
         }
     }
 
-    function closeBox(id) {
+    function closeBox() {
         document.getElementById('overlay').style.display = 'none';
-        document.body.style.overflow = 'auto'; // Returns background scroll
+        document.body.style.overflow = 'auto';
     }
 </script>
 
-
-
-    
 </body>
 </html>
-
