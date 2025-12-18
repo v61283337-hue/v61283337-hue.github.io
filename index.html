@@ -428,13 +428,13 @@
 
     };
 
-    function openBox( ) {
+    function openBox( id) {
         document.getElementById('content-body').innerHTML = data[id];
         document.getElementById('overlay').style.display = 'block';
         document.body.style.overflow = 'hidden';
     }
 
-    function closeBox() {
+    function closeBox(id) {
         document.getElementById('overlay').style.display = 'none';
         document.body.style.overflow = 'auto';
     }
@@ -578,7 +578,7 @@
     };
 
     // THE ONLY TWO FUNCTIONS YOU NEED:
-    function openBox( ) {
+    function openBox( id) {
         const contentBody = document.getElementById('content-body');
         const overlay = document.getElementById('overlay');
         
@@ -590,7 +590,7 @@
         }
     }
 
-    function closeBox() {
+    function closeBox(id) {
         document.getElementById('overlay').style.display = 'none';
         document.body.style.overflow = 'auto'; // Returns background scroll
     }
