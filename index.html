@@ -2,203 +2,181 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Common mistakes
-  .category-card {
-  background: linear-gradient(135deg, #1f1f1f, #151515);
-  border-radius: 16px;
-  padding: 26px;
-  text-decoration: none;
-  color: white;
-  transition: all 0.3s ease;
-}
+<title>Real English</title>
 
-.category-card:hover {
-  transform: translateY(-6px) scale(1.02);
-}.category-card:nth-child(1):hover {
-  box-shadow: 0 0 25px rgba(255, 99, 71, 0.4); /* Slang */
-}
-
-.category-card:nth-child(2):hover {
-  box-shadow: 0 0 25px rgba(100, 181, 246, 0.4); /* Homophones */
-}
-
-.category-card:nth-child(3):hover {
-  box-shadow: 0 0 25px rgba(129, 199, 132, 0.4); /* Pronunciation */
-}
-
-.category-card:nth-child(4):hover {
-  box-shadow: 0 0 25px rgba(255, 202, 40, 0.4); /* Mistakes */
-}
-
-.category-card:nth-child(5):hover {
-  box-shadow: 0 0 25px rgba(186, 104, 200, 0.4); /* Acronyms */
-}
-
-p {
-  color: #cfcfcf;
-  line-height: 1.5;
-}
-</style>
-</head>
 <style>
   body {
-    <h1>Real English 🧠</h1>
-<p class="subtitle">
-Learn how people actually speak — not dusty textbook English.
-Slang, mistakes, pronunciation, and real-life chaos.
-</p>
+    margin: 0;
+    padding: 30px;
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: #eee;
+  }
 
-<div class="category-container">
+  h1 {
+    text-align: center;
+    font-size: 2.6rem;
+    margin-bottom: 5px;
+  }
 
-  <a href="slang.html" class="category-card">
-    <span class="icon">🔥</span>
-    <strong>Slang</strong>
-    <small>"I'm cooked", "No cap", "Mid"</small>
-  </a>
+  .subtitle {
+    text-align: center;
+    color: #bbb;
+    max-width: 750px;
+    margin: 0 auto 40px;
+  }
 
-  <a href="homophones.html" class="category-card">
-    <span class="icon">🔊</span>
-    <strong>Homophones</strong>
-    <small>their / there / they’re</small>
-  </a>
+  .course {
+    background: linear-gradient(135deg, #1e1e2f, #141421);
+    border-radius: 18px;
+    margin-bottom: 22px;
+    border: 1px solid #2a2a40;
+    box-shadow: 0 0 18px rgba(0,0,0,.4);
+  }
 
-  <a href="phonetics.html" class="category-card">
-    <span class="icon">🗣️</span>
-    <strong>Pronunciation</strong>
-    <small>flower → US: flau·er | UK: flau·uh</small>
-  </a>
+  .course-header {
+    padding: 22px;
+    cursor: pointer;
+  }
 
-  <a href="mistakes.html" class="category-card">
-    <span class="icon">❌</span>
-    <strong>Common Mistakes</strong>
-    <small>dint ❌ didn’t ✅</small>
-  </a>
+  .course-header h2 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
 
-  <a href="acronyms.html" class="category-card">
-    <span class="icon">⚡</span>
-    <strong>Acronyms</strong>
-    <small>IDK, IMO, FYI</small>
-  </a>
+  .course-header:hover {
+    background: rgba(255,255,255,0.03);
+  }
 
-</div>
-  /* Glow per card */
-  .category-card:nth-child(1):hover { box-shadow: 0 0 25px rgba(255,99,71,.5); }
-  .category-card:nth-child(2):hover { box-shadow: 0 0 25px rgba(100,181,246,.5); }
-  .category-card:nth-child(3):hover { box-shadow: 0 0 25px rgba(129,199,132,.5); }
-  .category-card:nth-child(4):hover { box-shadow: 0 0 25px rgba(255,202,40,.5); }
-  .category-card:nth-child(5):hover { box-shadow: 0 0 25px rgba(186,104,200,.5); }
+  .content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    padding: 0 22px;
+  }
+
+  .content.open {
+    max-height: 2000px;
+    opacity: 1;
+    padding-bottom: 22px;
+  }
+
+  .content p {
+    line-height: 1.6;
+    color: #ddd;
+  }
+
+  h3 {
+    margin-top: 20px;
+    color: #fff;
+  }
+
+  button {
+    margin-top: 14px;
+    background: none;
+    border: 1px solid #555;
+    color: #ccc;
+    padding: 6px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    color: white;
+    border-color: #aaa;
+  }
 </style>
+
+<script>
+  function toggle(id) {
+    const all = document.querySelectorAll('.content');
+    all.forEach(c => {
+      if (c.id !== id) c.classList.remove('open');
+    });
+    document.getElementById(id).classList.toggle('open');
+  }
+</script>
+</head>
+
 <body>
 
-<h1>Common English Mistakes</h1>
-<p>These mistakes happen even to advanced learners. Fix them once, sound natural forever.</p>
-
-<details>
-<summary>❌ “I doesn’t know”</summary>
-<p>
-❌ I doesn’t know  
-✅ I don’t know  
-
-Why?  
-“Does” already has the **S**, so the verb stays clean.  
-Native speakers never say “doesn’t know” after “I”.
+<h1>Real English 🧠</h1>
+<p class="subtitle">
+Learn how people actually speak — slang, pronunciation, mistakes, and real-life English.
 </p>
-</details>
 
-<details>
-<summary>📘 Say vs Tell (MOST CONFUSING ONE)</summary>
-<p>
-<strong>Say</strong> = words, no listener needed  
-Examples:
-<br>• Say something  
-<br>• Say a prayer  
-<br>• Say hello  
+<!-- SLANG -->
+<div class="course">
+  <div class="course-header" onclick="toggle('slang')">
+    <h2>🔥 Slang</h2>
+  </div>
+  <div class="content" id="slang">
+    <p><b>I'm cooked</b> → I'm in trouble.</p>
+    <p><b>No cap</b> → No lie.</p>
+    <p><b>Mid</b> → Average / boring.</p>
+    <button onclick="toggle('slang')">⬅ Back</button>
+  </div>
+</div>
 
-<strong>Tell</strong> = needs a person  
-Examples:
-<br>• Tell me the truth  
-<br>• Tell him the story  
-<br>• Tell someone a secret  
+<!-- SAY VS TELL -->
+<div class="course">
+  <div class="course-header" onclick="toggle('saytell')">
+    <h2>📘 Say vs Tell</h2>
+  </div>
+  <div class="content" id="saytell">
+    <h3>SAY</h3>
+    <p>Focuses on words.</p>
+    <p>✅ She <b>said</b> she was tired.</p>
+    <p>❌ She said me she was tired.</p>
 
-❌ Say me the truth  
-✅ Tell me the truth  
-<details>
-  <summary>📘 Say vs Tell (FULL GUIDE)</summary>
-  <p>
-    <strong>SAY</strong> = focuses on words.
-    <br>• say something  
-    <br>• say hello / goodbye  
-    <br>• say a prayer  
-    <br>• say yes / no  
-    <br><br>
+    <h3>TELL</h3>
+    <p>Needs a listener.</p>
+    <p>✅ She <b>told me</b> the truth.</p>
+    <p>❌ She told the truth.</p>
 
-    <strong>TELL</strong> = needs a listener.
-    <br>• tell me  
-    <br>• tell him the truth  
-    <br>• tell someone a story  
-    <br><br>
+    <h3>Common mistake</h3>
+    <p>❌ He said me</p>
+    <p>✅ He told me</p>
 
-    ❌ Say me the answer  
-    <br>✅ Tell me the answer  
-    <br><br>
+    <button onclick="toggle('saytell')">⬅ Back</button>
+  </div>
+</div>
 
-    Easy rule:  
-    If there’s a person → <strong>tell</strong>.
-  </p>
-</details>
-Think: if there’s a person, **tell**.
-</p>
-</details>
+<!-- PRONUNCIATION -->
+<div class="course">
+  <div class="course-header" onclick="toggle('phonetics')">
+    <h2>🗣️ Pronunciation / Phonetics</h2>
+  </div>
+  <div class="content" id="phonetics">
+    <p><b>flower</b></p>
+    <p>US: flau·er</p>
+    <p>UK: flau·uh</p>
+    <p><b>didn’t</b> ≠ “dint”</p>
+    <button onclick="toggle('phonetics')">⬅ Back</button>
+  </div>
+</div>
 
-<details>
-<summary>❌ Did + past verb</summary>
-<p>
-❌ Did you went there?  
-✅ Did you go there?  
+<!-- MISTAKES -->
+<div class="course">
+  <div class="course-header" onclick="toggle('mistakes')">
+    <h2>❌ Common Mistakes</h2>
+  </div>
+  <div class="content" id="mistakes">
+    <p>❌ I doesn’t know</p>
+    <p>✅ I don’t know</p>
+    <p>Reason: “does” already carries the verb.</p>
+    <p>❌ did + V3</p>
+    <p>✅ did + base verb</p>
+    <button onclick="toggle('mistakes')">⬅ Back</button>
+  </div>
+</div>
 
-“Did” already puts it in the past.  
-Adding “went” is double past = wrong.
-</p>
-</details>
-
-<details>
-<summary>❌ “I am tensed”</summary>
-<p>
-❌ I am tensed  
-✅ I am stressed  
-
-“Tensed” is for muscles.  
-English speakers say “stressed”, “nervous”, or “anxious”.
-
-  <details>
-  <summary>❌ “’ll not” sounds weird</summary>
-  <p>
-    Native speakers almost never say <strong>’ll not</strong>.
-    <br><br>
-    ❌ I’ll not go  
-    <br>✅ I won’t go  
-    <br>✅ I’m not going
-    <br><br>
-    “Won’t” is the natural negative of “will”.
-  </p>
-  </details>
-</p>
-</details>
-<details>
-  <summary>🗣️ Didn’t → “dint”</summary>
-  <p>
-    Native speakers often pronounce <strong>didn’t</strong> as <strong>dint</strong> in fast speech.
-    <br><br>
-    Written: I didn’t do it.  
-    Spoken: I dint do it.
-    <br><br>
-    This is normal, casual pronunciation — especially American English.
-    Don’t write “dint”, but expect to hear it.
-  </p>
-</details>
-<a href="index.html">⬅ Back to home</a>
-
-</body>
-</html>
-
-
+<!-- ACRONYMS -->
+<div class="course">
+  <div class="course-header" onclick="toggle('acronyms')">
+    <h2>⚡ Acronyms & Contractions</h2>
+  </div>
+  <div class="content" id="acronyms">
+    <p><b>IDK</b> = I don’t know</p>
+    <p><b>IMO</b> = in my opinion</p>
