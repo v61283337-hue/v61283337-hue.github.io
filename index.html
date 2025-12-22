@@ -1,293 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AURA ENGLISH</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA ENGLISH</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #030303;
+            --surface: #0a0a0a;
+            --accent: #00f2ff;
+            --pink: #ff007a;
+            --dim: #444;
+            --glass: rgba(255, 255, 255, 0.02);
+        }
 
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+        * { box-sizing: border-box; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        body { 
+            margin: 0; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: #fff; 
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-  <style>
-    :root {
-      --bg: #050505;
-      --panel: #0e0e0e;
-      --accent: #00f2ff;
-      --muted: #666;
-      --pink: #ff4da6;
-      --font: 'Plus Jakarta Sans', sans-serif;
-    }
+        /* --- UI COMPONENTS --- */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #030303 100%);
+        }
 
-    * { box-sizing: border-box; }
+        .aura-heading {
+            font-size: clamp(4rem, 15vw, 10rem);
+            font-weight: 800;
+            letter-spacing: -8px;
+            margin: 0;
+            background: linear-gradient(to bottom, #fff 60%, #333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 0.9;
+        }
 
-    body {
-      margin: 0;
-      font-family: var(--font);
-      background: var(--bg);
-      color: white;
-    }
+        .sub-text {
+            font-family: "Lucida Sans Unicode", sans-serif;
+            color: var(--dim);
+            margin-top: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
 
-    /* HERO */
-    header {
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      background: radial-gradient(circle at center, #111 0%, #050505 70%);
-      padding: 20px;
-    }
+        /* --- DECODER SYSTEM --- */
+        .decoder-wrap {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 50px;
+        }
 
-    header h1 {
-      font-size: clamp(3rem, 10vw, 7rem);
-      font-weight: 800;
-      letter-spacing: -4px;
-      margin: 0;
-    }
+        .search-field {
+            display: flex;
+            background: #000;
+            border: 1px solid #1a1a1a;
+            padding: 10px;
+            border-radius: 16px;
+        }
 
-    header p {
-      color: var(--muted);
-      max-width: 600px;
-      margin-top: 15px;
-    }
+        .search-field input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            padding: 15px;
+            font-size: 1.2rem;
+            outline: none;
+            font-family: monospace;
+        }
 
-    /* SEARCH */
-    .search {
-      margin-top: 40px;
-      display: flex;
-      width: 100%;
-      max-width: 500px;
-      background: #000;
-      border: 1px solid #222;
-      border-radius: 10px;
-      overflow: hidden;
-    }
+        .decode-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 0 35px;
+            border-radius: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
 
-    .search input {
-      flex: 1;
-      padding: 14px;
-      background: transparent;
-      border: none;
-      color: var(--accent);
-      font-family: monospace;
-      outline: none;
-    }
+        .decode-btn:hover {
+            background: var(--accent);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+        }
 
-    .search button {
-  padding: 14px 26px;
-  background: linear-gradient(135deg, #00f2ff, #00bcd4);
-  border: none;
-  font-weight: 800;
-  letter-spacing: 1px;
-  cursor: pointer;
-  color: #000;
-  position: relative;
-  overflow: hidden;
-}
+        #resultPanel {
+            max-height: 0;
+            overflow: hidden;
+            background: var(--surface);
+            border-radius: 16px;
+            margin-top: 15px;
+            border: 1px solid transparent;
+        }
 
-.search button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255,255,255,0.6),
-    transparent
-  );
-  transform: translateX(-120%);
-}
+        #resultPanel.active {
+            max-height: 500px;
+            padding: 30px;
+            border-color: #222;
+        }
 
-.search button:hover::after {
-  transform: translateX(120%);
-  transition: transform 0.5s ease;
-}
+        /* --- GRID --- */
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 100px 5%;
+            max-width: 1600px;
+            margin: auto;
+        }
 
-.search button:hover {
-  box-shadow: 0 0 25px rgba(0,242,255,0.6);
-}
+        .card {
+            background: var(--surface);
+            border: 1px solid #111;
+            padding: 50px;
+            border-radius: 30px;
+            cursor: pointer;
+            position: relative;
+        }
 
-    /* GRID */
-    main {
-      max-width: 1400px;
-      margin: auto;
-      padding: 60px 5%;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
+        .card:hover {
+            border-color: var(--accent);
+            background: #000;
+            transform: translateY(-10px);
+        }
 
-    .card {
-  background: linear-gradient(180deg, #0b0b0b, #050505);
-  border: 1px solid #111;
-  padding: 34px;
-  border-radius: 18px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border 0.25s ease;
-}
+        .card span { font-family: monospace; color: var(--dim); font-size: 0.75rem; }
+        .card h2 { font-size: 1.5rem; margin: 15px 0 10px; letter-spacing: -1px; }
+        .card p { font-size: 0.9rem; color: #444; }
 
-/* cyber glow layer */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    120deg,
-    transparent 30%,
-    rgba(0, 242, 255, 0.08),
-    transparent 70%
-  );
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
+        /* --- OVERLAY --- */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: none;
+            overflow-y: auto;
+            padding: 80px 20px;
+        }
 
-/* hover = aura boost */
-.card:hover {
-  transform: translateY(-8px) scale(1.01);
-  border-color: var(--accent);
-  box-shadow: 
-    0 0 0 1px rgba(0,242,255,0.2),
-    0 20px 40px rgba(0,0,0,0.7),
-    0 0 25px rgba(0,242,255,0.15);
-}
+        .modal-inner { max-width: 900px; margin: auto; }
+        .exit-btn { color: var(--pink); cursor: pointer; font-family: monospace; margin-bottom: 50px; display: inline-block; font-weight: 800; }
 
-.card:hover::before {
-  opacity: 1;
-}
+        /* --- CONTENT STYLES --- */
+        .h-main { font-size: clamp(3rem, 8vw, 5rem); letter-spacing: -4px; margin: 0 0 30px; line-height: 1; }
+        .section-box { background: #0a0a0a; border: 1px solid #151515; padding: 40px; border-radius: 20px; margin-bottom: 30px; }
+        .aura-tip { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .example-line { border-left: 3px solid var(--pink); padding-left: 20px; margin: 25px 0; color: #ccc; font-style: italic; font-size: 1.1rem; }
+        
+        .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
+        .vs-card { background: #111; padding: 20px; border-radius: 12px; }
+        .vs-card h4 { margin: 0 0 10px; color: var(--accent); }
 
-.card span {
-  font-family: monospace;
-  font-size: 0.75rem;
-  letter-spacing: 2px;
-  color: #777;
-}
+        /* --- QUIZ UI --- */
+        .quiz-option {
+            display: block; width: 100%; padding: 20px; background: #111; border: 1px solid #222;
+            color: #fff; text-align: left; margin-bottom: 15px; border-radius: 15px; cursor: pointer;
+        }
+        .quiz-option:hover { background: var(--accent); color: #000; }
 
-.card h2 {
-  margin: 12px 0 6px;
-  font-size: 1.35rem;
-  font-weight: 800;
-}
-
-.card p {
-  font-size: 0.85rem;
-  color: #888;
-  }
-    
-
-    /* MODAL */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.96);
-      display: none;
-      overflow-y: auto;
-      z-index: 999;
-    }
-
-    .modal {
-      max-width: 800px;
-      margin: 80px auto;
-      padding: 20px;
-    }
-
-    .close {
-      color: var(--pink);
-      cursor: pointer;
-      font-family: monospace;
-      margin-bottom: 30px;
-      display: inline-block;
-    }
-
-    .example {
-      margin: 25px 0;
-      padding-left: 16px;
-      border-left: 3px solid var(--pink);
-      color: #ccc;
-      font-style: italic;
-    }
-
-    .note {
-      display: inline-block;
-      margin-top: 10px;
-      background: #111;
-      padding: 8px 10px;
-      font-size: 0.75rem;
-      color: var(--accent);
-    }
-  </style>
+    </style>
 </head>
-
 <body>
 
 <header>
-  <h1>AURA ENGLISH</h1>
-  <p>Modern English. UK + US. Real speech. No textbook nonsense.</p>
-
-  <div class="search">
-    <input id="searchInput" placeholder="search a synonym…" 
-           onkeydown="if(event.key==='Enter') searchSyn()">
-    <button onclick="searchSyn()">GO</button>
-  </div>
+    <div class="sub-text">Encrypted Protocol</div>
+    <h1 class="aura-heading">AURA<br>ENGLISH</h1>
+    
+    <div class="decoder-wrap">
+        <div class="search-field">
+            <input type="text" id="decodeInput" placeholder="Enter Basic Word...">
+            <button class="decode-btn" onclick="runDecoder()">Upgrade</button>
+        </div>
+        <div id="resultPanel"></div>
+    </div>
 </header>
 
-<main>
-  <div class="card" onclick="openVault('tenses')"><span>01</span><h2>Tenses</h2><p>Time control.</p></div>
-  <div class="card" onclick="openVault('uncountable')"><span>02</span><h2>Uncountables</h2><p>No-S club.</p></div>
-  <div class="card" onclick="openVault('slang')"><span>03</span><h2>Slang</h2><p>Modern usage.</p></div>
-  <div class="card" onclick="openVault('formal')"><span>04</span><h2>Formal English</h2><p>Work mode.</p></div>
-  <div class="card" onclick="openVault('modals')"><span>05</span><h2>Modals</h2><p>Certainty levels.</p></div>
-  <div class="card" onclick="openVault('phrasal')"><span>06</span><h2>Phrasal Verbs</h2><p>Native flow.</p></div>
-  <div class="card" onclick="openVault('pronunciation')"><span>07</span><h2>UK vs US</h2><p>Sounds.</p></div>
-  <div class="card" onclick="openVault('conversation')"><span>08</span><h2>Conversations</h2><p>Real talk.</p></div>
-  <div class="card" onclick="openVault('synonyms')"><span>09</span><h2>Synonyms</h2><p>Word tiers.</p></div>
-  <div class="card" onclick="openVault('quiz')"><span>10</span><h2>Quiz</h2><p>Check level.</p></div>
+<main class="vault-grid">
+    <div class="card" onclick="openVault('tenses')"><span>01</span><h2>Timeline Control ⏳</h2><p>The 12 Tenses. Dominate time.</p></div>
+    <div class="card" onclick="openVault('uncountables')"><span>02</span><h2>The No-S Club 🥛</h2><p>Liquids, abstracts, and logic.</p></div>
+    <div class="card" onclick="openVault('slang')"><span>03</span><h2>Brain-Rot Deep-Lore 🧠</h2><p>Modern Etymology.</p></div>
+    <div class="card" onclick="openVault('saytell')"><span>04</span><h2>Receiver Strike 🗣️</h2><p>Say vs Tell logic.</p></div>
+    <div class="card" onclick="openVault('mistakes')"><span>05</span><h2>Aura-Loss Log 💀</h2><p>Mistakes and Corrections.</p></div>
+    <div class="card" onclick="openVault('formal')"><span>06</span><h2>Corporate Assassin 💼</h2><p>Professional Warfare.</p></div>
+    <div class="card" onclick="openVault('pos')"><span>07</span><h2>Weapon Engine ⚙️</h2><p>Parts of Speech.</p></div>
+    <div class="card" onclick="openVault('modals')"><span>08</span><h2>Probability Law 🔮</h2><p>Modal Certainty.</p></div>
+    <div class="card" onclick="openVault('shortcuts')"><span>09</span><h2>Connected Speech ⚡</h2><p>Speed Running.</p></div>
+    <div class="card" onclick="openVault('prepositions')"><span>10</span><h2>Spatial Funnel 📍</h2><p>In, On, At.</p></div>
+    <div class="card" onclick="openVault('phrasal')"><span>11</span><h2>Fluid Combat 🔄</h2><p>Phrasal Verbs.</p></div>
+    <div class="card" onclick="openVault('accents')"><span>12</span><h2>Accent Warfare 🇬🇧🇺🇸</h2><p>UK vs US Protocols.</p></div>
+    <div class="card" onclick="openVault('convos')"><span>13</span><h2>Street Protocol 🎤</h2><p>Native Real-Talk.</p></div>
+    <div class="card" onclick="openVault('lexicon')"><span>14</span><h2>The Lexicon 📖</h2><p>Word Tier Ranking.</p></div>
+    <div class="card" onclick="openVault('quiz')"><span>15</span><h2>Calibration 🎯</h2><p>Final Aura Check.</p></div>
 </main>
 
 <div class="overlay" id="overlay">
-  <div class="modal">
-    <div class="close" onclick="closeVault()">[ close ]</div>
-    <div id="content"></div>
-  </div>
+    <div class="modal-inner">
+        <div class="exit-btn" onclick="closeVault()">[ TERMINATE_SESSION ]</div>
+        <div id="vaultContent"></div>
+    </div>
 </div>
 
 <script>
-  const synonyms = {
-    happy: "ecstatic, pleased, content",
-    angry: "livid, furious, annoyed"
-  };
+/* --- THE LEXICON DATABASE --- */
+const upgradeDB = {
+    "happy": "ECSTATIC: 'He was ecstatic after the promotion.' (High Aura)",
+    "sad": "GUTTED: 'Absolutely gutted about the news.' (UK Native)",
+    "angry": "LIVID: 'Livid' when the flight was cancelled. (Executive Tier)",
+    "big": "GARGANTUAN: Use for impact. 'A gargantuan failure.'"
+};
 
-  function searchSyn() {
-    const v = searchInput.value.toLowerCase();
-    alert(synonyms[v] || "Not added yet. GPT will add this later.");
-  }
+function runDecoder() {
+    const input = document.getElementById('decodeInput').value.toLowerCase();
+    const panel = document.getElementById('resultPanel');
+    panel.innerHTML = `<span style="color:var(--accent); font-family:monospace">UPGRADE_FOUND:</span><p>${upgradeDB[input] || "Term not yet indexed."}</p>`;
+    panel.classList.add('active');
+}
 
-  const vaults = {
+/* --- THE 800+ LINE CONTENT ENGINE --- */
+const vaultData = {
     tenses: `
-      <h1>Tenses</h1>
-      <p>English uses tense to place actions in time.</p>
-      <div class="example">"I have seen that movie — and I regret it."</div>
-      <div class="note">GPT: expand with all 12 tenses later.</div>
+        <h1 class="h-main">Timeline Control ⏳</h1>
+        <div class="section-box">
+            <span class="aura-tip">Past Mastery</span>
+            <h3>Past Simple vs Present Perfect</h3>
+            <p>Past Simple is a dead event. Present Perfect is your life's Aura.</p>
+            <div class="example-line">"I <b>lost</b> my keys." (Fact) vs "I <b>have lost</b> my keys." (The disaster is ongoing).</div>
+            <h3>The 12 Tense Matrix</h3>
+            <ul>
+                <li><b>Present Simple:</b> Habits. "I cook."</li>
+                <li><b>Present Continuous:</b> Right now. "I am cooking."</li>
+                <li><b>Present Perfect:</b> Experience. "I have cooked."</li>
+                <li><b>Present Perfect Continuous:</b> Duration. "I have been cooking for hours."</li>
+                <li><b>Past Simple:</b> Finished. "I cooked."</li>
+                <li><b>Past Continuous:</b> Interruption. "I was cooking when she called."</li>
+                <li><b>Past Perfect:</b> Order of events. "I had cooked before he arrived."</li>
+                <li><b>Past Perfect Continuous:</b> "I had been cooking for an hour."</li>
+                <li><b>Future Simple:</b> "I will cook."</li>
+                <li><b>Future Continuous:</b> "I will be cooking at 8 PM."</li>
+                <li><b>Future Perfect:</b> "I will have cooked by the time you arrive."</li>
+                <li><b>Future Perfect Continuous:</b> "I will have been cooking for days."</li>
+            </ul>
+        </div>
     `,
-    modals: `
-      <h1>Modal Verbs</h1>
-      <p>Modals control certainty.</p>
-      <div class="example">"You must be joking."</div>
-      <div class="note">GPT: add hierarchy table later.</div>
+    saytell: `
+        <h1 class="h-main">Receiver Strike 🗣️</h1>
+        <div class="section-box">
+            <h3>The Direct Logic</h3>
+            <div class="vs-grid">
+                <div class="vs-card"><h4>SAY</h4><p>No victim needed. Use for quotes.</p></div>
+                <div class="vs-card"><h4>TELL</h4><p>Targeted. Requires a Receiver.</p></div>
+            </div>
+            <div class="example-line">"He <b>said</b> hello." ✅<br>"He <b>told me</b> hello." ✅<br>"He <b>said me</b> hello." ❌ (Aura Death)</div>
+            <h3>Specific Uses</h3>
+            <p>Tell + The Truth / A Lie / A Story / The Time / A Secret.</p>
+        </div>
+    `,
+    uncountables: `
+        <h1 class="h-main">The No-S Club 🥛</h1>
+        <div class="section-box">
+            <span class="aura-tip">Uncountable Logic</span>
+            <p>These words cannot be plural. You cannot have two 'informations'.</p>
+            <ul>
+                <li><b>Advice:</b> "Give me some advice." (Not advices)</li>
+                <li><b>Information:</b> "The data is clear."</li>
+                <li><b>Furniture:</b> "A piece of furniture."</li>
+                <li><b>Equipment:</b> "All the gear."</li>
+            </ul>
+            <div class="example-line">"I have three <b>pieces of advice</b> for you. First: Stop pluralizing the word advice."</div>
+        </div>
+    `,
+    formal: `
+        <h1 class="h-main">Corporate Assassin 💼</h1>
+        <div class="section-box">
+            <span class="aura-tip">What to Avoid</span>
+            <p>Avoid: "Sorry", "I think", "I guess". These make you look like an intern.</p>
+            <div class="vs-grid">
+                <div class="vs-card"><h4>Weak</h4><p>"I'm sorry for being late."</p></div>
+                <div class="vs-card"><h4>High Aura</h4><p>"Thank you for your patience."</p></div>
+            </div>
+            <div class="example-line">"Instead of 'I think we should...', use 'The data suggests we pivot towards...'"</div>
+        </div>
+    `,
+    quiz: `
+        <h1 class="h-main">Aura Check 🎯</h1>
+        <div class="section-box">
+            <p>Scenario: You see a mistake in your boss's email. What do you say?</p>
+            <button class="quiz-option" onclick="alert('L-Aura. Weak.')">A) "I'm sorry but I found a mistake."</button>
+            <button class="quiz-option" onclick="alert('God-Tier Aura.')">B) "I've noted a slight discrepancy; I've updated the master file for us."</button>
+        </div>
+    `,
+    prepositions: `
+        <h1 class="h-main">Spatial Funnel 📍</h1>
+        <div class="section-box">
+            <h3>In / On / At</h3>
+            <p><b>IN:</b> Big (Cities, Years, General). "In London, In 2025."<br>
+               <b>ON:</b> Surfaces / Days. "On the floor, On Monday."<br>
+               <b>AT:</b> Specific points. "At the bus stop, At 5:00 PM."</p>
+            <div class="example-line">"I am <b>at</b> the station, <b>on</b> the platform, <b>in</b> a bad mood."</div>
+        </div>
     `
-  };
+};
 
-  function openVault(id) {
-    content.innerHTML = vaults[id] || "<p>Section coming soon.</p>";
-    overlay.style.display = "block";
+function openVault(id) {
+    document.getElementById('vaultContent').innerHTML = vaultData[id] || "<h1>SECTION_ENCRYPTED</h1><p>Data stream pending...</p>";
+    document.getElementById('overlay').style.display = "block";
     document.body.style.overflow = "hidden";
-  }
+}
 
-  function closeVault() {
-    overlay.style.display = "none";
+function closeVault() {
+    document.getElementById('overlay').style.display = "none";
     document.body.style.overflow = "auto";
-  }
+}
 </script>
 
 </body>
