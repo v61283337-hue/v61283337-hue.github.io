@@ -1,212 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ENGLISH // TERMINAL</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #030303;
-            --surface: #0a0a0a;
-            --accent: #00f2ff; /* Cyber Cyan */
-            --purple: #7000ff;
-            --pink: #ff007a;
-            --text-dim: #555;
-            --lucida: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURA ENGLISH</title>
 
-        * { box-sizing: border-box; transition: all 0.2s ease-in-out; }
-        body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
 
-        /* THE UPGRADED HERO */
-        .hero {
-            height: 85vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: radial-gradient(circle at center, #0f0f0f 0%, #030303 100%);
-            padding: 20px;
-            border-bottom: 1px solid #111;
-        }
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #0e0e0e;
+      --accent: #00f2ff;
+      --muted: #666;
+      --pink: #ff4da6;
+      --font: 'Plus Jakarta Sans', sans-serif;
+    }
 
-        .hero h1 { 
-            font-size: clamp(3.5rem, 15vw, 9rem); 
-            font-weight: 800; 
-            margin: 0; 
-            letter-spacing: -6px; 
-            background: linear-gradient(to bottom, #fff 60%, #222);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(255,255,255,0.1));
-        }
+    * { box-sizing: border-box; }
 
-        /* THE SEARCH BUTTON (RESIZED & STYLED) */
-        .search-box {
-            width: 100%; max-width: 650px;
-            background: #000;
-            border: 1px solid #222;
-            border-radius: 12px;
-            display: flex;
-            padding: 10px;
-            margin-top: 40px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
-        }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      color: white;
+    }
 
-        .search-box input {
-            flex: 1; background: transparent; border: none; padding: 0 20px;
-            color: var(--accent); font-size: 1.1rem; outline: none; font-family: monospace;
-        }
+    /* HERO */
+    header {
+      min-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: radial-gradient(circle at center, #111 0%, #050505 70%);
+      padding: 20px;
+    }
 
-        /* THE "SEXIER" BUTTON */
-        .action-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            box-shadow: 0 0 0 0 rgba(0, 242, 255, 0);
-        }
+    header h1 {
+      font-size: clamp(3rem, 10vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -4px;
+      margin: 0;
+    }
 
-        .action-btn:hover {
-            background: var(--accent);
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-        }
+    header p {
+      color: var(--muted);
+      max-width: 600px;
+      margin-top: 15px;
+    }
 
-        /* VAULT CARDS */
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 80px 5%;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
+    /* SEARCH */
+    .search {
+      margin-top: 40px;
+      display: flex;
+      width: 100%;
+      max-width: 500px;
+      background: #000;
+      border: 1px solid #222;
+      border-radius: 10px;
+      overflow: hidden;
+    }
 
-        .vault-card {
-            background: var(--surface);
-            border: 1px solid #111;
-            padding: 40px;
-            border-radius: 16px;
-            cursor: pointer;
-            border-left: 2px solid #111;
-        }
+    .search input {
+      flex: 1;
+      padding: 14px;
+      background: transparent;
+      border: none;
+      color: var(--accent);
+      font-family: monospace;
+      outline: none;
+    }
 
-        .vault-card:hover {
-            border-left: 2px solid var(--accent);
-            background: #0d0d0d;
-            transform: translateX(10px);
-        }
+    .search button {
+      padding: 14px 22px;
+      background: var(--accent);
+      border: none;
+      font-weight: 800;
+      cursor: pointer;
+    }
 
-        .vault-card .num { font-family: monospace; color: var(--text-dim); font-size: 0.8rem; display: block; margin-bottom: 10px; }
-        .vault-card h2 { font-size: 1.3rem; color: #fff; margin: 0 0 8px; font-weight: 800; }
-        .vault-card p { font-size: 0.85rem; color: #444; margin: 0; }
+    /* GRID */
+    main {
+      max-width: 1400px;
+      margin: auto;
+      padding: 60px 5%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
 
-        /* MODAL OVERLAY */
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); display: none; z-index: 1000; overflow-y: auto;
-            backdrop-filter: blur(10px);
-        }
+    .card {
+      background: var(--panel);
+      border: 1px solid #111;
+      padding: 30px;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: 0.25s;
+    }
 
-        .modal-body { max-width: 800px; margin: 100px auto; padding: 0 20px; }
-        .close-trigger { color: var(--pink); cursor: pointer; font-family: monospace; margin-bottom: 40px; font-weight: 800; }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+    }
 
-        .content-block h1 { font-size: 3.5rem; letter-spacing: -2px; }
-        .funny-ex { border-left: 2px solid var(--pink); padding-left: 20px; margin: 30px 0; color: #ccc; font-style: italic; }
-        .safety-rail { background: #111; padding: 10px; font-size: 0.75rem; color: var(--accent); display: inline-block; margin-top: 10px; }
+    .card span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: monospace;
+    }
 
-    </style>
+    .card h2 {
+      margin: 10px 0 6px;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      font-size: 0.85rem;
+      color: #777;
+    }
+
+    /* MODAL */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.96);
+      display: none;
+      overflow-y: auto;
+      z-index: 999;
+    }
+
+    .modal {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 20px;
+    }
+
+    .close {
+      color: var(--pink);
+      cursor: pointer;
+      font-family: monospace;
+      margin-bottom: 30px;
+      display: inline-block;
+    }
+
+    .example {
+      margin: 25px 0;
+      padding-left: 16px;
+      border-left: 3px solid var(--pink);
+      color: #ccc;
+      font-style: italic;
+    }
+
+    .note {
+      display: inline-block;
+      margin-top: 10px;
+      background: #111;
+      padding: 8px 10px;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="hero">
-    <h1>AURA ENGLISH ⛓️</h1>
-    <p style="font-family: var(--lucida); font-size: 1.1rem; color: #444; margin-top: 15px;">
-        ( the restricted linguistic bible for the social elite. )
-    </p>
-    
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="DECODE_SYNONYM_">
-        <button class="action-btn" onclick="searchSyn()">Upgrade</button>
-    </div>
-</div>
+<header>
+  <h1>AURA ENGLISH</h1>
+  <p>Modern English. UK + US. Real speech. No textbook nonsense.</p>
 
-<div class="vault-grid">
-    <div class="vault-card" onclick="openVault('tenses')"><span class="num">01</span><h2>Timeline Control ⏳</h2><p>Past. Present. Future.</p></div>
-    <div class="vault-card" onclick="openVault('uncountable')"><span class="num">02</span><h2>The No-S Club 🥛</h2><p>Refusing the plural.</p></div>
-    <div class="vault-card" onclick="openVault('slang')"><span class="num">03</span><h2>Brain-Rot Deep-Lore 🧠</h2><p>Slang Etymology.</p></div>
-    <div class="vault-card" onclick="openVault('saytell')"><span class="num">04</span><h2>The Receiver Logic 🗣️</h2><p>Say vs Tell.</p></div>
-    <div class="vault-card" onclick="openVault('mistakes')"><span class="num">05</span><h2>Aura-Loss Log 💀</h2><p>25 Social Sins.</p></div>
-    <div class="vault-card" onclick="openVault('formal')"><span class="num">06</span><h2>Corporate Assassin 💼</h2><p>Business Warfare.</p></div>
-    <div class="vault-card" onclick="openVault('pos')"><span class="num">07</span><h2>The Weapon Engine ⚙️</h2><p>8 Parts of Power.</p></div>
-    <div class="vault-card" onclick="openVault('modals')"><span class="num">08</span><h2>Probability Law 🔮</h2><p>Modal Domination.</p></div>
-    <div class="vault-card" onclick="openVault('contractions')"><span class="num">09</span><h2>Speed Running ⚡</h2><p>Native Shortcuts.</p></div>
-    <div class="vault-card" onclick="openVault('prepositions')"><span class="num">10</span><h2>Space-Time Funnel 📍</h2><p>In / On / At.</p></div>
-    <div class="vault-card" onclick="openVault('phrasal')"><span class="num">11</span><h2>Casual Fluidity 🔄</h2><p>Phrasal Verb Combos.</p></div>
-    <div class="vault-card" onclick="openVault('pronunciation')"><span class="num">12</span><h2>Accent Warfare 🇬🇧🇺🇸</h2><p>UK vs US sounds.</p></div>
-    <div class="vault-card" onclick="openVault('street')"><span class="num">13</span><h2>Street Protocol 🎤</h2><p>Native Conversations.</p></div>
-    <div class="vault-card" onclick="openVault('synonyms')"><span class="num">14</span><h2>The Lexicon 📖</h2><p>High-Aura Vocab.</p></div>
-    <div class="vault-card" onclick="openVault('quiz')"><span class="num">15</span><h2>Final Calibration 🎯</h2><p>Aura Level Test.</p></div>
-</div>
+  <div class="search">
+    <input id="searchInput" placeholder="search a synonym…" 
+           onkeydown="if(event.key==='Enter') searchSyn()">
+    <button onclick="searchSyn()">GO</button>
+  </div>
+</header>
 
-<div id="overlay" class="overlay">
-    <div class="modal-body">
-        <div class="close-trigger" onclick="closeVault()">[ CLOSE_SESSION ]</div>
-        <div id="vault-content"></div>
-    </div>
+<main>
+  <div class="card" onclick="openVault('tenses')"><span>01</span><h2>Tenses</h2><p>Time control.</p></div>
+  <div class="card" onclick="openVault('uncountable')"><span>02</span><h2>Uncountables</h2><p>No-S club.</p></div>
+  <div class="card" onclick="openVault('slang')"><span>03</span><h2>Slang</h2><p>Modern usage.</p></div>
+  <div class="card" onclick="openVault('formal')"><span>04</span><h2>Formal English</h2><p>Work mode.</p></div>
+  <div class="card" onclick="openVault('modals')"><span>05</span><h2>Modals</h2><p>Certainty levels.</p></div>
+  <div class="card" onclick="openVault('phrasal')"><span>06</span><h2>Phrasal Verbs</h2><p>Native flow.</p></div>
+  <div class="card" onclick="openVault('pronunciation')"><span>07</span><h2>UK vs US</h2><p>Sounds.</p></div>
+  <div class="card" onclick="openVault('conversation')"><span>08</span><h2>Conversations</h2><p>Real talk.</p></div>
+  <div class="card" onclick="openVault('synonyms')"><span>09</span><h2>Synonyms</h2><p>Word tiers.</p></div>
+  <div class="card" onclick="openVault('quiz')"><span>10</span><h2>Quiz</h2><p>Check level.</p></div>
+</main>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="close" onclick="closeVault()">[ close ]</div>
+    <div id="content"></div>
+  </div>
 </div>
 
 <script>
-    // SYNONYM SEARCHER (The Lexicon)
-    const synDB = {
-        "happy": "ECSTATIC: 'I was ecstatic when he finally stopped yapping.'",
-        "bad": "ABYSMAL: 'The service was abysmal, frankly a zero-aura experience.'",
-        "smart": "ASTUTE: 'An astute observation, though high-key obvious.'",
-        "mad": "LIVID: 'He was livid because he got caught in 4k.'"
-    };
+  const synonyms = {
+    happy: "ecstatic, pleased, content",
+    angry: "livid, furious, annoyed"
+  };
 
-    function searchSyn() {
-        const val = document.getElementById('searchInput').value.toLowerCase();
-        alert(synDB[val] || "Term not indexed. Requesting update from GPT...");
-    }
+  function searchSyn() {
+    const v = searchInput.value.toLowerCase();
+    alert(synonyms[v] || "Not added yet. GPT will add this later.");
+  }
 
-    // CONTENT VAULT (Ready for Expansion)
-    const vaultData = {
-        tenses: `
-            <div class="content-block">
-                <h1>Timeline Control ⏳</h1>
-                <h3>Present Continuous (US vs UK)</h3>
-                <p><b>US:</b> "I am heading out."<br><b>UK:</b> "I'm just nipping out, mate."</p>
-                <div class="funny-ex">"I <b>am currently ghosting</b> him, so if he calls, tell him I'm in the Himalayas."</div>
-                <div class="safety-rail">GPT: Use for ongoing actions that annoy you.</div>
-            </div>
-        `,
-        slang: `
-            <div class="content-block">
-                <h1>Brain-Rot Deep-Lore 🧠</h1>
-                <p><b>Rizz:</b> From 'Charisma'. <br>Example: "He has zero rizz, he tried to use a pick-up line from 2016."</p>
-                <div class="funny-ex">"If you have to ask if you have aura, you've already lost 500 points. 💀"</div>
-            </div>
-        `
-    };
+  const vaults = {
+    tenses: `
+      <h1>Tenses</h1>
+      <p>English uses tense to place actions in time.</p>
+      <div class="example">"I have seen that movie — and I regret it."</div>
+      <div class="note">GPT: expand with all 12 tenses later.</div>
+    `,
+    modals: `
+      <h1>Modal Verbs</h1>
+      <p>Modals control certainty.</p>
+      <div class="example">"You must be joking."</div>
+      <div class="note">GPT: add hierarchy table later.</div>
+    `
+  };
 
-    function openVault(id) {
-        document.getElementById('vault-content').innerHTML = vaultData[id] || "<h3>TERMINAL_ERROR</h3><p>Section under development. GPT currently writing heat...</p>";
-        document.getElementById('overlay').style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    }
+  function openVault(id) {
+    content.innerHTML = vaults[id] || "<p>Section coming soon.</p>";
+    overlay.style.display = "block";
+    document.body.style.overflow = "hidden";
+  }
 
-    function closeVault() {
-        document.getElementById('overlay').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
+  function closeVault() {
+    overlay.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
 </script>
+
 </body>
 </html>
