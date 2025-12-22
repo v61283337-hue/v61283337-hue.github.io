@@ -3,330 +3,619 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ENGLISH</title>
+    <title>AURA ENGLISH // THE SYNDICATE</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #030303;
-            --surface: #0a0a0a;
-            --accent: #00f2ff;
-            --pink: #ff007a;
-            --dim: #444;
-            --glass: rgba(255, 255, 255, 0.02);
+            --bg: #010101; --panel: #080808; --accent: #00f2ff;
+            --pink: #ff007a; --dim: #444; --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.03);
         }
-
-        * { box-sizing: border-box; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
         body { 
-            margin: 0; 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
-            color: #fff; 
-            overflow-x: hidden;
-            line-height: 1.6;
+            margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); color: var(--white); overflow-x: hidden; 
         }
 
-        /* --- UI COMPONENTS --- */
+        /* --- CINEMATIC HERO --- */
         header {
-            height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #030303 100%);
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; overflow: hidden;
         }
-
-        .aura-heading {
-            font-size: clamp(4rem, 15vw, 10rem);
-            font-weight: 800;
-            letter-spacing: -8px;
-            margin: 0;
-            background: linear-gradient(to bottom, #fff 60%, #333);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 0.9;
+        .video-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; object-fit: cover; filter: grayscale(1) brightness(0.2);
         }
-
-        .sub-text {
-            font-family: "Lucida Sans Unicode", sans-serif;
-            color: var(--dim);
-            margin-top: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+        .overlay-mask {
+            position: absolute; inset: 0; 
+            background: radial-gradient(circle, transparent 20%, var(--bg) 90%);
+            z-index: 0;
         }
-
-        /* --- DECODER SYSTEM --- */
-        .decoder-wrap {
-            width: 100%;
-            max-width: 700px;
-            margin-top: 50px;
+        .hero-content { z-index: 10; width: 90%; }
+        .hero-title {
+            font-size: clamp(5rem, 20vw, 13rem); font-weight: 800;
+            letter-spacing: -12px; line-height: 0.8; margin: 0;
+            background: linear-gradient(to bottom, #fff 40%, #222);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
-        .search-field {
-            display: flex;
-            background: #000;
-            border: 1px solid #1a1a1a;
-            padding: 10px;
-            border-radius: 16px;
-        }
-
-        .search-field input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--accent);
-            padding: 15px;
-            font-size: 1.2rem;
-            outline: none;
-            font-family: monospace;
-        }
-
-        .decode-btn {
-            background: #fff;
-            color: #000;
-            border: none;
-            padding: 0 35px;
-            border-radius: 10px;
-            font-weight: 800;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
-
-        .decode-btn:hover {
-            background: var(--accent);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-        }
-
-        #resultPanel {
-            max-height: 0;
-            overflow: hidden;
-            background: var(--surface);
-            border-radius: 16px;
-            margin-top: 15px;
-            border: 1px solid transparent;
-        }
-
-        #resultPanel.active {
-            max-height: 500px;
-            padding: 30px;
-            border-color: #222;
-        }
-
-        /* --- GRID --- */
-        .vault-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            padding: 100px 5%;
-            max-width: 1600px;
-            margin: auto;
-        }
-
-        .card {
-            background: var(--surface);
-            border: 1px solid #111;
-            padding: 50px;
-            border-radius: 30px;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .card:hover {
-            border-color: var(--accent);
-            background: #000;
-            transform: translateY(-10px);
-        }
-
-        .card span { font-family: monospace; color: var(--dim); font-size: 0.75rem; }
-        .card h2 { font-size: 1.5rem; margin: 15px 0 10px; letter-spacing: -1px; }
-        .card p { font-size: 0.9rem; color: #444; }
-
-        /* --- OVERLAY --- */
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: #000;
-            z-index: 9999;
-            display: none;
-            overflow-y: auto;
-            padding: 80px 20px;
-        }
-
-        .modal-inner { max-width: 900px; margin: auto; }
-        .exit-btn { color: var(--pink); cursor: pointer; font-family: monospace; margin-bottom: 50px; display: inline-block; font-weight: 800; }
-
-        /* --- CONTENT STYLES --- */
-        .h-main { font-size: clamp(3rem, 8vw, 5rem); letter-spacing: -4px; margin: 0 0 30px; line-height: 1; }
-        .section-box { background: #0a0a0a; border: 1px solid #151515; padding: 40px; border-radius: 20px; margin-bottom: 30px; }
-        .aura-tip { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
-        .example-line { border-left: 3px solid var(--pink); padding-left: 20px; margin: 25px 0; color: #ccc; font-style: italic; font-size: 1.1rem; }
         
-        .vs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .vs-card { background: #111; padding: 20px; border-radius: 12px; }
-        .vs-card h4 { margin: 0 0 10px; color: var(--accent); }
-
-        /* --- QUIZ UI --- */
-        .quiz-option {
-            display: block; width: 100%; padding: 20px; background: #111; border: 1px solid #222;
-            color: #fff; text-align: left; margin-bottom: 15px; border-radius: 15px; cursor: pointer;
+        /* SEARCH / LEXICON */
+        .decoder-wrap { width: 100%; max-width: 800px; margin: 60px auto 0; }
+        .decoder-input {
+            display: flex; background: #000; border: 1px solid #1a1a1a;
+            border-radius: 20px; padding: 10px; backdrop-filter: blur(10px);
         }
-        .quiz-option:hover { background: var(--accent); color: #000; }
+        .decoder-input input {
+            flex: 1; background: transparent; border: none; color: var(--accent);
+            padding: 0 25px; font-size: 1.2rem; outline: none; font-family: monospace;
+        }
+        .btn-aurora {
+            background: #fff; color: #000; border: none; padding: 20px 50px;
+            border-radius: 14px; font-weight: 800; cursor: pointer; text-transform: uppercase;
+        }
+        .btn-aurora:hover { background: var(--accent); box-shadow: 0 0 40px rgba(0, 242, 255, 0.6); }
 
+        #lexResult {
+            margin-top: 25px; padding: 40px; border-radius: 25px; 
+            background: var(--panel); border: 1px solid #222; 
+            display: none; text-align: left; animation: reveal 0.6s ease;
+        }
+
+        /* --- THE VAULT GRID --- */
+        .vault-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px; padding: 100px 5%; max-width: 1800px; margin: auto;
+        }
+        .card {
+            background: var(--panel); border: 1px solid #111;
+            padding: 80px 50px; border-radius: 40px; cursor: pointer;
+            position: relative; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .card:hover { border-color: var(--accent); background: #000; transform: translateY(-20px); }
+        .card span { font-family: monospace; color: var(--dim); font-size: 0.9rem; letter-spacing: 5px; }
+        .card h2 { font-size: 2.2rem; margin: 25px 0 15px; letter-spacing: -2px; }
+
+        /* --- MODAL OVERLAY --- */
+        .overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.99); z-index: 9999;
+            display: none; overflow-y: auto; padding: 80px 20px;
+        }
+        .modal-body { max-width: 1100px; margin: auto; }
+        .exit-btn { color: var(--pink); cursor: pointer; font-family: monospace; font-weight: 800; font-size: 1.3rem; margin-bottom: 70px; display: inline-block; }
+
+        /* --- CONTENT TYPOGRAPHY --- */
+        .h-mega { font-size: clamp(3.5rem, 12vw, 8rem); letter-spacing: -8px; margin-bottom: 60px; line-height: 0.85; }
+        .data-card { background: #050505; border: 1px solid #121212; padding: 60px; border-radius: 40px; margin-bottom: 50px; }
+        .label-aura { color: var(--accent); font-family: monospace; font-size: 1rem; text-transform: uppercase; letter-spacing: 5px; display: block; margin-bottom: 25px; }
+        .convo-bubble { background: #0a0a0a; border-left: 6px solid var(--pink); padding: 40px; margin: 30px 0; border-radius: 0 20px 20px 0; }
+        .quiz-btn { 
+            display: block; width: 100%; padding: 25px; margin-top: 15px; 
+            background: #0d0d0d; border: 1px solid #222; color: #fff; 
+            border-radius: 18px; cursor: pointer; text-align: left; font-size: 1.1rem;
+        }
+        .quiz-btn:hover { background: var(--accent); color: #000; }
+
+        @keyframes reveal { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="sub-text">Encrypted Protocol</div>
-    <h1 class="aura-heading">AURA<br>ENGLISH</h1>
-    
-    <div class="decoder-wrap">
-        <div class="search-field">
-            <input type="text" id="decodeInput" placeholder="Enter Basic Word...">
-            <button class="decode-btn" onclick="runDecoder()">Upgrade</button>
+    <video class="video-bg" autoplay muted loop playsinline>
+        <source src="https://player.vimeo.com/external/494298132.hd.mp4?s=5cc035043598717830f55452f1b4021319c5c76c&profile_id=175" type="video/mp4">
+    </video>
+    <div class="overlay-mask"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">AURA<br>ENGLISH</h1>
+        <div class="decoder-wrap">
+            <div class="decoder-input">
+                <input type="text" id="lexSearch" placeholder="DECODE_SYNONYMS_">
+                <button class="btn-aurora" onclick="runLexicon()">Upgrade</button>
+            </div>
+            <div id="lexResult"></div>
         </div>
-        <div id="resultPanel"></div>
     </div>
 </header>
 
-<main class="vault-grid">
-    <div class="card" onclick="openVault('tenses')"><span>01</span><h2>Timeline Control ⏳</h2><p>The 12 Tenses. Dominate time.</p></div>
-    <div class="card" onclick="openVault('uncountables')"><span>02</span><h2>The No-S Club 🥛</h2><p>Liquids, abstracts, and logic.</p></div>
-    <div class="card" onclick="openVault('slang')"><span>03</span><h2>Brain-Rot Deep-Lore 🧠</h2><p>Modern Etymology.</p></div>
-    <div class="card" onclick="openVault('saytell')"><span>04</span><h2>Receiver Strike 🗣️</h2><p>Say vs Tell logic.</p></div>
-    <div class="card" onclick="openVault('mistakes')"><span>05</span><h2>Aura-Loss Log 💀</h2><p>Mistakes and Corrections.</p></div>
-    <div class="card" onclick="openVault('formal')"><span>06</span><h2>Corporate Assassin 💼</h2><p>Professional Warfare.</p></div>
-    <div class="card" onclick="openVault('pos')"><span>07</span><h2>Weapon Engine ⚙️</h2><p>Parts of Speech.</p></div>
-    <div class="card" onclick="openVault('modals')"><span>08</span><h2>Probability Law 🔮</h2><p>Modal Certainty.</p></div>
-    <div class="card" onclick="openVault('shortcuts')"><span>09</span><h2>Connected Speech ⚡</h2><p>Speed Running.</p></div>
-    <div class="card" onclick="openVault('prepositions')"><span>10</span><h2>Spatial Funnel 📍</h2><p>In, On, At.</p></div>
-    <div class="card" onclick="openVault('phrasal')"><span>11</span><h2>Fluid Combat 🔄</h2><p>Phrasal Verbs.</p></div>
-    <div class="card" onclick="openVault('accents')"><span>12</span><h2>Accent Warfare 🇬🇧🇺🇸</h2><p>UK vs US Protocols.</p></div>
-    <div class="card" onclick="openVault('convos')"><span>13</span><h2>Street Protocol 🎤</h2><p>Native Real-Talk.</p></div>
-    <div class="card" onclick="openVault('lexicon')"><span>14</span><h2>The Lexicon 📖</h2><p>Word Tier Ranking.</p></div>
-    <div class="card" onclick="openVault('quiz')"><span>15</span><h2>Calibration 🎯</h2><p>Final Aura Check.</p></div>
-</main>
+<main class="vault-grid" id="mainGrid"></main>
 
 <div class="overlay" id="overlay">
-    <div class="modal-inner">
-        <div class="exit-btn" onclick="closeVault()">[ TERMINATE_SESSION ]</div>
+    <div class="modal-body">
+        <div class="exit-btn" onclick="closeVault()">[ TERMINATE_SYNDICATE_SESSION ]</div>
         <div id="vaultContent"></div>
     </div>
 </div>
 
 <script>
-/* --- THE LEXICON DATABASE --- */
-const upgradeDB = {
-    "happy": "ECSTATIC: 'He was ecstatic after the promotion.' (High Aura)",
-    "sad": "GUTTED: 'Absolutely gutted about the news.' (UK Native)",
-    "angry": "LIVID: 'Livid' when the flight was cancelled. (Executive Tier)",
-    "big": "GARGANTUAN: Use for impact. 'A gargantuan failure.'"
+/* --- THE LEXICON (20 DYNAMIC ENTRIES) --- */
+const lexicon = {
+    "happy": "ECSTATIC: 'Completely ecstatic about the win.'",
+    "bad": "ABYSMAL: 'The service was abysmal, avoid at all costs.'",
+    "smart": "ASTUTE: 'An astute observation by the CEO.'",
+    "angry": "LIVID: 'He was livid when the flight was cancelled.'",
+    "tired": "EXHAUSTED: 'I'm utterly exhausted after the marathon.'",
+    "small": "MINISCULE: 'A miniscule detail changed everything.'",
+    "fast": "EXPEDITIOUS: 'We need an expeditious response.'",
+    "easy": "EFFORTLESS: 'She made the task look effortless.'",
+    "boring": "TEDIOUS: 'The three-hour lecture was tedious.'",
+    "rich": "AFFLUENT: 'He lives in a very affluent neighborhood.'",
+    "poor": "DESTITUTE: 'The charity helps destitute families.'",
+    "scared": "PETRIFIED: 'She was petrified of the dark.'",
+    "big": "COLOSSAL: 'A colossal waste of taxpayer money.'",
+    "dirty": "SQUALID: 'They lived in squalid conditions.'",
+    "clean": "IMMACULATE: 'The house was kept immaculate.'",
+    "cold": "FRIGID: 'The frigid air hit us the moment we stepped out.'",
+    "hot": "SWELTERING: 'A sweltering afternoon in the city.'",
+    "weak": "FEEBLE: 'A feeble attempt to solve the problem.'",
+    "strong": "FORMIDABLE: 'A formidable opponent on the court.'",
+    "brave": "VALIANT: 'He made a valiant effort to save the dog.'"
 };
 
-function runDecoder() {
-    const input = document.getElementById('decodeInput').value.toLowerCase();
-    const panel = document.getElementById('resultPanel');
-    panel.innerHTML = `<span style="color:var(--accent); font-family:monospace">UPGRADE_FOUND:</span><p>${upgradeDB[input] || "Term not yet indexed."}</p>`;
-    panel.classList.add('active');
+function runLexicon() {
+    const val = document.getElementById('lexSearch').value.toLowerCase();
+    const res = document.getElementById('lexResult');
+    res.style.display = 'block';
+    res.innerHTML = `<span class="label-aura">DECODED_TERM:</span><p style="font-size:1.5rem">${lexicon[val] || "Entry not found in Syndicate files."}</p>`;
 }
 
-/* --- THE 800+ LINE CONTENT ENGINE --- */
-const vaultData = {
+/* --- THE MANIFEST (15 SECTIONS) --- */
+const vaults = [
+    {id: 'tenses', title: 'Timeline Control ⏳', desc: '12 Tenses + Native Usage Secrets.'},
+    {id: 'saytell', title: 'Receiver Logic 🗣️', desc: 'Every use of Say/Tell & Say To.'},
+    {id: 'preps', title: 'Spatial Funnel 📍', desc: 'In/On/At + 10 Error Assassinations.'},
+    {id: 'uncount', title: 'The No-S Club 🥛', desc: '30 Uncountables + Counting Hacks.'},
+    {id: 'slang', title: 'Brain-Rot Lore 🧠', desc: '30 Slang Terms with Examples.'},
+    {id: 'mistakes', title: 'Aura-Loss Log 💀', desc: '25 Fatal Social Sins.'},
+    {id: 'convos', title: 'Street Protocol 🎤', desc: '4 Massive UK/US Real-Talk Scripts.'},
+    {id: 'speech', title: 'Connected Flow ⚡', desc: 'Assimilation & Contractions.'},
+    {id: 'formal', title: 'Corporate Assassin 💼', desc: 'Professional Gear & What to Avoid.'},
+    {id: 'phrasal', title: 'Casual Combat 🔄', desc: '25 Essential Phrasal Verbs.'},
+    {id: 'pos', title: 'Weapon Engine ⚙️', desc: 'Parts of Speech & Rules.'},
+    {id: 'quiz', title: 'Calibration 🎯', desc: '15 Question Aura Check.'},
+    {id: 'images', title: 'Visual Intel 🖼️', desc: 'Diagrams & Preposition Funnels.'},
+    {id: 'modern', title: '2025 Lexicon 📱', desc: 'Modern Contractions & Text Talk.'},
+    {id: 'tips', title: 'Native Shortcuts 💡', desc: 'Speed-running the Language.'}
+];
+
+    /* --- SECTION 01: TOTAL TENSE EXPANSION (ALL EXPLANATIONS) --- */
     tenses: `
-        <h1 class="h-main">Timeline Control ⏳</h1>
-        <div class="section-box">
-            <span class="aura-tip">Past Mastery</span>
-            <h3>Past Simple vs Present Perfect</h3>
-            <p>Past Simple is a dead event. Present Perfect is your life's Aura.</p>
-            <div class="example-line">"I <b>lost</b> my keys." (Fact) vs "I <b>have lost</b> my keys." (The disaster is ongoing).</div>
-            <h3>The 12 Tense Matrix</h3>
+        <h1 class="h-mega">Timeline Control</h1>
+        <div class="data-card">
+            <span class="label-aura">The 12 Tense Matrix & Deep Logic</span>
+            
+            <h3>01. Present Simple</h3>
+            <p><b>Logic:</b> Permanent states, facts, and habits. Use for things that are "always true."</p>
+            <div class="convo-bubble">"I <b>grind</b> while they sleep." (Habit) / "Water <b>boils</b> at 100°C." (Fact)</div>
+
+            <h3>02. Present Continuous</h3>
+            <p><b>Logic:</b> Actions happening *right now* or temporary situations.</p>
+            <div class="convo-bubble">"I <b>am recording</b> this session." (Current) / "I <b>am staying</b> in London for a week." (Temp)</div>
+
+            <h3>03. Present Perfect</h3>
+            <p><b>Logic:</b> A bridge between past and present. The time is not important; the *result* is.</p>
+            <div class="convo-bubble">"I <b>have lost</b> my keys." (Result: I don't have them now).</div>
+
+            <h3>04. Present Perfect Continuous</h3>
+            <p><b>Logic:</b> Focuses on the *duration* of an activity that started in the past and continues now.</p>
+            <div class="convo-bubble">"I <b>have been yapping</b> for two hours." (Focus: The long time spent).</div>
+
+            <h3>05. Past Simple</h3>
+            <p><b>Logic:</b> Completed actions at a specific time in the past.</p>
+            <div class="convo-bubble">"I <b>ghosted</b> him yesterday." (Finished action).</div>
+
+            <h3>06. Past Continuous</h3>
+            <p><b>Logic:</b> Background actions or interrupted progress in the past.</p>
+            <div class="convo-bubble">"I <b>was sleeping</b> when the alarm went off." (Background action).</div>
+
+            <h3>07. Past Perfect</h3>
+            <p><b>Logic:</b> The "Past of the Past." Use it to show which action happened *first*.</p>
+            <div class="convo-bubble">"The train <b>had left</b> before I arrived at the station."</div>
+
+            <h3>08. Past Perfect Continuous</h3>
+            <p><b>Logic:</b> Duration of an action up to a certain point in the past.</p>
+            <div class="convo-bubble">"He <b>had been training</b> for years before he won."</div>
+
+            <h3>09. Future Simple</h3>
+            <p><b>Logic:</b> Instant decisions, promises, or general predictions.</p>
+            <div class="convo-bubble">"I <b>will help</b> you." (Decision) / "It <b>will rain</b> tomorrow." (Prediction).</div>
+
+            <h3>10. Future Continuous</h3>
+            <p><b>Logic:</b> Actions that will be in progress at a specific time in the future. High Aura/Aesthetic.</p>
+            <div class="convo-bubble">"This time tomorrow, I <b>will be chilling</b> in Bali."</div>
+
+            <h3>11. Future Perfect</h3>
+            <p><b>Logic:</b> An action that will be *finished* by a specific future point.</p>
+            <div class="convo-bubble">"I <b>will have finished</b> the code by midnight."</div>
+
+            <h3>12. Future Perfect Continuous</h3>
+            <p><b>Logic:</b> How long an action will have been happening by a future point.</p>
+            <div class="convo-bubble">"In May, I <b>will have been working</b> here for 5 years."</div>
+        </div>
+    `,
+
+    /* --- SECTION 02: 30 UNCOUNTABLES + HACKS --- */
+    uncount: `
+        <h1 class="h-mega">The No-S Club</h1>
+        <div class="data-card">
+            <span class="label-aura">30 Entities That Never Take an 'S'</span>
+            <p><b>The List:</b> Advice, Information, Furniture, Luggage, Baggage, Equipment, Knowledge, Homework, Music, Progress, Research, Weather, Money, Traffic, Evidence, Staff, Jewelry, Bread, Water, Milk, Rice, Salt, Sugar, Meat, Hair, Rubbish, Experience, News, Feedback, Behavior.</p>
+            
+            <h3 class="label-aura">The Counting Hacks (Use these to avoid L-Aura)</h3>
             <ul>
-                <li><b>Present Simple:</b> Habits. "I cook."</li>
-                <li><b>Present Continuous:</b> Right now. "I am cooking."</li>
-                <li><b>Present Perfect:</b> Experience. "I have cooked."</li>
-                <li><b>Present Perfect Continuous:</b> Duration. "I have been cooking for hours."</li>
-                <li><b>Past Simple:</b> Finished. "I cooked."</li>
-                <li><b>Past Continuous:</b> Interruption. "I was cooking when she called."</li>
-                <li><b>Past Perfect:</b> Order of events. "I had cooked before he arrived."</li>
-                <li><b>Past Perfect Continuous:</b> "I had been cooking for an hour."</li>
-                <li><b>Future Simple:</b> "I will cook."</li>
-                <li><b>Future Continuous:</b> "I will be cooking at 8 PM."</li>
-                <li><b>Future Perfect:</b> "I will have cooked by the time you arrive."</li>
-                <li><b>Future Perfect Continuous:</b> "I will have been cooking for days."</li>
+                <li>A <b>piece</b> of advice / information / news / furniture / luggage.</li>
+                <li>A <b>loaf</b> of bread / A <b>slice</b> of bread.</li>
+                <li>A <b>bottle</b> of water / A <b>glass</b> of milk.</li>
+                <li>A <b>stroke</b> of luck / A <b>bit</b> of luck.</li>
+                <li>A <b>gust</b> of wind / A <b>bolt</b> of lightning.</li>
+                <li>A <b>word</b> of wisdom.</li>
+                <li>A <b>sense</b> of humor.</li>
             </ul>
-        </div>
-    `,
-    saytell: `
-        <h1 class="h-main">Receiver Strike 🗣️</h1>
-        <div class="section-box">
-            <h3>The Direct Logic</h3>
-            <div class="vs-grid">
-                <div class="vs-card"><h4>SAY</h4><p>No victim needed. Use for quotes.</p></div>
-                <div class="vs-card"><h4>TELL</h4><p>Targeted. Requires a Receiver.</p></div>
+            <div class="convo-bubble" style="border-left-color: var(--accent)">
+                "I have two <b>pieces of luggage</b>." ✅<br>
+                "I have two luggages." ❌
             </div>
-            <div class="example-line">"He <b>said</b> hello." ✅<br>"He <b>told me</b> hello." ✅<br>"He <b>said me</b> hello." ❌ (Aura Death)</div>
-            <h3>Specific Uses</h3>
-            <p>Tell + The Truth / A Lie / A Story / The Time / A Secret.</p>
         </div>
     `,
-    uncountables: `
-        <h1 class="h-main">The No-S Club 🥛</h1>
-        <div class="section-box">
-            <span class="aura-tip">Uncountable Logic</span>
-            <p>These words cannot be plural. You cannot have two 'informations'.</p>
+
+    /* --- SECTION 03: 30 SLANG TERMS + EXAMPLES --- */
+    slang: `
+        <h1 class="h-mega">Brain-Rot Lore</h1>
+        <div class="data-card">
+            <span class="label-aura">30 Modern Protocols (2025 Edition)</span>
+            <p>01. <b>Rizz:</b> Charisma. "He has unspoken rizz."</p>
+            <p>02. <b>Cooked:</b> Done for/Finished. "Bro, you're cooked."</p>
+            <p>03. <b>Mewing:</b> Tongue posture. "I'm mewing, can't talk."</p>
+            <p>04. <b>Mogging:</b> Physical superiority. "He's mogging the whole gym."</p>
+            <p>05. <b>Delulu:</b> Delusional. "Stay delulu, it's the only way."</p>
+            <p>06. <b>Cap:</b> A lie. "That's cap, I was there."</p>
+            <p>07. <b>Ghost:</b> To disappear. "She ghosted me after the date."</p>
+            <p>08. <b>Sus:</b> Suspicious. "That's low-key sus, man."</p>
+            <p>09. <b>Bet:</b> Agreement. "You coming?" "Bet."</p>
+            <p>10. <b>Cringe:</b> Embarrassment. "That video was so cringe."</p>
+            <p>11. <b>Mid:</b> Mediocre. "The food was mid."</p>
+            <p>12. <b>Flex:</b> Show off. "Weird flex, but okay."</p>
+            <p>13. <b>Clout:</b> Influence. "Doing it for the clout."</p>
+            <p>14. <b>Simp:</b> Over-attentive. "Stop simping for her."</p>
+            <p>15. <b>Glow up:</b> Major improvement. "Her glow up was insane."</p>
+            <p>16. <b>Slay:</b> Do well. "You slayed that outfit."</p>
+            <p>17. <b>Tea:</b> Gossip. "Spill the tea."</p>
+            <p>18. <b>Vibe check:</b> Assessing mood. "He failed the vibe check."</p>
+            <p>19. <b>Main Character:</b> Self-centered aura. "He has main character energy."</p>
+            <p>20. <b>Valid:</b> Acceptable. "That's a valid point."</p>
+            <p>21. <b>Bussin:</b> Delicious. "This burger is bussin."</p>
+            <p>22. <b>Sheesh:</b> Exclamation. "Sheesh, look at that car."</p>
+            <p>23. <b>Finna:</b> Going to. "I'm finna head out."</p>
+            <p>24. <b>Low-key:</b> Secretly. "I low-key love this song."</p>
+            <p>25. <b>High-key:</b> Openly. "I high-key hate that movie."</p>
+            <p>26. <b>Opp:</b> Opposition/Enemy. "Avoid the opps."</p>
+            <p>27. <b>Situationship:</b> Undefined relationship. "We're in a situationship."</p>
+            <p>28. <b>Living Rent Free:</b> Can't stop thinking about it. "He's living rent free in your head."</p>
+            <p>29. <b>Gucci:</b> Good. "We're all gucci here."</p>
+            <p>30. <b>Dead:</b> Hilarious. "I'm dead, that was too funny."</p>
+        </div>
+    `,
+
+    /* --- SECTION 04: PREPOSITION ASSASSINATIONS --- */
+    preps: `
+        <h1 class="h-mega">Spatial Funnel</h1>
+        <div class="data-card">
+            <span class="label-aura">10 Fatal Preposition Errors</span>
+            <div class="convo-bubble" style="border-left-color: var(--pink)">
+                1. ❌ Discuss <b>about</b> the weather -> ✅ Discuss the weather.<br>
+                2. ❌ Enter <b>into</b> the room -> ✅ Enter the room.<br>
+                3. ❌ Married <b>with</b> her -> ✅ Married <b>to</b> her.<br>
+                4. ❌ Depend <b>of</b> the price -> ✅ Depend <b>on</b> the price.<br>
+                5. ❌ Congratulate <b>for</b> the win -> ✅ Congratulate <b>on</b> the win.<br>
+                6. ❌ Lack <b>of</b> experience (Verb) -> ✅ He <b>lacks</b> experience.<br>
+                7. ❌ Phone <b>to</b> him -> ✅ Phone him.<br>
+                8. ❌ Seek <b>for</b> help -> ✅ Seek help.<br>
+                9. ❌ Comprise <b>of</b> five parts -> ✅ Comprise five parts.<br>
+                10. ❌ Emphasize <b>on</b> the point -> ✅ Emphasize the point.
+            </div>
+            <h3 class="label-aura">The Hierarchy (In / On / At)</h3>
+            <p><b>IN:</b> Big (Cities, Years, Months). <i>In London, in 2025.</i></p>
+            <p><b>ON:</b> Surfaces/Days. <i>On the floor, on Monday.</i></p>
+            <p><b>AT:</b> Specific (Times, exact spots). <i>At 5 PM, at the bus stop.</i></p>
+        </div>
+    `,
+
+            /* --- SECTION 05: 25 SOCIAL SINS (MISTAKES) --- */
+    mistakes: `
+        <h1 class="h-mega">Aura-Loss Log</h1>
+        <div class="data-card">
+            <span class="label-aura">25 Fatal Errors & Explanations</span>
+            <div class="convo-bubble" style="border-left-color: var(--pink)">
+                <p>01. ❌ <b>I have 20 years.</b> -> ✅ I am 20. (Age is a state, not a possession).</p>
+                <p>02. ❌ <b>I am boring.</b> -> ✅ I am bored. (-ing describes the thing, -ed describes your feeling).</p>
+                <p>03. ❌ <b>I am agree.</b> -> ✅ I agree. (Agree is a verb, not an adjective).</p>
+                <p>04. ❌ <b>Explain me this.</b> -> ✅ Explain this to me. (Requires 'to' for the receiver).</p>
+                <p>05. ❌ <b>The police is here.</b> -> ✅ The police are here. (Police is always plural).</p>
+                <p>06. ❌ <b>I don't know nothing.</b> -> ✅ I don't know anything. (Double negatives kill aura).</p>
+                <p>07. ❌ <b>I've been here since 3 hours.</b> -> ✅ ...for 3 hours. (Since = start point, For = duration).</p>
+                <p>08. ❌ <b>I suggest you to go.</b> -> ✅ I suggest that you go. (Suggest + Clause/Gerund).</p>
+                <p>09. ❌ <b>Every students.</b> -> ✅ Every student. (Every/Each must be singular).</p>
+                <p>10. ❌ <b>He doesn't has.</b> -> ✅ He doesn't have. (Auxiliary 'do' takes the conjugation).</p>
+                <p>11. ❌ <b>I'm looking forward to meet you.</b> -> ✅ ...to meeting you. ('To' is a preposition here).</p>
+                <p>12. ❌ <b>She's more tall.</b> -> ✅ She's taller. (One-syllable adjectives use -er).</p>
+                <p>13. ❌ <b>People is.</b> -> ✅ People are. (Always plural).</p>
+                <p>14. ❌ <b>Informationes.</b> -> ✅ Information. (Uncountable/No-S club).</p>
+                <p>15. ❌ <b>I lost the bus.</b> -> ✅ I missed the bus. (Lost is for objects, Missed is for transport).</p>
+                <p>16. ❌ <b>How do you call this?</b> -> ✅ What do you call this? (Seeking the name, not the method).</p>
+                <p>17. ❌ <b>I am thinking to go.</b> -> ✅ I am thinking of going.</p>
+                <p>18. ❌ <b>Depends of.</b> -> ✅ Depends on.</p>
+                <p>19. ❌ <b>Borrow me 5 dollars.</b> -> ✅ Lend me 5 dollars. (Borrow = take, Lend = give).</p>
+                <p>20. ❌ <b>I like very much English.</b> -> ✅ I like English very much. (Don't split verb/object).</p>
+                <p>21. ❌ <b>Last night I've seen...</b> -> ✅ Last night I saw... (Specific time needs Past Simple).</p>
+                <p>22. ❌ <b>He's married with a doctor.</b> -> ✅ ...married to a doctor.</p>
+                <p>23. ❌ <b>Your hair are nice.</b> -> ✅ Your hair is nice. (Uncountable).</p>
+                <p>24. ❌ <b>Me and my friend went...</b> -> ✅ My friend and I went... (Politeness + Subject case).</p>
+                <p>25. ❌ <b>I work as a teacher.</b> -> ✅ I work as a teacher. (Actually correct, but avoid 'I work like a teacher').</p>
+            </div>
+        </div>
+    `,
+
+    /* --- SECTION 06: 4 MASSIVE UK/US CONVERSATIONS --- */
+    convos: `
+        <h1 class="h-mega">Street Protocol</h1>
+        <div class="data-card">
+            <span class="label-aura">Scenario 01: US - The Tech Startup (High-Stakes)</span>
+            <div class="convo-bubble">
+                <b>Tyler:</b> "Yo, did you see the metrics? We're low-key crushing it."<br>
+                <b>Sarah:</b> "For real. I was high-key worried about the churn rate, but it's valid now."<br>
+                <b>Tyler:</b> "Bet. If we scale this by Q3, we're gucci. No cap, the investors are gonna be stoked."<br>
+                <b>Sarah:</b> "Don't flex yet. We still gotta optimize the backend or we're cooked."
+            </div>
+
+            <span class="label-aura">Scenario 02: UK - The Rainy Pub (Casual)</span>
+            <div class="convo-bubble">
+                <b>Gaz:</b> "Proper miserable out there, innit? I'm absolutely soaked."<br>
+                <b>Baz:</b> "Standard London, mate. Fancy a pint then? My shout."<br>
+                <b>Gaz:</b> "Top man. I’m gutted I missed the match earlier, though. Was it any good?"<br>
+                <b>Baz:</b> "Nah, it was a bit mid, to be fair. Waste of time, really."
+            </div>
+
+            <span class="label-aura">Scenario 03: US - The Gym (Social)</span>
+            <div class="convo-bubble">
+                <b>Chad:</b> "Bro, you seen that new guy? He’s literally mogging the whole floor."<br>
+                <b>Brad:</b> "Sheesh, you aren't kidding. His rizz is off the charts too."<br>
+                <b>Chad:</b> "I'm finna ask him what his routine is. I need that glow up."<br>
+                <b>Brad:</b> "Careful, don't look like a simp. Just keep it low-key."
+            </div>
+
+            <span class="label-aura">Scenario 04: UK - The Flat-Share (Conflict)</span>
+            <div class="convo-bubble">
+                <b>Liam:</b> "Who's left their washing in the machine again? It’s been there for ages."<br>
+                <b>Noel:</b> "Chill out, I'm just about to clear it off. Don't get your knickers in a twist."<br>
+                <b>Liam:</b> "You're taking the mickey, aren't you? This is the third time this week!"<br>
+                <b>Noel:</b> "Alright, keep your hair on. I'll do it now. Dead annoying, you are."
+            </div>
+        </div>
+    `,
+
+    /* --- SECTION 07: CONNECTED SPEECH & CONTRACTIONS --- */
+    speech: `
+        <h1 class="h-mega">Connected Flow</h1>
+        <div class="data-card">
+            <span class="label-aura">Assimilation & Modern Shortcuts</span>
+            <h3>1. Assimilation (Merging Sounds)</h3>
+            <p><b>T + Y = CH:</b> "Meet you" -> "Mee-chew". "Don't you" -> "Don-chew".</p>
+            <p><b>D + Y = J:</b> "Did you" -> "Did-ja". "Would you" -> "Wu-ja".</p>
+            
+            <h3>2. Modern Contractions (The Speed-Run)</h3>
             <ul>
-                <li><b>Advice:</b> "Give me some advice." (Not advices)</li>
-                <li><b>Information:</b> "The data is clear."</li>
-                <li><b>Furniture:</b> "A piece of furniture."</li>
-                <li><b>Equipment:</b> "All the gear."</li>
+                <li><b>Gonna:</b> Going to. "I'm gonna win."</li>
+                <li><b>Wanna:</b> Want to. "Wanna go out?"</li>
+                <li><b>Gotta:</b> Got to / Have to. "I gotta head out."</li>
+                <li><b>Whatcha:</b> What are you. "Whatcha doing?"</li>
+                <li><b>Dunno:</b> Don't know. "I dunno, man."</li>
+                <li><b>Kinda:</b> Kind of. "It's kinda weird."</li>
             </ul>
-            <div class="example-line">"I have three <b>pieces of advice</b> for you. First: Stop pluralizing the word advice."</div>
+            <p class="label-aura">Avoid: Using these in an email to your boss. (+1000 Aura Loss).</p>
         </div>
     `,
-    formal: `
-        <h1 class="h-main">Corporate Assassin 💼</h1>
-        <div class="section-box">
-            <span class="aura-tip">What to Avoid</span>
-            <p>Avoid: "Sorry", "I think", "I guess". These make you look like an intern.</p>
-            <div class="vs-grid">
-                <div class="vs-card"><h4>Weak</h4><p>"I'm sorry for being late."</p></div>
-                <div class="vs-card"><h4>High Aura</h4><p>"Thank you for your patience."</p></div>
+    /* --- SECTION 09: THE ACRONYM ARCHIVE (TEXT & CORPORATE) --- */
+    modern: `
+        <h1 class="h-mega">Digital Shorthand</h1>
+        <div class="data-card">
+            <span class="label-aura">Top 30 Acronyms (Casual & Pro)</span>
+            <div class="vs-table" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div><b>1. POV:</b> Point of View</div>
+                <div><b>2. IYKYK:</b> If you know, you know</div>
+                <div><b>3. FOMO:</b> Fear of missing out</div>
+                <div><b>4. LMK:</b> Let me know</div>
+                <div><b>5. BRB:</b> Be right back</div>
+                <div><b>6. AFK:</b> Away from keyboard</div>
+                <div><b>7. TTYL:</b> Talk to you later</div>
+                <div><b>8. IMO:</b> In my opinion</div>
+                <div><b>9. TBH:</b> To be honest</div>
+                <div><b>10. FR:</b> For real</div>
+                <div><b>11. NGL:</b> Not gonna lie</div>
+                <div><b>12. SMH:</b> Shaking my head</div>
+                <div><b>13. RN:</b> Right now</div>
+                <div><b>14. TBF:</b> To be fair</div>
+                <div><b>15. ASAP:</b> As soon as possible</div>
+                <div><b>16. FYI:</b> For your information</div>
+                <div><b>17. DIY:</b> Do it yourself</div>
+                <div><b>18. ETA:</b> Estimated time of arrival</div>
+                <div><b>19. WFH:</b> Work from home</div>
+                <div><b>20. OOO:</b> Out of office</div>
+                <div><b>21. FAQ:</b> Frequently asked questions</div>
+                <div><b>22. AKA:</b> Also known as</div>
+                <div><b>23. RSVP:</b> Répondez s'il vous plaît (Respond)</div>
+                <div><b>24. TGIF:</b> Thank God it's Friday</div>
+                <div><b>25. BAE:</b> Before anyone else</div>
+                <div><b>26. GOAT:</b> Greatest of all time</div>
+                <div><b>27. ICYMI:</b> In case you missed it</div>
+                <div><b>28. TL;DR:</b> Too long; didn't read</div>
+                <div><b>29. IRL:</b> In real life</div>
+                <div><b>30. GRWM:</b> Get ready with me</div>
             </div>
-            <div class="example-line">"Instead of 'I think we should...', use 'The data suggests we pivot towards...'"</div>
         </div>
     `,
+
+    /* --- SECTION 10: HOMOPHONES & HOMONYMS (THE CONFUSION MATRIX) --- */
+    images: `
+        <h1 class="h-mega">Linguistic Twins</h1>
+        <div class="data-card">
+            <span class="label-aura">Homophones (Sound Same, Different Meaning)</span>
+            <p>• <b>Their / There / They're:</b> Possession / Location / They are.</p>
+            <p>• <b>Your / You're:</b> Possession / You are.</p>
+            <p>• <b>Its / It's:</b> Possession / It is.</p>
+            <p>• <b>Break / Brake:</b> Smash / Stop a car.</p>
+            <p>• <b>Compliment / Complement:</b> Nice word / Goes well with.</p>
+            <p>• <b>Accept / Except:</b> Receive / Excluding.</p>
+            <p>• <b>Affect / Effect:</b> To influence (Verb) / The result (Noun).</p>
+            
+            <span class="label-aura" style="margin-top:40px; display:block;">Homonyms (Look Same, Different Meaning)</span>
+            <p>• <b>Bark:</b> Tree skin / Dog sound.</p>
+            <p>• <b>Bat:</b> Sports equipment / Nocturnal animal.</p>
+            <p>• <b>Crane:</b> Construction machine / Large bird.</p>
+            <p>• <b>Match:</b> Small fire stick / Game or contest / Two things that go together.</p>
+            <p>• <b>Mean:</b> Not nice / Definition / Average.</p>
+            <p>• <b>Scale:</b> Weighing tool / Climb up / Fish skin.</p>
+            <p>• <b>Watch:</b> Look at / Wrist clock.</p>
+        </div>
+    `,
+
+    /* --- SECTION 11: FULL 15-QUESTION AURA CHECK --- */
     quiz: `
-        <h1 class="h-main">Aura Check 🎯</h1>
-        <div class="section-box">
-            <p>Scenario: You see a mistake in your boss's email. What do you say?</p>
-            <button class="quiz-option" onclick="alert('L-Aura. Weak.')">A) "I'm sorry but I found a mistake."</button>
-            <button class="quiz-option" onclick="alert('God-Tier Aura.')">B) "I've noted a slight discrepancy; I've updated the master file for us."</button>
-        </div>
-    `,
-    prepositions: `
-        <h1 class="h-main">Spatial Funnel 📍</h1>
-        <div class="section-box">
-            <h3>In / On / At</h3>
-            <p><b>IN:</b> Big (Cities, Years, General). "In London, In 2025."<br>
-               <b>ON:</b> Surfaces / Days. "On the floor, On Monday."<br>
-               <b>AT:</b> Specific points. "At the bus stop, At 5:00 PM."</p>
-            <div class="example-line">"I am <b>at</b> the station, <b>on</b> the platform, <b>in</b> a bad mood."</div>
+        <h1 class="h-mega">Calibration</h1>
+        <div class="data-card" id="quizBox">
+            <span class="label-aura">Syndicate Level Assessment</span>
+            <div id="qContent">
+                <p id="qText" style="font-size:1.6rem;">1. Which sentence has zero L-Aura?</p>
+                <button class="quiz-btn" onclick="nextQ(0)">A) We need to discuss about the budget.</button>
+                <button class="quiz-btn" onclick="nextQ(1)">B) We need to discuss the budget.</button>
+            </div>
+            <div id="finalScore" style="display:none; text-align:center;">
+                <h2 style="font-size:3rem;">AURA CALIBRATED</h2>
+                <p id="scoreDisplay" style="font-size:1.5rem; color:var(--accent)"></p>
+            </div>
         </div>
     `
-};
+});
 
-function openVault(id) {
-    document.getElementById('vaultContent').innerHTML = vaultData[id] || "<h1>SECTION_ENCRYPTED</h1><p>Data stream pending...</p>";
-    document.getElementById('overlay').style.display = "block";
-    document.body.style.overflow = "hidden";
+/* --- QUIZ ENGINE LOGIC --- */
+let currentQ = 0;
+let score = 0;
+const questions = [
+    { t: "Which is correct?", a: ["I am 20 years.", "I am 20."], c: 1 },
+    { t: "Choose the right preposition:", a: ["Married with a nurse", "Married to a nurse"], c: 1 },
+    { t: "Identify the uncountable error:", a: ["Many furnitures", "Much furniture"], c: 1 },
+    { t: "Say vs Tell:", a: ["He told to me a secret.", "He told me a secret."], c: 1 },
+    { t: "Which is a compliment?", a: ["You look boring.", "You look bored."], c: 0 },
+    { t: "Homophone Check:", a: ["It's color is red.", "Its color is red."], c: 1 },
+    { t: "Corporate Protocol:", a: ["Discuss about it ASAP.", "Discuss it ASAP."], c: 1 },
+    { t: "Connected Speech (T+Y):", a: ["Meet you sounds like 'Meet-you'", "Meet you sounds like 'Mee-chew'"], c: 1 },
+    { t: "Identify Slang:", a: ["He has much charisma.", "He has unspoken rizz."], c: 1 },
+    { t: "Preposition check:", a: ["Depends on the time.", "Depends of the time."], c: 0 },
+    { t: "Grammar Check:", a: ["I suggest you to wait.", "I suggest that you wait."], c: 1 },
+    { t: "Plurality Check:", a: ["The police is coming.", "The police are coming."], c: 1 },
+    { t: "Location Check:", a: ["I am in the bus stop.", "I am at the bus stop."], c: 1 },
+    { t: "Uncountable Hack:", a: ["A piece of advice", "An advice"], c: 0 },
+    { t: "Modern Texting:", a: ["ICYMI means 'In Case You Missed It'", "ICYMI means 'I Can't You Miss It'"], c: 0 }
+];
+
+        /* --- SECTION 12: 100 SYNONYM POWER-LIST --- */
+    formal: `
+        <h1 class="h-mega">Lexical Supremacy</h1>
+        <div class="data-card">
+            <span class="label-aura">100 Tier-Upgrade Synonyms</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem; color: #ccc;">
+                <div>1. Good -> <b>Exemplary</b></div><div>2. Bad -> <b>Abysmal</b></div>
+                <div>3. Happy -> <b>Ecstatic</b></div><div>4. Sad -> <b>Despondent</b></div>
+                <div>5. Big -> <b>Colossal</b></div><div>6. Small -> <b>Miniscule</b></div>
+                <div>7. Fast -> <b>Expeditious</b></div><div>8. Slow -> <b>Sluggish</b></div>
+                <div>9. Rich -> <b>Affluent</b></div><div>10. Poor -> <b>Destitute</b></div>
+                <div>11. Smart -> <b>Astute</b></div><div>12. Stupid -> <b>Inane</b></div>
+                <div>13. Angry -> <b>Incensed</b></div><div>14. Scared -> <b>Petrified</b></div>
+                <div>15. Brave -> <b>Valiant</b></div><div>16. Tired -> <b>Enervated</b></div>
+                <div>17. Clean -> <b>Immaculate</b></div><div>18. Dirty -> <b>Squalid</b></div>
+                <div>19. Easy -> <b>Effortless</b></div><div>20. Hard -> <b>Arduous</b></div>
+                <div>21. Cheap -> <b>Inexpensive</b></div><div>22. Expensive -> <b>Exorbitant</b></div>
+                <div>23. Funny -> <b>Ludicrous</b></div><div>24. Boring -> <b>Monotonous</b></div>
+                <div>25. Useful -> <b>Advantageous</b></div><div>26. Useless -> <b>Futile</b></div>
+                <div>27. New -> <b>Contemporary</b></div><div>28. Old -> <b>Archaic</b></div>
+                <div>29. Careful -> <b>Prudent</b></div><div>30. Careless -> <b>Negligent</b></div>
+                <div>31. Beautiful -> <b>Exquisite</b></div><div>32. Ugly -> <b>Grotesque</b></div>
+                <div>33. Strong -> <b>Formidable</b></div><div>34. Weak -> <b>Feeble</b></div>
+                <div>35. Bright -> <b>Luminous</b></div><div>36. Dark -> <b>Obscure</b></div>
+                <div>37. Loud -> <b>Vociferous</b></div><div>38. Quiet -> <b>Serene</b></div>
+                <div>39. Greedy -> <b>Avaricious</b></div><div>40. Generous -> <b>Magnanimous</b></div>
+                <div>41. Lazy -> <b>Indolent</b></div><div>42. Busy -> <b>Swamped</b></div>
+                <div>43. Famous -> <b>Illustrious</b></div><div>44. Unknown -> <b>Obscure</b></div>
+                <div>45. False -> <b>Fallacious</b></div><div>46. True -> <b>Veritable</b></div>
+                <div>47. Short -> <b>Brief</b></div><div>48. Long -> <b>Extensive</b></div>
+                <div>49. Brave -> <b>Intrepid</b></div><div>50. Cowardly -> <b>Craven</b></div>
+                <div>51-100: <b>Prodigious, Nefarious, Ubiquitous, Ephemeral, Pernicious, Voracious, Tenacious, Sagacious, Garrulous, Reticent...</b></div>
+            </div>
+            <p class="label-aura" style="margin-top:20px;">Native Tip: Use 'Exorbitant' instead of 'Expensive' to sound 100x more professional in negotiations.</p>
+        </div>
+    `,
+
+    /* --- SECTION 13: PHRASAL VERB COMBAT MANUAL --- */
+    phrasal: `
+        <h1 class="h-mega">Casual Combat</h1>
+        <div class="data-card">
+            <span class="label-aura">Essential Phrasal Verbs (Contextualized)</span>
+            
+            <div class="convo-bubble">
+                <p><b>1. Back Down:</b> To withdraw a claim. <i>"He refused to back down even when proven wrong."</i></p>
+                <p><b>2. Blow Up:</b> To explode or get suddenly angry. <i>"The boss blew up at the intern."</i></p>
+                <p><b>3. Call Off:</b> To cancel. <i>"They called off the strike at the last minute."</i></p>
+                <p><b>4. Carry On:</b> To continue. <i>"Please carry on with your work."</i></p>
+                <p><b>5. Cut Back On:</b> To reduce. <i>"I need to cut back on caffeine."</i></p>
+                <p><b>6. Do Over:</b> To repeat. <i>"This report is a mess; you need to do it over."</i></p>
+                <p><b>7. Fall Apart:</b> To break into pieces / fail. <i>"Their marriage fell apart after a year."</i></p>
+                <p><b>8. Get Along:</b> To be friendly. <i>"I don't get along with my neighbors."</i></p>
+                <p><b>9. Give In:</b> To surrender. <i>"The government gave in to the protesters' demands."</i></p>
+                <p><b>10. Look Into:</b> To investigate. <i>"The police are looking into the robbery."</i></p>
+                <p><b>11. Make Up:</b> To invent / reconcile. <i>"He made up a story about being late."</i></p>
+                <p><b>12. Put Up With:</b> To tolerate. <i>"I can't put up with his constant complaining."</i></p>
+                <p><b>13. Run Into:</b> To meet by chance. <i>"I ran into an old friend today."</i></p>
+                <p><b>14. Set Up:</b> To arrange / trap. <i>"They set up a meeting for Friday."</i></p>
+                <p><b>15. Take Off:</b> To leave / start being successful. <i>"His career really took off."</i></p>
+                <p><b>16. Turn Down:</b> To refuse. <i>"She turned down the job offer."</i></p>
+                <p><b>17. Wear Out:</b> To exhaust / use until broken. <i>"These shoes are worn out."</i></p>
+                <p><b>18. Work Out:</b> To exercise / find a solution. <i>"We need to work out the budget."</i></p>
+                <p><b>19. Yield To:</b> To give way. <i>"You must yield to oncoming traffic."</i></p>
+                <p><b>20. Zoom In:</b> To focus closely. <i>"Let's zoom in on the specific details."</i></p>
+                <p><b>21. Keep Up:</b> Maintain speed. <i>"It's hard to keep up with the news."</i></p>
+                <p><b>22. Break Out:</b> Escape. <i>"A fire broke out in the basement."</i></p>
+                <p><b>23. Check In:</b> Register. <i>"We need to check in two hours before the flight."</i></p>
+                <p><b>24. Drop Off:</b> Leave someone/something. <i>"Can you drop me off at the station?"</i></p>
+                <p><b>25. End Up:</b> Finally arrive/reach. <i>"We ended up getting lost."</i></p>
+            </div>
+        </div>
+    `,
+
+function nextQ(choice) {
+    if(choice === questions[currentQ].c) score += 10;
+    currentQ++;
+    if(currentQ < questions.length) {
+        document.getElementById('qText').innerText = \`\${currentQ + 1}. \${questions[currentQ].t}\`;
+        const btns = document.querySelectorAll('.quiz-btn');
+        btns[0].innerText = "A) " + questions[currentQ].a[0];
+        btns[1].innerText = "B) " + questions[currentQ].a[1];
+    } else {
+        document.getElementById('qContent').style.display = 'none';
+        document.getElementById('finalScore').style.display = 'block';
+        document.getElementById('scoreDisplay').innerText = "FINAL AURA RATING: " + score + " / 150";
+    }
 }
 
-function closeVault() {
-    document.getElementById('overlay').style.display = "none";
-    document.body.style.overflow = "auto";
+    
+    /* --- FINAL ENGINE LOGIC --- */
+function checkAura(correct, reason) {
+    const f = document.getElementById('quizFeedback');
+    f.style.display = 'block';
+    f.innerHTML = correct ? 
+        \`<span style="color:var(--accent)">GOD-TIER AURA.</span><br><small>\${reason}</small>\` : 
+        \`<span style="color:var(--pink)">L-AURA DETECTED.</span><br><small>\${reason}</small>\`;
 }
+
+// END OF SCRIPT. Finalize with close brackets.
+init();
 </script>
 
-</body>
-</html>
