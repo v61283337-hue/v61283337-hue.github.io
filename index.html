@@ -100,3 +100,1837 @@
 
 </body>
 </html>
+
+<div class="vault-grid">
+    <div class="vault-card" onclick="openVault('tenses')"><span class="num">01</span><h2>Timeline Control ⏳</h2><p>Past, Present, Future Chaos</p></div>
+    <div class="vault-card" onclick="openVault('uncount')"><span class="num">02</span><h2>The No-S Club 🥛</h2><p>Uncountable Nouns Mastery</p></div>
+    <div class="vault-card" onclick="openVault('slang')"><span class="num">03</span><h2>Brain-Rot Deep-Lore 🧠</h2><p>2025 Slang Secrets</p></div>
+    <div class="vault-card" onclick="openVault('saytell')"><span class="num">04</span><h2>Receiver Logic 🗣️</h2><p>Say vs Tell + Hacks</p></div>
+    <div class="vault-card" onclick="openVault('preps')"><span class="num">05</span><h2>Spatial Funnel 📍</h2><p>In / On / At Assassinations</p></div>
+    <div class="vault-card" onclick="openVault('mistakes')"><span class="num">06</span><h2>Aura-Loss Log 💀</h2><p>25 Fatal Social Mistakes</p></div>
+    <div class="vault-card" onclick="openVault('formal')"><span class="num">07</span><h2>Lexical Supremacy 💎</h2><p>Tier-Up Synonyms</p></div>
+    <div class="vault-card" onclick="openVault('phrasal')"><span class="num">08</span><h2>Casual Combat 🔄</h2><p>Phrasal Verbs Galore</p></div>
+    <div class="vault-card" onclick="openVault('convos')"><span class="num">09</span><h2>Street Protocol 🎤</h2><p>Native Dialogues</p></div>
+    <div class="vault-card" onclick="openVault('speech')"><span class="num">10</span><h2>Connected Flow ⚡</h2><p>Assimilation & Contractions</p></div>
+    <div class="vault-card" onclick="openVault('acronyms')"><span class="num">11</span><h2>Digital Shorthand 📱</h2><p>Modern Acronyms Explained</p></div>
+    <div class="vault-card" onclick="openVault('homophones')"><span class="num">12</span><h2>Confusion Matrix ♊</h2><p>Homophones & Homonyms</p></div>
+    <div class="vault-card" onclick="openVault('pos')"><span class="num">13</span><h2>Weapon Engine ⚙️</h2><p>Parts of Speech Mastery</p></div>
+    <div class="vault-card" onclick="openVault('quiz')"><span class="num">14</span><h2>Calibration 🎯</h2><p>Interactive Aura Quiz</p></div>
+    <div class="vault-card" onclick="openVault('native')"><span class="num">15</span><h2>Ghosting Tips 💡</h2><p>Native Shortcuts & Hacks</p></div>
+</div>
+
+<script>
+const vaultData = {
+    tenses: `
+    <div class="content-block">
+        <h1>Timeline Control ⏳</h1>
+        <p>Master all 12 tenses with wild examples, native hacks, and mini-games to keep your Aura High.</p>
+
+        <!-- Present Simple -->
+        <h3>Present Simple</h3>
+        <p>Used for habits, routines, and truths.</p>
+        <div class="funny-ex">
+            "I <b>eat pizza</b> every time I fail a test. My soul demands carbs."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Swap verbs with slang to sound casual. "I <b>smash pizza</b> daily."</div>
+
+        <!-- Present Continuous -->
+        <h3>Present Continuous</h3>
+        <p>Actions happening right now.</p>
+        <div class="funny-ex">
+            "I <b>am ghosting</b> my group chat, so if someone texts, pretend I'm climbing Everest."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Add <b>always</b> for annoyance. "He's <b>always complaining</b>!"</div>
+
+        <!-- Present Perfect -->
+        <h3>Present Perfect</h3>
+        <p>Bridge between past and now.</p>
+        <div class="funny-ex">
+            "I <b>have watched</b> 5 hours of cat videos, and regret nothing."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Use for life experience flex. "I <b>have eaten</b> sushi in Tokyo."</div>
+
+        <!-- Present Perfect Continuous -->
+        <h3>Present Perfect Continuous</h3>
+        <p>Duration of ongoing action started in the past.</p>
+        <div class="funny-ex">
+            "I <b>have been binge-watching</b> Stranger Things for 3 days straight. Send help."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Show effort or suffering. "I <b>have been waiting</b> 2 hours in line."</div>
+
+        <!-- Past Simple -->
+        <h3>Past Simple</h3>
+        <p>Completed actions in the past.</p>
+        <div class="funny-ex">
+            "Yesterday, I <b>ate</b> ice cream directly from the tub. Zero regrets."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Good for storytelling. Keep verbs vivid.</div>
+
+        <!-- Past Continuous -->
+        <h3>Past Continuous</h3>
+        <p>Actions in progress at a past moment.</p>
+        <div class="funny-ex">
+            "I <b>was texting</b> my ex when my dog stole my homework."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Pair with Past Simple for drama. "I <b>was walking</b> when I <b>tripped</b>."</div>
+
+        <!-- Past Perfect -->
+        <h3>Past Perfect</h3>
+        <p>Action completed before another past action.</p>
+        <div class="funny-ex">
+            "By the time she arrived, I <b>had eaten</b> all the cookies. Sorry not sorry."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Essential for clear sequence. <b>had + past participle</b>.</div>
+
+        <!-- Past Perfect Continuous -->
+        <h3>Past Perfect Continuous</h3>
+        <p>Duration before another past action.</p>
+        <div class="funny-ex">
+            "I <b>had been waiting</b> 30 mins before realizing the party was online."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Emphasize frustration or effort.</div>
+
+        <!-- Future Simple -->
+        <h3>Future Simple</h3>
+        <p>Predictions, promises, or sudden decisions.</p>
+        <div class="funny-ex">
+            "I <b>will order</b> 12 tacos tonight. No one can stop me."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Use <b>will</b> for certainty, <b>going to</b> for plan.</div>
+
+        <!-- Future Continuous -->
+        <h3>Future Continuous</h3>
+        <p>Action in progress at a specific future time.</p>
+        <div class="funny-ex">
+            "Tomorrow at 8 PM, I <b>will be napping</b> like a pro."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Great for sarcastic future plans.</div>
+
+        <!-- Future Perfect -->
+        <h3>Future Perfect</h3>
+        <p>Action completed before a future time.</p>
+        <div class="funny-ex">
+            "By next week, I <b>will have finished</b> Netflix. Actually, maybe not."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Use to flex accomplishments ahead of time.</div>
+
+        <!-- Future Perfect Continuous -->
+        <h3>Future Perfect Continuous</h3>
+        <p>Duration of action before a future moment.</p>
+        <div class="funny-ex">
+            "By 10 PM, I <b>will have been gaming</b> for 12 hours straight. Elite energy."
+        </div>
+        <div class="safety-rail">NATIVE HACK: Drama + exaggeration makes it funny and native.</div>
+
+        <!-- MINI GAME -->
+        <h3>🎮 Mini Challenge</h3>
+        <p>Match the tense to the crazy example. Click & drag (JS to be added later) for Aura Points!</p>
+    </div>
+    `
+};
+</script>
+vaultData['tenses'] = `
+<div class="content-block">
+    <h1>Timeline Control ⏳</h1>
+    <p>Master all <b>12 tenses</b> with high-aura examples and native hacks. Let's make it chaotic & fun.</p>
+
+    <h3>1. Present Simple</h3>
+    <p>Routine, facts, vibes.</p>
+    <div class="funny-ex">"I <b>eat pizza</b> every day, even during apocalypse drills."</div>
+    <div class="safety-rail">Native hack: Use short, punchy sentences to sound confident.</div>
+
+    <h3>2. Present Continuous</h3>
+    <p>Ongoing actions, real-time drama.</p>
+    <div class="funny-ex">"I <b>am dodging</b> my boss while pretending to work."</div>
+    <div class="safety-rail">Hack: Drop the 'right now' in casual speech; natives skip it all the time.</div>
+
+    <h3>3. Present Perfect</h3>
+    <p>Life experiences, no timestamps.</p>
+    <div class="funny-ex">"I <b>have survived</b> 3 coffee spills this week."</div>
+    <div class="safety-rail">Native: Use to flex vague experience without exact times.</div>
+
+    <h3>4. Present Perfect Continuous</h3>
+    <p>Duration-focused actions.</p>
+    <div class="funny-ex">"I <b>have been binge-watching</b> memes for 4 hours."</div>
+
+    <h3>5. Past Simple</h3>
+    <p>Finished actions.</p>
+    <div class="funny-ex">"I <b>ate</b> all the tacos yesterday, no regrets."</div>
+
+    <h3>6. Past Continuous</h3>
+    <p>Action in progress in the past.</p>
+    <div class="funny-ex">"I <b>was hiding</b> from responsibilities when my mom called."</div>
+
+    <h3>7. Past Perfect</h3>
+    <p>Before another past action.</p>
+    <div class="funny-ex">"I <b>had left</b> before the drama started."</div>
+
+    <h3>8. Past Perfect Continuous</h3>
+    <p>Duration before a past point.</p>
+    <div class="funny-ex">"I <b>had been refreshing</b> Twitter for 2 hours when the news dropped."</div>
+
+    <h3>9. Future Simple</h3>
+    <p>Promises & predictions.</p>
+    <div class="funny-ex">"I <b>will conquer</b> this homework like a legend."</div>
+
+    <h3>10. Future Continuous</h3>
+    <p>Action in progress at a future time.</p>
+    <div class="funny-ex">"I <b>will be flexing</b> my coding skills while eating pizza."</div>
+
+    <h3>11. Future Perfect</h3>
+    <p>Completed action before a future point.</p>
+    <div class="funny-ex">"I <b>will have finished</b> this project before my brain explodes."</div>
+
+    <h3>12. Future Perfect Continuous</h3>
+    <p>Duration before a future point.</p>
+    <div class="funny-ex">"By tomorrow, I <b>will have been procrastinating</b> for 72 hours straight."</div>
+
+    <h3>Interactive Game: Guess the Tense 🎮</h3>
+    <p>Click the button matching the tense of the sentence:</p>
+    <div id="tense-sentence" style="margin: 20px 0; font-weight: 700; color: #00f2ff;">Sentence appears here...</div>
+    <div id="tense-buttons" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+    <div id="tense-feedback" style="margin-top: 15px; font-style: italic; color: #ff007a;"></div>
+
+    <button class="action-btn" onclick="startTenseGame()">Start Game</button>
+</div>
+
+<script>
+const tenses = [
+    {sentence: "I eat pizza every day.", answer: "Present Simple"},
+    {sentence: "I am dodging my boss.", answer: "Present Continuous"},
+    {sentence: "I have survived 3 coffee spills.", answer: "Present Perfect"},
+    {sentence: "I have been binge-watching memes for 4 hours.", answer: "Present Perfect Continuous"},
+    {sentence: "I ate all the tacos yesterday.", answer: "Past Simple"},
+    {sentence: "I was hiding from responsibilities when my mom called.", answer: "Past Continuous"},
+    {sentence: "I had left before the drama started.", answer: "Past Perfect"},
+    {sentence: "I had been refreshing Twitter for 2 hours when the news dropped.", answer: "Past Perfect Continuous"},
+    {sentence: "I will conquer this homework.", answer: "Future Simple"},
+    {sentence: "I will be flexing my coding skills while eating pizza.", answer: "Future Continuous"},
+    {sentence: "I will have finished this project before my brain explodes.", answer: "Future Perfect"},
+    {sentence: "By tomorrow, I will have been procrastinating for 72 hours straight.", answer: "Future Perfect Continuous"}
+];
+
+let currentTense = 0;
+
+function startTenseGame() {
+    currentTense = 0;
+    document.getElementById('tense-feedback').innerText = "";
+    showTenseSentence();
+}
+
+function showTenseSentence() {
+    const sentenceDiv = document.getElementById('tense-sentence');
+    const buttonsDiv = document.getElementById('tense-buttons');
+    sentenceDiv.innerText = tenses[currentTense].sentence;
+    buttonsDiv.innerHTML = "";
+    tenses.forEach(t => {
+        const btn = document.createElement('button');
+        btn.className = "action-btn";
+        btn.style.fontSize = "0.8rem";
+        btn.innerText = t.answer;
+        btn.onclick = () => checkTense(t.answer);
+        buttonsDiv.appendChild(btn);
+    });
+}
+
+function checkTense(selected) {
+    const feedback = document.getElementById('tense-feedback');
+    if(selected === tenses[currentTense].answer){
+        feedback.innerText = "✅ Correct!";
+    } else {
+        feedback.innerText = "❌ Wrong! Answer: " + tenses[currentTense].answer;
+    }
+    currentTense++;
+    if(currentTense < tenses.length){
+        setTimeout(showTenseSentence, 1000);
+    } else {
+        feedback.innerText += " 🎉 You finished all 12 tenses!";
+    }
+}
+</script>
+`;
+
+vaultData['uncount'] = `
+<div class="content-block">
+    <h1>The No-S Club 🥛</h1>
+    <p>Uncountable nouns that refuse to multiply. Native hacks included so you sound like a pro.</p>
+
+    <h3>Examples & Hacks</h3>
+    <ul>
+        <li><b>Clothes</b> - Always plural? Trick: Use "a piece of clothing" for one item. Ex: "I bought a cool piece of clothing." Funny hack: You never say "2 clothes."</li>
+        <li><b>Water</b> - Can't count it like bottles without "a glass of". Ex: "Can I get a glass of water?"</li>
+        <li><b>Milk</b> - Use containers to count. "I drank 2 cartons of milk."</li>
+        <li><b>Advice</b> - One tip at a time: "A piece of advice for you..."</li>
+        <li><b>Information</b> - Never "informations", natives say: "Some info."</li>
+        <li><b>Furniture</b> - "Three pieces of furniture" sounds boss.</li>
+        <li><b>Luggage</b> - Count with "bag", "suitcase": "Two bags of luggage."</li>
+        <li><b>Rice</b> - Never "rices", just "a bowl of rice."</li>
+        <li><b>Cheese</b> - Slice or block it: "Two slices of cheese."</li>
+        <li><b>Homework</b> - Use "assignment": "I finished my math assignment."</li>
+        <li><b>Knowledge</b> - Can't pluralize, but "areas of knowledge" works.</li>
+        <li><b>Music</b> - Genres, yes: "I love jazz music."</li>
+        <li><b>Traffic</b> - "Heavy traffic" not "traffics".</li>
+        <li><b>Weather</b> - "The weather is crazy today!"</li>
+        <li><b>Work</b> - "I have a lot of work to do."</li>
+        <li><b>Money</b> - Always singular in form: "I need some money."</li>
+        <li><b>Equipment</b> - "Two pieces of equipment" for plural fun.</li>
+        <li><b>Sand</b> - "A handful of sand" makes it countable.</li>
+        <li><b>Traffic</b> - "Traffic jams" counts, not traffic itself.</li>
+        <li><b>Homework</b> - Repeated for emphasis, natives still love this hack.</li>
+        <li><b>Research</b> - "Some research is needed."</li>
+        <li><b>Paper</b> - "A sheet of paper" to count.</li>
+        <li><b>Knowledge</b> - Deep hack: "Bits of knowledge" works.</li>
+        <li><b>Advice</b> - Yes, again, because natives stress it.</li>
+        <li><b>Money</b> - "Three dollars" is ok, but "moneys"? Nope.</li>
+        <li><b>Furniture</b> - Hack: "pieces of furniture" like a boss.</li>
+        <li><b>Luggage</b> - One suitcase or two: natives stay classy.</li>
+        <li><b>Equipment</b> - Same hack as furniture, high-aura.</li>
+        <li><b>Knowledge</b> - Wrap up: always singular unless grouped.</li>
+        <li><b>Information</b> - Summarize as "info nuggets".</li>
+    </ul>
+
+    <h3>Mini Game: Count It Right 🕹️</h3>
+    <p>Choose the correct phrase for each sentence:</p>
+    <div id="uncount-sentence" style="margin: 20px 0; font-weight: 700; color: #00f2ff;">Sentence appears here...</div>
+    <div id="uncount-buttons" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+    <div id="uncount-feedback" style="margin-top: 15px; font-style: italic; color: #ff007a;"></div>
+
+    <button class="action-btn" onclick="startUncountGame()">Start Game</button>
+</div>
+
+<script>
+const uncountables = [
+    {sentence: "I bought 2 ___ yesterday.", options: ["clothes", "clotheses"], answer: "clothes"},
+    {sentence: "Can I get a glass of ___?", options: ["water", "waters"], answer: "water"},
+    {sentence: "I drank 2 cartons of ___", options: ["milk", "milks"], answer: "milk"},
+    {sentence: "She gave me a piece of ___", options: ["advice", "advices"], answer: "advice"},
+    {sentence: "I need some ___ about coding.", options: ["information", "informations"], answer: "information"},
+    {sentence: "I bought 3 pieces of ___", options: ["furniture", "furnitures"], answer: "furniture"},
+    {sentence: "Pack your ___ before leaving.", options: ["luggage", "luggages"], answer: "luggage"},
+    {sentence: "I cooked a bowl of ___", options: ["rice", "rices"], answer: "rice"},
+    {sentence: "Add 2 slices of ___ on the pizza.", options: ["cheese", "cheeses"], answer: "cheese"},
+    {sentence: "Finish your math ___.", options: ["homework", "homeworks"], answer: "homework"}
+];
+
+let currentUncount = 0;
+
+function startUncountGame() {
+    currentUncount = 0;
+    document.getElementById('uncount-feedback').innerText = "";
+    showUncountSentence();
+}
+
+function showUncountSentence() {
+    const sentenceDiv = document.getElementById('uncount-sentence');
+    const buttonsDiv = document.getElementById('uncount-buttons');
+    sentenceDiv.innerText = uncountables[currentUncount].sentence;
+    buttonsDiv.innerHTML = "";
+    uncountables[currentUncount].options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = "action-btn";
+        btn.style.fontSize = "0.8rem";
+        btn.innerText = opt;
+        btn.onclick = () => checkUncount(opt);
+        buttonsDiv.appendChild(btn);
+    });
+}
+
+function checkUncount(selected) {
+    const feedback = document.getElementById('uncount-feedback');
+    if(selected === uncountables[currentUncount].answer){
+        feedback.innerText = "✅ Correct!";
+    } else {
+        feedback.innerText = "❌ Wrong! Answer: " + uncountables[currentUncount].answer;
+    }
+    currentUncount++;
+    if(currentUncount < uncountables.length){
+        setTimeout(showUncountSentence, 1000);
+    } else {
+        feedback.innerText += " 🎉 You finished the No-S Club!";
+    }
+}
+</script>
+`;
+vaultData['slang'] = `
+<div class="content-block">
+    <h1>Brain-Rot Lore 🧠</h1>
+    <p>Modern 2025 slang decoded. Use it or risk being called a “basic bot.” Native hacks included.</p>
+
+    <h3>30 Slang Words + Fun Examples</h3>
+    <ul>
+        <li><b>Rizz</b> – Charisma, charm level. Ex: "Damn, he’s got zero rizz, tried a 2016 pick-up line."</li>
+        <li><b>Cap / No Cap</b> – Lie / No lie. "He said he’s rich, no cap? I saw his bank account 😂."</li>
+        <li><b>Bet</b> – Agree or confirm. "You want pizza tonight?" "Bet."</li>
+        <li><b>Sus</b> – Suspicious. "She said she loves horror movies… sus."</li>
+        <li><b>Yeet</b> – Throw / hype. "I just yeeted my phone across the room."</li>
+        <li><b>Flex</b> – Show off. "He flexed his sneakers, 10/10 aura points."</li>
+        <li><b>Ghost</b> – Disappear from chat. "She ghosted me after we matched 😭."</li>
+        <li><b>Salty</b> – Bitter or annoyed. "He’s salty he lost at Mario Kart."</li>
+        <li><b>Slaps</b> – Really good. "This song slaps hard, 11/10."</li>
+        <li><b>Cheugy</b> – Outdated, cringe. "Wearing cargo pants in 2025? Cheugy!"</li>
+        <li><b>FYP</b> – TikTok For You Page. "I got famous on FYP, peak aura."</li>
+        <li><b>Capo</b> – Leader, boss. "He’s the capo of the Discord server."</li>
+        <li><b>Drip</b> – Style / fashion. "His drip is immaculate, I need that hoodie."</li>
+        <li><b>Betwixt</b> – Stuck between choices. "I’m betwixt pizza or burger."</li>
+        <li><b>Snack</b> – Attractive person. "She’s a whole snack, not just crumbs."</li>
+        <li><b>Vibe Check</b> – Mood inspection. "We’re doing a vibe check, who’s chaotic?"</li>
+        <li><b>Flexin'</b> – Showing off aggressively. "He’s flexin’ with a $2000 backpack."</li>
+        <li><b>Lowkey</b> – Secretly. "Lowkey, I’m addicted to TikTok."</li>
+        <li><b>Highkey</b> – Obviously. "Highkey, this is the best burger ever."</li>
+        <li><b>Clout</b> – Influence / fame. "He’s chasing clout, posting every meme."</li>
+        <li><b>Fam</b> – Friends / squad. "Yo fam, movie night tonight?"</li>
+        <li><b>GOAT</b> – Greatest Of All Time. "Messi is the GOAT, no debate."</li>
+        <li><b>Stan</b> – Overly obsessed fan. "I stan this artist so hard, room full of posters."</li>
+        <li><b>Snackable</b> – Easily enjoyable content. "This TikTok is snackable, 30 sec binge."</li>
+        <li><b>Flexitarian</b> – Semi-vegan joke. "I’m flexitarian, today salad, tomorrow steak."</li>
+        <li><b>Shook</b> – Surprised. "I’m shook he actually answered my DM."</li>
+        <li><b>Tea</b> – Gossip. "Spill the tea, what happened at the party?"</li>
+        <li><b>Receipts</b> – Proof / evidence. "I got receipts of him lying 😂."</li>
+        <li><b>Lit</b> – Amazing, fun. "The party was lit, still recovering."</li>
+        <li><b>Snack Attack</b> – Combo: hot person + funny. "She’s a snack attack, vibe 100."</li>
+    </ul>
+
+    <h3>Mini Challenge 🎮</h3>
+    <p>Match the slang to the meaning! Click and test your Aura:</p>
+    <div id="slang-game" style="margin: 20px 0;"></div>
+    <button class="action-btn" onclick="startSlangGame()">Start Challenge</button>
+    <div id="slang-feedback" style="margin-top: 15px; font-style: italic; color: #ff007a;"></div>
+</div>
+
+<script>
+const slangPairs = [
+    {slang:"Rizz", meaning:"Charisma"},
+    {slang:"Cap", meaning:"Lie"},
+    {slang:"No Cap", meaning:"No lie"},
+    {slang:"Bet", meaning:"Agree"},
+    {slang:"Sus", meaning:"Suspicious"},
+    {slang:"Yeet", meaning:"Throw / hype"},
+    {slang:"Flex", meaning:"Show off"},
+    {slang:"Ghost", meaning:"Disappear"},
+    {slang:"Salty", meaning:"Bitter"},
+    {slang:"Slaps", meaning:"Really good"}
+];
+
+let currentSlang = 0;
+
+function startSlangGame() {
+    currentSlang = 0;
+    document.getElementById('slang-feedback').innerText = "";
+    showSlangPair();
+}
+
+function showSlangPair() {
+    const gameDiv = document.getElementById('slang-game');
+    gameDiv.innerHTML = "";
+    const pair = slangPairs[currentSlang];
+    gameDiv.innerHTML = '<p>What does <b>'+pair.slang+'</b> mean?</p>';
+    const options = ["Charisma","Lie","No lie","Agree","Suspicious","Throw / hype","Show off","Disappear","Bitter","Really good"];
+    options.sort(() => Math.random() - 0.5);
+    options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = "action-btn";
+        btn.style.fontSize = "0.8rem";
+        btn.innerText = opt;
+        btn.onclick = () => checkSlang(opt);
+        gameDiv.appendChild(btn);
+    });
+}
+
+function checkSlang(selected) {
+    const feedback = document.getElementById('slang-feedback');
+    const correct = slangPairs[currentSlang].meaning;
+    if(selected === correct){
+        feedback.innerText = "✅ Correct! Aura points +10.";
+    } else {
+        feedback.innerText = "❌ Wrong! Correct: " + correct;
+    }
+    currentSlang++;
+    if(currentSlang < slangPairs.length){
+        setTimeout(showSlangPair, 1000);
+    } else {
+        feedback.innerText += " 🎉 You completed the Brain-Rot Challenge!";
+    }
+}
+</script>
+`;
+
+vaultData['saytell'] = `
+<div class="content-block">
+    <h1>Receiver Logic 🗣️</h1>
+    <p>Master the art of <b>Say</b> and <b>Tell</b> like a native. Stop sounding robotic. Chaos-approved, fully interactive, real-life style!</p>
+
+    <h3>Say vs Tell vs Say To - Quick Native Hacks</h3>
+    <ul>
+        <li><b>Say</b> – Just speaking. "He said he was hungry."</li>
+        <li><b>Tell</b> – Speaking to someone, requires listener. "She told me a secret."</li>
+        <li><b>Say To</b> – Emphasis on who hears it. "He said to me: 'Stop flexing.'" </li>
+    </ul>
+
+    <h3>15 Fixed Native Expressions</h3>
+    <ul>
+        <li>"I can't say for sure, but…" – Perfect for mysterious vibes.</li>
+        <li>"Let me tell you…" – Storytelling upgrade, aura +500.</li>
+        <li>"She told me off" – Stylish disapproval.</li>
+        <li>"He said to me…" – Emphasis, dramatic storytelling.</li>
+        <li>"They said it best…" – Quoting like a native.</li>
+        <li>"Say no more" – Instant understanding, fluent flex.</li>
+        <li>"Don't say I didn't warn you" – Meme-tier chaos.</li>
+        <li>"Tell me everything" – Info extraction, pro aura hack.</li>
+        <li>"You wouldn't believe what he said!" – Drama + native vibe.</li>
+        <li>"He told her to chill" – Casual conflict resolution.</li>
+        <li>"They say…" – Gossipy native flavor.</li>
+        <li>"I have to tell you…" – Secret-sharing hack.</li>
+        <li>"She said it like a boss" – Emphasis + storytelling.</li>
+        <li>"Tell me if you agree" – Engagement + aura booster.</li>
+        <li>"He said to her, she said to him…" – Chaos storytelling, classic native trap.</li>
+    </ul>
+
+    <h3>Mini-Game: Say or Tell? 🎮</h3>
+    <p>Pick whether to use <b>say</b>, <b>tell</b>, or <b>say to</b>. Get instant chaotic feedback.</p>
+    <div id="saytell-game" style="margin:20px 0;"></div>
+    <button class="action-btn" onclick="startSayTellGame()">Start Receiver Challenge</button>
+    <div id="saytell-feedback" style="margin-top:15px; font-style: italic; color: #00f2ff;"></div>
+
+    <h3>Native Chaos Hacks 💡</h3>
+    <ul>
+        <li>Always use <b>tell</b> with a listener to upgrade sentence aura.</li>
+        <li>Mix <b>say</b> with quotes for dramatic storytelling.</li>
+        <li><b>Say to</b> emphasizes the listener in chaotic dialogues.</li>
+        <li>Use "They said" to gossip like a native.</li>
+        <li>Combine multiple phrases mid-story for max chaos fun.</li>
+    </ul>
+</div>
+
+<script>
+const sayTellPairs = [
+    {sentence:"He ___ he loves pizza.", answer:"said"},
+    {sentence:"She ___ me a secret.", answer:"told"},
+    {sentence:"He ___ to me: 'Stop flexing.'", answer:"said to"},
+    {sentence:"I can't ___ for sure, but…", answer:"say"},
+    {sentence:"Let me ___ you…", answer:"tell"},
+    {sentence:"They ___ it best.", answer:"said"},
+    {sentence:"Don't ___ I didn't warn you.", answer:"say"},
+    {sentence:"He ___ her off.", answer:"told"},
+    {sentence:"Say ___ again, I didn't catch that.", answer:"it"},
+    {sentence:"I won't ___ a soul.", answer:"tell"}
+];
+
+let currentST = 0;
+
+function startSayTellGame() {
+    currentST = 0;
+    document.getElementById('saytell-feedback').innerText = "";
+    showSTPair();
+}
+
+function showSTPair() {
+    const gameDiv = document.getElementById('saytell-game');
+    gameDiv.innerHTML = "";
+    const pair = sayTellPairs[currentST];
+    const input = document.createElement('input');
+    input.style.padding="8px";
+    input.style.fontSize="0.9rem";
+    input.style.width="60%";
+    input.placeholder="Type 'say', 'tell' or 'say to'";
+    gameDiv.appendChild(document.createTextNode(pair.sentence.replace("___","______")+" "));
+    gameDiv.appendChild(input);
+    const btn = document.createElement('button');
+    btn.className="action-btn";
+    btn.style.fontSize="0.8rem";
+    btn.innerText="Submit";
+    btn.onclick = () => checkST(input.value);
+    gameDiv.appendChild(btn);
+}
+
+function checkST(val) {
+    const feedback = document.getElementById('saytell-feedback');
+    const correct = sayTellPairs[currentST].answer;
+    if(val.trim().toLowerCase()===correct){
+        feedback.innerText="✅ Correct! Aura +10";
+    } else { feedback.innerText="❌ Wrong! Correct: "+correct; }
+    currentST++;
+    if(currentST<sayTellPairs.length){ setTimeout(showSTPair,1000); } 
+    else { feedback.innerText+=" 🎉 Receiver Challenge Complete! Chaos unlocked."; }
+}
+</script>
+`;
+
+vaultData['preps'] = `
+<div class="content-block">
+    <h1>Spatial Funnel 📍</h1>
+    <p>In, On, At – the holy trinity of English positioning. Stop sounding like a robot. Native chaos tips included.</p>
+
+    <h3>Native Hacks for In / On / At</h3>
+    <ul>
+        <li><b>In</b> – Inside enclosed space. "I am <b>in</b> the room." Upgrade: "I’m in the vibes, mate."</li>
+        <li><b>On</b> – Surface contact. "The book is <b>on</b> the table." Chaos upgrade: "Laptop’s on fire… metaphorically."</li>
+        <li><b>At</b> – Specific point / location. "Meet me <b>at</b> the mall." Pro tip: add drama – "I’ll be at destiny’s door… aka Starbucks."</li>
+    </ul>
+
+    <h3>10 Preposition Assassinations</h3>
+    <ul>
+        <li>"I’m in love with chaos" – metaphor level: native</li>
+        <li>"On top of my game" – boss-level flex</li>
+        <li>"At odds with reality" – drama flair</li>
+        <li>"In a pickle" – classic idiom</li>
+        <li>"On point" – perfect aura moment</li>
+        <li>"At the drop of a hat" – chaos triggers</li>
+        <li>"In hot water" – meme-tier trouble</li>
+        <li>"On thin ice" – risky vibes</li>
+        <li>"At large" – escape vibes, cinematic native hack</li>
+        <li>"In the loop" – insider chaos info</li>
+    </ul>
+
+    <h3>Mini-Game: Preposition Chaos 🎮</h3>
+    <p>Fill the blank with <b>in</b>, <b>on</b>, or <b>at</b>. Score points for chaotic correctness!</p>
+    <div id="preps-game" style="margin:20px 0;"></div>
+    <button class="action-btn" onclick="startPrepsGame()">Start Preposition Challenge</button>
+    <div id="preps-feedback" style="margin-top:15px; font-style: italic; color: #00f2ff;"></div>
+</div>
+
+<script>
+const prepsPairs = [
+    {sentence:"I am ___ the room.", answer:"in"},
+    {sentence:"The cat is ___ the table.", answer:"on"},
+    {sentence:"Meet me ___ the mall.", answer:"at"},
+    {sentence:"She is ___ love with chaos.", answer:"in"},
+    {sentence:"Laptop is ___ fire.", answer:"on"},
+    {sentence:"I’ll be ___ destiny’s door.", answer:"at"},
+    {sentence:"He is ___ a pickle.", answer:"in"},
+    {sentence:"Flexing ___ top of my game.", answer:"on"},
+    {sentence:"I was ___ hot water.", answer:"in"},
+    {sentence:"They are ___ thin ice.", answer:"on"}
+];
+
+let currentPrep = 0;
+
+function startPrepsGame() {
+    currentPrep = 0;
+    document.getElementById('preps-feedback').innerText = "";
+    showPrepPair();
+}
+
+function showPrepPair() {
+    const gameDiv = document.getElementById('preps-game');
+    gameDiv.innerHTML = "";
+    const pair = prepsPairs[currentPrep];
+    const input = document.createElement('input');
+    input.style.padding="8px";
+    input.style.fontSize="0.9rem";
+    input.style.width="60%";
+    input.placeholder="Type 'in', 'on', or 'at'";
+    gameDiv.appendChild(document.createTextNode(pair.sentence.replace("___","______")+" "));
+    gameDiv.appendChild(input);
+    const btn = document.createElement('button');
+    btn.className="action-btn";
+    btn.style.fontSize="0.8rem";
+    btn.innerText="Submit";
+    btn.onclick = () => checkPrep(input.value);
+    gameDiv.appendChild(btn);
+}
+
+function checkPrep(val) {
+    const feedback = document.getElementById('preps-feedback');
+    const correct = prepsPairs[currentPrep].answer;
+    if(val.trim().toLowerCase()===correct){
+        feedback.innerText="✅ Correct! Aura +10";
+    } else { feedback.innerText="❌ Wrong! Correct: "+correct; }
+    currentPrep++;
+    if(currentPrep<prepsPairs.length){ setTimeout(showPrepPair,1000); } 
+    else { feedback.innerText+=" 🎉 Preposition Challenge Complete! Chaos unlocked."; }
+}
+</script>
+`;
+
+vaultData['mistakes'] = `
+<div class="content-block">
+    <h1>Aura-Loss Log 💀</h1>
+    <p>25 common mistakes that make you look low-aura. Correct them before you step out of your digital dojo.</p>
+
+    <h3>Idioms & Common Errors</h3>
+    <ul>
+        <li>"Discuss about" ❌ – Just <b>discuss</b>! "We discussed the game plan."</li>
+        <li>"Enter into" ❌ – Use <b>enter</b> alone. "He entered the room." Chaos tip: "He entered the vibes."</li>
+        <li>"Could of" ❌ – <b>Could have</b> is correct. "I could have flexed harder."</li>
+        <li>"I seen" ❌ – Use <b>have seen</b>. "I have seen this chaos before."</li>
+        <li>"Less people" ❌ – Use <b>fewer people</b>. "Fewer people attended the raid."</li>
+        <li>"Irregardless" ❌ – Just <b>regardless</b>. "Regardless, we continue."</li>
+        <li>"Between you and I" ❌ – Should be <b>me</b>. "Between you and me."</li>
+        <li>"Me and him went" ❌ – Correct: "<b>He and I went</b> to the raid."</li>
+        <li>"Could care less" ❌ – Actually: "Couldn't care less."</li>
+        <li>"Supposably" ❌ – Correct: "Supposedly."</li>
+    </ul>
+
+    <h3>Mini Game: Mistake Hunt 🎮</h3>
+    <p>Spot the error, fix it, get chaos points!</p>
+    <div id="mistakes-game" style="margin:20px 0;"></div>
+    <button class="action-btn" onclick="startMistakesGame()">Start Mistake Hunt</button>
+    <div id="mistakes-feedback" style="margin-top:15px; font-style: italic; color: #00f2ff;"></div>
+</div>
+
+<script>
+const mistakesPairs = [
+    {wrong:"We will discuss about the plan.", correct:"discuss"},
+    {wrong:"He will enter into the room.", correct:"enter"},
+    {wrong:"I could of done it.", correct:"could have"},
+    {wrong:"I seen him yesterday.", correct:"have seen"},
+    {wrong:"Less people came to the party.", correct:"fewer people"},
+    {wrong:"Irregardless of the storm, we went.", correct:"regardless"},
+    {wrong:"Between you and I, this is chaos.", correct:"me"},
+    {wrong:"Me and him went to the mall.", correct:"He and I"},
+    {wrong:"I could care less about drama.", correct:"couldn't care less"},
+    {wrong:"Supposably, it will rain.", correct:"supposedly"}
+];
+
+let currentMistake = 0;
+
+function startMistakesGame() {
+    currentMistake = 0;
+    document.getElementById('mistakes-feedback').innerText = "";
+    showMistakePair();
+}
+
+function showMistakePair() {
+    const gameDiv = document.getElementById('mistakes-game');
+    gameDiv.innerHTML = "";
+    const pair = mistakesPairs[currentMistake];
+    const input = document.createElement('input');
+    input.style.padding="8px";
+    input.style.fontSize="0.9rem";
+    input.style.width="60%";
+    input.placeholder="Fix the error";
+    gameDiv.appendChild(document.createTextNode(pair.wrong+" "));
+    gameDiv.appendChild(input);
+    const btn = document.createElement('button');
+    btn.className="action-btn";
+    btn.style.fontSize="0.8rem";
+    btn.innerText="Submit";
+    btn.onclick = () => checkMistake(input.value);
+    gameDiv.appendChild(btn);
+}
+
+function checkMistake(val) {
+    const feedback = document.getElementById('mistakes-feedback');
+    const correct = mistakesPairs[currentMistake].correct;
+    if(val.trim().toLowerCase()===correct){
+        feedback.innerText="✅ Fixed! Aura +10";
+    } else { feedback.innerText="❌ Wrong! Correct fix: "+correct; }
+    currentMistake++;
+    if(currentMistake<mistakesPairs.length){ setTimeout(showMistakePair,1000); } 
+    else { feedback.innerText+=" 🎉 Mistake Hunt Complete! Aura restored."; }
+}
+    
+</script>
+`;
+vaultData['formal'] = `
+<div class="content-block">
+    <h1>Lexical Supremacy 💎</h1>
+    <p>Upgrade your vocabulary, flex your aura. 50 high-tier synonyms for boring words, Part 1 of 2.</p>
+
+    <div class="search-box">
+        <input type="text" id="synSearchInput" placeholder="Type a word like 'good', 'happy', 'smart'...">
+        <button class="action-btn" onclick="searchFormalSyn()">Search Aura</button>
+    </div>
+
+    <h3>High-Aura Synonyms – Part 1 (1–50)</h3>
+    <ul>
+        <li><b>Good</b> → Exemplary: "That was an <b>exemplary</b> chaos move."</li>
+        <li><b>Bad</b> → Abysmal: "The aura was <b>abysmal</b>, zero points."</li>
+        <li><b>Happy</b> → Ecstatic: "I’m <b>ecstatic</b> because my meme went viral."</li>
+        <li><b>Sad</b> → Gutted: "He was <b>gutted</b> after the WiFi outage."</li>
+        <li><b>Smart</b> → Astute: "An <b>astute</b> observation, high-key obvious."</li>
+        <li><b>Angry</b> → Livid: "She was <b>livid</b> because of 4k exposure."</li>
+        <li><b>Funny</b> → Hilarious: "That joke was <b>hilarious</b>, meme status."</li>
+        <li><b>Big</b> → Colossal: "The chaos was <b>colossal</b>, epic flex."</li>
+        <li><b>Small</b> → Minute: "A <b>minute</b> detail but it changed the raid."</li>
+        <li><b>Fast</b> → Lightning: "His response was <b>lightning</b>, unreal."</li>
+        <li><b>Slow</b> → Lethargic: "The server was <b>lethargic</b>, mood killer."</li>
+        <li><b>Strong</b> → Formidable: "He is <b>formidable</b> in digital duels."</li>
+        <li><b>Weak</b> → Feeble: "Her attempt was <b>feeble</b>, sad vibes."</li>
+        <li><b>Easy</b> → Effortless: "He made the chaos <b>effortless</b>."</li>
+        <li><b>Hard</b> → Grueling: "The exam was <b>grueling</b>, big brain flex."</li>
+        <li><b>Old</b> → Ancient: "This meme is <b>ancient</b>, retro chaos."</li>
+        <li><b>Young</b> → Juvenile: "His prank was <b>juvenile</b>, street-level." </li>
+        <li><b>Rich</b> → Wealthy: "The NFT collector is <b>wealthy</b>, peak aura."</li>
+        <li><b>Poor</b> → Destitute: "His game wallet is <b>destitute</b>, sad vibes."</li>
+        <li><b>Beautiful</b> → Stunning: "Her outfit is <b>stunning</b>, visual overload."</li>
+        <li><b>Ugly</b> → Hideous: "The digital avatar looked <b>hideous</b>."</li>
+        <li><b>Hot</b> → Scorching: "The tea was <b>scorching</b>, literally."</li>
+        <li><b>Cold</b> → Frigid: "The WiFi was <b>frigid</b>, mood killer."</li>
+        <li><b>Easygoing</b> → Laid-back: "He’s <b>laid-back</b>, zero stress aura."</li>
+        <li><b>Angry</b> → Incensed: "She was <b>incensed</b> about the spoilers."</li>
+        <li><b>Smart</b> → Brilliant: "That plan was <b>brilliant</b>, chaos approved."</li>
+        <li><b>Brave</b> → Dauntless: "He’s <b>dauntless</b>, fear ignored."</li>
+        <li><b>Lazy</b> → Indolent: "Her response was <b>indolent</b>, zero points."</li>
+        <li><b>Noisy</b> → Boisterous: "The crowd was <b>boisterous</b>, loud vibes."</li>
+        <li><b>Quiet</b> → Hushed: "The room went <b>hushed</b>, drama incoming."</li>
+        <li><b>Strong</b> → Potent: "The meme was <b>potent</b>, chaos unlocked."</li>
+        <li><b>Weak</b> → Fragile: "The WiFi connection was <b>fragile</b>."</li>
+        <li><b>Good-looking</b> → Handsome: "The avatar looked <b>handsome</b>." </li>
+        <li><b>Bad-looking</b> → Unsightly: "That glitch was <b>unsightly</b>."</li>
+        <li><b>Funny</b> → Witty: "He was <b>witty</b>, top-tier roasts."</li>
+        <li><b>Serious</b> → Grave: "The hack had <b>grave</b> consequences."</li>
+        <li><b>Bright</b> → Luminous: "Her setup was <b>luminous</b>, vibes +100."</li>
+        <li><b>Dark</b> → Murky: "The server room looked <b>murky</b>."</li>
+        <li><b>New</b> → Innovative: "That idea was <b>innovative</b>, chaos points."</li>
+        <li><b>Old</b> → Vintage: "The NFT looked <b>vintage</b>, retro vibes."</li>
+        <li><b>Expensive</b> → Priceless: "His aura is <b>priceless</b>, peak tier."</li>
+        <li><b>Cheap</b> → Inferior: "The knock-off was <b>inferior</b>." </li>
+        <li><b>Fast</b> → Rapid: "The sprint was <b>rapid</b>, meme-level." </li>
+        <li><b>Slow</b> → Sluggish: "The lag was <b>sluggish</b>." </li>
+        <li><b>Calm</b> → Serene: "The Zen vibes were <b>serene</b>." </li>
+        <li><b>Nervous</b> → Anxious: "He felt <b>anxious</b> before the raid." </li>
+        <li><b>Hungry</b> → Ravenous: "She was <b>ravenous</b> for chaos snacks." </li>
+        <li><b>Thirsty</b> → Parched: "He was <b>parched</b>, water ASAP."</li>
+        <li><b>Strong</b> → Mighty: "The boss was <b>mighty</b>, epic aura." </li>
+        <li><b>Weak</b> → Pitiful: "The attempt was <b>pitiful</b>, low-tier aura."</li>
+    </ul>
+</div>
+
+<script>
+const formalDB = {
+    "good":"Exemplary",
+    "bad":"Abysmal",
+    "happy":"Ecstatic",
+    "sad":"Gutted",
+    "smart":"Astute",
+    "angry":"Livid",
+    "funny":"Hilarious",
+    "big":"Colossal",
+    "small":"Minute",
+    "fast":"Lightning",
+    "slow":"Lethargic",
+    "strong":"Formidable",
+    "weak":"Feeble",
+    "easy":"Effortless",
+    "hard":"Grueling",
+    "old":"Ancient",
+    "young":"Juvenile",
+    "rich":"Wealthy",
+    "poor":"Destitute",
+    "beautiful":"Stunning",
+    "ugly":"Hideous",
+    "hot":"Scorching",
+    "cold":"Frigid",
+    "easygoing":"Laid-back",
+    "angry2":"Incensed",
+    "smart2":"Brilliant",
+    "brave":"Dauntless",
+    "lazy":"Indolent",
+    "noisy":"Boisterous",
+    "quiet":"Hushed",
+    "strong2":"Potent",
+    "weak2":"Fragile",
+    "goodlooking":"Handsome",
+    "badlooking":"Unsightly",
+    "funny2":"Witty",
+    "serious":"Grave",
+    "bright":"Luminous",
+    "dark":"Murky",
+    "new":"Innovative",
+    "old2":"Vintage",
+    "expensive":"Priceless",
+    "cheap":"Inferior",
+    "fast2":"Rapid",
+    "slow2":"Sluggish",
+    "calm":"Serene",
+    "nervous":"Anxious",
+    "hungry":"Ravenous",
+    "thirsty":"Parched",
+    "strong3":"Mighty",
+    "weak3":"Pitiful"
+    
+};
+
+function searchFormalSyn() {
+    const val = document.getElementById('synSearchInput').value.toLowerCase();
+    const result = formalDB[val] || "Word not indexed yet. Aura boost request sent to GPT...";
+    alert(result);
+}
+</script>
+`;
+vaultData['formal2'] = `
+<div class="content-block">
+    <h1>Lexical Supremacy 💎 – Part 2</h1>
+    <p>Final 50 high-tier synonyms. Flex your aura with these words!</p>
+
+    <h3>High-Aura Synonyms – Part 2 (51–100)</h3>
+    <ul>
+        <li><b>Lazy2</b> → Slothful: "He was <b>slothful</b>, left the raid to chaos alone."</li>
+        <li><b>Angry3</b> → Outraged: "She was <b>outraged</b> by the spoiler alert."</li>
+        <li><b>Funny3</b> → Comical: "That meme was <b>comical</b>, laughed IRL."</li>
+        <li><b>Beautiful2</b> → Gorgeous: "Her avatar looked <b>gorgeous</b>, pure aura."</li>
+        <li><b>Ugly2</b> → Grotesque: "The glitch looked <b>grotesque</b>, chaos vibes."</li>
+        <li><b>Hot2</b> → Blazing: "The tea was <b>blazing</b>, too spicy."</li>
+        <li><b>Cold2</b> → Icy: "The response was <b>icy</b>, zero points."</li>
+        <li><b>Easy2</b> → Simple: "The tutorial was <b>simple</b>, effortless aura."</li>
+        <li><b>Hard2</b> → Arduous: "The boss fight was <b>arduous</b>, max flex."</li>
+        <li><b>Fast3</b> → Swift: "The meme spread <b>swiftly</b> across socials."</li>
+        <li><b>Slow3</b> → Plodding: "His reaction was <b>plodding</b>, mood killer."</li>
+        <li><b>Strong4</b> → Herculean: "The build was <b>herculean</b>, peak chaos."</li>
+        <li><b>Weak4</b> → Frail: "The WiFi was <b>frail</b>, sad vibes."</li>
+        <li><b>Rich2</b> → Affluent: "He’s <b>affluent</b>, crypto lord."</li>
+        <li><b>Poor2</b> → Impoverished: "The old server was <b>impoverished</b>, sad aura."</li>
+        <li><b>Young2</b> → Fresh-faced: "The newbie was <b>fresh-faced</b>, rookie points."</li>
+        <li><b>Old3</b> → Elderly: "The library books were <b>elderly</b>, retro chaos."</li>
+        <li><b>Bright2</b> → Radiant: "The setup was <b>radiant</b>, visual overload."</li>
+        <li><b>Dark2</b> → Shadowy: "The server room was <b>shadowy</b>, mood killer."</li>
+        <li><b>Smart3</b> → Ingenious: "That plan was <b>ingenious</b>, chaos approved."</li>
+        <li><b>Brave2</b> → Heroic: "He made a <b>heroic</b> move, max aura."</li>
+        <li><b>Calm2</b> → Placid: "Her mood was <b>placid</b>, zero stress."</li>
+        <li><b>Nervous2</b> → Tense: "He felt <b>tense</b> before the raid."</li>
+        <li><b>Hungry2</b> → Voracious: "She had a <b>voracious</b> appetite for chaos snacks."</li>
+        <li><b>Thirsty2</b> → Dehydrated: "He was <b>dehydrated</b>, water ASAP."</li>
+        <li><b>Easygoing2</b> → Mellow: "He was <b>mellow</b>, peak aura." </li>
+        <li><b>Funny4</b> → Entertaining: "The clip was <b>entertaining</b>, laughs everywhere."</li>
+        <li><b>Serious2</b> → Stern: "The teacher was <b>stern</b>, zero chaos."</li>
+        <li><b>Bright3</b> → Gleaming: "The lights were <b>gleaming</b>, max vibes."</li>
+        <li><b>Dark3</b> → Ominous: "The shadow felt <b>ominous</b>, low-tier aura."</li>
+        <li><b>New2</b> → Cutting-edge: "The NFT drop was <b>cutting-edge</b>, chaos unlocked."</li>
+        <li><b>Old4</b> → Antiquated: "The app looked <b>antiquated</b>, retro vibes."</li>
+        <li><b>Expensive2</b> → Lavish: "His gaming rig was <b>lavish</b>, chaos points."</li>
+        <li><b>Cheap2</b> → Substandard: "The knock-off felt <b>substandard</b>, sad aura."</li>
+        <li><b>Fast4</b> → Brisk: "The sprint was <b>brisk</b>, meme-level." </li>
+        <li><b>Slow4</b> → Crawling: "The download was <b>crawling</b>, epic fail." </li>
+        <li><b>Strong5</b> → Invincible: "The boss was <b>invincible</b>, chaos legend." </li>
+        <li><b>Weak5</b> → Vulnerable: "The attempt felt <b>vulnerable</b>, low-tier." </li>
+        <li><b>Quiet2</b> → Muted: "The chat was <b>muted</b>, zero vibes." </li>
+        <li><b>Noisy2</b> → Clamorous: "The raid was <b>clamorous</b>, high energy." </li>
+        <li><b>Beautiful3</b> → Radiant: "Her outfit was <b>radiant</b>, max aura." </li>
+        <li><b>Ugly3</b> → Unappealing: "The glitch looked <b>unappealing</b>, sad vibes." </li>
+        <li><b>Smart4</b> → Keen: "He was <b>keen</b>, top-tier observation." </li>
+        <li><b>Brave3</b> → Courageous: "He made a <b>courageous</b> move, epic flex." </li>
+        <li><b>Calm3</b> → Collected: "Her mood was <b>collected</b>, chaos zen." </li>
+        <li><b>Nervous3</b> → Restless: "He felt <b>restless</b> during downtime." </li>
+        <li><b>Hungry3</b> → Starving: "She was <b>starving</b>, snack attack!" </li>
+        <li><b>Thirsty3</b> → Parched2: "He was <b>parched</b>, water ASAP." </li>
+        <li><b>Funny5</b> → Amusing: "The skit was <b>amusing</b>, laughs everywhere." </li>
+        <li><b>Serious3</b> → Solemn: "The announcement was <b>solemn</b>, zero jokes." </li>
+    </ul>
+</div>
+`;
+vaultData['phrasal'] = `
+<div class="content-block">
+    <h1>Casual Combat 🔄</h1>
+    <p>100 phrasal verbs to dominate English. Fun examples, street hacks, and interactive aura points!</p>
+
+    <h3>Level 1 – Starter Pack (1–25)</h3>
+    <ul>
+        <li><b>Wake up</b> → "I <b>woke up</b> late, lost 50 aura points."</li>
+        <li><b>Break down</b> → "The server <b>broke down</b>, chaos unleashed."</li>
+        <li><b>Look after</b> → "He <b>looked after</b> the pets, bonus points."</li>
+        <li><b>Run into</b> → "I <b>ran into</b> my ex in VR, disaster."</li>
+        <li><b>Give up</b> → "She <b>gave up</b> mid-raid, sad vibes."</li>
+        <li><b>Pick up</b> → "He <b>picked up</b> the new skill fast."</li>
+        <li><b>Drop off</b> → "I <b>dropped off</b> the package, stealth mode."</li>
+        <li><b>Bring up</b> → "Don't <b>bring up</b> spoilers here."</li>
+        <li><b>Turn on</b> → "He <b>turned on</b> the charm, instant rizz."</li>
+        <li><b>Turn off</b> → "The bug <b>turned off</b> the chat alert."</li>
+        <li><b>Come across</b> → "I <b>came across</b> a hidden easter egg."</li>
+        <li><b>Cut down</b> → "She <b>cut down</b> her gaming hours, pro vibes."</li>
+        <li><b>Look into</b> → "We <b>looked into</b> the glitch thoroughly."</li>
+        <li><b>Go on</b> → "He <b>went on</b> about memes for 2 hours."</li>
+        <li><b>Take off</b> → "The hype <b>took off</b> instantly."</li>
+        <li><b>Set up</b> → "We <b>set up</b> the raid strategy."</li>
+        <li><b>Check out</b> → "Check out this chaos clip, max aura."</li>
+        <li><b>Call off</b> → "They <b>called off</b> the event last minute."</li>
+        <li><b>Run out</b> → "We <b>ran out</b> of energy drinks."</li>
+        <li><b>Take up</b> → "He <b>took up</b> meme analysis as a side quest."</li>
+        <li><b>Give in</b> → "She <b>gave in</b> to peer pressure, sad aura."</li>
+        <li><b>Bring back</b> → "The remix <b>brought back</b> old chaos vibes."</li>
+        <li><b>Look out</b> → "Look out for server crashes!"</li>
+        <li><b>Run away</b> → "He <b>ran away</b> from the toxic lobby."</li>
+        <li><b>Break up</b> → "They <b>broke up</b> mid-campaign, chaos alert."</li>
+    </ul>
+
+    <h3>Level 2 – Intermediate (26–50)</h3>
+    <ul>
+        <li><b>Blow up</b> → "The meme <b>blew up</b>, max aura."</li>
+        <li><b>Hold on</b> → "Hold on, the boss fight is insane."</li>
+        <li><b>Let down</b> → "He <b>let down</b> the team, sad vibes."</li>
+        <li><b>Look up</b> → "Look up the cheat code, max points."</li>
+        <li><b>Make up</b> → "We <b>made up</b> after the glitch fight."</li>
+        <li><b>Run over</b> → "He <b>ran over</b> the enemy with style."</li>
+        <li><b>Take over</b> → "She <b>took over</b> the squad, legendary."</li>
+        <li><b>Turn up</b> → "The volume <b>turned up</b>, party mode."</li>
+        <li><b>Turn down</b> → "Turn down the chaos alerts."</li>
+        <li><b>Back up</b> → "Always <b>back up</b> your progress."</li>
+        <li><b>Break into</b> → "He <b>broke into</b> the dungeon stealthily."</li>
+        <li><b>Come up</b> → "A new patch <b>came up</b>, max hype."</li>
+        <li><b>Cut off</b> → "They <b>cut off</b> the voice channel."</li>
+        <li><b>Get along</b> → "We <b>get along</b> with random players."</li>
+        <li><b>Go back</b> → "Go back to the previous level."</li>
+        <li><b>Give out</b> → "He <b>gave out</b> free skins, legend."</li>
+        <li><b>Hang out</b> → "We <b>hung out</b> in the virtual plaza."</li>
+        <li><b>Keep up</b> → "Keep up with the patch notes."</li>
+        <li><b>Look forward to</b> → "I <b>look forward to</b> the new event."</li>
+        <li><b>Move on</b> → "Move on from failed raids."</li>
+        <li><b>Pay off</b> → "The grind <b>paid off</b>, max loot."</li>
+        <li><b>Put off</b> → "Don't <b>put off</b> leveling."</li>
+        <li><b>Set off</b> → "We <b>set off</b> fireworks in-game."</li>
+        <li><b>Show up</b> → "He <b>showed up</b> late, chaos lost."</li>
+        <li><b>Take back</b> → "I <b>took back</b> my meme comment."</li>
+    </ul>
+
+    <h3>Level 3 – Advanced (51–75)</h3>
+    <ul>
+        <li><b>Break out</b> → "The chaos <b>broke out</b> in chat."</li>
+        <li><b>Bring down</b> → "The patch <b>brought down</b> lag."</li>
+        <li><b>Call up</b> → "I <b>called up</b> the raid leader."</li>
+        <li><b>Come in</b> → "The new player <b>came in</b> stealthily."</li>
+        <li><b>Fill in</b> → "He <b>filled in</b> the missing stats."</li>
+        <li><b>Get back</b> → "I <b>got back</b> my lost aura points."</li>
+        <li><b>Give away</b> → "She <b>gave away</b> free skins."</li>
+        <li><b>Go through</b> → "Go through the tutorial thoroughly."</li>
+        <li><b>Look around</b> → "Look around for hidden Easter eggs."</li>
+        <li><b>Put up</b> → "Put up defenses, raid incoming."</li>
+        <li><b>Run off</b> → "He <b>ran off</b> with the loot."</li>
+        <li><b>Set aside</b> → "Set aside your points for upgrades."</li>
+        <li><b>Take out</b> → "Take out the boss stealthily."</li>
+        <li><b>Turn around</b> → "Turn around, threat behind you."</li>
+        <li><b>Work out</b> → "Work out a strategy before next raid."</li>
+        <li><b>Check in</b> → "Check in with the team."</li>
+        <li><b>Look back</b> → "Don't look back at mistakes."</li>
+        <li><b>Hold back</b> → "Hold back your rage in chat."</li>
+        <li><b>Break off</b> → "Break off negotiations, low-tier aura."</li>
+        <li><b>Come over</b> → "Come over to the stream, max hype."</li>
+        <li><b>Go under</b> → "The server <b>went under</b> unexpectedly."</li>
+        <li><b>Pull over</b> → "Pull over the spam bot."</li>
+        <li><b>Step up</b> → "Step up your game, chaos mode."</li>
+        <li><b>Take on</b> → "Take on the hardest raid boss."</li>
+        <li><b>Bring in</b> → "Bring in allies for max aura."</li>
+    </ul>
+
+    <h3>Level 4 – Master Tier (76–100)</h3>
+    <ul>
+        <li><b>Call out</b> → "Call out cheaters in chat."</li>
+        <li><b>Check out</b> → "Check out the new skins."</li>
+        <li><b>Cut back</b> → "Cut back your laggy mods."</li>
+        <li><b>Drop by</b> → "Drop by the virtual plaza."</li>
+        <li><b>Fall behind</b> → "Don't fall behind the patch meta."</li>
+        <li><b>Figure out</b> → "Figure out the hidden Easter egg."</li>
+        <li><b>Give up on</b> → "Never give up on leveling."</li>
+        <li><b>Go along with</b> → "Go along with the squad plan."</li>
+        <li><b>Hold up</b> → "Hold up, check the loot first."</li>
+        <li><b>Keep on</b> → "Keep on grinding for aura."</li>
+        <li><b>Look into</b> → "Look into the glitch, max insight."</li>
+        <li><b>Make out</b> → "They tried to make out in VR, chaos points lost."</li>
+        <li><b>Pass out</b> → "He <b>passed out</b> from screen fatigue."</li>
+        <li><b>Put down</b> → "Put down the toxic memes."</li>
+        <li><b>Run through</b> → "Run through the tutorial quickly."</li>
+        <li><b>Set up</b> → "Set up traps for enemy raid."</li>
+        <li><b>Take apart</b> → "Take apart the puzzle to solve it."</li>
+        <li><b>Turn in</b> → "Turn in your quest items."</li>
+        <li><b>Work on</b> → "Work on your aura upgrades."</li>
+        <li><b>Wrap up</b> → "Wrap up the session, max points."</li>
+        <li><b>Bring out</b> → "Bring out the legendary skin."</li>
+        <li><b>Call in</b> → "Call in reinforcements."</li>
+        <li><b>Come along</b> → "Come along for the raid."</li>
+        <li><b>Fall apart</b> → "Don't let your team fall apart."</li>
+        <li><b>Get through</b> → "Get through the boss phase."</li>
+    </ul>
+
+    <div class="funny-ex">
+        <p>Mini-Game Hack: Count your aura points each time you use a phrasal verb in chat. Max 5 bonus points per session!</p>
+    </div>
+</div>
+`;
+
+
+vaultData['convos'] = `
+<div class="content-block">
+    <h1>Street Protocol 🎤</h1>
+    <p>Real-talk dialogues. 2 UK, 2 US. Slang, rizz, chaos, and aura points included!</p>
+
+    <h3>UK Dialogue 1 – Coffee Shop Chaos ☕</h3>
+    <p><b>Jake:</b> "Oi mate, fancy a flat white? It’s dead busy today."</p>
+    <p><b>Liam:</b> "Yeah bruv, gimme one. Heard they added a new oat milk option?"</p>
+    <p><b>Jake:</b> "Yup, legit vibes. But don’t tell Karen, she’ll moan."</p>
+    <p class="funny-ex">Mini-aura: Guess the slang words used correctly, +5 points.</p>
+
+    <h3>UK Dialogue 2 – Pub Banter 🍺</h3>
+    <p><b>Ella:</b> "You coming down for a pint or nah?"</p>
+    <p><b>Tom:</b> "Sure, mate. Heard Sam’s doing karaoke, might be peak cringe."</p>
+    <p><b>Ella:</b> "Can’t miss it, gotta earn those laughter points."</p>
+    <p class="funny-ex">Mini-aura: Spot the local idioms, +10 points.</p>
+
+    <h3>US Dialogue 1 – College Dorm Vibes 🎮</h3>
+    <p><b>Chris:</b> "Yo, you up for some late-night Halo?"</p>
+    <p><b>Megan:</b> "Bet! But I’m wrecking you this time, no mercy."</p>
+    <p><b>Chris:</b> "We’ll see, fam. Snack stash ready?"</p>
+    <p class="funny-ex">Mini-aura: Identify 3 US slang terms, +5 points each.</p>
+
+    <h3>US Dialogue 2 – Street Coffee Shop ☕</h3>
+    <p><b>Jade:</b> "Hey dude, latte with extra whip, thanks."</p>
+    <p><b>Ryan:</b> "No prob, want it iced or hot?"</p>
+    <p><b>Jade:</b> "Iced. Traffic’s brutal, can’t deal with hot today."</p>
+    <p class="funny-ex">Mini-aura: Count the casual phrases used, +5 points each.</p>
+
+    <h3>Extra Hacks & Fun Notes 💡</h3>
+    <ul>
+        <li>UK “mate” = friend, +1 aura point whenever spotted.</li>
+        <li>US “fam” = squad/friends, +1 aura point whenever used.</li>
+        <li>UK “peak” = bad/awkward situation, +1 for each usage.</li>
+        <li>US “bet” = agreement/yes, +1 for each usage.</li>
+        <li>Interactive challenge: Try reading aloud each dialogue with proper accent, +5 bonus.</li>
+        <li>Optional mini-game: replace one slang word with another and see if it still vibes, +10 points if correct.</li>
+    </ul>
+
+    <div class="funny-ex">
+        <p>Mini-Game Hack: Track your “aura points” while reading each dialogue. Max 50 points per session!</p>
+    </div>
+</div>
+`;
+
+vaultData['speech'] = `
+<div class="content-block">
+    <h1>Connected Flow ⚡</h1>
+    <p>Learn how natives REALLY speak. Letters vanish, words fuse, modals collapse. We break all the chaos into fun hacks, games, and aura points.</p>
+
+    <h3>1. Assimilation & Fusion</h3>
+    <p>When words collide, sounds merge:</p>
+    <ul>
+        <li>Don't you → donchu</li>
+        <li>Give me → gimme</li>
+        <li>Let me → lemme</li>
+        <li>Going to → gonna</li>
+        <li>Want to → wanna</li>
+    </ul>
+    <p class="funny-ex">"I donchu know why he ghosted… maybe he just gonna sleep forever."</p>
+
+    <h3>2. Modal + Have (Native Style)</h3>
+    <p>Modals with HAVE collapse in fast speech:</p>
+    <ul>
+        <li>Would have → wudev</li>
+        <li>Could have → cudev</li>
+        <li>Should have → shudev</li>
+        <li>Must have → mustev</li>
+        <li>Might have → mightev</li>
+        <li>Modal + HAVE = ev (shortcut for all casual modal-have forms)</li>
+    </ul>
+    <p class="funny-ex">"He wudev called, she cudva replied, but honestly ev lost 50 aura points 💀"</p>
+
+    <h3>3. Elision (Letters vanish)</h3>
+    <ul>
+        <li>Camera → camra</li>
+        <li>Family → famly</li>
+        <li>Chocolate → choc’late</li>
+        <li>Every → ev’ry</li>
+        <li>Probably → prob’ly</li>
+    </ul>
+    <p class="funny-ex">"Grab the camra famly style, probly gonna take epic pics."</p>
+
+    <h3>4. Contractions – Native Cheats</h3>
+    <ol>
+        <li>I’m = I am → “I’m chillin’”</li>
+        <li>You’re = You are → “You’re late again”</li>
+        <li>He’s / She’s / It’s → is / has → “He’s been ghosting”</li>
+        <li>We’re / They’re → are → “We’re vibing”</li>
+        <li>Can’t = cannot → “I can’t even”</li>
+        <li>Don’t = do not → “Don’t panic”</li>
+        <li>Won’t = will not → “He won’t show”</li>
+        <li>Gonna = going to → “I’m gonna nap”</li>
+        <li>Wanna = want to → “I wanna vibe”</li>
+        <li>Modal+Have = ev / wudev / cudva / shudva → “She wudev told me”</li>
+    </ol>
+    <p class="funny-ex">"I dunno if he wudev texted or  ignored us… 💀"</p>
+
+    <h3>5. US vs UK Fusion Examples</h3>
+    <p><b>US:</b> "What are you going to do?" → "Whatcha gonna do?"</p>
+    <p><b>UK:</b> "I am going to the shop" → "I'm goin' t'the shop, mate"</p>
+    <p class="funny-ex">Mini-game: Say it fast 3x. If you merge all words correctly = +10 aura points</p>
+
+    <h3>6. Pronunciation Quirks</h3>
+    <ul>
+        <li>Better → /bɛɾər/ (T = soft D, US)</li>
+        <li>Water → /wɑɾər/ (US, T → soft D)</li>
+        <li>Car → /kɑː/ (UK, drop R)</li>
+        <li>This → /dis/ (US, Th → D in casual speech)</li>
+        <li>Have to → /hæfta/ or /havta/ (fast speech)</li>
+    </ul>
+    <p class="funny-ex">"He hafta leave, but dunchu know he gonna ghost again 💀"</p>
+
+    <h3>7. Mini-Game: Native Chaos</h3>
+    <p>Transform proper sentences into native shortcuts:</p>
+    <ul>
+        <li>"I don’t know what he would have said" → "I dunno what he wudev said"</li>
+        <li>"You are not going to eat that" → "You ain't gonna eat that"</li>
+        <li>"She should have told me" → "She shudev told me"</li>
+        <li>Max aura points: 50 per session</li>
+    </ul>
+
+    <h3>8. Hacks & Tips</h3>
+    <ul>
+        <li>Always merge words for native flow, +5 points</li>
+        <li>Drop unstressed vowels, +10 points</li>
+        <li>Use modal-have shortcuts ev / wudev / cudva / shudva</li>
+        <li>Mini-aura challenge: Spot 10 shortcuts in a conversation, +1 per shortcut</li>
+    </ul>
+
+    <h3>9. Fun Example Paragraph</h3>
+    <p>"I dunno if he's gonna show, she wudev texted but ignored the messages. Whatcha gonna do? Lemme grab the camra famly style, probly epic pics incoming!"</p>
+</div>
+`;
+
+
+vaultData['acronyms'] = `
+<div class="content-block">
+    <h1>Digital Shorthand 📱</h1>
+    <p>Welcome to the chaotic world of modern texting & social media acronyms. Learn 30 of the hottest 2025 acronyms, with examples, aura points, and native hacks.</p>
+
+    <h3>1. Common Acronyms</h3>
+    <ul>
+        <li>POV → Point Of View | "POV: You’re reading this in bed at 2AM"</li>
+        <li>IYKYK → If You Know, You Know | "IYKYK, that vibe hits differently"</li>
+        <li>LMK → Let Me Know | "LMK if you coming to the vibe party"</li>
+        <li>BRB → Be Right Back | "BRB grabbing snacks"</li>
+        <li>TBH → To Be Honest | "TBH, that meme was pure chaos"</li>
+        <li>FOMO → Fear Of Missing Out | "I had FOMO at the concert last night"</li>
+        <li>YOLO → You Only Live Once | "YOLO, let’s try the spicy challenge"</li>
+        <li>SMH → Shaking My Head | "SMH at that text, pure fail"</li>
+        <li>ICYMI → In Case You Missed It | "ICYMI, she ghosted again"</li>
+        <li>TFW → That Feeling When | "TFW you see pizza at 3AM"</li>
+    </ul>
+
+    <h3>2. Gaming & Streamer Acronyms</h3>
+    <ul>
+        <li>GG → Good Game | "GG everyone, epic play"</li>
+        <li>AFK → Away From Keyboard | "AFK for a sec, snacks time"</li>
+        <li>NGL → Not Gonna Lie | "NGL, I’m kinda vibing with this"</li>
+        <li>IRL → In Real Life | "IRL meetups are chaotic"</li>
+        <li>OP → Overpowered | "That combo was OP, total aura flex"</li>
+        <li>EZ → Easy | "That round was EZ, +10 aura"</li>
+        <li>PWN → Own/Defeat | "We totally pwned them last night"</li>
+        <li>AF → As F*** | "Tired AF, need coffee"</li>
+        <li>GGWP → Good Game Well Played | "GGWP, messy but fun"</li>
+        <li>BR → Battle Royale | "Playing BR tonight, who’s in?"</li>
+    </ul>
+
+    <h3>3. Social Chaos Acronyms</h3>
+    <ul>
+        <li>IDC → I Don’t Care | "IDC, do what you want"</li>
+        <li>ILY → I Love You | "ILY, but stop ghosting"</li>
+        <li>IDK → I Don’t Know | "IDK if he’s vibing with us"</li>
+        <li>OMG → Oh My God | "OMG, that meme killed me 😂"</li>
+        <li>BTW → By The Way | "BTW, you’re late again"</li>
+        <li>TMI → Too Much Information | "TMI, I didn’t need to know that"</li>
+        <li>RN → Right Now | "Streaming RN, hop in"</li>
+        <li>LMFAO → Laughing My F***ing Ass Off | "LMFAO, pure chaos"</li>
+        <li>ROFL → Rolling On Floor Laughing | "ROFL at that fail video"</li>
+        <li>SM → Social Media | "SM is full of vibes & drama"</li>
+    </ul>
+
+    <h3>4. Mini Game: Decode the Text</h3>
+    <p>Convert the chaotic text into plain English:</p>
+    <ul>
+        <li>"IYKYK, this party was lit AF" → "If you know, you know, this party was extremely fun"</li>
+        <li>"BRB, AFK, grab snacks" → "Be right back, away from keyboard, grabbing snacks"</li>
+        <li>"TFW you see pizza IRL" → "That feeling when you see pizza in real life"</li>
+        <li>Max aura points: 50 per round</li>
+    </ul>
+
+    <h3>5. Hacks & Tips</h3>
+    <ul>
+        <li>Use acronyms for casual texting, but +10 aura points if you explain them cleverly</li>
+        <li>Spot at least 5 acronyms in a chat, +5 points each</li>
+        <li>Create your own 2025-style acronyms, +10 points per creative term</li>
+        <li>Always read US & UK texts differently: "BRB" = same, but vibe changes</li>
+    </ul>
+
+    <h3>6. Fun Paragraph Example</h3>
+    <p>"POV: You’re vibing IRL, LMFAO at the meme, BRB grabbing snacks, TFW you realize it’s already 3AM. IYKYK, chaos achieved, +50 aura!"</p>
+</div>
+`;
+
+
+vaultData['homophones'] = `
+<div class="content-block">
+    <h1>Confusion Matrix ♊</h1>
+    <p>Welcome to the tricky world of homophones & homonyms. Words that sound the same but mean different things. Real native chaos inside.</p>
+
+    <h3>1. Common Confusions</h3>
+    <ul>
+        <li>Their / There / They’re  
+            <br>Example: "Their car is over there. They’re late again."</li>
+        <li>To / Too / Two  
+            <br>Example: "I want to go too. I have two tickets."</li>
+        <li>Its / It’s  
+            <br>Example: "The cat licked its paw. It’s happy now."</li>
+        <li>Hear / Here  
+            <br>Example: "Can you hear that? I’m right here."</li>
+        <li>Buy / By / Bye  
+            <br>Example: "I’ll buy a coffee by the window. Bye!"</li>
+        <li>Write / Right  
+            <br>Example: "Write your name on the paper. You’re doing it right."</li>
+        <li>Sea / See  
+            <br>Example: "See the sea? It’s huge."</li>
+        <li>Pair / Pear  
+            <br>Example: "I ate a pear. We bought a pair of shoes."</li>
+        <li>Brake / Break  
+            <br>Example: "Brake before the corner. Take a break afterwards."</li>
+        <li>Flour / Flower  
+            <br>Example: "The flower smells nice. We need flour for cookies."</li>
+    </ul>
+
+    <h3>2. Tricky Homonyms</h3>
+    <ul>
+        <li>Lead (metal) / Lead (guide)  
+            <br>Example: "Lead pipes are old. She will lead the team."</li>
+        <li>Bat (animal) / Bat (sports)  
+            <br>Example: "A bat flew in. He swung the bat."</li>
+        <li>Bow (front of ship) / Bow (tie) / Bow (bend)  
+            <br>Example: "The bow of the ship. A bow tie. Bow before the king."</li>
+        <li>Ring (sound) / Ring (jewelry)  
+            <br>Example: "The bell rings. I bought a ring."</li>
+        <li>Fair (festival) / Fair (just) / Fare (price)  
+            <br>Example: "The county fair was fun. That’s fair. Bus fare is $2."</li>
+        <li>Right (direction) / Right (correct) / Write  
+            <br>Example: "Turn right. You are right. Write it down."</li>
+        <li>Bear (animal) / Bear (endure)  
+            <br>Example: "The bear roams. I cannot bear this noise."</li>
+        <li>Match (game) / Match (fire)  
+            <br>Example: "The soccer match is tonight. Strike a match."</li>
+        <li>Wave (hand) / Wave (ocean)  
+            <br>Example: "Wave goodbye. Watch the big wave."</li>
+        <li>Fair / Fare  
+            <br>Example: "It’s only fair. Pay the fare."</li>
+    </ul>
+
+    <h3>3. Pronunciation Hacks</h3>
+    <ul>
+        <li>Their / There / They’re → /ðɛr/ (same sound, rely on context!)</li>
+        <li>To / Too / Two → /tuː/ (native trick: read aloud, guess by meaning)</li>
+        <li>Its / It’s → /ɪts/ vs /ɪts/ (context is king!)</li>
+        <li>Brake / Break → /breɪk/ (write a mini story to remember)</li>
+        <li>Flour / Flower → /flaʊər/ (visualize object + food)</li>
+    </ul>
+
+    <h3>4. Fun Mini-Game</h3>
+    <p>Choose the correct homophone:</p>
+    <ul>
+        <li>"I can’t ___ this noise anymore." → Bear / Bare</li>
+        <li>"The chef needs ___ for the cake." → Flour / Flower</li>
+        <li>"Turn ___ at the next street." → Right / Write</li>
+        <li>"I saw a ___ flying in the cave." → Bat / Bat</li>
+        <li>+20 aura points if you make a silly sentence using both!</li>
+    
+    <h3>5. Native Tip</h3>
+    <p>Even natives mess these up in texting & fast speech. The trick: always read the sentence aloud, imagine the scene, then pick the correct word. Makes reading fun & memorable.</p>
+
+    <h3>6. Fun Example Paragraph</h3>
+    <p>"I went to the fair and saw a bear near the ring. I can’t bear it. The chef gave me a pear instead of a pair of shoes. TFW you see a wave of confusion in their eyes!"</p>
+</div>
+`;
+
+vaultData['pos'] = `
+<div class="content-block">
+    <h1>Weapon Engine ⚙️</h1>
+    <p>Welcome to the ultimate arsenal of English grammar: the 8 Parts of Speech. Each is a “weapon” in your aura arsenal. Learn, practice, and dominate.</p>
+
+    <h3>1. Nouns 🏷️</h3>
+    <p>People, places, things, ideas. Names of everything that exists or is imagined.</p>
+    <div class="funny-ex">"The cat, the empire, the aura… even chaos is a noun here."</div>
+    <p><b>Rules & Hacks:</b> Pluralize irregulars carefully (man → men, child → children). Uncountable nouns like advice, clothes, furniture never take “s”.</p>
+    <ul>
+        <li>Example: "His aura is untouchable. Advice is free, but chaos is priceless."</li>
+    </ul>
+
+    <h3>2. Pronouns 🙋‍♂️</h3>
+    <p>Replace nouns to avoid repetition. I, you, he, she, it, we, they, who, which.</p>
+    <div class="funny-ex">"They said they’d bring their aura—but it’s gone. Who even knows?"</div>
+    <ul>
+        <li>Rule: Match pronoun to noun gender and number.</li>
+        <li>Native Hack: "It" is flexible; can refer to anything confusing.</li>
+    </ul>
+
+    <h3>3. Verbs ⚡</h3>
+    <p>Action, existence, occurrence. Literally the engine of a sentence.</p>
+    <div class="funny-ex">"He ninja-sprinted, teleported, and ghosted all at once."</div>
+    <ul>
+        <li>Rule: Always match subject and tense. "She runs," not "She run."</li>
+        <li>Native Hack: Modal + base = probability / obligation (can go, must eat, shoulda known).</li>
+    </ul>
+
+    <h3>4. Adjectives 🎨</h3>
+    <p>Describe nouns. Make them sexy, powerful, chaotic.</p>
+    <div class="funny-ex">"Epic, chaotic, audacious aura vibes everywhere."</div>
+    <ul>
+        <li>Rule: Usually before noun. Can go after verb ‘be’ (The aura is chaotic).</li>
+        <li>Native Hack: Adjective stacking is fun. "Big, bold, beautiful chaos."</li>
+    </ul>
+
+    <h3>5. Adverbs 🚀</h3>
+    <p>Modify verbs, adjectives, or other adverbs. How, when, where, why.</p>
+    <div class="funny-ex">"She ghosted extremely quickly, like a ninja on espresso."</div>
+    <ul>
+        <li>Rule: Usually end with -ly. Exceptions: fast, well, hard.</li>
+        <li>Native Hack: Position matters. "He quietly left" vs "He left quietly" – subtle aura shift.</li>
+    </ul>
+
+    <h3>6. Prepositions 📍</h3>
+    <p>Show relationships: location, time, cause. In, on, at, under, between.</p>
+    <div class="funny-ex">"Aura is in chaos, on fire, at max level."</div>
+    <ul>
+        <li>Rule: Always followed by a noun or pronoun. Never alone.</li>
+        <li>Native Hack: Prepositional phrases can stack: "On the desk in the office at 3 PM."</li>
+    </ul>
+
+    <h3>7. Conjunctions 🔗</h3>
+    <p>Connect words, phrases, clauses. And, but, or, yet, for, nor, so.</p>
+    <div class="funny-ex">"He has aura, but she stole the spotlight, and chaos ensued."</div>
+    <ul>
+        <li>Rule: Coordinating connect equals balance. Subordinating introduces dependency: because, although, while.</li>
+        <li>Native Hack: Conjunctions create flow; overuse = chaotic poetry.</li>
+    </ul>
+
+    <h3>8. Interjections 💥</h3>
+    <p>Express strong emotions or reactions. Hey!, Wow!, Oops!, Damn!</p>
+    <div class="funny-ex">"Yo! That aura hit me like a truck. Damn, epic."</div>
+    <ul>
+        <li>Rule: Usually stand-alone or at start. Comma or exclamation for effect.</li>
+        <li>Native Hack: Sprinkle in dialogue for flavor. “Ah, I knew it!”</li>
+    </ul>
+
+    <h3>9. Massive Example Paragraph</h3>
+    <p>"Wow! She sprinted fast across the field, dodging chaos and shadow, while her friends screamed and laughed. Their aura, bright and audacious, lit up the night, and nobody could touch it. Epic, chaotic, unforgettable."</p>
+
+    <h3>10. Game / Exercise</h3>
+    <p>Identify each part of speech in the above paragraph. Score 5 aura points per correct match. Bonus for funny sentence creation with at least 5 parts of speech combined!</p>
+</div>
+`;
+
+
+vaultData['modals'] = `
+<div class="content-block">
+    <h1>Probability Law 🔮</h1>
+    <p>All the power of English uncertainty condensed into one vault. Learn modals, their twists, hacks, and common mistakes.</p>
+
+    <h3>1️⃣ Basic Modals</h3>
+    <p>Can, Could, May, Might, Shall, Should, Will, Would, Must</p>
+    <div class="funny-ex">
+        "I <b>can</b> eat this aura cake before anyone notices." (Ability)<br>
+        "He <b>should</b> apologize for stealing the vibe." (Advice)
+    </div>
+
+    <h3>2️⃣ Modal + HAVE</h3>
+    <p>Expressing **past probability or speculation**</p>
+    <div class="funny-ex">
+        "He <b>must have eaten</b> the aura cake already. It’s gone, bro."<br>
+        "She <b>might have left</b> without saying 'cheers'." (UK chaos)
+    </div>
+
+    <h3>3️⃣ Modal + HAVE + BEEN</h3>
+    <p>Expressing **past experiences or ongoing past situations**</p>
+    <div class="funny-ex">
+        "They <b>should have been studying</b> instead of ghosting the lecture."<br>
+        "He <b>could have been winning</b> the aura points, but he forgot the slang." 
+    </div>
+
+    <h3>4️⃣ Common Mistakes</h3>
+    <ul>
+        <li>Incorrect: "He must of eaten."<br>Correct: "He must have eaten."</li>
+        <li>Incorrect: "She could of been here."<br>Correct: "She could have been here."</li>
+        <li>Overusing double modals: "He might could go." ❌ Only in dialect, not standard.</li>
+    </ul>
+
+    <h3>5️⃣ Fun Native Hacks</h3>
+    <p>Native speakers often **shorten modal+have** in conversation:</p>
+    <div class="funny-ex">
+        "He must’ve eaten." = "He must’ve eaten the vibe." <br>
+        "They could’ve been amazing." = "They could’ve been peak chaos."
+    </div>
+
+    <h3>6️⃣ Modal + HAVE in Questions</h3>
+    <div class="funny-ex">
+        "Must he have left already?" (Formal)<br>
+        "Could she’ve forgotten her aura badge?" (Casual UK/US)<br>
+        "Would they have done this without memes?" (Chaos test)
+    </div>
+
+    <h3>7️⃣ Modal + HAVE in Negatives</h3>
+    <div class="funny-ex">
+        "He <b>shouldn’t have eaten</b> the aura cake so fast." <br>
+        "They <b>might not have noticed</b> the hidden slang hack."
+    </div>
+
+    <h3>8️⃣ Combined Examples</h3>
+    <p>Mixing past and present probabilities for max aura:</p>
+    <div class="funny-ex">
+        "She <b>must have been hiding</b> those aura points, now they’re gone." <br>
+        "I <b>might have been late</b>, but the chaos saved me." 
+    </div>
+
+    <h3>9️⃣ Common Mistake Reminders</h3>
+    <ul>
+        <li>Don't confuse "must have been" (past speculation) with "must be" (present certainty).</li>
+        <li>Shorten carefully: "might’ve been" is fine, "might’ve being" ❌ wrong.</li>
+        <li>Modal+have can be tricky with perfect participles: "should have gone", not "should have went".</li>
+    </ul>
+
+    <h3>10️⃣ Challenge for Fun</h3>
+    <p>Write sentences using <b>must have, could have, should have, might have been</b> in your daily chaos. Extra points if you sneak in slang and preps!</p>
+    <div class="funny-ex">
+        Example: "I <b>might have been flexing</b> aura points while ghosting the lecture."
+    </div>
+
+</div>
+`;
+vaultData['mistakes'] = `
+<div class="content-block">
+    <h1>Aura-Loss Log 💀</h1>
+    <p>Welcome to the Hall of Shame. These are the 25 most common mistakes that kill your aura in English. Fix them or suffer chaos.</p>
+
+    <h3>1️⃣ Mixing Up Tenses</h3>
+    <div class="funny-ex">
+        ❌ "I seen that movie yesterday." <br>
+        ✅ "I <b>saw</b> that movie yesterday."<br>
+        Hack: Use past simple for finished actions, present perfect for life experience.
+    </div>
+
+    <h3>2️⃣ Double Negatives</h3>
+    <div class="funny-ex">
+        ❌ "I don’t need no help." <br>
+        ✅ "I don’t need any help."<br>
+        Native Tip: Double negatives = old-school chaos, avoid unless for style.
+    </div>
+
+    <h3>3️⃣ Incorrect Plurals</h3>
+    <div class="funny-ex">
+        ❌ "Two furnitures in the room." <br>
+        ✅ "Two <b>pieces of furniture</b> in the room."<br>
+        Hack: Some nouns refuse to pluralize. Remember “clothes” = correct, not “2 clothes”.
+    </div>
+
+    <h3>4️⃣ Confusing Prepositions</h3>
+    <div class="funny-ex">
+        ❌ "I’m good in cooking." <br>
+        ✅ "I’m good <b>at</b> cooking."<br>
+        Native Hack: "at" = skill, "in" = location/field.
+    </div>
+
+    <h3>5️⃣ Enter into vs Enter</h3>
+    <div class="funny-ex">
+        ❌ "He entered into the room." <br>
+        ✅ "He entered the room." <br>
+        Tip: “Enter into” is mostly redundant. Less is more.
+    </div>
+
+    <h3>6️⃣ Its vs It’s</h3>
+    <div class="funny-ex">
+        ❌ "Its a sunny day." <br>
+        ✅ "It’s a sunny day."<br>
+        Trick: “It’s” = it is/has, “Its” = possessive.
+    </div>
+
+    <h3>7️⃣ Their / There / They’re</h3>
+    <div class="funny-ex">
+        ❌ "There going to the party." <br>
+        ✅ "They’re going to the party."<br>
+        Hack: Think “They are” → They’re.
+    </div>
+
+    <h3>8️⃣ Who vs Whom</h3>
+    <div class="funny-ex">
+        ❌ "Whom is coming?" <br>
+        ✅ "Who is coming?"<br>
+        Trick: “Who” = subject, “Whom” = object (rarely used in casual speech)
+    </div>
+
+    <h3>9️⃣ Me vs I</h3>
+    <div class="funny-ex">
+        ❌ "Me and him went out." <br>
+        ✅ "He and I went out."<br>
+        Native Hack: Always put yourself last.
+    </div>
+
+    <h3>🔟 Dangling Modifiers</h3>
+    <div class="funny-ex">
+        ❌ "Running fast, the finish line was reached." <br>
+        ✅ "Running fast, <b>she</b> reached the finish line."<br>
+        Tip: Modifier = must clearly attach to subject.
+    </div>
+
+    <h3>1️⃣1️⃣ Overusing Commas</h3>
+    <div class="funny-ex">
+        ❌ "I went to the store, and bought apples." <br>
+        ✅ "I went to the store and bought apples."<br>
+        Hack: Only use commas for independent clauses or lists.
+    </div>
+
+    <h3>1️⃣2️⃣ Misplacing Adverbs</h3>
+    <div class="funny-ex">
+        ❌ "I only ate the cake yesterday." (wrong meaning) <br>
+        ✅ "I ate only the cake yesterday."<br>
+        Native Hack: Placement = meaning.
+    </div>
+
+    <h3>1️⃣3️⃣ Using Incorrect Articles</h3>
+    <div class="funny-ex">
+        ❌ "I saw a Eiffel Tower." <br>
+        ✅ "I saw <b>the</b> Eiffel Tower."<br>
+        Tip: Proper nouns often need “the” or none.
+    </div>
+
+    <h3>1️⃣4️⃣ Misusing “Like” vs “As”</h3>
+    <div class="funny-ex">
+        ❌ "He works like a teacher, he is strict." <br>
+        ✅ "He works as a teacher; he is strict."<br>
+        Hack: Like = similarity, As = role/function.
+    </div>
+
+    <h3>1️⃣5️⃣ Confusing Idioms</h3>
+    <div class="funny-ex">
+        ❌ "He kicked the bucket list." <br>
+        ✅ "He kicked the bucket."<br>
+        Tip: Literal vs idiomatic meaning matters.
+    </div>
+
+    <h3>1️⃣6️⃣ Sentence Fragments</h3>
+    <div class="funny-ex">
+        ❌ "Because I was hungry." <br>
+        ✅ "I ate because I was hungry."<br>
+        Hack: Every fragment needs a main clause.
+    </div>
+
+    <h3>1️⃣7️⃣ Run-on Sentences</h3>
+    <div class="funny-ex">
+        ❌ "I went to the store I bought milk." <br>
+        ✅ "I went to the store, and I bought milk."<br>
+        Native Tip: Two thoughts = connect or separate.
+    </div>
+
+    <h3>1️⃣8️⃣ Wrong Verb Forms</h3>
+    <div class="funny-ex">
+        ❌ "He done the homework." <br>
+        ✅ "He <b>did</b> the homework."<br>
+        Hack: Past simple = did, Past participle = have done.
+    </div>
+
+    <h3>1️⃣9️⃣ Confusing “Much” vs “Many”</h3>
+    <div class="funny-ex">
+        ❌ "I have much friends." <br>
+        ✅ "I have many friends."<br>
+        Tip: Much = uncountable, Many = countable.
+    </div>
+
+    <h3>2️⃣0️⃣ Mixing Up “Few” and “A Few”</h3>
+    <div class="funny-ex">
+        ❌ "I have few friends." (meaning almost none) <br>
+        ✅ "I have a few friends." (positive)<br>
+        Native Hack: Tiny difference, huge aura impact.
+    </div>
+
+    <h3>2️⃣1️⃣ Confusing “Less” vs “Fewer”</h3>
+    <div class="funny-ex">
+        ❌ "Less cars on the road." <br>
+        ✅ "Fewer cars on the road."<br>
+        Tip: Less = uncountable, Fewer = countable.
+    </div>
+
+    <h3>2️⃣2️⃣ Wrong Collocations</h3>
+    <div class="funny-ex">
+        ❌ "Strong rain fell." <br>
+        ✅ "Heavy rain fell."<br>
+        Hack: Native collocations = high aura.
+    </div>
+
+    <h3>2️⃣3️⃣ Misusing Reflexives</h3>
+    <div class="funny-ex">
+        ❌ "He made it hisself." <br>
+        ✅ "He made it <b>himself</b>."<br>
+        Tip: Reflexive = self, hisself = chaos.
+    </div>
+
+    <h3>2️⃣4️⃣ Confusing “Do” vs “Make”</h3>
+    <div class="funny-ex">
+        ❌ "I will make my homework." <br>
+        ✅ "I will do my homework."<br>
+        Hack: Do = action/task, Make = create something tangible.
+    </div>
+
+    <h3>2️⃣5️⃣ Overusing “Very”</h3>
+    <div class="funny-ex">
+        ❌ "It was very good." <br>
+        ✅ "It was <b>stellar</b>, <b>epic</b>, <b>next-level</b>!"<br>
+        Tip: Boost aura points, ditch boring adjectives.
+    </div>
+</div>
+`;
+
+vaultData['quiz'] = `
+<div class="content-block">
+    <h1>Final Calibration 🎯</h1>
+    <p>Test your Aura English mastery! Each correct answer = 10 Aura Points. Keep track, get legendary.</p>
+
+    <ol>
+        <li>
+            <b>Choose the correct past tense:</b><br>
+            "Yesterday I ____ to the store."<br>
+            <input type="radio" name="q1" value="0"> go<br>
+            <input type="radio" name="q1" value="10"> went<br>
+            <input type="radio" name="q1" value="0"> gone
+        </li>
+
+        <li>
+            <b>Pick the uncountable noun:</b><br>
+            "I need some ____."<br>
+            <input type="radio" name="q2" value="0"> chairs<br>
+            <input type="radio" name="q2" value="10"> furniture<br>
+            <input type="radio" name="q2" value="0"> tables
+        </li>
+
+        <li>
+            <b>Correct modal + have:</b><br>
+            "She ____ finished the project by now."<br>
+            <input type="radio" name="q3" value="10"> must have<br>
+            <input type="radio" name="q3" value="0"> can have<br>
+            <input type="radio" name="q3" value="0"> will has
+        </li>
+
+        <li>
+            <b>Choose the proper phrasal verb:</b><br>
+            "I need to ____ my work before Friday."<br>
+            <input type="radio" name="q4" value="10"> catch up on<br>
+            <input type="radio" name="q4" value="0"> turn off<br>
+            <input type="radio" name="q4" value="0"> give in
+        </li>
+
+        <li>
+            <b>Identify the correct preposition:</b><br>
+            "He is good ____ math."<br>
+            <input type="radio" name="q5" value="10"> at<br>
+            <input type="radio" name="q5" value="0"> in<br>
+            <input type="radio" name="q5" value="0"> on
+        </li>
+
+        <li>
+            <b>Choose the proper article:</b><br>
+            "I visited ____ Louvre last summer."<br>
+            <input type="radio" name="q6" value="10"> the<br>
+            <input type="radio" name="q6" value="0"> a<br>
+            <input type="radio" name="q6" value="0"> no article
+        </li>
+
+        <li>
+            <b>Correct contraction:</b><br>
+            "I ____ seen that movie before."<br>
+            <input type="radio" name="q7" value="0"> have not<br>
+            <input type="radio" name="q7" value="10"> haven’t<br>
+            <input type="radio" name="q7" value="0"> had not
+        </li>
+
+        <li>
+            <b>Choose the proper homophone:</b><br>
+            "I put the book over ____."<br>
+            <input type="radio" name="q8" value="10"> there<br>
+            <input type="radio" name="q8" value="0"> their<br>
+            <input type="radio" name="q8" value="0"> they’re
+        </li>
+
+        <li>
+            <b>Correct collocation:</b><br>
+            "It was a ____ decision."<br>
+            <input type="radio" name="q9" value="0"> strong<br>
+            <input type="radio" name="q9" value="10"> wise<br>
+            <input type="radio" name="q9" value="0"> heavy
+        </li>
+
+        <li>
+            <b>Correct adverb placement:</b><br>
+            "I have ____ finished my homework."<br>
+            <input type="radio" name="q10" value="10"> already<br>
+            <input type="radio" name="q10" value="0"> only<br>
+            <input type="radio" name="q10" value="0"> just
+        </li>
+
+        <!-- Repeat similar pattern for 11-25 -->
+        <li><b>Question 11:</b> Which sentence is correct?
+a) I can to swim.
+b) I can swim.
+c) I can swimming. (10 points)</li>
+        <li><b>Question 12:</b> Choose the proper phrasal verb:
+"I need to ____ the meeting notes before sending them."
+a) look after
+b) go over
+c) break out (10 points)</li>
+        <li><b>Question 13:</b> Identify the uncountable noun:
+a) Water
+b) Apples
+c) Cats (10 points)</li>
+        <li><b>Question 14:</b> What’s the native way to shorten “Do not know”?
+a) Dunno
+b) Don’tno
+c) Do’nt know (10 points)</li>
+        <li><b>Question 15:</b> Select the modal+have example:
+a) She must have left early.
+b) She must left early.
+c) She must leaving early. (10 points)</li>
+        <li><b>Question 16:</b> Fill in the preposition:
+“I’ll meet you ___ the coffee shop.”
+a) on
+b) at
+c) in (10 points)</li>
+        <li><b>Question 17:</b> Which is formal?
+a) I need this fixed ASAP.
+b) I would appreciate it if this could be corrected.
+c) Fix it now. (10 points)</li>
+        <li><b>Question 18:</b> Identify the correct slang meaning:
+“Rizz” means:
+a) Charisma
+b) Rage
+c) Riddle(10 points)</li>
+        <li><b>Question 19:</b> Which is correct UK native phrasing?
+a) I’m going to the shop.
+b) I’m just nipping out, mate.
+c) I’m heading to the store.(10 points)</li>
+        <li><b>Question 20:</b> Pick the contraction for “Do not you”:
+a) Donchu
+b) Don’t you
+c) D’you(10 points)</li>
+        <li><b>Question 21:</b> Which sentence uses the past perfect correctly?
+a) I had eaten before he arrived.
+b) I have ate before he arrived.
+c) I had eat before he arrived.(10 points)</li>
+        <li><b>Question 22:</b> Which phrasal verb fits?
+“She had to ____ the project because of time constraints.”
+a) call off
+b) put up
+c) run into(10 points)</li>
+        <li><b>Question 23:</b> Choose the correct homophone:
+“They went over ___ ideas.”
+a) there
+b) their
+c) they’re(10 points)</li>
+        <li><b>Question 24:</b>  Which sentence is a mistake?
+a) I look forward to meet you.
+b) I look forward to meeting you.
+c) I am looking forward to seeing you.(10 points)</li>
+        <li><b>Question 25:</b>  Identify the modal+have+been(Modal perfect continous or progressive)example:
+a) She might have been sleeping all morning.
+b) She might being sleeping all morning.
+c) She might has been sleeping all morning.(10 points)</li>
+    </ol>
+
+    <button class="action-btn" onclick="calculateQuiz()">SUBMIT & CALIBRATE</button>
+    <div id="quiz-result" style="margin-top: 20px; font-size: 1.2rem; color: var(--accent);"></div>
+</div>
+
+<script>
+function calculateQuiz() {
+    let total = 0;
+    for(let i=1;i<=25;i++){
+        const options = document.getElementsByName('q'+i);
+        for(let opt of options){
+            if(opt.checked){ total += parseInt(opt.value); }
+        }
+    }
+    const aura = total;
+    document.getElementById('quiz-result').innerHTML = 
+        "You earned <b>" + aura + "</b> Aura Points! " + 
+        (aura>=200?"💎 Legendary Aura":"Keep training to reach High-Aura status!");
+}
+</script>
+
+</script>
+</body>
+</html>
