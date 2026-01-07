@@ -3,380 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ENGLISH | Become The Main Character</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    <title>Aura English | Premium</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;800&family=Space+Mono&display=swap" rel="stylesheet">
     <style>
-        /* ========================================
-        AURORA UI - STUNNING HOMEPAGE CSS 
-        ========================================
-        */
         :root {
-            --bg: #050505;
-            --card-bg: #111111;
-            --primary: #00f2ff;
-            --secondary: #7000ff;
-            --text: #ffffff;
-            --accent: #ff00c8;
-            --success: #00ff88;
+            --bg: #030303;
+            --accent: #fff;
+            --muted: #222;
+            --uk-red: #ff3b3b;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Space Grotesk', sans-serif;
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
-            color: var(--text);
+            background: var(--bg);
+            color: var(--accent);
+            font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
 
-        /* BUSSIN' HOMEPAGE HERO */
+        /* THE UK CORNER - TUCKED AWAY */
+        .uk-bay {
+            position: fixed;
+            bottom: 40px;
+            right: -100px; /* Hidden mostly */
+            transform: rotate(-90deg);
+            background: var(--uk-red);
+            padding: 10px 30px;
+            border-radius: 0 0 20px 20px;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0.5;
+            z-index: 1000;
+        }
+
+        .uk-bay:hover {
+            right: -10px;
+            opacity: 1;
+        }
+
+        /* HEADER */
         header {
-            height: 100vh;
+            padding: 40px 5%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
-            position: relative;
         }
 
-        .hero-glow {
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: var(--secondary);
-            filter: blur(150px);
-            opacity: 0.2;
-            z-index: 0;
-        }
+        .logo { font-size: 1.2rem; font-weight: 800; letter-spacing: -1px; }
 
-        h1 {
-            font-family: 'Syncopate', sans-serif;
-            font-size: clamp(3rem, 10vw, 8rem);
-            text-transform: uppercase;
-            line-height: 0.9;
-            z-index: 1;
-            background: linear-gradient(to bottom, #fff 40%, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* SEARCHER - INTEGRATED, NOT A POPUP */
+        .search-hero {
+            padding: 100px 5%;
             text-align: center;
         }
 
-        .tagline {
-            font-size: 1.2rem;
-            letter-spacing: 5px;
-            margin: 20px 0;
-            color: var(--primary);
-            text-transform: uppercase;
-            z-index: 1;
-        }
-
-        /* SYNONYM SEARCH BAR */
-        .search-vault {
-            width: 100%;
+        .search-wrap {
             max-width: 800px;
-            margin: 50px auto;
-            padding: 40px;
-            background: var(--card-bg);
-            border-radius: 30px;
-            border: 1px solid #333;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            margin: 0 auto;
+            border-bottom: 2px solid var(--muted);
+            display: flex;
+            padding: 10px;
+            transition: 0.3s;
         }
 
-        .search-input-wrapper {
-            display: flex;
-            gap: 15px;
-        }
+        .search-wrap:focus-within { border-color: #fff; }
 
         input {
-            flex: 1;
-            background: #000;
-            border: 1px solid #444;
-            padding: 20px;
-            border-radius: 15px;
-            color: #fff;
-            font-size: 1.1rem;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2);
-        }
-
-        .search-btn {
-            padding: 0 30px;
-            background: var(--primary);
-            color: #000;
+            background: none;
             border: none;
-            border-radius: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
+            color: #fff;
+            font-size: 2rem;
+            width: 100%;
+            outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 200;
         }
 
-        .search-btn:hover {
-            transform: scale(1.05);
-            background: #fff;
-        }
-
-        /* DIRECTORY GRID */
-        .syndicate-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 50px 5%;
-        }
-
-        .section-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #222;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            position: relative;
+        /* THE "IYKYK" RESULT AREA */
+        #search-results-area {
+            height: 0;
             overflow: hidden;
+            transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #0a0a0a;
+            margin-top: 20px;
         }
 
-        .section-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary);
-            box-shadow: 0 10px 30px rgba(112, 0, 255, 0.2);
+        .active-results { height: 150px !important; padding: 40px 0; }
+
+        /* COURSE GRID - 15 SLOTS */
+        .vault-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1px;
+            background: var(--muted);
+            border: 1px solid var(--muted);
+            margin-top: 50px;
         }
 
-        .section-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--primary);
+        .course-card {
+            background: var(--bg);
+            aspect-ratio: 1/1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: 0.4s;
+            cursor: pointer;
         }
 
-        .section-card p {
-            color: #888;
-            font-size: 0.95rem;
-        }
+        .course-card:hover { background: #080808; }
 
-        .badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 0.7rem;
-            background: #222;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: var(--accent);
-        }
+        .course-card h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.4; }
+        .course-card .status { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: #444; }
 
-        /* CONTENT MODAL */
-        .modal {
-            display: none;
+        /* INTEGRATED QUIZ DRAWER */
+        #quiz-drawer {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 100;
-            padding: 50px;
-            overflow-y: auto;
+            right: -100%;
+            width: 40%;
+            height: 100vh;
+            background: #fff;
+            color: #000;
+            z-index: 2000;
+            transition: 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 100px 60px;
         }
 
-        .modal-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        .drawer-open #quiz-drawer { right: 0; }
 
-        .close-btn {
-            position: fixed;
-            top: 30px;
-            right: 50px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--accent);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            h1 { font-size: 4rem; }
-            .modal { padding: 20px; }
-        }
     </style>
 </head>
 <body>
 
+    <div class="uk-bay">BRITISH EDITION / ACCESS REDACTED</div>
+
     <header>
-        <div class="hero-glow"></div>
-        <div class="tagline">The Digital Syndicate</div>
-        <h1>AURA<br>ENGLISH</h1>
-        <p style="z-index: 1; margin-top: 20px; color: #666;">Stop sounding like a textbook. Start sounding like a native.</p>
+        <div class="logo">AURA®</div>
+        <div style="font-size: 0.7rem; opacity: 0.5;">CURRICULUM 2026</div>
     </header>
 
-    <section class="search-vault">
-        <h2 style="margin-bottom: 20px; text-align: center;">LEXICAL SUPREMACY SEARCH 💎</h2>
-        <div class="search-input-wrapper">
-            <input type="text" id="syn-input" placeholder="Enter a basic word (e.g., 'Happy', 'Small')...">
-            <button class="search-btn" onclick="searchSynonyms()">UPGRADE</button>
+    <section class="search-hero">
+        <div class="search-wrap">
+            <input type="text" placeholder="Search synonyms..." onfocus="showResults()" onblur="hideResults()">
         </div>
-        <div id="syn-results" style="margin-top: 30px; text-align: center;"></div>
+        <div id="search-results-area">
+            <p style="opacity: 0.3; letter-spacing: 5px;">RESULTS WILL FLOW HERE</p>
+        </div>
     </section>
 
-    <div class="syndicate-grid" id="directory">
-        </div>
+    <div class="vault-grid">
+        <div class="course-card" onclick="toggleQuiz()"><h3>Tenses</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Uncountable Nouns</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Slang</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Say vs Tell</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Prepositions</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Connected Speech</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Mistakes</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Formal English</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Phrasal Verbs</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Homophones</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Parts of Speech</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Idioms</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Nuance</h3><span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Texting Acronyms >Text<span class="status">[ LOCKED ]</span></div>
+        <div class="course-card" onclick="toggleQuiz()"><h3>Mastery Speak like a Native</h3><span class="status">[ LOCKED ]</span></div>
+    </div>
 
-    <div id="content-modal" class="modal">
-        <span class="close-btn" onclick="closeModal()">&times;</span>
-        <div class="modal-content" id="modal-body">
-            </div>
+    <div id="quiz-drawer">
+        <h2 style="font-size: 3rem; margin-bottom: 20px;">QUIZ_MODE</h2>
+        <div style="width: 40px; height: 2px; background: #000; margin-bottom: 40px;"></div>
+        <p>CONTENT COMING TOMORROW. GET READY.</p>
+        <button onclick="toggleQuiz()" style="margin-top: 100px; background: none; border: 1px solid #000; padding: 15px 30px; cursor: pointer;">CLOSE</button>
     </div>
 
     <script>
-        /* ========================================
-        AURADATA - THE 15-SECTION VAULT
-        ========================================
-        */
-        const vaultData = {
-            tenses: {
-                title: "Timeline Control ⏳",
-                desc: "12 Tenses + Native Logic Secrets.",
-                content: `
-                    <h2>Mastering the Timeline</h2>
-                    <p>Stop overthinking formulas. Think about <strong>impact</strong>.</p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
-                        <div class="card"><strong>Present Perfect:</strong> It's not about the past, it's about the result NOW. <em>"I've finished" = I'm free now.</em></div>
-                        <div class="card"><strong>Future Continuous:</strong> Use it to sound more polite. <em>"Will you be staying?"</em> sounds better than <em>"Will you stay?"</em></div>
-                    </div>
-                `
-            },
-            uncount: {
-                title: "The No-S Club 🥛",
-                desc: "30 Uncountable nouns + counting hacks.",
-                content: "<h2>Mass Nouns (Non-count)</h2><p>Never say 'furnitures' or 'knowledges'. Use 'pieces of' or 'bits of'.</p>"
-            },
-            slang: {
-                title: "Brain-Rot Lore 🧠",
-                desc: "2026 Modern Slang with usage examples.",
-                content: "<h2>Modern American Slang</h2><ul><li><strong>Cooked:</strong> In trouble. 'Bro, I'm cooked, the exam was hard.'</li><li><strong>Aura:</strong> Your vibe or presence.</li></ul>"
-            },
-            saytell: {
-                title: "Receiver Logic 🗣️",
-                desc: "Say vs. Tell vs. Speak + Fixed Expressions.",
-                content: "<h2>The Receiver Rule</h2><p><strong>Tell</strong> always needs a person (Tell me). <strong>Say</strong> focuses on the words (Say 'Hi').</p>"
-            },
-            preps: {
-                title: "Spatial Funnel 📍",
-                desc: "In/On/At Hierarchy & Assassinations.",
-                content: "<h2>The Preposition Pyramid</h2><p>General (In) ➡️ Specific (On) ➡️ Precise (At).</p>"
-            },
-            mistakes: {
-                title: "Aura-Loss Log 💀",
-                desc: "25 Fatal Social Sins corrected.",
-                content: "<h2>Common Fails</h2><p>❌ 'I am agree' ➡️ ✅ 'I agree'.</p><p>❌ 'I prefer tea than coffee' ➡️ ✅ 'I prefer tea TO coffee'.</p>"
-            },
-            formal: {
-                title: "Lexical Supremacy 💎",
-                desc: "100 Tier-Upgrade Synonyms.",
-                content: "<h2>Tier-100 Vocabulary</h2><p>Replace 'Very Good' with <strong>Exemplary</strong> or <strong>Magnificent</strong>.</p>"
-            },
-            phrasal: {
-                title: "Casual Combat 🔄",
-                desc: "100 Phrasal Verbs for everyday life.",
-                content: "<h2>Phrasal Mastery</h2><p>Natives use these for 80% of communication. 'Bring up' instead of 'Mention'.</p>"
-            },
-            convos: {
-                title: "Street Protocol 🎤",
-                desc: "Real-Talk Scripts for US Vibes.",
-                content: "<h2>Dialogue Practice</h2><p>'What's up?' ➡️ 'Not much, just chilling. You?'</p>"
-            },
-            speech: {
-                title: "Connected Flow ⚡",
-                desc: "Assimilation + Elision + Flow Hacks.",
-                content: "<h2>Connected Speech</h2><p>'What do you' becomes <strong>'Whatcha'</strong>. 'Got to' becomes <strong>'Gotta'</strong>.</p>"
-            },
-            acronyms: {
-                title: "Digital Shorthand 📱",
-                desc: "POV, IYKYK, LMK, FR, NGL.",
-                content: "<h2>Texting Like a Pro</h2><p><strong>FR:</strong> For Real. <strong>NGL:</strong> Not Gonna Lie.</p>"
-            },
-            homophones: {
-                title: "Confusion Matrix ♊",
-                desc: "40 Homophones like Their/There/They're.",
-                content: "<h2>Homophone Cheat Sheet</h2><p><strong>It's</strong> = It is. <strong>Its</strong> = Possessive.</p>"
-            },
-            pos: {
-                title: "Weapon Engine ⚙️",
-                desc: "8 Parts of Speech + Syntax Logic.",
-                content: "<h2>The Engine</h2><p>Verbs are the engine; Adjectives are the paint job.</p>"
-            },
-            quiz: {
-                title: "Calibration 🎯",
-                desc: "15-Question Interactive Quiz.",
-                content: "<h2>Level Check</h2><button onclick='alert(\"Correct!\")'>Is 'Gonna' American? Yes/No</button>"
-            },
-            native: {
-                title: "Ghosting Tips 💡",
-                desc: "What we DON'T say in real life.",
-                content: "<h2>Native Secrets</h2><p>Don't say 'How do you do?'—it's 2026, say 'How's it going?'</p>"
-            }
-        };
-
-        const synDatabase = {
-            "happy": "Ecstatic, Jubilant, Elated, Overjoyed",
-            "good": "Exemplary, Stellar, Top-notch, Phenomenal",
-            "bad": "Atrocious, Subpar, Dreadful, Abysmal",
-            "big": "Colossal, Mammoth, Gargantuan, Immense",
-            "small": "Minuscule, Tiny, Microscopic, Diminutive"
-        };
-
-        // RENDER DIRECTORY
-        const grid = document.getElementById('directory');
-        Object.keys(vaultData).forEach((key, index) => {
-            const section = vaultData[key];
-            const card = document.createElement('div');
-            card.className = 'section-card';
-            card.onclick = () => openModal(key);
-            card.innerHTML = `
-                <span class="badge">SEC-${index + 1}</span>
-                <h3>${section.title}</h3>
-                <p>${section.desc}</p>
-            `;
-            grid.appendChild(card);
-        });
-
-        // MODAL LOGIC
-        function openModal(key) {
-            const modal = document.getElementById('content-modal');
-            const body = document.getElementById('modal-body');
-            body.innerHTML = vaultData[key].content;
-            modal.style.display = 'block';
+        function showResults() {
+            document.getElementById('search-results-area').classList.add('active-results');
         }
-
-        function closeModal() {
-            document.getElementById('content-modal').style.display = 'none';
+        function hideResults() {
+            // Keep it open if there's text, but for now we'll just toggle
         }
-
-        // SYNONYM SEARCH
-        function searchSynonyms() {
-            const word = document.getElementById('syn-input').value.toLowerCase().trim();
-            const resultBox = document.getElementById('syn-results');
-            
-            if (synDatabase[word]) {
-                resultBox.innerHTML = `<h3>Aura Upgrades for "${word}":</h3><p style="font-size: 1.5rem; color: var(--success); margin-top: 10px;">${synDatabase[word]}</p>`;
-            } else {
-                resultBox.innerHTML = `<p style="color: var(--accent);">Word not in the Syndicate database. Try 'Good' or 'Bad'.</p>`;
-            }
-        }
-
-        // FILLER CONTENT GENERATOR (Ensures code volume)
-        for (let i = 0; i < 50; i++) {
-            console.log("Syndicate Line Optimization Cycle: " + i);
+        function toggleQuiz() {
+            document.body.classList.toggle('drawer-open');
         }
     </script>
+
 </body>
 </html>
+
 
