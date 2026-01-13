@@ -1,147 +1,205 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Aura English</title>
-  <style>
-    :root {
-      --primary: #6366f1;
-      --bg: #05070a;
-      --text: #ffffff;
-      --accent: #10b981;
-      --card-bg: rgba(255,255,255,0.04);
-      --transition: 0.5s ease;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aura English</title>
 
-    body.british {
-      --primary: #cf142b;
-      --bg: #f3f4f6;
-      --text: #111827;
-      --accent: #00247d;
-      --card-bg: #ffffff;
-    }
+<style>
+:root {
+  --bg: #070712;
+  --glass: rgba(255,255,255,0.08);
+  --neon: #7c7cff;
+  --accent: #00ffd5;
+  --text: #ffffff;
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, sans-serif;
-      transition: background var(--transition), color var(--transition);
-    }
+body.british {
+  --bg: #f5f5f5;
+  --glass: #ffffff;
+  --neon: #cf142b;
+  --accent: #00247d;
+  --text: #111;
+}
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 40px 80px;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(20px);
-    }
+body {
+  margin:0;
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, var(--neon), transparent 60%), var(--bg);
+  color: var(--text);
+  transition: 0.5s;
+}
 
-    .hero {
-      text-align: center;
-      padding: 120px 20px;
-    }
+.nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:30px 60px;
+}
 
-    .mode-toggle {
-      padding: 14px 32px;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      background: var(--primary);
-      color: white;
-    }
+.logo {
+  font-size:2.5rem;
+  font-weight:900;
+  letter-spacing:-1px;
+}
 
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
-      gap: 32px;
-      padding: 80px;
-    }
+button {
+  padding:14px 28px;
+  border:none;
+  border-radius:999px;
+  background:var(--neon);
+  color:white;
+  cursor:pointer;
+  font-weight:700;
+}
 
-    .course-card {
-      background: var(--card-bg);
-      padding: 48px;
-      border-radius: 28px;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.hero {
+  text-align:center;
+  padding:100px 20px 40px;
+}
 
-    .course-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    }
-  </style>
+.search {
+  max-width:700px;
+  margin:40px auto;
+  position:relative;
+}
+
+.search input {
+  width:100%;
+  padding:22px 36px;
+  border-radius:999px;
+  border:2px solid var(--accent);
+  background:rgba(0,0,0,0.4);
+  color:white;
+  font-size:1.3rem;
+  outline:none;
+}
+
+#synonym {
+  margin-top:20px;
+  font-size:2rem;
+  color:var(--accent);
+  opacity:0;
+  transform:translateY(10px);
+  transition:0.4s;
+}
+
+#synonym.show {
+  opacity:1;
+  transform:translateY(0);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  padding:60px;
+}
+
+.card {
+  background:var(--glass);
+  padding:40px;
+  border-radius:28px;
+  backdrop-filter:blur(12px);
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:translateY(-8px) scale(1.02);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+}
+
+.card h3, .card p {
+  outline:none;
+}
+
+.back {
+  margin:40px auto;
+  display:block;
+  background:var(--accent);
+  color:black;
+}
+</style>
 </head>
 <body>
 
-<nav class="navbar">
+<div class="nav">
   <div class="logo" id="logo">AURA ENGLISH</div>
-  <button class="mode-toggle" id="toggleBtn">Switch to UK</button>
-</nav>
+  <div>
+    <button onclick="toggleMode()">UK / US</button>
+  </div>
+</div>
 
-<header class="hero">
-  <h1 id="headline">American English Excellence</h1>
-</header>
+<div class="hero">
+  <h1 id="headline">Glow-Up Your English</h1>
+  <div class="search">
+    <input id="searchInput" placeholder="Type a word…">
+    <div id="synonym"></div>
+  </div>
+</div>
 
-<main class="course-grid" id="courseGrid"></main>
+<div class="grid" id="grid"></div>
+
+<button class="back" onclick="resetCourses()">🔙 Back</button>
 
 <script>
-  const state = {
-    mode: localStorage.getItem("mode") || "american",
-    courses: {
-      american: Array(15).fill({ title: "Course", info: "Details coming soon." }),
-      british: Array(15).fill({ title: "Subject", info: "Details coming soon." })
-    }
-  };
+const synonyms = {
+  apartment:"flat",
+  truck:"lorry",
+  fries:"chips",
+  cookie:"biscuit",
+  gas:"petrol"
+};
 
-  const ui = {
-    logo: document.getElementById("logo"),
-    headline: document.getElementById("headline"),
-    toggleBtn: document.getElementById("toggleBtn"),
-    courseGrid: document.getElementById("courseGrid")
-  };
+let mode = localStorage.getItem("mode") || "american";
 
-  function init() {
-    applyMode(state.mode);
-    renderCourses();
-    ui.toggleBtn.addEventListener("click", toggleMode);
+const courses = Array.from({length:15}, (_,i)=>({
+  title:`Course ${i+1}`,
+  info:"Click to edit this description."
+}));
+
+const grid = document.getElementById("grid");
+
+function renderCourses() {
+  grid.innerHTML="";
+  courses.forEach((c,i)=>{
+    const card=document.createElement("div");
+    card.className="card";
+    card.innerHTML=`
+      <h3 contenteditable="true">${c.title}</h3>
+      <p contenteditable="true">${c.info}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function toggleMode() {
+  mode = mode==="american" ? "british" : "american";
+  localStorage.setItem("mode",mode);
+  document.body.classList.toggle("british",mode==="british");
+  document.getElementById("logo").textContent = mode==="british" ? "AURA UK" : "AURA ENGLISH";
+}
+
+document.getElementById("searchInput").addEventListener("input", e=>{
+  const val = e.target.value.toLowerCase();
+  const box = document.getElementById("synonym");
+  if(synonyms[val]) {
+    box.textContent = `${val} → ${synonyms[val]}`;
+    box.classList.add("show");
+  } else {
+    box.classList.remove("show");
   }
+});
 
-  function toggleMode() {
-    state.mode = state.mode === "american" ? "british" : "american";
-    localStorage.setItem("mode", state.mode);
-    applyMode(state.mode);
-    renderCourses();
-  }
+function resetCourses(){
+  renderCourses();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-  function applyMode(mode) {
-    document.body.classList.toggle("british", mode === "british");
-    ui.logo.textContent = mode === "british" ? "AURA UK" : "AURA ENGLISH";
-    ui.headline.textContent = mode === "british"
-      ? "British English Sophistication"
-      : "American English Excellence";
-    ui.toggleBtn.textContent = mode === "british" ? "Switch to US" : "Switch to UK";
-  }
-
-  function renderCourses() {
-    ui.courseGrid.innerHTML = "";
-    const list = state.courses[state.mode];
-    list.forEach((c, i) => {
-      const card = document.createElement("div");
-      card.className = "course-card";
-      card.innerHTML = `<h3>${c.title} ${i+1}</h3><p>${c.info}</p>`;
-      ui.courseGrid.appendChild(card);
-    });
-  }
-
-  init();
+toggleMode(); toggleMode();
+renderCourses();
 </script>
 
 </body>
 </html>
-
 
