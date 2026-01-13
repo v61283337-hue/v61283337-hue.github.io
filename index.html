@@ -1,209 +1,143 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aura English</title>
+    <meta charset="UTF-8">
+    <title>AURA ENGLISH | THE DIVIDE</title>
+    <style>
+        /* WORLD 1: THE AMERICAN VIBE (Dark, Neon, Edgy) */
+        :root { --us-bg: #050505; --us-accent: #007aff; --us-text: #ffffff; }
+        
+        /* WORLD 2: THE BRITISH VIBE (Clean, Royal, Traditional) */
+        :root { --uk-bg: #f5f5f7; --uk-accent: #cf142b; --uk-text: #1a1a1a; }
 
-<style>
-:root {
-  --bg: #05050a;
-  --glow: #7c7cff;
-  --accent: #00ffd5;
-  --text: #ffffff;
-  --glass: rgba(255,255,255,0.08);
-}
+        body { margin: 0; transition: 0.8s cubic-bezier(0.85, 0, 0.15, 1); overflow-x: hidden; }
+        
+        /* LAYOUT ARCHITECTURE */
+        .world-container { width: 100vw; min-height: 100vh; display: none; padding-bottom: 100px; }
+        .active-world { display: block; animation: worldFade 1s ease-in-out; }
 
-body {
-  margin:0;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  background:
-    radial-gradient(circle at top, var(--glow), transparent 60%),
-    linear-gradient(180deg, #05050a, #000);
-  color:var(--text);
-  overflow-x:hidden;
-}
+        @keyframes worldFade { from { opacity: 0; filter: blur(10px); } to { opacity: 1; filter: blur(0); } }
 
-header {
-  text-align:center;
-  padding:140px 20px 80px;
-}
+        .navbar { height: 80px; display: flex; justify-content: space-between; align-items: center; padding: 0 50px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 50px; }
+        .card { padding: 40px; border-radius: 30px; border: 2px solid rgba(0,0,0,0.1); }
+        
+        /* US SPECIFIC STYLES */
+        #US_WORLD { background: var(--us-bg); color: var(--us-text); font-family: 'Impact', sans-serif; }
+        #US_WORLD .card { background: #111; border-color: var(--us-accent); }
+        #US_WORLD .search-bar { background: #222; color: white; border: 2px solid var(--us-accent); border-radius: 10px; }
 
-.logo {
-  font-size:5rem;
-  font-weight:900;
-  letter-spacing:-3px;
-  background: linear-gradient(90deg, #fff, var(--accent), #fff);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  text-shadow:0 0 40px rgba(124,124,255,0.6);
-}
+        /* UK SPECIFIC STYLES */
+        #UK_WORLD { background: var(--uk-bg); color: var(--uk-text); font-family: 'Georgia', serif; }
+        #UK_WORLD .card { background: white; border-color: var(--uk-accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        #UK_WORLD .search-bar { background: #fff; color: #000; border: 1px solid var(--uk-accent); border-radius: 0; }
 
-.tagline {
-  font-size:1.6rem;
-  opacity:0.85;
-  margin-top:10px;
-}
-
-.search {
-  max-width:720px;
-  margin:60px auto 20px;
-}
-
-.search input {
-  width:100%;
-  padding:26px 40px;
-  border-radius:999px;
-  border:2px solid var(--accent);
-  background:rgba(0,0,0,0.5);
-  color:white;
-  font-size:1.4rem;
-  outline:none;
-  box-shadow:0 0 30px rgba(0,255,213,0.3);
-}
-
-#synonym {
-  margin-top:24px;
-  font-size:2.2rem;
-  color:var(--accent);
-  opacity:0;
-  transform:translateY(10px);
-  transition:0.4s;
-}
-
-#synonym.show {
-  opacity:1;
-  transform:translateY(0);
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:36px;
-  padding:80px;
-}
-
-.card {
-  background:var(--glass);
-  padding:48px;
-  border-radius:30px;
-  backdrop-filter:blur(16px);
-  cursor:pointer;
-  transition:0.4s;
-  box-shadow:0 10px 30px rgba(0,0,0,0.5);
-}
-
-.card:hover {
-  transform:translateY(-10px) scale(1.03);
-  box-shadow:0 25px 60px rgba(0,0,0,0.7);
-}
-
-.card h3 {
-  font-size:1.6rem;
-}
-
-#courseView {
-  display:none;
-  padding:100px 40px;
-  text-align:center;
-}
-
-#courseView h2 {
-  font-size:3rem;
-}
-
-.back {
-  margin-top:40px;
-  padding:16px 40px;
-  border:none;
-  border-radius:999px;
-  background:var(--accent);
-  font-weight:800;
-  cursor:pointer;
-}
-</style>
+        .toggle-gate { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .gate-btn { padding: 20px 40px; border-radius: 100px; font-weight: 900; cursor: pointer; border: none; box-shadow: 0 0 20px var(--us-accent); }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">AURA ENGLISH</div>
-  <div class="tagline">Transform your English into power.</div>
+<div class="toggle-gate">
+    <button class="gate-btn" id="gateTrigger" onclick="crossTheBorder()">CROSS TO THE UK</button>
+</div>
 
-  <div class="search">
-    <input id="searchInput" placeholder="Type a word for a synonym…">
-    <div id="synonym"></div>
-  </div>
-</header>
+<div id="US_WORLD" class="world-container active-world">
+    <nav class="navbar">
+        <div style="font-size: 2.5rem; font-weight: 900;">AURA US</div>
+        <div>EST. 2026</div>
+    </nav>
+    <div style="text-align:center; padding: 100px 20px;">
+        <h1>AMERICAN PRIDE</h1>
+        <p>This is the exclusive US homepage. No British English allowed.</p>
+        <div style="margin: 50px auto; max-width: 600px;">
+            <input type="text" class="search-bar" id="usSearch" placeholder="Search US Slang..." style="width:100%; padding:20px;" onkeyup="usSearchLogic()">
+            <div id="usResult" style="margin-top:20px; font-size: 2rem; color: var(--us-accent);"></div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="card"><h3>US Course 1</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 2</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 3</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 4</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 5</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 6</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 7</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 8</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 9</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 10</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 11</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 12</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 13</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 14</h3><p>Pure American curriculum.</p></div>
+        <div class="card"><h3>US Course 15</h3><p>Pure American curriculum.</p></div>
+    </div>
+</div>
 
-<div class="grid" id="grid"></div>
-
-<div id="courseView">
-  <h2 id="courseTitle"></h2>
-  <p id="courseInfo"></p>
-  <button class="back" onclick="exitCourse()">🔙 Back</button>
+<div id="UK_WORLD" class="world-container">
+    <nav class="navbar">
+        <div style="font-size: 2.5rem; font-weight: 900;">AURA UK</div>
+        <div>LONDON CALLED</div>
+    </nav>
+    <div style="text-align:center; padding: 100px 20px;">
+        <h1>BRITISH REFINEMENT</h1>
+        <p>This is the separate British homepage. Proper English only.</p>
+        <div style="margin: 50px auto; max-width: 600px;">
+            <input type="text" class="search-bar" id="ukSearch" placeholder="Search Proper Synonyms..." style="width:100%; padding:20px;" onkeyup="ukSearchLogic()">
+            <div id="ukResult" style="margin-top:20px; font-size: 2rem; color: var(--uk-accent);"></div>
+        </div>
+    </div>
+    <div class="grid">
+        <div class="card"><h3>UK Module 1</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 2</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 3</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 4</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 5</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 6</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 7</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 8</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 9</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 10</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 11</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 12</h3><p>Proper British syllabus.</p></div>
+        <div class="card)<h3>UK Module 13</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 14</h3><p>Proper British syllabus.</p></div>
+        <div class="card"><h3>UK Module 15</h3><p>Proper British syllabus.</p></div>
+    </div>
 </div>
 
 <script>
-const synonyms = {
-  apartment:"flat",
-  truck:"lorry",
-  fries:"chips",
-  cookie:"biscuit",
-  gas:"petrol",
-  movie:"film",
-  sidewalk:"pavement"
-};
+    // THE SEPARATE BRAINS
+    const US_DATABASE = { "gas": "Petrol (UK)", "sidewalk": "Pavement (UK)" };
+    const UK_DATABASE = { "petrol": "Gas (US)", "pavement": "Sidewalk (US)" };
 
-const courses = Array.from({length:15},(_,i)=>({
-  title:`Course ${i+1}`,
-  info:`Welcome to Course ${i+1}. This is where the magic happens.`
-}));
+    function usSearchLogic() {
+        const val = document.getElementById('usSearch').value.toLowerCase();
+        document.getElementById('usResult').innerText = US_DATABASE[val] || "";
+    }
 
-const grid = document.getElementById("grid");
-const courseView = document.getElementById("courseView");
+    function ukSearchLogic() {
+        const val = document.getElementById('ukSearch').value.toLowerCase();
+        document.getElementById('ukResult').innerText = UK_DATABASE[val] || "";
+    }
 
-function renderCourses() {
-  grid.innerHTML="";
-  grid.style.display="grid";
-  courseView.style.display="none";
+    function crossTheBorder() {
+        const us = document.getElementById('US_WORLD');
+        const uk = document.getElementById('UK_WORLD');
+        const btn = document.getElementById('gateTrigger');
 
-  courses.forEach((c,i)=>{
-    const card=document.createElement("div");
-    card.className="card";
-    card.innerHTML=`<h3>${c.title}</h3><p>${c.info}</p>`;
-    card.onclick=()=>openCourse(i);
-    grid.appendChild(card);
-  });
-}
-
-function openCourse(i){
-  const c = courses[i];
-  grid.style.display="none";
-  courseView.style.display="block";
-  document.getElementById("courseTitle").textContent = c.title;
-  document.getElementById("courseInfo").textContent = c.info;
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function exitCourse(){
-  renderCourses();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-document.getElementById("searchInput").addEventListener("input", e=>{
-  const val = e.target.value.toLowerCase();
-  const box = document.getElementById("synonym");
-
-  if(synonyms[val]) {
-    box.textContent = `${val} → ${synonyms[val]}`;
-    box.classList.add("show");
-  } else {
-    box.classList.remove("show");
-  }
-});
-
-renderCourses();
+        if (us.classList.contains('active-world')) {
+            us.classList.remove('active-world');
+            uk.classList.add('active-world');
+            btn.innerText = "CROSS TO THE USA";
+            btn.style.boxShadow = "0 0 20px #cf142b";
+        } else {
+            uk.classList.remove('active-world');
+            us.classList.add('active-world');
+            btn.innerText = "CROSS TO THE UK";
+            btn.style.boxShadow = "0 0 20px #007aff";
+        }
+    }
 </script>
-
 </body>
 </html>
