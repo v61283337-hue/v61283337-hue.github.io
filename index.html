@@ -3,371 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ENGLISH | Gain real AURA 😎</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Orbitron:wght@400;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>AURA ENGLISH | The Great Divide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Orbitron:wght@400;900&family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --us-primary: #00f2ff;
-            --us-accent: #bc13fe;
-            --uk-primary: #ff0040;
-            --uk-accent: #ffd700;
-            --bg: #030305;
-            --card-bg: #0d0d10;
-            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --us-glow: #00f2ff; --uk-glow: #ff0040; --gold: #ffcc33;
+            --bg: #000000; --card: #0a0a0c; --transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
         }
 
-        body {
-            margin: 0;
-            background-color: var(--bg);
-            color: white;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+        /* PORTAL NAV */
+        .portal { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 15px; }
+        .portal button { 
+            padding: 15px 35px; border-radius: 5px; font-family: 'Syncopate', sans-serif; 
+            font-weight: 900; border: none; cursor: pointer; transition: var(--transition);
         }
+        .us-btn { background: var(--us-glow); box-shadow: 0 0 20px var(--us-glow); }
+        .uk-btn { background: var(--uk-glow); color: white; box-shadow: 0 0 20px var(--uk-glow); }
 
-        /* World Container Logic */
-        .world {
-            min-height: 100vh;
-            display: none;
-            padding: 40px 20px;
-            animation: fadeIn 0.8s ease;
+        /* WORLD LOGIC */
+        .world { display: none; padding: 100px 20px 40px; min-height: 100vh; }
+        .active { display: block; animation: flare 0.8s ease; }
+        @keyframes flare { from { filter: brightness(0); transform: scale(1.05); } to { filter: brightness(1); transform: scale(1); } }
+
+        h1.aura-title { font-family: 'Orbitron', sans-serif; font-size: 5rem; text-align: center; text-transform: uppercase; margin: 0; }
+        .us-world h1 { text-shadow: 0 0 30px var(--us-glow); }
+        .uk-world h1 { text-shadow: 0 0 30px var(--uk-glow); }
+
+        /* GOLDEN SEARCHER */
+        .gold-search-box { 
+            max-width: 800px; margin: 60px auto; background: var(--card); padding: 40px; 
+            border: 1px solid var(--gold); border-radius: 40px; box-shadow: 0 0 30px rgba(255,204,51,0.1); 
         }
+        .search-row { display: flex; gap: 20px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
+        .search-row input { flex: 1; background: transparent; border: none; color: white; font-size: 1.5rem; outline: none; }
+        .search-row button { background: var(--gold); border: none; padding: 10px 30px; font-family: 'Syncopate', sans-serif; font-weight: 900; cursor: pointer; border-radius: 10px; }
 
-        .world.active {
-            display: block;
+        .gold-manifest { margin-top: 30px; }
+        .gold-item { background: linear-gradient(135deg, #ffcc33, #b8860b); color: black; padding: 25px; border-radius: 20px; margin-bottom: 15px; animation: slideUp 0.4s ease forwards; }
+        .gold-item strong { font-size: 1.4rem; display: block; font-family: 'Orbitron'; }
+        .gold-item em { font-size: 0.9rem; opacity: 0.8; display: block; margin-top: 5px; }
+
+        /* STUNNING GRID */
+        .aura-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
+        .aura-card { background: #050505; border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; transition: var(--transition); cursor: pointer; }
+        .aura-card:hover { background: #0f0f12; border-color: white; transform: translateY(-10px); }
+        .us-world .aura-card:hover { box-shadow: 0 10px 40px rgba(0,242,255,0.1); }
+        .uk-world .aura-card:hover { box-shadow: 0 10px 40px rgba(255,0,64,0.1); }
+
+        /* MODULE VIEW */
+        .module-overlay { display: none; position: fixed; inset: 0; background: black; z-index: 200; padding: 60px; overflow-y: auto; }
+        .huge-back { 
+            display: inline-block; background: white; color: black; padding: 25px 60px; 
+            font-family: 'Syncopate', sans-serif; font-weight: 900; font-size: 1.5rem; 
+            border-radius: 15px; cursor: pointer; margin-bottom: 60px; transition: 0.3s;
         }
+        .huge-back:hover { transform: translateX(-20px) scale(1.05); background: var(--gold); }
 
-        /* Navigation Bar */
-        .world-nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(15px);
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .nav-btn {
-            padding: 10px 25px;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 0.7rem;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-            border-radius: 2px;
-            letter-spacing: 2px;
-        }
-
-        .btn-us { color: var(--us-primary); border-color: var(--us-primary); }
-        .btn-us:hover, .btn-us.active { background: var(--us-primary); color: black; box-shadow: 0 0 20px var(--us-primary); }
-
-        .btn-uk { color: var(--uk-primary); border-color: var(--uk-primary); }
-        .btn-uk:hover, .btn-uk.active { background: var(--uk-primary); color: black; box-shadow: 0 0 20px var(--uk-primary); }
-
-        /* Typography */
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 4.5rem;
-            text-align: center;
-            margin: 40px 0 10px;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .us-title { color: white; text-shadow: 0 0 20px var(--us-primary); }
-        .uk-title { color: white; text-shadow: 0 0 20px var(--uk-primary); }
-
-        /* Search Section - Specific to each world */
-        .search-container {
-            max-width: 800px;
-            margin: 40px auto 60px;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-
-        .search-bar {
-            width: 100%;
-            background: #000;
-            border: 2px solid;
-            padding: 20px;
-            border-radius: 15px;
-            color: white;
-            font-size: 1.2rem;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .us-world .search-bar { border-color: var(--us-accent); }
-        .uk-world .search-bar { border-color: var(--uk-accent); }
-
-        .results-area {
-            margin-top: 25px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-        }
-
-        .syn-pill {
-            padding: 8px 18px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            animation: popIn 0.3s ease;
-        }
-
-        .us-pill { background: rgba(188, 19, 254, 0.2); border: 1px solid var(--us-accent); color: var(--us-accent); }
-        .uk-pill { background: rgba(255, 215, 0, 0.1); border: 1px solid var(--uk-accent); color: var(--uk-accent); }
-
-        /* Course Grid Layout */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            transition: var(--transition);
-            cursor: pointer;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .us-world .card:hover { border-color: var(--us-primary); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0,242,255,0.1); }
-        .uk-world .card:hover { border-color: var(--uk-primary); transform: translateY(-10px); box-shadow: 0 10px 30px rgba(255,0,64,0.1); }
-
-        .card-num { font-family: 'Syncopate', sans-serif; font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px; }
-        .card h3 { margin: 0 0 10px; font-size: 1.5rem; letter-spacing: 1px; }
-        .card p { color: #888; line-height: 1.6; font-size: 0.95rem; }
-
-        /* Detailed View */
-        .detail-view {
-            display: none;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 40px;
-            background: #000;
-            border-radius: 40px;
-            border: 2px solid;
-        }
-
-        .back-btn {
-            cursor: pointer;
-            margin-bottom: 30px;
-            display: inline-block;
-            font-weight: 900;
-            text-transform: uppercase;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-        /* Massive Scalability CSS (Adding 500 lines worth of depth via complex layout management) */
-        /* ... Imagine massive amounts of specific layouts for quizzes, video embedding, and voice interaction here ... */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<nav class="world-nav">
-    <div class="nav-btn btn-us active" onclick="switchWorld('us')">USA DIMENSION</div>
-    <div class="nav-btn btn-uk" onclick="switchWorld('uk')">UK KINGDOM</div>
-</nav>
+<div class="portal">
+    <button class="us-btn" onclick="openWorld('us')">USA</button>
+    <button class="uk-btn" onclick="openWorld('uk')">UK</button>
+</div>
 
 <section id="us-world" class="world us-world active">
-    <div class="main-content">
-        <h1 class="us-title">AURA US</h1>
-        
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="SEARCH US SYNONYMS..." onkeyup="search('us')">
-            <div id="us-syn-results" class="results-area"></div>
+    <h1 class="aura-title">AURA US</h1>
+    <div class="gold-search-box">
+        <div class="search-row">
+            <input type="text" id="us-in" placeholder="UPGRADE LEXIS...">
+            <button onclick="auraSearch('us')">GO</button>
         </div>
-
-        <div class="grid" id="us-grid"></div>
+        <div id="us-res" class="gold-manifest"></div>
     </div>
-    
-    <div id="us-detail" class="detail-view" style="border-color: var(--us-primary);">
-        <div class="back-btn" style="color: var(--us-primary);" onclick="closeDetail('us')">🔙 EXIT MODULE</div>
-        <h1 id="us-mod-title" style="font-size: 2.5rem; text-align: left;"></h1>
-        <div id="us-mod-body"></div>
-    </div>
+    <div class="aura-grid" id="us-grid"></div>
 </section>
 
 <section id="uk-world" class="world uk-world">
-    <div class="main-content">
-        <h1 class="uk-title">AURA UK</h1>
-        
-        <div class="search-container">
-            <input type="text" class="search-bar" placeholder="SEARCH UK SYNONYMS..." onkeyup="search('uk')">
-            <div id="uk-syn-results" class="results-area"></div>
+    <h1 class="aura-title">AURA UK</h1>
+    <div class="gold-search-box">
+        <div class="search-row">
+            <input type="text" id="uk-in" placeholder="REFINE DIALECT...">
+            <button onclick="auraSearch('uk')">GO</button>
         </div>
-
-        <div class="grid" id="uk-grid"></div>
+        <div id="uk-res" class="gold-manifest"></div>
     </div>
-
-    <div id="uk-detail" class="detail-view" style="border-color: var(--uk-primary);">
-        <div class="back-btn" style="color: var(--uk-primary);" onclick="closeDetail('uk')">🔙 EXIT MODULE</div>
-        <h1 id="uk-mod-title" style="font-size: 2.5rem; text-align: left;"></h1>
-        <div id="uk-mod-body"></div>
-    </div>
+    <div class="aura-grid" id="uk-grid"></div>
 </section>
 
+<div id="module-overlay" class="module-overlay">
+    <div class="huge-back" onclick="closeModule()">🔙 BACK TO HOME</div>
+    <h1 id="mod-h1" class="aura-title" style="text-align: left; font-size: 4rem;"></h1>
+    <p style="font-size: 2rem; color: #444;">DATA CHANNEL SILENT... STANDBY FOR POPULATION.</p>
+</div>
+
 <script>
-    // DATA ENGINE (Ready for massive info)
-    const worlds = {
+    const usCourses = [
+        {n: "01", t: "TENSES", s: "Timeline Control ⏳"}, {n: "02", t: "UNCOUNT", s: "The No-S Club 🥛"},
+        {n: "03", t: "SLANG", s: "Brain-Rot Lore 🧠"}, {n: "04", t: "SAYTELL", s: "Receiver Logic 🗣️"},
+        {n: "05", t: "PREPS", s: "Spatial Funnel 📍"}, {n: "06", t: "MISTAKES", s: "Aura-Loss Log 💀"},
+        {n: "07", t: "FORMAL", s: "Lexical Supremacy 💎"}, {n: "08", t: "PHRASAL", s: "Casual Combat 🔄"},
+        {n: "09", t: "CONVOS", s: "Street Protocol 🎤"}, {n: "10", t: "SPEECH", s: "Connected Flow ⚡"},
+        {n: "11", t: "ACRONYMS", s: "Digital Shorthand 📱"}, {n: "12", t: "HOMOPHONES", s: "Confusion Matrix ♊"},
+        {n: "13", t: "POS", s: "Weapon Engine ⚙️"}, {n: "14", t: "NATIVE", s: "Ghosting Tips 💡"},
+        {n: "15", t: "QUIZ", s: "Calibration 🎯"}
+    ];
+
+    const ukCourses = [
+        {n: "01", t: "TENSES", s: "Empire Timing ⏳"}, {n: "02", t: "UNCOUNT", s: "Tea & Logic ☕"},
+        {n: "03", t: "SLANG", s: "Roadman Lore 🧢"}, {n: "04", t: "SAYTELL", s: "Direct Address 🗣️"},
+        {n: "05", t: "PREPS", s: "Island Funnel 📍"}, {n: "06", t: "MISTAKES", s: "Social Blunders 💀"},
+        {n: "07", t: "FORMAL", s: "Royal Lexis 💎"}, {n: "08", t: "PHRASAL", s: "Pub Protocol 🔄"},
+        {n: "09", t: "CONVOS", s: "Proper Chat 🎤"}, {n: "10", t: "SPEECH", s: "Glottal Stops ⚡"},
+        {n: "11", t: "ACRONYMS", s: "WhatsApp Shorthand 📱"}, {n: "12", t: "HOMOPHONES", s: "Sound Confusion ♊"},
+        {n: "13", t: "POS", s: "Structure Engine ⚙️"}, {n: "14", t: "NATIVE", s: "Sarcasm 101 💡"},
+        {n: "15", t: "QUIZ", s: "The Exam 🎯"}
+    ];
+
+    const database = {
         us: {
-             synonym: { "bad": ["Mid", "Trash", "Cooked"]
-"good": ["Exquisite", "Bussin'", "Goated", "Top-tier", "Exemplary", "Valid", "Superlative", "Fire", "Snatched", "Elite"],
-"bad": ["Atrocious", "Mid", "Cooked", "Trash", "Deplorable", "Abysmal", "Dusty", "Wack", "Lame", "Bottom-tier"],
-"very": ["Deadass", "Extremely", "Incredibly", "Mad", "Massively", "Profoundly", "Hella", "Way", "Straight-up", "Lowkey"],
-"happy": ["Ecstatic", "Geeked", "Hyped", "Jubilant", "Stoked", "Radiant", "Thriving", "Beaming", "Elated", "Vibing"],
-"sad": ["Down bad", "Despondent", "Bummed", "Melancholy", "Gutted", "Dejected", "Gloomy", "Blue", "Washed", "Heartbroken"],
-"smart": ["Brilliant", "Astute", "Big Brain", "Wicked Smart", "Intellectual", "Sharp", "Savvy", "Knowledgeable", "Gifted", "Sage"],
-"stupid": ["Clueless", "Bird-brained", "Dense", "Vacuous", "Slow", "Smooth-brain", "Ignorant", "Brain-dead", "Goofy", "Witless"],
-"fast": ["Speedy", "Rapid", "Quick", "Zooming", "Swift", "Expeditious", "Breakneck", "Zippy", "Hyper-speed", "Nimble"],
-"slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
-"big": ["Massive", "Colossal", "Gargantuan", "Chunky", "Humongous", "Gigantic", "Substantial", "Immense", "Enormous", "Beefy"],
-"small": ["Tiny", "Micro", "Petite", "Miniscule", "Bite-sized", "Diminutive", "Compact", "Teeny", "Puny", "Slight"],
-"beautiful": ["Stunning", "Snatched", "Gorgeous", "Radiant", "Aesthetic", "Breathtaking", "Exquisite", "Divine", "Picturesque", "Captivating"],
-"ugly": ["Hideous", "Repulsive", "Unbalanced", "Unappealing", "Gross", "Cluttered", "Busted", "Clunky", "Grotesque", "Foul"],
+    "good": ["Exquisite", "Bussin'", "Goated", "Top-tier", "Valid", "Fire", "Snatched", "Elite", "Superlative", "Clutch"],
+    "bad": ["Atrocious", "Mid", "Cooked", "Trash", "Dusty", "Wack", "Abysmal", "Deplorable", "Lame", "Busted"],
+    "very": ["Deadass", "Extremely", "Mad", "Hella", "Straight-up", "Incredibly", "Massively", "Profoundly", "Way", "Lowkey"],
+    "happy": ["Ecstatic", "Geeked", "Hyped", "Stoked", "Radiant", "Thriving", "Elated", "Vibing", "Jubilant", "Beaming"],
+    "sad": ["Down bad", "Despondent", "Bummed", "Melancholy", "Gutted", "Dejected", "Gloomy", "Blue", "Washed", "Heartbroken"],
+    "smart": ["Astute", "Big Brain", "Brilliant", "Savvy", "Wicked Smart", "Sharp", "Intellectual", "Gifted", "Sage", "Einstein"],
+    "stupid": ["Clueless", "Bird-brained", "Dense", "Vacuous", "Smooth-brain", "Ignorant", "Brain-dead", "Goofy", "Witless", "Dumb"],
+    "fast": ["Speedy", "Rapid", "Zooming", "Swift", "Expeditious", "Breakneck", "Zippy", "Hyper-speed", "Nimble", "Quick"],
+    "slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
+    "big": ["Massive", "Colossal", "Gargantuan", "Chunky", "Humongous", "Gigantic", "Substantial", "Immense", "Enormous", "Beefy"],
+    "small": ["Tiny", "Micro", "Petite", "Miniscule", "Bite-sized", "Diminutive", "Compact", "Teeny", "Puny", "Slight"],
+    "angry": ["Livid", "Fuming", "Salty", "Enraged", "Pressed", "Irate", "Heated", "Triggered", "Infuriated", "Resentful"],
+    "tired": ["Exhausted", "Spent", "Drained", "Beat", "Washed", "Fatigued", "Sleepy", "Weary", "Donezo", "Pooped"],
+    "cool": ["Chilled", "Aesthetic", "Rad", "Slick", "Sophisticated", "Iconic", "Swag", "Chill", "Dope", "Fly"],
+    "funny": ["Hilarious", "Comical", "Sending me", "Witty", "Humorous", "Uproarious", "Entertaining", "Goofy", "Sidesplitting", "Crack-up"]
+"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
+"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
 "rich": ["Loaded", "Wealthy", "Affluent", "Opulent", "Stacked", "Balling", "Moneyed", "Prosperous", "Well-off", "Plush"],
 "poor": ["Broke", "Destitute", "Penniless", "Struggling", "Down-and-out", "Indigent", "Hard-up", "Needy", "Bankrupt", "Skint"],
 "easy": ["Simple", "Light work", "Effortless", "Elementary", "Basic", "Straightforward", "Cinch", "Breeze", "Manageable", "Uncomplicated"],
 "hard": ["Formidable", "Strenuous", "Grueling", "Challenging", "Complex", "Demanding", "Tough", "Intricate", "Arduous", "Knotted"],
-"angry": ["Livid", "Fuming", "Salty", "Enraged", "Pressed", "Irate", "Heated", "Triggered", "Infuriated", "Resentful"],
-"tired": ["Exhausted", "Spent", "Drained", "Beat", "Washed", "Fatigued", "Sleepy", "Weary", "Knock-out", "Donezo"],
-"cool": ["Chilled", "Aesthetic", "Valid", "Rad", "Slick", "Sophisticated", "Goated", "Legendary", "Iconic", "Swag"],
-"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
-"funny": ["Hilarious", "Comical", "Sending me", "Witty", "Humorous", "Uproarious", "Entertaining", "Goofy", "Sidesplitting", "Jocular"],
-"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
-"strong": ["Powerful", "Jacked", "Robust", "Formidable", "Mighty", "Sturdy", "Resilient", "Stalwart", "Brawny", "Muscular"],
-"weak": ["Fragile", "Feeble", "Frail", "Mid", "Puny", "Insubstantial", "Delicate", "Brittle", "Wimpy", "Vulnerable"]
+"clean": ["Spotless", "Pristine", "Immaculate", "Snatched", "Spick-and-span", "Sanitized", "Sterile", "Unblemished", "Shiny", "Neat"],
+"dirty": ["Filthy", "Grungy", "Rank", "Grimey", "Polluted", "Squalid", "Sordid", "Nasty", "Muddy", "Vile"],
+"loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
+"quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
 
-},
-            courses: [
-                {id: "01", title: "TENSES", sub: "Timeline Control ⏳", desc: "All 12 Tenses + Deep Logic + 12 Native Secrets."},
-                {id: "02", title: "UNCOUNT", sub: "The No-S Club 🥛", desc: "30 Uncountable nouns + specific 'Counting Hacks.'"},
-                {id: "03", title: "SLANG", sub: "Brain-Rot Lore 🧠", desc: "30 Modern 2025 Slang terms with usage examples."},
-                {id: "04", title: "SAY&TELL", sub: "Receiver Logic 🗣️", desc: "Say vs. Tell vs. Say To + 15 Fixed Expressions."},
-                {id: "05", title: "PREPS", sub: "Spatial Funnel 📍", desc: "In/On/At Hierarchy + 10 Preposition Assassinations."},
-                {id: "06", title: "MISTAKES", sub: "Aura-Loss Log 💀", desc: "25 Fatal Social Sins (Common Errors) corrected."},
-                {id: "07", title: "FORMAL", sub: "Lexical Supremacy 💎", desc: "100 Tier-Upgrade Synonyms."},
-                {id: "08", title: "PHRASAL", sub: "Casual Combat 🔄", desc: "100 Phrasal Verbs with full definitions."},
-                {id: "09", title: "CONVOS", sub: "Street Protocol 🎤", desc: "4 Massive Dialogues (US Style)."},
-                {id: "10", title: "SPEECH", sub: "Connected Flow ⚡", desc: "Assimilation + Elision + 15 Contractions."},
-                {id: "11", title: "ACRONYMS", sub: "Digital Shorthand 📱", desc: "30 Modern Acronyms Explained."},
-                {id: "12", title: "HOMOPHONES", sub: "Confusion Matrix ♊", desc: "40 Homophones/Homonyms."},
-                {id: "13", title: "POS", sub: "Weapon Engine ⚙️", desc: "The 8 Parts of Speech + Syntax."},
-                {id: "14", title: "QUIZ", sub: "Calibration 🎯", desc: "15-Question Interactive Quiz."},
-                {id: "15", title: "NATIVE", sub: "Ghosting Tips 💡", desc: "Native Shortcuts."}
-            ]
-        },
-        uk: {
-            synonyms: { "good": ["Splendid", "Lovely", "Proper"], "Ace", "Smashing", "Top-hole", "Marvellous", "Capital", "Lovely"],
-"bad": ["Rubbish", "Dodgy", "Ghastly", "Knickers", "Abysmal", "Dreadful", "Crap", "Grim", "Poor form", "Shoddy"],
-"very": ["Properly", "Bloody", "Massively", "Extremely", "Dead", "Rightly", "Awfully", "Terribly", "Jolly", "Rather"],
-"happy": ["Chuffed", "Delighted", "Buzzing", "Over the moon", "Jubilant", "Tickled pink", "Beaming", "Thrilled", "Merry", "Chipper"],
-"sad": ["Gutted", "Miserable", "Sorted", "Despondent", "Down in the dumps", "Melancholy", "Grievous", "Unhappy", "Forlorn", "Blue"],
-"smart": ["Clever", "Sharp", "Brainy", "Spot on", "Astute", "Intellectual", "Witty", "Quick-witted", "Academic", "Knowledgeable"],
-"stupid": ["Daft", "Dim", "Thick", "Gormless", "Vacuous", "Clueless", "Bird-brained", "Slow-witted", "Dense", "Witless"],
-"fast": ["Speedy", "Rapid", "Swift", "Expeditious", "Quick", "Nipper", "Zippy", "Breakneck", "Pacy", "Nimble"],
-"slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
-"big": ["Massive", "Colossal", "Gargantuan", "Enormous", "Substantial", "Immense", "Large", "Whacking", "Hefty", "Great"],
-"small": ["Tiny", "Petite", "Miniscule", "Diminutive", "Wee", "Compact", "Teeny", "Puny", "Slight", "Little"],
-"beautiful": ["Stunning", "Gorgeous", "Exquisite", "Radiant", "Lovely", "Breathtaking", "Divine", "Picturesque", "Captivating", "Handsome"],
-"ugly": ["Hideous", "Repulsive", "Unappealing", "Gross", "Busted", "Clunky", "Grotesque", "Foul", "Unsightly", "Plain"],
+
+        
+}
+uk: {
+    "good": ["Brilliant", "Top-drawer", "Proper", "Splendid", "Ace", "Smashing", "Class", "Marvellous", "Mint", "Lovely"],
+    "bad": ["Rubbish", "Dodgy", "Ghastly", "Dreadful", "Grim", "Poor form", "Shoddy", "Knickers", "Abysmal", "Crap"],
+    "very": ["Properly", "Bloody", "Massively", "Extremely", "Dead", "Rightly", "Awfully", "Terribly", "Jolly", "Rather"],
+    "happy": ["Chuffed", "Delighted", "Buzzing", "Over the moon", "Jubilant", "Tickled pink", "Beaming", "Thrilled", "Merry", "Chipper"],
+    "sad": ["Gutted", "Miserable", "Sorted", "Despondent", "Down in the dumps", "Melancholy", "Grievous", "Unhappy", "Forlorn", "Blue"],
+    "smart": ["Clever", "Sharp", "Brainy", "Spot on", "Astute", "Intellectual", "Witty", "Quick-witted", "Academic", "Knowledgeable"],
+    "stupid": ["Daft", "Dim", "Thick", "Gormless", "Vacuous", "Clueless", "Bird-brained", "Slow-witted", "Dense", "Witless"],
+    "fast": ["Speedy", "Rapid", "Swift", "Expeditious", "Quick", "Nipper", "Zippy", "Breakneck", "Pacy", "Nimble"],
+    "slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
+    "big": ["Massive", "Colossal", "Gargantuan", "Enormous", "Substantial", "Immense", "Large", "Whacking", "Hefty", "Great"],
+    "small": ["Tiny", "Petite", "Miniscule", "Diminutive", "Wee", "Compact", "Teeny", "Puny", "Slight", "Little"],
+    "angry": ["Livid", "Fuming", "Cross", "Enraged", "Irate", "Heated", "Triggered", "Infuriated", "Resentful", "Miffed"],
+    "tired": ["Knackered", "Exhausted", "Spent", "Drained", "Fatigued", "Weary", "Done in", "Shattered", "Tired out", "Worn out"],
+    "cool": ["Chilled", "Aesthetic", "Slick", "Sophisticated", "Legendary", "Iconic", "Swish", "Posh", "Smart", "Gucci"],
+    "funny": ["Hilarious", "Comical", "Witty", "Humorous", "Uproarious", "Entertaining", "Jocular", "Sidesplitting", "Amusing", "Droll"]
+"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
+"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
 "rich": ["Loaded", "Wealthy", "Affluent", "Opulent", "Stacked", "Moneyed", "Prosperous", "Well-off", "Plush", "Flush"],
 "poor": ["Skint", "Destitute", "Penniless", "Struggling", "Broke", "Indigent", "Hard-up", "Needy", "Bankrupt", "Impecunious"],
 "easy": ["Simple", "Piece of cake", "Effortless", "Elementary", "Basic", "Straightforward", "Cinch", "Breeze", "Manageable", "Uncomplicated"],
 "hard": ["Formidable", "Strenuous", "Grueling", "Challenging", "Complex", "Demanding", "Tough", "Intricate", "Arduous", "Knotted"],
-"angry": ["Livid", "Fuming", "Cross", "Enraged", "Irate", "Heated", "Triggered", "Infuriated", "Resentful", "Miffed"],
-"tired": ["Knackered", "Exhausted", "Spent", "Drained", "Fatigued", "Weary", "Done in", "Shattered", "Tired out", "Worn out"],
-"cool": ["Chilled", "Aesthetic", "Valid", "Slick", "Sophisticated", "Legendary", "Iconic", "Swish", "Posh", "Smart"],
-"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
-"funny": ["Hilarious", "Comical", "Witty", "Humorous", "Uproarious", "Entertaining", "Jocular", "Sidesplitting", "Amusing", "Droll"],
-"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
-"strong": ["Powerful", "Robust", "Formidable", "Mighty", "Sturdy", "Resilient", "Stalwart", "Brawny", "Muscular", "Tough"],
-"weak": ["Fragile", "Feeble", "Frail", "Mid", "Puny", "Insubstantial", "Delicate", "Brittle", "Wimpy", "Vulnerable"]
+"clean": ["Spotless", "Pristine", "Immaculate", "Spick-and-span", "Sanitized", "Sterile", "Unblemished", "Shiny", "Neat", "Tidy"],
+"dirty": ["Filthy", "Grungy", "Rank", "Grimey", "Polluted", "Squalid", "Sordid", "Nasty", "Muddy", "Vile"],
+"loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
+"quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
 
-},
-            courses: [
-                {id: "01", title: "TENSES", sub: "Kingdom Time ⏳", desc: "British tense nuances + Received Pronunciation tips."},
-                {id: "02", title: "UNCOUNT", sub: "The Tea Club ☕", desc: "UK-specific uncountable nouns."},
-                {id: "03", title: "SLANG", sub: "Chav Logic 🧢", desc: "Roadman slang and regional UK dialects."},
-                {id: "04", title: "SAY&TELL", sub: "Direct Address 🗣️", desc: "British nuances of Say/Tell."},
-                {id: "05", title: "PREPS", sub: "Island Funnel 📍", desc: "UK Preposition variations."},
-                {id: "06", title: "MISTAKES", sub: "Social Blunders 💀", desc: "Common UK errors corrected."},
-                {id: "07", title: "FORMAL", sub: "Royal Lexis 💎", desc: "High-tier UK vocabulary upgrades."},
-                {id: "08", title: "PHRASAL", sub: "The Pub Crawl 🔄", desc: "100 Phrasal Verbs used in Britain."},
-                {id: "09", title: "CONVOS", sub: "High Tea Talk 🎤", desc: "4 Massive Dialogues (UK Style)."},
-                {id: "10", title: "SPEECH", sub: "The Glottal Stop ⚡", desc: "British phonetics and elision."},
-                {id: "11", title: "ACRONYMS", sub: "WhatsApp Shorthand 📱", desc: "UK-specific digital acronyms."},
-                {id: "12", title: "HOMOPHONES", sub: "Sound Confusion ♊", desc: "40 Homophones with UK spelling."},
-                {id: "13", title: "POS", sub: "Structure Engine ", desc: "Grammar foundations."},
-                {id: "14", title: "QUIZ", sub: "The Exam 🎯", desc: "Interactive UK English Quiz."},
-                {id: "15", title: "NATIVE", sub: "Sarcasm 101 💡", desc: "British shortcuts and nuances."}
-            ]
-        }
+}
+
     };
 
-    function switchWorld(world) {
-        document.querySelectorAll('.world').forEach(w => w.classList.remove('active'));
-        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(`${world}-world`).classList.add('active');
-        document.querySelector(`.btn-${world}`).classList.add('active');
+    function openWorld(w) {
+        document.querySelectorAll('.world').forEach(el => el.classList.remove('active'));
+        document.getElementById(`${w}-world`).classList.add('active');
     }
 
-    function initGrids() {
+    function init() {
         ['us', 'uk'].forEach(w => {
             const grid = document.getElementById(`${w}-grid`);
-            worlds[w].courses.forEach(course => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.onclick = () => openDetail(w, course);
-                card.innerHTML = `<div class="card-num">${course.id}</div><h3>${course.title}</h3><p><strong>${course.sub}</strong></p><p>${course.desc}</p>`;
-                grid.appendChild(card);
+            const courses = w === 'us' ? usCourses : ukCourses;
+            courses.forEach(c => {
+                grid.innerHTML += `<div class="aura-card" onclick="openModule('${c.t}')"><small>${c.n}</small><h3>${c.t}</h3><p>${c.s}</p></div>`;
             });
         });
     }
 
-    function search(world) {
-        const val = document.querySelector(`.${world}-world .search-bar`).value.toLowerCase();
-        const area = document.getElementById(`${world}-syn-results`);
-        area.innerHTML = '';
-        if(worlds[world].synonyms[val]) {
-            worlds[world].synonyms[val].forEach(s => {
-                area.innerHTML += `<span class="syn-pill ${world}-pill">${s}</span>`;
-            });
-        }
+    function auraSearch(w) {
+    const val = document.getElementById(`${w}-in`).value.toLowerCase();
+    const res = document.getElementById(`${w}-res`);
+    res.innerHTML = '';
+    if(database[w][val]) {
+        database[w][val].forEach(synonym => {
+            // No more .w or .e, just the raw string
+            res.innerHTML += `<div class="gold-item"><strong>${synonym}</strong></div>`;
+        });
+    }
+}
+
+
+    function openModule(t) {
+        document.getElementById('module-overlay').style.display = 'block';
+        document.getElementById('mod-h1').innerText = t;
     }
 
-    function openDetail(world, course) {
-        document.querySelector(`#${world}-world .main-content`).style.display = 'none';
-        const detail = document.getElementById(`${world}-detail`);
-        detail.style.display = 'block';
-        document.getElementById(`${world}-mod-title`).innerText = course.title;
-        document.getElementById(`${world}-mod-body`).innerHTML = `<p>${course.desc}</p><p>Massive data population pending...</p>`;
-    }
+    function closeModule() { document.getElementById('module-overlay').style.display = 'none'; }
 
-    function closeDetail(world) {
-        document.querySelector(`#${world}-world .main-content`).style.display = 'block';
-        document.getElementById(`${world}-detail`).style.display = 'none';
-    }
-
-    initGrids();
+    init();
 </script>
 </body>
 </html>
+
