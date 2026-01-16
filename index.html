@@ -4,129 +4,349 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AURA ENGLISH | The Great Divide</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Orbitron:wght@400;900&family=Inter:wght@300;600;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --us-glow: #00f2ff; --uk-glow: #ff0040; --gold: #ffcc33;
-            --bg: #000000; --card: #0a0a0c; --transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+            /* USA DIMENSION PALETTE */
+            --us-glow: #00f2ff;
+            --us-accent: #bc13fe;
+            --us-bg: #050505;
+            
+            /* UK KINGDOM PALETTE */
+            --uk-glow: #ff0040;
+            --uk-accent: #ffd700;
+            --uk-bg: #050505;
+
+            /* SHARED AESTHETICS */
+            --black: #000000;
+            --white: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        body { margin: 0; background: var(--bg); color: white; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-
-        /* PORTAL NAV */
-        .portal { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 15px; }
-        .portal button { 
-            padding: 15px 35px; border-radius: 5px; font-family: 'Syncopate', sans-serif; 
-            font-weight: 900; border: none; cursor: pointer; transition: var(--transition);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Space Grotesk', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
-        .us-btn { background: var(--us-glow); box-shadow: 0 0 20px var(--us-glow); }
-        .uk-btn { background: var(--uk-glow); color: white; box-shadow: 0 0 20px var(--uk-glow); }
 
-        /* WORLD LOGIC */
-        .world { display: none; padding: 100px 20px 40px; min-height: 100vh; }
-        .active { display: block; animation: flare 0.8s ease; }
-        @keyframes flare { from { filter: brightness(0); transform: scale(1.05); } to { filter: brightness(1); transform: scale(1); } }
-
-        h1.aura-title { font-family: 'Orbitron', sans-serif; font-size: 5rem; text-align: center; text-transform: uppercase; margin: 0; }
-        .us-world h1 { text-shadow: 0 0 30px var(--us-glow); }
-        .uk-world h1 { text-shadow: 0 0 30px var(--uk-glow); }
-
-        /* GOLDEN SEARCHER */
-        .gold-search-box { 
-            max-width: 800px; margin: 60px auto; background: var(--card); padding: 40px; 
-            border: 1px solid var(--gold); border-radius: 40px; box-shadow: 0 0 30px rgba(255,204,51,0.1); 
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            height: 100vh;
         }
-        .search-row { display: flex; gap: 20px; border-bottom: 2px solid var(--gold); padding-bottom: 10px; }
-        .search-row input { flex: 1; background: transparent; border: none; color: white; font-size: 1.5rem; outline: none; }
-        .search-row button { background: var(--gold); border: none; padding: 10px 30px; font-family: 'Syncopate', sans-serif; font-weight: 900; cursor: pointer; border-radius: 10px; }
 
-        .gold-manifest { margin-top: 30px; }
-        .gold-item { background: linear-gradient(135deg, #ffcc33, #b8860b); color: black; padding: 25px; border-radius: 20px; margin-bottom: 15px; animation: slideUp 0.4s ease forwards; }
-        .gold-item strong { font-size: 1.4rem; display: block; font-family: 'Orbitron'; }
-        .gold-item em { font-size: 0.9rem; opacity: 0.8; display: block; margin-top: 5px; }
-
-        /* STUNNING GRID */
-        .aura-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 1400px; margin: 0 auto; }
-        .aura-card { background: #050505; border: 1px solid rgba(255,255,255,0.05); padding: 40px; border-radius: 20px; transition: var(--transition); cursor: pointer; }
-        .aura-card:hover { background: #0f0f12; border-color: white; transform: translateY(-10px); }
-        .us-world .aura-card:hover { box-shadow: 0 10px 40px rgba(0,242,255,0.1); }
-        .uk-world .aura-card:hover { box-shadow: 0 10px 40px rgba(255,0,64,0.1); }
-
-        /* MODULE VIEW */
-        .module-overlay { display: none; position: fixed; inset: 0; background: black; z-index: 200; padding: 60px; overflow-y: auto; }
-        .huge-back { 
-            display: inline-block; background: white; color: black; padding: 25px 60px; 
-            font-family: 'Syncopate', sans-serif; font-weight: 900; font-size: 1.5rem; 
-            border-radius: 15px; cursor: pointer; margin-bottom: 60px; transition: 0.3s;
+        /* --- THE PORTAL OVERLAY --- */
+        #dimension-portal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.8s ease-in-out;
         }
-        .huge-back:hover { transform: translateX(-20px) scale(1.05); background: var(--gold); }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- GLOBAL UI COMPONENTS --- */
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Syncopate', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* --- DIMENSION SPECIFIC STYLES --- */
+        body.us-mode {
+            background: radial-gradient(circle at top right, #0a001a, #000);
+        }
+
+        body.uk-mode {
+            background: radial-gradient(circle at top right, #1a0000, #000);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 30px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .portal-switcher {
+            cursor: pointer;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: var(--transition);
+        }
+
+        .us-mode .portal-switcher {
+            border: 2px solid var(--uk-glow);
+            color: var(--uk-glow);
+            box-shadow: 0 0 15px var(--uk-glow);
+        }
+
+        .uk-mode .portal-switcher {
+            border: 2px solid var(--us-glow);
+            color: var(--us-glow);
+            box-shadow: 0 0 15px var(--us-glow);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 20px;
+        }
+
+        .us-mode .hero h1 {
+            color: var(--us-glow);
+            text-shadow: 0 0 30px var(--us-glow);
+        }
+
+        .uk-mode .hero h1 {
+            color: var(--uk-glow);
+            text-shadow: 0 0 30px var(--uk-glow);
+        }
+
+        /* --- SYNONYM SEARCHER --- */
+        .search-container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto 100px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 25px 40px;
+            background: rgba(255,255,255,0.05);
+            border: 2px solid transparent;
+            border-radius: 100px;
+            color: white;
+            font-size: 1.2rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .us-mode .search-bar:focus {
+            border-color: var(--us-glow);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+        }
+
+        .uk-mode .search-bar:focus {
+            border-color: var(--uk-glow);
+            box-shadow: 0 0 30px rgba(255, 0, 64, 0.2);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 12px 35px;
+            border-radius: 100px;
+            border: none;
+            font-weight: 900;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .us-mode .search-btn { background: var(--us-glow); color: black; }
+        .uk-mode .search-btn { background: var(--uk-glow); color: white; }
+
+        /* --- RESULTS: GOLDEN PILLS --- */
+        #search-results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+
+        .gold-pill {
+            padding: 10px 25px;
+            border: 1px solid var(--uk-accent);
+            color: var(--uk-accent);
+            border-radius: 50px;
+            background: rgba(255, 215, 0, 0.05);
+            font-weight: 700;
+            animation: fadeIn 0.5s ease-out;
+            box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2);
+        }
+
+        /* --- THE GRID (15 SECTIONS) --- */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 50px 100px;
+        }
+
+        .course-card {
+            height: 250px;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .us-mode .course-card { border-left: 5px solid var(--us-glow); }
+        .uk-mode .course-card { border-left: 5px solid var(--uk-glow); }
+
+        .card-id {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            font-weight: 900;
+        }
+
+        .card-title {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            font-size: 1.5rem;
+        }
+
+        /* --- FULLSCREEN COURSE VIEW --- */
+        #course-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 500;
+            display: none;
+            padding: 100px 50px;
+            overflow-y: auto;
+        }
+
+        .big-back-btn {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #ff0000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 600;
+            border: 4px solid white;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HIDDEN CONTENT FOR MASSIVE DATABASE --- */
+        .hidden-lexicon { display: none; }
+
     </style>
 </head>
-<body>
+<body class="us-mode">
 
-<div class="portal">
-    <button class="us-btn" onclick="openWorld('us')">USA</button>
-    <button class="uk-btn" onclick="openWorld('uk')">UK</button>
-</div>
-
-<section id="us-world" class="world us-world active">
-    <h1 class="aura-title">AURA US</h1>
-    <div class="gold-search-box">
-        <div class="search-row">
-            <input type="text" id="us-in" placeholder="UPGRADE LEXIS...">
-            <button onclick="auraSearch('us')">GO</button>
+    <nav>
+        <div id="logo" style="font-family: 'Syncopate'; font-weight: 700;">AURA ENGLISH</div>
+        <div class="portal-switcher" onclick="switchDimension()">
+            Switch to UK Kingdom 🇬🇧
         </div>
-        <div id="us-res" class="gold-manifest"></div>
-    </div>
-    <div class="aura-grid" id="us-grid"></div>
-</section>
+    </nav>
 
-<section id="uk-world" class="world uk-world">
-    <h1 class="aura-title">AURA UK</h1>
-    <div class="gold-search-box">
-        <div class="search-row">
-            <input type="text" id="uk-in" placeholder="REFINE DIALECT...">
-            <button onclick="auraSearch('uk')">GO</button>
+    <main id="world-content">
+        <section class="hero">
+            <h1 id="hero-title">USA DIMENSION</h1>
+            <p id="hero-subtitle">High-Aura American English Mastery</p>
+        </section>
+
+        <section class="search-container">
+            <input type="text" id="synonym-input" class="search-bar" placeholder="Enter basic vocabulary...">
+            <button class="search-btn" onclick="triggerSearch()">Go</button>
+            <div id="search-results"></div>
+        </section>
+
+        <section class="curriculum-grid" id="curriculum-grid">
+            </section>
+    </main>
+
+    <div id="course-overlay">
+        <div class="big-back-btn" onclick="closeCourse()">🔙</div>
+        <div id="course-content-target">
+            <h1 id="overlay-title" style="font-size: 4rem; margin-bottom: 50px;"></h1>
+            <div id="content-payload" style="font-size: 1.5rem; line-height: 1.8; color: #888;">
+                [BLOCK ENCRYPTED: CONTENT PENDING]
+            </div>
         </div>
-        <div id="uk-res" class="gold-manifest"></div>
     </div>
-    <div class="aura-grid" id="uk-grid"></div>
-</section>
 
-<div id="module-overlay" class="module-overlay">
-    <div class="huge-back" onclick="closeModule()">🔙 BACK TO HOME</div>
-    <h1 id="mod-h1" class="aura-title" style="text-align: left; font-size: 4rem;"></h1>
-    <p style="font-size: 2rem; color: #444;">DATA CHANNEL SILENT... STANDBY FOR POPULATION.</p>
-</div>
-
-<script>
-    const usCourses = [
-        {n: "01", t: "TENSES", s: "Timeline Control ⏳"}, {n: "02", t: "UNCOUNT", s: "The No-S Club 🥛"},
-        {n: "03", t: "SLANG", s: "Brain-Rot Lore 🧠"}, {n: "04", t: "SAYTELL", s: "Receiver Logic 🗣️"},
-        {n: "05", t: "PREPS", s: "Spatial Funnel 📍"}, {n: "06", t: "MISTAKES", s: "Aura-Loss Log 💀"},
-        {n: "07", t: "FORMAL", s: "Lexical Supremacy 💎"}, {n: "08", t: "PHRASAL", s: "Casual Combat 🔄"},
-        {n: "09", t: "CONVOS", s: "Street Protocol 🎤"}, {n: "10", t: "SPEECH", s: "Connected Flow ⚡"},
-        {n: "11", t: "ACRONYMS", s: "Digital Shorthand 📱"}, {n: "12", t: "HOMOPHONES", s: "Confusion Matrix ♊"},
-        {n: "13", t: "POS", s: "Weapon Engine ⚙️"}, {n: "14", t: "NATIVE", s: "Ghosting Tips 💡"},
-        {n: "15", t: "QUIZ", s: "Calibration 🎯"}
-    ];
-
-    const ukCourses = [
-        {n: "01", t: "TENSES", s: "Empire Timing ⏳"}, {n: "02", t: "UNCOUNT", s: "Tea & Logic ☕"},
-        {n: "03", t: "SLANG", s: "Roadman Lore 🧢"}, {n: "04", t: "SAYTELL", s: "Direct Address 🗣️"},
-        {n: "05", t: "PREPS", s: "Island Funnel 📍"}, {n: "06", t: "MISTAKES", s: "Social Blunders 💀"},
-        {n: "07", t: "FORMAL", s: "Royal Lexis 💎"}, {n: "08", t: "PHRASAL", s: "Pub Protocol 🔄"},
-        {n: "09", t: "CONVOS", s: "Proper Chat 🎤"}, {n: "10", t: "SPEECH", s: "Glottal Stops ⚡"},
-        {n: "11", t: "ACRONYMS", s: "WhatsApp Shorthand 📱"}, {n: "12", t: "HOMOPHONES", s: "Sound Confusion ♊"},
-        {n: "13", t: "POS", s: "Structure Engine ⚙️"}, {n: "14", t: "NATIVE", s: "Sarcasm 101 💡"},
-        {n: "15", t: "QUIZ", s: "The Exam 🎯"}
-    ];
-
-    const database = {
-        us: {
-    "good": ["Exquisite", "Bussin'", "Goated", "Top-tier", "Valid", "Fire", "Snatched", "Elite", "Superlative", "Clutch"],
+    <script>
+        // --- THE MASSIVE DATA STRUCTURE ---
+        const SYNDICATE_DATA = {
+            us: {
+                title: "USA DIMENSION",
+                subtitle: "Elevate your dialect to Executive status.",
+                searchPlaceholder: "Search US Lexicon...",
+                btnText: "Switch to UK Kingdom 🇬🇧",
+                sections: [
+                    { id: "01", name: "Timeline Control ⏳", tag: "tenses" },
+                    { id: "02", name: "The No-S Club 🥛", tag: "uncount" },
+                    { id: "03", name: "Brain-Rot Lore 🧠", tag: "slang" },
+                    { id: "04", name: "Receiver Logic 🗣️", tag: "saytell" },
+                    { id: "05", name: "Spatial Funnel 📍", tag: "preps" },
+                    { id: "06", name: "Aura-Loss Log 💀", tag: "mistakes" },
+                    { id: "07", name: "Lexical Supremacy 💎", tag: "formal" },
+                    { id: "08", name: "Casual Combat 🔄", tag: "phrasal" },
+                    { id: "09", name: "Street Protocol 🎤", tag: "convos" },
+                    { id: "10", name: "Connected Flow ⚡", tag: "speech" },
+                    { id: "11", name: "Digital Shorthand 📱", tag: "acronyms" },
+                    { id: "12", name: "Confusion Matrix ♊", tag: "homophones" },
+                    { id: "13", name: "Weapon Engine ⚙️", tag: "pos" },
+                    { id: "14", name: "Native Ghosting Tips 💡", tag: "native" },
+                    { id: "15", name: "The Calibration 🎯", tag: "quiz" }
+                ],
+                synonyms: {
+                    good": ["Exquisite", "Bussin'", "Goated", "Top-tier", "Valid", "Fire", "Snatched", "Elite", "Superlative", "Clutch"],
     "bad": ["Atrocious", "Mid", "Cooked", "Trash", "Dusty", "Wack", "Abysmal", "Deplorable", "Lame", "Busted"],
     "very": ["Deadass", "Extremely", "Mad", "Hella", "Straight-up", "Incredibly", "Massively", "Profoundly", "Way", "Lowkey"],
     "happy": ["Ecstatic", "Geeked", "Hyped", "Stoked", "Radiant", "Thriving", "Elated", "Vibing", "Jubilant", "Beaming"],
@@ -151,14 +371,35 @@
 "dirty": ["Filthy", "Grungy", "Rank", "Grimey", "Polluted", "Squalid", "Sordid", "Nasty", "Muddy", "Vile"],
 "loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
 "quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
-
-
-        
-}
-uk: {
+                }
+            },
+            uk: {
+                title: "UK KINGDOM",
+                subtitle: "Master the Queen's English, mate.",
+                searchPlaceholder: "Search UK Lexicon, mate...",
+                btnText: "Switch to USA Dimension 🇺🇸",
+                sections: [
+                    { id: "01", name: "Royal Tenses ⏳", tag: "tenses" },
+                    { id: "02", name: "Proper Nouns 🥛", tag: "uncount" },
+                    { id: "03", name: "Chav vs. Posh 🧠", tag: "slang" },
+                    { id: "04", name: "Utterance Logic 🗣️", tag: "saytell" },
+                    { id: "05", name: "The Tube Map 📍", tag: "preps" },
+                    { id: "06", name: "Social Blunders 💀", tag: "mistakes" },
+                    { id: "07", name: "Aristocratic Lexicon 💎", tag: "formal" },
+                    { id: "08", name: "Pub Talk 🔄", tag: "phrasal" },
+                    { id: "09", name: "High Street Protocol 🎤", tag: "convos" },
+                    { id: "10", name: "RP Articulation ⚡", tag: "speech" },
+                    { id: "11", name: "Old Guard Shorthand 📱", tag: "acronyms" },
+                    { id: "12", name: "The King's Matrix ♊", tag: "homophones" },
+                    { id: "13", name: "Parliament Engine ⚙️", tag: "pos" },
+                    { id: "14", name: "Sarcasm Masterclass 💡", tag: "native" },
+                    { id: "15", name: "The Grand Quiz 🎯", tag: "quiz" }
+                ],
+                synonyms: {
+                    
     "good": ["Brilliant", "Top-drawer", "Proper", "Splendid", "Ace", "Smashing", "Class", "Marvellous", "Mint", "Lovely"],
     "bad": ["Rubbish", "Dodgy", "Ghastly", "Dreadful", "Grim", "Poor form", "Shoddy", "Knickers", "Abysmal", "Crap"],
-    "very": ["Properly", "Bloody", "Massively", "Extremely", "Dead", "Rightly", "Awfully", "Terribly", "Jolly", "Rather"],
+    "very": ["Properly", "Bloody", "Massively", "Extremely", "Dead", "Rightly", "Awfully(satirical)", "Terribly", "Jolly", "Rather"],
     "happy": ["Chuffed", "Delighted", "Buzzing", "Over the moon", "Jubilant", "Tickled pink", "Beaming", "Thrilled", "Merry", "Chipper"],
     "sad": ["Gutted", "Miserable", "Sorted", "Despondent", "Down in the dumps", "Melancholy", "Grievous", "Unhappy", "Forlorn", "Blue"],
     "smart": ["Clever", "Sharp", "Brainy", "Spot on", "Astute", "Intellectual", "Witty", "Quick-witted", "Academic", "Knowledgeable"],
@@ -182,47 +423,86 @@ uk: {
 "loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
 "quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
 
-}
+                }
+            }
+        };
 
-    };
+        let currentMode = 'us';
 
-    function openWorld(w) {
-        document.querySelectorAll('.world').forEach(el => el.classList.remove('active'));
-        document.getElementById(`${w}-world`).classList.add('active');
-    }
+        // --- CORE FUNCTIONS ---
 
-    function init() {
-        ['us', 'uk'].forEach(w => {
-            const grid = document.getElementById(`${w}-grid`);
-            const courses = w === 'us' ? usCourses : ukCourses;
-            courses.forEach(c => {
-                grid.innerHTML += `<div class="aura-card" onclick="openModule('${c.t}')"><small>${c.n}</small><h3>${c.t}</h3><p>${c.s}</p></div>`;
+        function renderGrid() {
+            const grid = document.getElementById('curriculum-grid');
+            grid.innerHTML = '';
+            const data = SYNDICATE_DATA[currentMode];
+
+            data.sections.forEach(sec => {
+                const card = document.createElement('div');
+                card.className = 'course-card glass-panel';
+                card.onclick = () => openCourse(sec.name);
+                card.innerHTML = `
+                    <div class="card-id">${sec.id}</div>
+                    <div class="card-title">${sec.name}</div>
+                `;
+                grid.appendChild(card);
             });
-        });
-    }
+        }
 
-    function auraSearch(w) {
-    const val = document.getElementById(`${w}-in`).value.toLowerCase();
-    const res = document.getElementById(`${w}-res`);
-    res.innerHTML = '';
-    if(database[w][val]) {
-        database[w][val].forEach(synonym => {
-            // No more .w or .e, just the raw string
-            res.innerHTML += `<div class="gold-item"><strong>${synonym}</strong></div>`;
-        });
-    }
-}
+        function switchDimension() {
+            const body = document.body;
+            const switcher = document.querySelector('.portal-switcher');
+            
+            if (currentMode === 'us') {
+                currentMode = 'uk';
+                body.className = 'uk-mode';
+            } else {
+                currentMode = 'us';
+                body.className = 'us-mode';
+            }
 
+            const data = SYNDICATE_DATA[currentMode];
+            document.getElementById('hero-title').innerText = data.title;
+            document.getElementById('hero-subtitle').innerText = data.subtitle;
+            document.getElementById('synonym-input').placeholder = data.searchPlaceholder;
+            switcher.innerText = data.btnText;
+            
+            renderGrid();
+            document.getElementById('search-results').innerHTML = '';
+        }
 
-    function openModule(t) {
-        document.getElementById('module-overlay').style.display = 'block';
-        document.getElementById('mod-h1').innerText = t;
-    }
+        function openCourse(title) {
+            document.getElementById('overlay-title').innerText = title;
+            document.getElementById('course-overlay').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
 
-    function closeModule() { document.getElementById('module-overlay').style.display = 'none'; }
+        function closeCourse() {
+            document.getElementById('course-overlay').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
 
-    init();
-</script>
+        function triggerSearch() {
+            const val = document.getElementById('synonym-input').value.toLowerCase();
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.innerHTML = '';
+
+            const db = SYNDICATE_DATA[currentMode].synonyms;
+
+            if (db[val]) {
+                db[val].forEach(syn => {
+                    const pill = document.createElement('div');
+                    pill.className = 'gold-pill';
+                    pill.innerText = syn;
+                    resultsDiv.appendChild(pill);
+                });
+            } else {
+                resultsDiv.innerHTML = '<p style="color: #444;">No high-aura synonyms found for this term yet.</p>';
+            }
+        }
+
+        // INIT
+        renderGrid();
+
+    </script>
 </body>
 </html>
-
