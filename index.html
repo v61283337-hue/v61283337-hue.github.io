@@ -1,508 +1,1299 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AURA ENGLISH | The Great Divide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            /* USA DIMENSION PALETTE */
-            --us-glow: #00f2ff;
-            --us-accent: #bc13fe;
-            --us-bg: #050505;
-            
-            /* UK KINGDOM PALETTE */
-            --uk-glow: #ff0040;
-            --uk-accent: #ffd700;
-            --uk-bg: #050505;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura English</title>  <!-- ================================ -->  <!-- 🔥 AURA ENGLISH MEGA CORE STYLES -->  <!-- ================================ -->  <style>
+    :root {
+      --bg-dark: #05060a;
+      --bg-mid: #0c0f1c;
+      --bg-glass: rgba(255,255,255,0.05);
+      --accent-us: #00eaff;
+      --accent-uk: #ff4fd8;
+      --accent-alt: #7cff00;
+      --text-main: #ffffff;
+      --text-soft: #cfd3ff;
+      --danger: #ff3c3c;
+      --radius-xl: 22px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --blur-heavy: blur(24px);
+      --blur-light: blur(12px);
+      --glow-us: 0 0 25px rgba(0,234,255,0.45);
+      --glow-uk: 0 0 25px rgba(255,79,216,0.45);
+      --shadow-deep: 0 25px 80px rgba(0,0,0,0.65);
+      --font-main: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --font-display: 'Poppins', system-ui, sans-serif;
+    }
 
-            /* SHARED AESTHETICS */
-            --black: #000000;
-            --white: #ffffff;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Space Grotesk', sans-serif;
-            -webkit-font-smoothing: antialiased;
-        }
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at 20% 10%, #0b1126, #04050a 70%);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
 
-        body {
-            background-color: var(--black);
-            color: var(--white);
-            overflow-x: hidden;
-            height: 100vh;
-        }
+    body {
+      min-height: 100vh;
+      position: relative;
+    }
 
-        /* --- THE PORTAL OVERLAY --- */
-        #dimension-portal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1000;
-            background: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: transform 0.8s ease-in-out;
-        }
+    /* ================================ */
+    /* 🌌 GLOBAL UTILITY CLASSES */
+    /* ================================ */
 
-        /* --- GLOBAL UI COMPONENTS --- */
-        .glass-panel {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-        }
+    .hidden {
+      display: none !important;
+    }
 
-        h1, h2, h3 {
-            font-family: 'Syncopate', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
+    .center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        /* --- DIMENSION SPECIFIC STYLES --- */
-        body.us-mode {
-            background: radial-gradient(circle at top right, #0a001a, #000);
-        }
+    .col {
+      display: flex;
+      flex-direction: column;
+    }
 
-        body.uk-mode {
-            background: radial-gradient(circle at top right, #1a0000, #000);
-        }
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
 
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-        }
+    .glass {
+      background: var(--bg-glass);
+      backdrop-filter: var(--blur-light);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-deep);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
 
-        .portal-switcher {
-            cursor: pointer;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: var(--transition);
-        }
+    .btn {
+      cursor: pointer;
+      border: none;
+      outline: none;
+      padding: 14px 26px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      font-size: 15px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, opacity 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      user-select: none;
+    }
 
-        .us-mode .portal-switcher {
-            border: 2px solid var(--uk-glow);
-            color: var(--uk-glow);
-            box-shadow: 0 0 15px var(--uk-glow);
-        }
+    .btn:active {
+      transform: scale(0.97);
+    }
 
-        .uk-mode .portal-switcher {
-            border: 2px solid var(--us-glow);
-            color: var(--us-glow);
-            box-shadow: 0 0 15px var(--us-glow);
-        }
+    .btn-primary-us {
+      background: linear-gradient(135deg, #00eaff, #00bcd4);
+      color: #001114;
+      box-shadow: var(--glow-us);
+    }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+    .btn-primary-us:hover {
+      box-shadow: 0 0 35px rgba(0,234,255,0.7);
+    }
 
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 20px;
-        }
+    .btn-primary-uk {
+      background: linear-gradient(135deg, #ff4fd8, #ff0077);
+      color: #14000d;
+      box-shadow: var(--glow-uk);
+    }
 
-        .us-mode .hero h1 {
-            color: var(--us-glow);
-            text-shadow: 0 0 30px var(--us-glow);
-        }
+    .btn-primary-uk:hover {
+      box-shadow: 0 0 35px rgba(255,79,216,0.7);
+    }
 
-        .uk-mode .hero h1 {
-            color: var(--uk-glow);
-            text-shadow: 0 0 30px var(--uk-glow);
-        }
+    .btn-secondary {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-main);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
 
-        /* --- SYNONYM SEARCHER --- */
-        .search-container {
-            width: 80%;
-            max-width: 800px;
-            margin: 20px auto 100px;
-            position: relative;
-        }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.14);
+    }
 
-        .search-bar {
-            width: 100%;
-            padding: 25px 40px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid transparent;
-            border-radius: 100px;
-            color: white;
-            font-size: 1.2rem;
-            outline: none;
-            transition: var(--transition);
-        }
+    .btn-danger {
+      background: linear-gradient(135deg, #ff3c3c, #ff0000);
+      color: #200000;
+    }
 
-        .us-mode .search-bar:focus {
-            border-color: var(--us-glow);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
-        }
+    .title-glow-us {
+      color: var(--accent-us);
+      text-shadow: 0 0 22px rgba(0,234,255,0.55);
+    }
 
-        .uk-mode .search-bar:focus {
-            border-color: var(--uk-glow);
-            box-shadow: 0 0 30px rgba(255, 0, 64, 0.2);
-        }
+    .title-glow-uk {
+      color: var(--accent-uk);
+      text-shadow: 0 0 22px rgba(255,79,216,0.55);
+    }
 
-        .search-btn {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            padding: 12px 35px;
-            border-radius: 100px;
-            border: none;
-            font-weight: 900;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+    .subtitle-soft {
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
 
-        .us-mode .search-btn { background: var(--us-glow); color: black; }
-        .uk-mode .search-btn { background: var(--uk-glow); color: white; }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      margin: 24px 0;
+    }
 
-        /* --- RESULTS: GOLDEN PILLS --- */
-        #search-results {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 30px;
-            justify-content: center;
-        }
+    .fade-in {
+      animation: fadeIn 0.6s ease forwards;
+    }
 
-        .gold-pill {
-            padding: 10px 25px;
-            border: 1px solid var(--uk-accent);
-            color: var(--uk-accent);
-            border-radius: 50px;
-            background: rgba(255, 215, 0, 0.05);
-            font-weight: 700;
-            animation: fadeIn 0.5s ease-out;
-            box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        /* --- THE GRID (15 SECTIONS) --- */
-        .curriculum-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 50px 100px;
-        }
+    /* ================================ */
+    /* 🚪 ENTRY PORTAL (GLOBAL HOME) */
+    /* ================================ */
 
-        .course-card {
-            height: 250px;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            transition: var(--transition);
-        }
+    #entryPortal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at 20% 10%, #101a3f, #04050a 70%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-        .course-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.08);
-        }
+    .portal-bg-glow {
+      position: absolute;
+      width: 1400px;
+      height: 1400px;
+      background: radial-gradient(circle, rgba(0,234,255,0.12), transparent 70%);
+      filter: blur(80px);
+      animation: floatGlow 16s ease-in-out infinite alternate;
+    }
 
-        .us-mode .course-card { border-left: 5px solid var(--us-glow); }
-        .uk-mode .course-card { border-left: 5px solid var(--uk-glow); }
+    @keyframes floatGlow {
+      from { transform: translate(-120px, -80px) scale(1); }
+      to { transform: translate(120px, 80px) scale(1.1); }
+    }
 
-        .card-id {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3rem;
-            opacity: 0.1;
-            font-weight: 900;
-        }
+    .portal-card {
+      position: relative;
+      z-index: 10;
+      width: min(960px, 92vw);
+      padding: 64px 48px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      backdrop-filter: var(--blur-heavy);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 40px 120px rgba(0,0,0,0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 44px;
+      align-items: center;
+      text-align: center;
+    }
 
-        .card-title {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            font-size: 1.5rem;
-        }
+    .portal-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(135deg, #00eaff, #ff4fd8, #7cff00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 40px rgba(0,234,255,0.25);
+    }
 
-        /* --- FULLSCREEN COURSE VIEW --- */
-        #course-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: black;
-            z-index: 500;
-            display: none;
-            padding: 100px 50px;
-            overflow-y: auto;
-        }
+    .portal-tagline {
+      max-width: 700px;
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      opacity: 0.9;
+    }
 
-        .big-back-btn {
-            position: fixed;
-            top: 40px;
-            right: 40px;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: #ff0000;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 900;
-            font-size: 2rem;
-            cursor: pointer;
-            z-index: 600;
-            border: 4px solid white;
-            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
-        }
+    .portal-actions {
+      display: flex;
+      gap: 28px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .portal-world-btn {
+      min-width: 240px;
+      padding: 18px 32px;
+      font-size: 17px;
+      border-radius: 999px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+    }
 
-        /* --- HIDDEN CONTENT FOR MASSIVE DATABASE --- */
-        .hidden-lexicon { display: none; }
+    /* ================================ */
+    /* 🌎 WORLD WRAPPER (US / UK) */
+    /* ================================ */
 
-    </style>
-</head>
-<body class="us-mode">
+    .world {
+      min-height: 100vh;
+      width: 100%;
+      position: relative;
+      overflow-x: hidden;
+      padding-bottom: 120px;
+    }
 
-    <nav>
-        <div id="logo" style="font-family: 'Syncopate'; font-weight: 700;">AURA ENGLISH</div>
-        <div class="portal-switcher" onclick="switchDimension()">
-            Switch to UK Kingdom 🇬🇧
-        </div>
-    </nav>
+    .world::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 15% 10%, rgba(0,234,255,0.08), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-    <main id="world-content">
-        <section class="hero">
-            <h1 id="hero-title">USA DIMENSION</h1>
-            <p id="hero-subtitle">High-Aura American English Mastery</p>
-        </section>
+    .world.uk::before {
+      background: radial-gradient(circle at 15% 10%, rgba(255,79,216,0.08), transparent 60%);
+    }
 
-        <section class="search-container">
-            <input type="text" id="synonym-input" class="search-bar" placeholder="Enter basic vocabulary...">
-            <button class="search-btn" onclick="triggerSearch()">Go</button>
-            <div id="search-results"></div>
-        </section>
+    .world-inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 24px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+    }
 
-        <section class="curriculum-grid" id="curriculum-grid">
-            </section>
-    </main>
+    /* ================================ */
+    /* 🧭 WORLD NAVBAR */
+    /* ================================ */
 
-    <div id="course-overlay">
-        <div class="big-back-btn" onclick="closeCourse()">🔙</div>
-        <div id="course-content-target">
-            <h1 id="overlay-title" style="font-size: 4rem; margin-bottom: 50px;"></h1>
-            <div id="content-payload" style="font-size: 1.5rem; line-height: 1.8; color: #888;">
-                [BLOCK ENCRYPTED: CONTENT PENDING]
-            </div>
-        </div>
+    .navbar {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 28px;
+      border-radius: var(--radius-xl);
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: var(--blur-light);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+      position: sticky;
+      top: 18px;
+      z-index: 1000;
+    }
+
+    .navbar-left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .brand.us {
+      color: var(--accent-us);
+      text-shadow: 0 0 18px rgba(0,234,255,0.45);
+    }
+
+    .brand.uk {
+      color: var(--accent-uk);
+      text-shadow: 0 0 18px rgba(255,79,216,0.45);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    /* ================================ */
+    /* 🏠 WORLD HERO */
+    /* ================================ */
+
+    .hero {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      padding: 72px 48px;
+      background: linear-gradient(135deg, rgba(0,234,255,0.12), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.65);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .world.uk .hero {
+      background: linear-gradient(135deg, rgba(255,79,216,0.12), rgba(255,255,255,0.02));
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 900px;
+      height: 900px;
+      right: -300px;
+      top: -300px;
+      background: radial-gradient(circle, rgba(0,234,255,0.18), transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+    }
+
+    .world.uk .hero::after {
+      background: radial-gradient(circle, rgba(255,79,216,0.18), transparent 70%);
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0.8px;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--text-soft);
+      max-width: 560px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-orb {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(0,234,255,0.25), rgba(0,0,0,0.2));
+      box-shadow: 0 0 80px rgba(0,234,255,0.5);
+      animation: pulseOrb 5s ease-in-out infinite alternate;
+    }
+
+    .world.uk .hero-orb {
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), rgba(255,79,216,0.25), rgba(0,0,0,0.2));
+      box-shadow: 0 0 80px rgba(255,79,216,0.5);
+    }
+
+    @keyframes pulseOrb {
+      from { transform: scale(0.95); }
+      to { transform: scale(1.05); }
+    }
+
+    /* ================================ */
+    /* 🔍 SYNONYM SEARCHER */
+    /* ================================ */
+
+    .synonym-section {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      padding: 42px 36px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: var(--blur-light);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .synonym-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .synonym-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+    }
+
+    .synonym-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+
+    .synonym-search-row {
+      width: 100%;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .synonym-input {
+      flex: 1 1 260px;
+      padding: 16px 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: var(--text-main);
+      font-size: 15px;
+      outline: none;
+      transition: border 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .synonym-input:focus {
+      border-color: rgba(0,234,255,0.6);
+      box-shadow: 0 0 0 3px rgba(0,234,255,0.15);
+    }
+
+    .world.uk .synonym-input:focus {
+      border-color: rgba(255,79,216,0.6);
+      box-shadow: 0 0 0 3px rgba(255,79,216,0.15);
+    }
+
+    .synonym-results {
+      width: 100%;
+      min-height: 80px;
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .synonym-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .synonym-chip:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.14);
+      box-shadow: 0 0 14px rgba(0,234,255,0.35);
+    }
+
+    .world.uk .synonym-chip:hover {
+      box-shadow: 0 0 14px rgba(255,79,216,0.35);
+    }
+
+    /* ================================ */
+    /* 📚 COURSE GRID */
+    /* ================================ */
+
+    .courses-section {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      padding: 42px 36px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: var(--blur-light);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.65);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .courses-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .courses-title {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+    }
+
+    .courses-grid {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 22px;
+    }
+
+    .course-card {
+      position: relative;
+      height: 170px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.55);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 18px;
+    }
+
+    .course-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 25px 70px rgba(0,0,0,0.75);
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    }
+
+    .course-card-title {
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.4px;
+    }
+
+    .course-card-sub {
+      font-size: 12px;
+      color: var(--text-soft);
+      opacity: 0.85;
+    }
+
+    .course-lock {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    /* ================================ */
+    /* 📦 COURSE VIEW (EMPTY CONTENT) */
+    /* ================================ */
+
+    .course-view {
+      width: 100%;
+      border-radius: var(--radius-xl);
+      padding: 48px 42px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: var(--blur-light);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .course-view-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .course-view-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+    }
+
+    .course-view-body {
+      min-height: 200px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.04);
+      border: 1px dashed rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: var(--text-soft);
+      opacity: 0.8;
+      text-align: center;
+      padding: 24px;
+    }
+
+    /* ================================ */
+    /* 🧱 FOOTER */
+    /* ================================ */
+
+    .footer {
+      width: 100%;
+      padding: 32px 24px 0 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.5;
+      font-size: 12px;
+    }
+
+    /* ================================ */
+    /* 📱 RESPONSIVE */
+    /* ================================ */
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .portal-card {
+        padding: 44px 28px;
+      }
+      .hero {
+        padding: 48px 28px;
+      }
+      .synonym-section,
+      .courses-section,
+      .course-view {
+        padding: 32px 24px;
+      }
+    }
+
+  </style></head>
+<body>  <!-- ===================================================== -->  <!-- 🚪 ENTRY PORTAL (GLOBAL WORLD SELECTOR) -->  <!-- ===================================================== -->  <section id="entryPortal">
+    <div class="portal-bg-glow"></div>
+    <div class="portal-card fade-in">
+      <h1 class="portal-title">Aura English</h1>
+      <p class="portal-tagline">
+        Choose your world. Same power. Different curriculum. Different slang. Different vibe. <br />
+        US or UK English, fully separate universes. No crossover. No comparison. Pure immersion.
+      </p>
+      <div class="portal-actions">
+        <button class="btn btn-primary-us portal-world-btn" onclick="enterWorld('us')">🇺🇸 Enter US English</button>
+        <button class="btn btn-primary-uk portal-world-btn" onclick="enterWorld('uk')">🇬🇧 Enter UK English</button>
+      </div>
+    </div>
+  </section>  <!-- ===================================================== -->  <!-- 🇺🇸 US WORLD -->  <!-- ===================================================== -->  <section id="usWorld" class="world us hidden">
+    <div class="world-inner"><!-- ========================= -->
+  <!-- 🧭 US NAVBAR -->
+  <!-- ========================= -->
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <div class="brand us" onclick="goHome('us')">Aura English · US</div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-secondary" onclick="switchWorld('uk')">🇬🇧 UK World</button>
+      <button class="btn btn-danger" onclick="exitToPortal()">Exit</button>
+    </div>
+  </nav>
+
+  <!-- ========================= -->
+  <!-- 🏠 US HERO -->
+  <!-- ========================= -->
+
+  <section id="usHome" class="hero fade-in">
+    <div class="hero-left">
+      <h2 class="hero-title title-glow-us">Learn US English.<br />Sound Native. Think Native.</h2>
+      <p class="hero-subtitle">
+        This is the American English universe. Slang, grammar, pronunciation, rhythm, culture, shortcuts. <br />
+        Everything tuned for real-life US speech, not textbook NPC nonsense.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary-us" onclick="scrollToSection('usSynonyms')">Synonyms Engine</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('usCourses')">Courses</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-orb"></div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- 🔍 US SYNONYM SEARCHER -->
+  <!-- ========================= -->
+
+  <section id="usSynonyms" class="synonym-section fade-in">
+    <div class="synonym-header">
+      <div>
+        <div class="synonym-title title-glow-us">US Synonym Engine</div>
+        <div class="synonym-sub">Type a word. Get American-flavor replacements. You control the data later.</div>
+      </div>
+      <div>
+        <span style="opacity:0.6;font-size:13px;">Live Search · Editable Data · Chip UI</span>
+      </div>
     </div>
 
-    <script>
-        // --- THE MASSIVE DATA STRUCTURE ---
-        const SYNDICATE_DATA = {
-            us: {
-                title: "USA DIMENSION",
-                subtitle: "Elevate your dialect to Executive status.",
-                searchPlaceholder: "Search US Lexicon...",
-                btnText: "Switch to UK Kingdom 🇬🇧",
-                sections: [
-                    { id: "01", name: "Timeline Control ⏳", tag: "tenses" },
-                    { id: "02", name: "The No-S Club 🥛", tag: "uncount" },
-                    { id: "03", name: "Brain-Rot Lore 🧠", tag: "slang" },
-                    { id: "04", name: "Receiver Logic 🗣️", tag: "saytell" },
-                    { id: "05", name: "Spatial Funnel 📍", tag: "preps" },
-                    { id: "06", name: "Aura-Loss Log 💀", tag: "mistakes" },
-                    { id: "07", name: "Lexical Supremacy 💎", tag: "formal" },
-                    { id: "08", name: "Casual Combat 🔄", tag: "phrasal" },
-                    { id: "09", name: "Street Protocol 🎤", tag: "convos" },
-                    { id: "10", name: "Connected Flow ⚡", tag: "speech" },
-                    { id: "11", name: "Digital Shorthand 📱", tag: "acronyms" },
-                    { id: "12", name: "Confusion Matrix ♊", tag: "homophones" },
-                    { id: "13", name: "Weapon Engine ⚙️", tag: "pos" },
-                    { id: "14", name: "Native Ghosting Tips 💡", tag: "native" },
-                    { id: "15", name: "The Calibration 🎯", tag: "quiz" }
-                ],
-                synonyms: {
-                    good": ["Exquisite", "Bussin'", "Goated", "Top-tier", "Valid", "Fire", "Snatched", "Elite", "Superlative", "Clutch"],
-    "bad": ["Atrocious", "Mid", "Cooked", "Trash", "Dusty", "Wack", "Abysmal", "Deplorable", "Lame", "Busted"],
-    "very": ["Deadass", "Extremely", "Mad", "Hella", "Straight-up", "Incredibly", "Massively", "Profoundly", "Way", "Lowkey"],
-    "happy": ["Ecstatic", "Geeked", "Hyped", "Stoked", "Radiant", "Thriving", "Elated", "Vibing", "Jubilant", "Beaming"],
-    "sad": ["Down bad", "Despondent", "Bummed", "Melancholy", "Gutted", "Dejected", "Gloomy", "Blue", "Washed", "Heartbroken"],
-    "smart": ["Astute", "Big Brain", "Brilliant", "Savvy", "Wicked Smart", "Sharp", "Intellectual", "Gifted", "Sage", "Einstein"],
-    "stupid": ["Clueless", "Bird-brained", "Dense", "Vacuous", "Smooth-brain", "Ignorant", "Brain-dead", "Goofy", "Witless", "Dumb"],
-    "fast": ["Speedy", "Rapid", "Zooming", "Swift", "Expeditious", "Breakneck", "Zippy", "Hyper-speed", "Nimble", "Quick"],
-    "slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
-    "big": ["Massive", "Colossal", "Gargantuan", "Chunky", "Humongous", "Gigantic", "Substantial", "Immense", "Enormous", "Beefy"],
-    "small": ["Tiny", "Micro", "Petite", "Miniscule", "Bite-sized", "Diminutive", "Compact", "Teeny", "Puny", "Slight"],
-    "angry": ["Livid", "Fuming", "Salty", "Enraged", "Pressed", "Irate", "Heated", "Triggered", "Infuriated", "Resentful"],
-    "tired": ["Exhausted", "Spent", "Drained", "Beat", "Washed", "Fatigued", "Sleepy", "Weary", "Donezo", "Pooped"],
-    "cool": ["Chilled", "Aesthetic", "Rad", "Slick", "Sophisticated", "Iconic", "Swag", "Chill", "Dope", "Fly"],
-    "funny": ["Hilarious", "Comical", "Sending me", "Witty", "Humorous", "Uproarious", "Entertaining", "Goofy", "Sidesplitting", "Crack-up"]
-"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
-"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
-"rich": ["Loaded", "Wealthy", "Affluent", "Opulent", "Stacked", "Balling", "Moneyed", "Prosperous", "Well-off", "Plush"],
-"poor": ["Broke", "Destitute", "Penniless", "Struggling", "Down-and-out", "Indigent", "Hard-up", "Needy", "Bankrupt", "Skint"],
-"easy": ["Simple", "Light work", "Effortless", "Elementary", "Basic", "Straightforward", "Cinch", "Breeze", "Manageable", "Uncomplicated"],
-"hard": ["Formidable", "Strenuous", "Grueling", "Challenging", "Complex", "Demanding", "Tough", "Intricate", "Arduous", "Knotted"],
-"clean": ["Spotless", "Pristine", "Immaculate", "Snatched", "Spick-and-span", "Sanitized", "Sterile", "Unblemished", "Shiny", "Neat"],
-"dirty": ["Filthy", "Grungy", "Rank", "Grimey", "Polluted", "Squalid", "Sordid", "Nasty", "Muddy", "Vile"],
-"loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
-"quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
-                }
-            },
-            uk: {
-                title: "UK KINGDOM",
-                subtitle: "Master the Queen's English, mate.",
-                searchPlaceholder: "Search UK Lexicon, mate...",
-                btnText: "Switch to USA Dimension 🇺🇸",
-                sections: [
-                    { id: "01", name: "Royal Tenses ⏳", tag: "tenses" },
-                    { id: "02", name: "Proper Nouns 🥛", tag: "uncount" },
-                    { id: "03", name: "Chav vs. Posh 🧠", tag: "slang" },
-                    { id: "04", name: "Utterance Logic 🗣️", tag: "saytell" },
-                    { id: "05", name: "The Tube Map 📍", tag: "preps" },
-                    { id: "06", name: "Social Blunders 💀", tag: "mistakes" },
-                    { id: "07", name: "Aristocratic Lexicon 💎", tag: "formal" },
-                    { id: "08", name: "Pub Talk 🔄", tag: "phrasal" },
-                    { id: "09", name: "High Street Protocol 🎤", tag: "convos" },
-                    { id: "10", name: "RP Articulation ⚡", tag: "speech" },
-                    { id: "11", name: "Old Guard Shorthand 📱", tag: "acronyms" },
-                    { id: "12", name: "The King's Matrix ♊", tag: "homophones" },
-                    { id: "13", name: "Parliament Engine ⚙️", tag: "pos" },
-                    { id: "14", name: "Sarcasm Masterclass 💡", tag: "native" },
-                    { id: "15", name: "The Grand Quiz 🎯", tag: "quiz" }
-                ],
-                synonyms: {
-                    
-    "good": ["Brilliant", "Top-drawer", "Proper", "Splendid", "Ace", "Smashing", "Class", "Marvellous", "Mint", "Lovely"],
-    "bad": ["Rubbish", "Dodgy", "Ghastly", "Dreadful", "Grim", "Poor form", "Shoddy", "Knickers", "Abysmal", "Crap"],
-    "very": ["Properly", "Bloody", "Massively", "Extremely", "Dead", "Rightly", "Awfully(satirical)", "Terribly", "Jolly", "Rather"],
-    "happy": ["Chuffed", "Delighted", "Buzzing", "Over the moon", "Jubilant", "Tickled pink", "Beaming", "Thrilled", "Merry", "Chipper"],
-    "sad": ["Gutted", "Miserable", "Sorted", "Despondent", "Down in the dumps", "Melancholy", "Grievous", "Unhappy", "Forlorn", "Blue"],
-    "smart": ["Clever", "Sharp", "Brainy", "Spot on", "Astute", "Intellectual", "Witty", "Quick-witted", "Academic", "Knowledgeable"],
-    "stupid": ["Daft", "Dim", "Thick", "Gormless", "Vacuous", "Clueless", "Bird-brained", "Slow-witted", "Dense", "Witless"],
-    "fast": ["Speedy", "Rapid", "Swift", "Expeditious", "Quick", "Nipper", "Zippy", "Breakneck", "Pacy", "Nimble"],
-    "slow": ["Sluggish", "Leisurely", "Plodding", "Lagging", "Lethargic", "Creeping", "Dilatory", "Poky", "Tortoise-like", "Stagnant"],
-    "big": ["Massive", "Colossal", "Gargantuan", "Enormous", "Substantial", "Immense", "Large", "Whacking", "Hefty", "Great"],
-    "small": ["Tiny", "Petite", "Miniscule", "Diminutive", "Wee", "Compact", "Teeny", "Puny", "Slight", "Little"],
-    "angry": ["Livid", "Fuming", "Cross", "Enraged", "Irate", "Heated", "Triggered", "Infuriated", "Resentful", "Miffed"],
-    "tired": ["Knackered", "Exhausted", "Spent", "Drained", "Fatigued", "Weary", "Done in", "Shattered", "Tired out", "Worn out"],
-    "cool": ["Chilled", "Aesthetic", "Slick", "Sophisticated", "Legendary", "Iconic", "Swish", "Posh", "Smart", "Gucci"],
-    "funny": ["Hilarious", "Comical", "Witty", "Humorous", "Uproarious", "Entertaining", "Jocular", "Sidesplitting", "Amusing", "Droll"]
-"scared": ["Terrified", "Shook", "Petrified", "Fearful", "Anxious", "Intimidated", "Panicked", "Apprehensive", "Spooked", "Startled"],
-"boring": ["Dull", "Dry", "Monotonous", "Mid", "Tedious", "Pedestrian", "Plain", "Stale", "Humdrum", "Uninspired"],
-"rich": ["Loaded", "Wealthy", "Affluent", "Opulent", "Stacked", "Moneyed", "Prosperous", "Well-off", "Plush", "Flush"],
-"poor": ["Skint", "Destitute", "Penniless", "Struggling", "Broke", "Indigent", "Hard-up", "Needy", "Bankrupt", "Impecunious"],
-"easy": ["Simple", "Piece of cake", "Effortless", "Elementary", "Basic", "Straightforward", "Cinch", "Breeze", "Manageable", "Uncomplicated"],
-"hard": ["Formidable", "Strenuous", "Grueling", "Challenging", "Complex", "Demanding", "Tough", "Intricate", "Arduous", "Knotted"],
-"clean": ["Spotless", "Pristine", "Immaculate", "Spick-and-span", "Sanitized", "Sterile", "Unblemished", "Shiny", "Neat", "Tidy"],
-"dirty": ["Filthy", "Grungy", "Rank", "Grimey", "Polluted", "Squalid", "Sordid", "Nasty", "Muddy", "Vile"],
-"loud": ["Deafening", "Thunderous", "Blaring", "Boisterous", "Raucous", "Clamorous", "Vociferous", "Piercing", "Ear-splitting", "Noisy"],
-"quiet": ["Silent", "Hushed", "Muted", "Serene", "Tranquil", "Peaceful", "Still", "Inaudible", "Low-key", "Reticent"]
+    <div class="synonym-search-row">
+      <input id="usSynonymInput" class="synonym-input" type="text" placeholder="Type a word (e.g., cool, angry, fast...)" oninput="searchSynonyms('us')" />
+      <button class="btn btn-primary-us" onclick="searchSynonyms('us')">Search</button>
+      <button class="btn btn-secondary" onclick="clearSynonyms('us')">Clear</button>
+    </div>
 
-                }
-            }
-        };
+    <div id="usSynonymResults" class="synonym-results">
+      <!-- Results injected dynamically -->
+    </div>
+  </section>
 
-        let currentMode = 'us';
+  <!-- ========================= -->
+  <!-- 📚 US COURSES GRID -->
+  <!-- ========================= -->
 
-        // --- CORE FUNCTIONS ---
+  <section id="usCourses" class="courses-section fade-in">
+    <div class="courses-header">
+      <div>
+        <div class="courses-title title-glow-us">US Courses</div>
+        <div class="synonym-sub">15 sections. Full American curriculum. Content coming later.</div>
+      </div>
+    </div>
 
-        function renderGrid() {
-            const grid = document.getElementById('curriculum-grid');
-            grid.innerHTML = '';
-            const data = SYNDICATE_DATA[currentMode];
+    <div class="courses-grid">
 
-            data.sections.forEach(sec => {
-                const card = document.createElement('div');
-                card.className = 'course-card glass-panel';
-                card.onclick = () => openCourse(sec.name);
-                card.innerHTML = `
-                    <div class="card-id">${sec.id}</div>
-                    <div class="card-title">${sec.name}</div>
-                `;
-                grid.appendChild(card);
-            });
-        }
+      <!-- ============ COURSE 01 ============ -->
+      <div class="course-card" onclick="openCourse('us','tenses')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Timeline Control ⏳</div>
+        <div class="course-card-sub">All 12 Tenses · Logic · Native Patterns</div>
+      </div>
 
-        function switchDimension() {
-            const body = document.body;
-            const switcher = document.querySelector('.portal-switcher');
-            
-            if (currentMode === 'us') {
-                currentMode = 'uk';
-                body.className = 'uk-mode';
-            } else {
-                currentMode = 'us';
-                body.className = 'us-mode';
-            }
+      <!-- ============ COURSE 02 ============ -->
+      <div class="course-card" onclick="openCourse('us','uncount')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">The No-S Club 🥛</div>
+        <div class="course-card-sub">Uncountables · Counting Hacks</div>
+      </div>
 
-            const data = SYNDICATE_DATA[currentMode];
-            document.getElementById('hero-title').innerText = data.title;
-            document.getElementById('hero-subtitle').innerText = data.subtitle;
-            document.getElementById('synonym-input').placeholder = data.searchPlaceholder;
-            switcher.innerText = data.btnText;
-            
-            renderGrid();
-            document.getElementById('search-results').innerHTML = '';
-        }
+      <!-- ============ COURSE 03 ============ -->
+      <div class="course-card" onclick="openCourse('us','slang')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Brain-Rot Lore 🧠</div>
+        <div class="course-card-sub">2025 US Slang · Real Usage</div>
+      </div>
 
-        function openCourse(title) {
-            document.getElementById('overlay-title').innerText = title;
-            document.getElementById('course-overlay').style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+      <!-- ============ COURSE 04 ============ -->
+      <div class="course-card" onclick="openCourse('us','saytell')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Receiver Logic 🗣️</div>
+        <div class="course-card-sub">Say vs Tell · Fixed Phrases</div>
+      </div>
 
-        function closeCourse() {
-            document.getElementById('course-overlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
+      <!-- ============ COURSE 05 ============ -->
+      <div class="course-card" onclick="openCourse('us','preps')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Spatial Funnel 📍</div>
+        <div class="course-card-sub">In / On / At · Precision</div>
+      </div>
 
-        function triggerSearch() {
-            const val = document.getElementById('synonym-input').value.toLowerCase();
-            const resultsDiv = document.getElementById('search-results');
-            resultsDiv.innerHTML = '';
+      <!-- ============ COURSE 06 ============ -->
+      <div class="course-card" onclick="openCourse('us','mistakes')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Aura-Loss Log 💀</div>
+        <div class="course-card-sub">Common Errors · Fixes</div>
+      </div>
 
-            const db = SYNDICATE_DATA[currentMode].synonyms;
+      <!-- ============ COURSE 07 ============ -->
+      <div class="course-card" onclick="openCourse('us','formal')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Lexical Supremacy 💎</div>
+        <div class="course-card-sub">High-Tier Synonyms</div>
+      </div>
 
-            if (db[val]) {
-                db[val].forEach(syn => {
-                    const pill = document.createElement('div');
-                    pill.className = 'gold-pill';
-                    pill.innerText = syn;
-                    resultsDiv.appendChild(pill);
-                });
-            } else {
-                resultsDiv.innerHTML = '<p style="color: #444;">No high-aura synonyms found for this term yet.</p>';
-            }
-        }
+      <!-- ============ COURSE 08 ============ -->
+      <div class="course-card" onclick="openCourse('us','phrasal')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Casual Combat 🔄</div>
+        <div class="course-card-sub">Phrasal Verbs · US Usage</div>
+      </div>
 
-        // INIT
-        renderGrid();
+      <!-- ============ COURSE 09 ============ -->
+      <div class="course-card" onclick="openCourse('us','convos')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Street Protocol 🎤</div>
+        <div class="course-card-sub">Real Dialogues · US Flow</div>
+      </div>
 
-    </script>
-</body>
-</html>
+      <!-- ============ COURSE 10 ============ -->
+      <div class="course-card" onclick="openCourse('us','speech')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Connected Flow ⚡</div>
+        <div class="course-card-sub">Linking · Reductions · Rhythm</div>
+      </div>
+
+      <!-- ============ COURSE 11 ============ -->
+      <div class="course-card" onclick="openCourse('us','acronyms')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Digital Shorthand 📱</div>
+        <div class="course-card-sub">Modern Acronyms</div>
+      </div>
+
+      <!-- ============ COURSE 12 ============ -->
+      <div class="course-card" onclick="openCourse('us','homophones')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Confusion Matrix ♊</div>
+        <div class="course-card-sub">Their/There · Bark/Bark</div>
+      </div>
+
+      <!-- ============ COURSE 13 ============ -->
+      <div class="course-card" onclick="openCourse('us','pos')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Weapon Engine ⚙️</div>
+        <div class="course-card-sub">Parts of Speech · Syntax</div>
+      </div>
+
+      <!-- ============ COURSE 14 ============ -->
+      <div class="course-card" onclick="openCourse('us','quiz')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Calibration 🎯</div>
+        <div class="course-card-sub">Interactive Quiz</div>
+      </div>
+
+      <!-- ============ COURSE 15 ============ -->
+      <div class="course-card" onclick="openCourse('us','native')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Ghosting Tips 💡</div>
+        <div class="course-card-sub">Native Shortcuts</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- 📦 US COURSE VIEW (EMPTY) -->
+  <!-- ========================= -->
+
+  <section id="usCourseView" class="course-view hidden fade-in">
+    <div class="course-view-header">
+      <div class="course-view-title title-glow-us" id="usCourseTitle">Course</div>
+      <button class="btn btn-secondary" onclick="backToCourses('us')">🔙 Back</button>
+    </div>
+    <div class="course-view-body">
+      US Course content goes here later. You’ll drop massive data blocks into this section.
+    </div>
+  </section>
+
+  <footer class="footer">Aura English · US World · All rights reserved</footer>
+
+</div>
+
+  </section>  <!-- ===================================================== -->  <!-- 🇬🇧 UK WORLD -->  <!-- ===================================================== -->  <section id="ukWorld" class="world uk hidden">
+    <div class="world-inner"><!-- ========================= -->
+  <!-- 🧭 UK NAVBAR -->
+  <!-- ========================= -->
+
+  <nav class="navbar">
+    <div class="navbar-left">
+      <div class="brand uk" onclick="goHome('uk')">Aura English · UK</div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn btn-secondary" onclick="switchWorld('us')">🇺🇸 US World</button>
+      <button class="btn btn-danger" onclick="exitToPortal()">Exit</button>
+    </div>
+  </nav>
+
+  <!-- ========================= -->
+  <!-- 🏠 UK HERO -->
+  <!-- ========================= -->
+
+  <section id="ukHome" class="hero fade-in">
+    <div class="hero-left">
+      <h2 class="hero-title title-glow-uk">Learn UK English, mate.<br />Proper Native Energy.</h2>
+      <p class="hero-subtitle">
+        This is the British English universe. UK grammar, pronunciation, slang, rhythm, culture. <br />
+        Built for real UK speech, not dusty textbook vibes.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary-uk" onclick="scrollToSection('ukSynonyms')">UK Synonyms</button>
+        <button class="btn btn-secondary" onclick="scrollToSection('ukCourses')">Courses</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-orb"></div>
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- 🔍 UK SYNONYM SEARCHER -->
+  <!-- ========================= -->
+
+  <section id="ukSynonyms" class="synonym-section fade-in">
+    <div class="synonym-header">
+      <div>
+        <div class="synonym-title title-glow-uk">UK Synonym Engine</div>
+        <div class="synonym-sub">British-flavor synonyms. Separate database. Same power.</div>
+      </div>
+      <div>
+        <span style="opacity:0.6;font-size:13px;">Live Search · Editable Data · Chip UI</span>
+      </div>
+    </div>
+
+    <div class="synonym-search-row">
+      <input id="ukSynonymInput" class="synonym-input" type="text" placeholder="Type a word (e.g., clever, angry, fast...)" oninput="searchSynonyms('uk')" />
+      <button class="btn btn-primary-uk" onclick="searchSynonyms('uk')">Search</button>
+      <button class="btn btn-secondary" onclick="clearSynonyms('uk')">Clear</button>
+    </div>
+
+    <div id="ukSynonymResults" class="synonym-results">
+      <!-- Results injected dynamically -->
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- 📚 UK COURSES GRID -->
+  <!-- ========================= -->
+
+  <section id="ukCourses" class="courses-section fade-in">
+    <div class="courses-header">
+      <div>
+        <div class="courses-title title-glow-uk">UK Courses</div>
+        <div class="synonym-sub">15 sections. Full British curriculum. Content coming later.</div>
+      </div>
+    </div>
+
+    <div class="courses-grid">
+
+      <!-- ============ COURSE 01 ============ -->
+      <div class="course-card" onclick="openCourse('uk','tenses')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Timeline Control ⏳</div>
+        <div class="course-card-sub">All 12 Tenses · Logic · Native Patterns</div>
+      </div>
+
+      <!-- ============ COURSE 02 ============ -->
+      <div class="course-card" onclick="openCourse('uk','uncount')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">The No-S Club 🥛</div>
+        <div class="course-card-sub">Uncountables · Counting Hacks</div>
+      </div>
+
+      <!-- ============ COURSE 03 ============ -->
+      <div class="course-card" onclick="openCourse('uk','slang')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Brain-Rot Lore 🧠</div>
+        <div class="course-card-sub">2025 UK Slang · Real Usage</div>
+      </div>
+
+      <!-- ============ COURSE 04 ============ -->
+      <div class="course-card" onclick="openCourse('uk','saytell')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Receiver Logic 🗣️</div>
+        <div class="course-card-sub">Say vs Tell · Fixed Phrases</div>
+      </div>
+
+      <!-- ============ COURSE 05 ============ -->
+      <div class="course-card" onclick="openCourse('uk','preps')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Spatial Funnel 📍</div>
+        <div class="course-card-sub">In / On / At · Precision</div>
+      </div>
+
+      <!-- ============ COURSE 06 ============ -->
+      <div class="course-card" onclick="openCourse('uk','mistakes')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Aura-Loss Log 💀</div>
+        <div class="course-card-sub">Common Errors · Fixes</div>
+      </div>
+
+      <!-- ============ COURSE 07 ============ -->
+      <div class="course-card" onclick="openCourse('uk','formal')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Lexical Supremacy 💎</div>
+        <div class="course-card-sub">High-Tier Synonyms</div>
+      </div>
+
+      <!-- ============ COURSE 08 ============ -->
+      <div class="course-card" onclick="openCourse('uk','phrasal')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Casual Combat 🔄</div>
+        <div class="course-card-sub">Phrasal Verbs · UK Usage</div>
+      </div>
+
+      <!-- ============ COURSE 09 ============ -->
+      <div class="course-card" onclick="openCourse('uk','convos')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Street Protocol 🎤</div>
+        <div class="course-card-sub">Real Dialogues · UK Flow</div>
+      </div>
+
+      <!-- ============ COURSE 10 ============ -->
+      <div class="course-card" onclick="openCourse('uk','speech')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Connected Flow ⚡</div>
+        <div class="course-card-sub">Linking · Reductions · Rhythm</div>
+      </div>
+
+      <!-- ============ COURSE 11 ============ -->
+      <div class="course-card" onclick="openCourse('uk','acronyms')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Digital Shorthand 📱</div>
+        <div class="course-card-sub">Modern Acronyms</div>
+      </div>
+
+      <!-- ============ COURSE 12 ============ -->
+      <div class="course-card" onclick="openCourse('uk','homophones')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Confusion Matrix ♊</div>
+        <div class="course-card-sub">Their/There · Bark/Bark</div>
+      </div>
+
+      <!-- ============ COURSE 13 ============ -->
+      <div class="course-card" onclick="openCourse('uk','pos')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Weapon Engine ⚙️</div>
+        <div class="course-card-sub">Parts of Speech · Syntax</div>
+      </div>
+
+      <!-- ============ COURSE 14 ============ -->
+      <div class="course-card" onclick="openCourse('uk','quiz')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Calibration 🎯</div>
+        <div class="course-card-sub">Interactive Quiz</div>
+      </div>
+
+      <!-- ============ COURSE 15 ============ -->
+      <div class="course-card" onclick="openCourse('uk','native')">
+        <div class="course-lock">🔒</div>
+        <div class="course-card-title">Ghosting Tips 💡</div>
+        <div class="course-card-sub">Native Shortcuts</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================= -->
+  <!-- 📦 UK COURSE VIEW (EMPTY) -->
+  <!-- ========================= -->
+
+  <section id="ukCourseView" class="course-view hidden fade-in">
+    <div class="course-view-header">
+      <div class="course-view-title title-glow-uk" id="ukCourseTitle">Course</div>
+      <button class="btn btn-secondary" onclick="backToCourses('uk')">🔙 Back</button>
+    </div>
+    <div class="course-view-body">
+      UK Course content goes here later. You’ll drop massive data blocks into this section.
+    </div>
+  </section>
+
+  <footer class="footer">Aura English · UK World · All rights reserved</footer>
+
+</div>
+
+  </section>  <!-- ===================================================== -->  <!-- 🧠 CORE JAVASCRIPT ENGINE -->  <!-- ===================================================== -->  <script>
+
+    /* ===================================================== */
+    /* 🌎 WORLD NAVIGATION CORE */
+    /* ===================================================== */
+
+    const entryPortal = document.getElementById('entryPortal');
+    const usWorld = document.getElementById('usWorld');
+    const ukWorld = document.getElementById('ukWorld');
+
+    function enterWorld(world) {
+      entryPortal.classList.add('hidden');
+      if (world === 'us') {
+        usWorld.classList.remove('hidden');
+        ukWorld.classList.add('hidden');
+      } else if (world === 'uk') {
+        ukWorld.classList.remove('hidden');
+        usWorld.classList.add('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchWorld(world) {
+      if (world === 'us') {
+        usWorld.classList.remove('hidden');
+        ukWorld.classList.add('hidden');
+      } else if (world === 'uk') {
+        ukWorld.classList.remove('hidden');
+        usWorld.classList.add('hidden');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function exitToPortal() {
+      usWorld.classList.add('hidden');
+      ukWorld.classList.add('hidden');
+      entryPortal.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function goHome(world) {
+      if (world === 'us') {
+        document.getElementById('usCourseView').classList.add('hidden');
+        document.getElementById('usCourses').classList.remove('hidden');
+        document.getElementById('usHome').scrollIntoView({ behavior: 'smooth' });
+      } else if (world === 'uk') {
+        document.getElementById('ukCourseView').classList.add('hidden');
+        document.getElementById('ukCourses').classList.remove('hidden');
+        document.getElementById('ukHome').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    /* ===================================================== */
+    /* 📚 COURSE NAVIGATION ENGINE */
+    /* ===================================================== */
+
+    function openCourse(world, courseId) {
+      if (world === 'us') {
+        document.getElementById('usCourses').classList.add('hidden');
+        const view = document.getElementById('usCourseView');
+        view.classList.remove('hidden');
+        document.getElementById('usCourseTitle').textContent = courseTitleMap[courseId] || 'Course';
+        view.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      if (world === 'uk') {
+        document.getElementById('ukCourses').classList.add('hidden');
+        const view = document.getElementById('ukCourseView');
+        view.classList.remove('hidden');
+        document.getElementById('ukCourseTitle').textContent = courseTitleMap[courseId] || 'Course';
+        view.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function backToCourses(world) {
+      if (world === 'us') {
+        document.getElementById('usCourseView').classList.add('hidden');
+        document.getElementById('usCourses').classList.remove('hidden');
+        document.getElementById('usCourses').scrollIntoView({ behavior: 'smooth' });
+      }
+
+      if (world === 'uk') {
+        document.getElementById('ukCourseView').classList.add('hidden');
+        document.getElementById('ukCourses').classList.remove('hidden');
+        document.getElementById('ukCourses').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    const courseTitleMap = {
+      tenses: 'Timeline Control ⏳',
+      uncount: 'The No-S Club 🥛',
+      slang: 'Brain-Rot Lore 🧠',
+      saytell: 'Receiver Logic 🗣️',
+      preps: 'Spatial Funnel 📍',
+      mistakes: 'Aura-Loss Log 💀',
+      formal: 'Lexical Supremacy 💎',
+      phrasal: 'Casual Combat 🔄',
+      convos: 'Street Protocol 🎤',
+      speech: 'Connected Flow ⚡',
+      acronyms: 'Digital Shorthand 📱',
+      homophones: 'Confusion Matrix ♊',
+      pos: 'Weapon Engine ⚙️',
+      quiz: 'Calibration 🎯',
+      native: 'Ghosting Tips 💡'
+    };
+
+    /* ===================================================== */
+    /* 🔍 SYNONYM SEARCH ENGINE (US + UK SEPARATE DATASETS) */
+    /* ===================================================== */
+
+    const usSynonymData = {
+      cool: ['awesome', 'dope', 'slick', 'chill', 'fire', 'lit', 'clean', 'smooth'],
+      angry: ['mad', 'pissed', 'heated', 'irritated', 'furious', 'salty'],
+      fast: ['quick', 'rapid', 'speedy', 'swift', 'turbo', 'zooming'],
+      good: ['great', 'solid', 'excellent', 'clean', 'legit', 'top-tier'],
+      bad: ['trash', 'rough', 'weak', 'mid', 'awful', 'broken'],
+      big: ['huge', 'massive', 'giant', 'heavy', 'stacked', 'mega'],
+      small: ['tiny', 'mini', 'micro', 'compact', 'short'],
+      smart: ['sharp', 'bright', 'clever', 'brainy', 'on-point'],
+      rich: ['loaded', 'stacked', 'wealthy', 'ballin', 'flush'],
+      poor: ['broke', 'strapped', 'low-cash', 'skint'],
+    };
+
+    const ukSynonymData = {
+      cool: ['brilliant', 'proper', 'sound', 'mint', 'class', 'tidy'],
+      angry: ['cross', 'fuming', 'livid', 'irritated', 'peevish'],
+      fast: ['quick', 'rapid', 'speedy', 'swift', 'nippy'],
+      good: ['brilliant', 'smashing', 'lovely', 'top-notch', 'proper'],
+      bad: ['rubbish', 'naff', 'dodgy', 'poor', 'pants'],
+      big: ['huge', 'massive', 'giant', 'proper', 'whopping'],
+      small: ['tiny', 'wee', 'little', 'compact'],
+      smart: ['clever', 'bright', 'sharp', 'brainy'],
+      rich: ['wealthy', 'loaded', 'flush', 'well-off'],
+      poor: ['skint', 'broke', 'hard-up'],
+    };
+
+    function searchSynonyms(world) {
+      const input = world === 'us' ? document.getElementById('usSynonymInput') : document.getElementById('ukSynonymInput');
+      const resultsBox = world === 'us' ? document.getElementById('usSynonymResults') : document.getElementById('ukSynonymResults');
+      const data = world === 'us' ? usSynonymData : ukSynonymData;
+
+      const query = input.value.trim().toLowerCase();
+      resultsBox.innerHTML = '';
+
+      if (!query) return;
+
+      if (data[query]) {
+        data[query].forEach(word => {
+          const chip = document.createElement('div');
+          chip.className = 'synonym-chip';
+          chip.textContent = word;
+          chip.onclick = () => {
+            input.value = word;
+            searchSynonyms(world);
+          };
+          resultsBox.appendChild(chip);
+        });
+      } else {
+        const chip = document.createElement('div');
+        chip.className = 'synonym-chip';
+        chip.textContent = 'No synonyms yet. You can add this word later.';
+        resultsBox.appendChild(chip);
+      }
+    }
+
+    function clearSynonyms(world) {
+      if (world === 'us') {
+        document.getElementById('usSynonymInput').value = '';
+        document.getElementById('usSynonymResults').innerHTML = '';
+      }
+
+      if (world === 'uk') {
+        document.getElementById('ukSynonymInput').value = '';
+        document.getElementById('ukSynonymResults').innerHTML = '';
+      }
+    }
+
+  </script></body>
+            </html>
