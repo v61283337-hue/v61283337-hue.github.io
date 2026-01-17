@@ -1450,114 +1450,108 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
         document.getElementById('ukSynonymResults').innerHTML = '';
       }
     }
-<div class="site-comment-box">
-  <h4>💬 Got advice?</h4>
-  <textarea id="siteCommentInput" placeholder="Drop your thoughts..."></textarea>
-  <button onclick="submitSiteComment()">Send</button>
-  <div id="siteCommentResult"></div>
+<!-- ===== Public Advice Box (Footer) ===== -->
+<div class="footer-advice-box">
+  <p class="advice-intro">
+    💬 We've been given a lot of useful advice. Wanna give us some advice? Please, do.
+  </p>
+
+  <textarea id="adviceInput" placeholder="Write your advice here..."></textarea>
+  <button onclick="submitAdvice()">Send</button>
+
+  <p id="thankYouMessage" class="thank-you hidden">
+    Thank you so much! We will definitely consider this 😊
+  </p>
+
+  <div id="adviceWall" class="advice-wall"></div>
 </div>
 
 <script>
-  function submitSiteComment() {
-    const input = document.getElementById("siteCommentInput");
-    const msg = input.value.trim();
-    if (!msg) return;
+  const adviceList = [];
+
+  function submitAdvice() {
+    const input = document.getElementById("adviceInput");
+    const text = input.value.trim();
+    if (!text) return;
+
+    adviceList.push(text);
     input.value = "";
-    document.getElementById("siteCommentResult").innerHTML =
-      "Thank you so much for the advice! We'll try to consider it 😊";
+
+    document.getElementById("thankYouMessage").classList.remove("hidden");
+    renderAdvice();
+  }
+
+  function renderAdvice() {
+    const wall = document.getElementById("adviceWall");
+    wall.innerHTML = "";
+    adviceList.forEach(a => {
+      const div = document.createElement("div");
+      div.className = "advice-entry";
+      div.textContent = a;
+      wall.appendChild(div);
+    });
   }
 </script>
 
 <style>
-.site-comment-box {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  width: 230px;
-  padding: 10px;
-  background: #fffbe6;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  font-size: 13px;
-  z-index: 9999;
+.footer-advice-box {
+  margin-top: 60px;
+  padding: 16px;
+  border-top: 1px solid #ddd;
+  background: #fafafa;
+  font-size: 14px;
 }
-.site-comment-box textarea {
+
+.advice-intro {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.footer-advice-box textarea {
   width: 100%;
-  height: 45px;
+  height: 55px;
   border-radius: 6px;
   border: 1px solid #ccc;
   padding: 6px;
   resize: none;
+  font-family: inherit;
 }
-.site-comment-box button {
+
+.footer-advice-box button {
   margin-top: 6px;
-  width: 100%;
-  border: none;
+  padding: 6px 12px;
   border-radius: 6px;
+  border: none;
   background: #111;
   color: white;
-  padding: 6px;
   cursor: pointer;
 }
-#siteCommentResult {
+
+.thank-you {
   margin-top: 6px;
-  font-size: 12px;
   color: green;
-}
-</style><div class="site-comment-box">
-  <h4>💬 Got advice?</h4>
-  <textarea id="siteCommentInput" placeholder="Drop your thoughts..."></textarea>
-  <button onclick="submitSiteComment()">Send</button>
-  <div id="siteCommentResult"></div>
-</div>
-
-<script>
-  function submitSiteComment() {
-    const input = document.getElementById("siteCommentInput");
-    const msg = input.value.trim();
-    if (!msg) return;
-    input.value = "";
-    document.getElementById("siteCommentResult").innerHTML =
-      "Thank you so much for the advice! We'll try to consider it 😊";
-  }
-</script>
-
-<style>
-.site-comment-box {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  width: 230px;
-  padding: 10px;
-  background: #fffbe6;
-  border-radius: 10px;
-  border: 1px solid #ccc;
   font-size: 13px;
-  z-index: 9999;
 }
-.site-comment-box textarea {
-  width: 100%;
-  height: 45px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+
+.hidden {
+  display: none;
+}
+
+.advice-wall {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.advice-entry {
+  background: #eee;
   padding: 6px;
-  resize: none;
-}
-.site-comment-box button {
-  margin-top: 6px;
-  width: 100%;
-  border: none;
   border-radius: 6px;
-  background: #111;
-  color: white;
-  padding: 6px;
-  cursor: pointer;
+  font-size: 13px;
 }
-#siteCommentResult {
-  margin-top: 6px;
-  font-size: 12px;
-  color: green;
-}
+</style>
+
 </style>
   </script></body>
             </html>
