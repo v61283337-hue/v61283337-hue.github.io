@@ -1228,187 +1228,168 @@
     /* 🔍 SYNONYM SEARCH ENGINE (US + UK SEPARATE DATASETS) */
     /* ===================================================== */
 
-    const usSynonymData = {
-      cool: ['awesome', 'dope', 'slick', 'chill', 'fire', 'lit', 'clean', 'smooth'],
-      angry: ['mad', 'pissed', 'heated', 'irritated', 'furious', 'salty'],
-      fast: ['quick', 'rapid', 'speedy', 'swift', 'turbo', 'zooming'],
-      good: ['great', 'solid', 'excellent', 'clean', 'legit', 'top-tier'],
-      bad: ['trash', 'rough', 'weak', 'mid', 'awful', 'broken'],
-      big: ['huge', 'massive', 'giant', 'heavy', 'stacked', 'mega'],
-      small: ['tiny', 'mini', 'micro', 'compact', 'short'],
-      smart: ['sharp', 'bright', 'clever', 'brainy', 'on-point'],
-      rich: ['loaded', 'stacked', 'wealthy', 'ballin', 'flush'],
-      poor: ['broke', 'strapped', 'low-cash', 'skint'],
-      ace: ["champ", "winner", "top-dog", "king", "legend"],
-admire: ["respect", "idolize", "revere", "appreciate", "dig"],
-alert: ["aware", "watchful", "attentive", "sharp", "keen"],
-angry: ["irate", "enraged", "heated", "mad", "fuming"],
-awesome: ["sick", "crazy", "insane", "amazing", "legendary"],
-baby: ["kid", "child", "babe", "tiny", "small fry"],
-badass: ["monster", "beast", "demon", "hero", "freak"],
-beautiful: ["gorgeous", "stunning", "hot", "banging", "lit"],
-big: ["huge", "massive", "giant", "enormous", "colossal"],
-boring: ["dull", "lame", "meh", "dry", "unfun"],
-brave: ["fearless", "bold", "heroic", "daring", "gutsy"],
-bright: ["luminous", "smart", "vivid", "radiant", "sparkly"],
-broken: ["shattered", "wrecked", "damaged", "fucked", "cracked"],
-busy: ["swamped", "occupied", "tied-up", "overloaded", "jammed"],
-calm: ["chill", "relaxed", "mellow", "serene", "peaceful"],
-cheap: ["broke-ass", "budget", "low-cost", "affordable", "shitty price"],
-clean: ["tidy", "neat", "polished", "spotless", "fresh"],
-cold: ["freezing", "icy", "chilly", "frosty", "crisp"],
-crazy: ["insane", "bonkers", "wild", "nuts", "mental"],
-dangerous: ["risky", "hazardous", "scary", "deadly", "perilous"],
-dark: ["gloomy", "shadowy", "murky", "dim", "black"],
-dead: ["gone", "expired", "deceased", "croaked", "kaput"],
-delicious: ["tasty", "yummy", "scrumptious", "mouthwatering", "fire"],
-dirty: ["filthy", "grimy", "messy", "nasty", "gross"],
-dumb: ["stupid", "idiotic", "clueless", "dense", "slow"],
-easy: ["simple", "effortless", "piece-of-cake", "straightforward", "smooth"],
-empty: ["bare", "vacant", "hollow", "void", "bare-ass"],
-excited: ["hyped", "pumped", "amped", "stoked", "lit"],
-fast: ["speedy", "quick", "rapid", "zooming", "blazing"],
-fat: ["chunky", "thick", "heavyset", "meaty", "plump"],
-fierce: ["ferocious", "savage", "wild", "intense", "vicious"],
-friendly: ["kind", "amiable", "cool", "chill", "pleasant"],
-fun: ["dope", "lit", "amazing", "hilarious", "epic"],
-funny: ["hilarious", "joke-y", "witty", "goofy", "comic"],
-good: ["great", "fantastic", "solid", "excellent", "legit"],
-happy: ["joyful", "cheerful", "stoked", "pumped", "elated"],
-hard: ["tough", "rigid", "solid", "rough", "gritty"],
-hardcore: ["extreme", "insane", "brutal", "fierce", "intense"],
-hot: ["blazing", "fiery", "steamy", "banging", "sexy"],
-hungry: ["starving", "famished", "peckish", "ravenous", "craving"],
-important: ["vital", "crucial", "key", "essential", "critical"],
-interesting: ["fascinating", "cool", "captivating", "dope", "wild"],
-jealous: ["envious", "green-eyed", "resentful", "covetous", "bitter"],
-lazy: ["slothful", "slow", "chill", "unmotivated", "dragging"],
-light: ["bright", "luminous", "radiant", "glowy", "airy"],
-little: ["tiny", "small", "mini", "wee", "pocket"],
-lonely: ["alone", "isolated", "solo", "abandoned", "forsaken"],
-loud: ["booming", "blaring", "rowdy", "raging", "thundering"],
-love: ["adore", "cherish", "dig", "fancy", "worship"],
-mad: ["angry", "pissed", "heated", "furious", "irate"],
-mean: ["cruel", "ruthless", "harsh", "evil", "spiteful"],
-nice: ["pleasant", "friendly", "sweet", "cool", "decent"],
-old: ["ancient", "aged", "vintage", "elderly", "retro"],
-poor: ["broke", "strapped", "low-cash", "skint", "destitute"],
-pretty: ["cute", "beautiful", "hot", "stunning", "banging"],
-rich: ["loaded", "stacked", "wealthy", "ballin", "flush"],
-sad: ["down", "blue", "unhappy", "depressed", "gloomy"],
-safe: ["secure", "protected", "solid", "stable", "locked"],
-scary: ["frightening", "terrifying", "creepy", "spooky", "hair-raising"],
-serious: ["grave", "stern", "intense", "important", "solemn"],
-short: ["tiny", "mini", "brief", "compact", "little"],
-shy: ["timid", "bashful", "reserved", "quiet"],
-sick: ["ill", "unwell", "dope", "awesome", "lit"],
-slow: ["sluggish", "laggy", "lazy", "slowed", "dragging"],
-small: ["tiny", "mini", "wee", "compact", "short"],
-smart: ["bright", "clever", "sharp", "brainy"],
-strong: ["powerful", "tough", "mighty", "solid", "sturdy"],
-stupid: ["dumb", "idiotic", "dense", "foolish", "clueless"],
-sweet: ["nice", "cute", "adorable", "pleasant", "sugary"],
-tough: ["hard", "durable", "resilient", "gritty", "rough"],
-ugly: ["hideous", "gross", "nasty", "rough"],
-weak: ["frail", "soft", "fragile", "flimsy", "squishy"],
-weird: ["strange", "bizarre", "wacky", "odd", "quirky"],
-wet: ["damp", "moist", "soggy", "drippy", "sloppy"],
-wild: ["crazy", "insane", "feral", "unhinged", "mad"],
-young: ["youthful", "juvenile", "fresh", "new", "teeny"],
-zany: ["crazy", "wacky", "odd", "quirky", "funny"],
-zoom: ["speed", "dash", "rush", "blast", "jet"]
-    };
+    const synonymsUS = {
+  awesome: ["dope", "slick", "chill", "fire", "lit", "clean", "smooth", "legendary"],
+  angry: ["mad", "pissed", "heated", "irritated", "furious", "salty", "irate", "fuming"],
+  fast: ["quick", "rapid", "speedy", "swift", "turbo", "zooming", "blazing"],
+  good: ["great", "solid", "excellent", "clean", "legit", "top-tier", "fantastic"],
+  bad: ["trash", "rough", "weak", "mid", "awful", "broken", "garbage"],
+  big: ["huge", "massive", "giant", "enormous", "colossal", "mega"],
+  small: ["tiny", "mini", "micro", "compact", "short", "wee"],
+  smart: ["sharp", "bright", "clever", "brainy", "on-point"],
+  rich: ["loaded", "stacked", "wealthy", "ballin", "flush"],
+  poor: ["broke", "strapped", "low-cash", "skint", "destitute"],
+  ace: ["champ", "winner", "top-dog", "king", "legend"],
+  admire: ["respect", "idolize", "revere", "appreciate", "dig"],
+  alert: ["aware", "watchful", "attentive", "sharp", "keen"],
+  baby: ["kid", "child", "babe", "tiny", "small fry"],
+  badass: ["monster", "beast", "demon", "hero", "freak"],
+  beautiful: ["gorgeous", "stunning", "hot", "banging", "lit"],
+  boring: ["dull", "lame", "meh", "dry", "unfun"],
+  brave: ["fearless", "bold", "heroic", "daring", "gutsy"],
+  bright: ["luminous", "smart", "vivid", "radiant", "sparkly"],
+  broken: ["shattered", "wrecked", "damaged", "fucked", "cracked"],
+  busy: ["swamped", "occupied", "tied-up", "overloaded", "jammed"],
+  calm: ["chill", "relaxed", "mellow", "serene", "peaceful"],
+  cheap: ["budget", "low-cost", "affordable", "bargain", "discount"],
+  clean: ["tidy", "neat", "polished", "spotless", "fresh"],
+  cold: ["freezing", "icy", "chilly", "frosty", "crisp"],
+  crazy: ["insane", "bonkers", "wild", "nuts", "mental"],
+  dangerous: ["risky", "hazardous", "scary", "deadly", "perilous"],
+  dark: ["gloomy", "shadowy", "murky", "dim", "black"],
+  dead: ["gone", "expired", "deceased", "croaked", "kaput"],
+  delicious: ["tasty", "yummy", "scrumptious", "mouthwatering", "fire"],
+  dirty: ["filthy", "grimy", "messy", "nasty", "gross"],
+  dumb: ["stupid", "idiotic", "clueless", "dense", "slow"],
+  easy: ["simple", "effortless", "piece-of-cake", "straightforward", "smooth"],
+  empty: ["bare", "vacant", "hollow", "void"],
+  excited: ["hyped", "pumped", "amped", "stoked", "lit"],
+  fat: ["chunky", "thick", "heavyset", "meaty", "plump"],
+  fierce: ["ferocious", "savage", "wild", "intense", "vicious"],
+  friendly: ["kind", "amiable", "cool", "chill", "pleasant"],
+  fun: ["dope", "lit", "amazing", "hilarious", "epic"],
+  funny: ["hilarious", "witty", "goofy", "comic", "jokey"],
+  happy: ["joyful", "cheerful", "stoked", "pumped", "elated"],
+  hard: ["tough", "rigid", "solid", "rough", "gritty"],
+  hardcore: ["extreme", "insane", "brutal", "fierce", "intense"],
+  hot: ["blazing", "fiery", "steamy", "banging", "sexy"],
+  hungry: ["starving", "famished", "peckish", "ravenous", "craving"],
+  important: ["vital", "crucial", "key", "essential", "critical"],
+  interesting: ["fascinating", "cool", "captivating", "dope", "wild"],
+  jealous: ["envious", "green-eyed", "resentful", "covetous", "bitter"],
+  lazy: ["slothful", "slow", "chill", "unmotivated", "dragging"],
+  light: ["bright", "luminous", "radiant", "glowy", "airy"],
+  little: ["tiny", "small", "mini", "wee", "pocket"],
+  lonely: ["alone", "isolated", "solo", "abandoned", "forsaken"],
+  loud: ["booming", "blaring", "rowdy", "raging", "thundering"],
+  love: ["adore", "cherish", "dig", "fancy", "worship"],
+  mean: ["cruel", "ruthless", "harsh", "evil", "spiteful"],
+  nice: ["pleasant", "friendly", "sweet", "cool", "decent"],
+  old: ["ancient", "aged", "vintage", "elderly", "retro"],
+  pretty: ["cute", "beautiful", "hot", "stunning", "banging"],
+  sad: ["down", "blue", "unhappy", "depressed", "gloomy"],
+  safe: ["secure", "protected", "solid", "stable", "locked"],
+  scary: ["frightening", "terrifying", "creepy", "spooky", "hair-raising"],
+  serious: ["grave", "stern", "intense", "important", "solemn"],
+  short: ["tiny", "mini", "brief", "compact", "little"],
+  shy: ["timid", "bashful", "reserved", "quiet"],
+  sick: ["ill", "unwell", "dope", "awesome", "lit"],
+  slow: ["sluggish", "laggy", "lazy", "dragging"],
+  strong: ["powerful", "tough", "mighty", "solid", "sturdy"],
+  stupid: ["dumb", "idiotic", "dense", "foolish", "clueless"],
+  sweet: ["nice", "cute", "adorable", "pleasant", "sugary"],
+  tough: ["hard", "durable", "resilient", "gritty", "rough"],
+  ugly: ["hideous", "gross", "nasty", "rough"],
+  weak: ["frail", "soft", "fragile", "flimsy", "squishy"],
+  weird: ["strange", "bizarre", "wacky", "odd", "quirky"],
+  wet: ["damp", "moist", "soggy", "drippy", "sloppy"],
+  wild: ["crazy", "insane", "feral", "unhinged", "mad"],
+  young: ["youthful", "juvenile", "fresh", "new", "teeny"],
+  zany: ["crazy", "wacky", "odd", "quirky", "funny"],
+  zoom: ["speed", "dash", "rush", "blast", "jet"]
+};
+    
 
-    const ukSynonymData = {
-      cool: ['brilliant', 'proper', 'sound', 'mint', 'class', 'tidy'],
-      angry: ['cross', 'fuming', 'livid', 'irritated', 'peevish'],
-      fast: ['quick', 'rapid', 'speedy', 'swift', 'nippy'],
-      good: ['brilliant', 'smashing', 'lovely', 'top-notch', 'proper'],
-      bad: ['rubbish', 'naff', 'dodgy', 'poor', 'pants'],
-      big: ['huge', 'massive', 'giant', 'proper', 'whopping'],
-      small: ['tiny', 'wee', 'little', 'compact'],
-      smart: ['clever', 'bright', 'sharp', 'brainy'],
-      rich: ['wealthy', 'loaded', 'flush', 'well-off'],
-      poor: ['skint', 'broke', 'hard-up'],
-     ace: ["champion", "top-tier", "winner", "legend", "king"],
-admire: ["respect", "idolise", "revere", "appreciate", "rate highly"],
-alert: ["aware", "watchful", "attentive", "keen", "sharp"],
-angry: ["cross", "livid", "fuming", "irate", "peevish"],
-awesome: ["brilliant", "mint", "classy", "amazing", "smashing"],
-baby: ["babe", "kiddo", "child", "tiny", "little one"],
-badass: ["beast", "monster", "freak", "hero", "legend"],
-beautiful: ["stunning", "gorgeous", "lovely", "breathtaking", "mint"],
-big: ["massive", "huge", "giant", "whopping", "enormous"],
-boring: ["dull", "naff", "tedious", "drab", "meh"],
-brave: ["valiant", "gutsy", "heroic", "bold", "fearless"],
-bright: ["smart", "clever", "radiant", "luminous", "brilliant"],
-broken: ["shattered", "wrecked", "damaged", "kaput", "busted"],
-busy: ["occupied", "swamped", "tied-up", "overloaded", "jam-packed"],
-calm: ["chill", "relaxed", "mellow", "serene", "peaceful"],
-cheap: ["budget", "low-cost", "bargain", "shoddy", "naff"],
-clean: ["tidy", "neat", "spotless", "pristine", "fresh"],
-cold: ["chilly", "freezing", "icy", "crisp", "frosty"],
-crazy: ["mad", "bonkers", "insane", "loopy", "nuts"],
-dangerous: ["risky", "hazardous", "scary", "perilous", "treacherous"],
-dark: ["gloomy", "shadowy", "murky", "dim", "black"],
-dead: ["gone", "deceased", "expired", "croaked", "kaput"],
-delicious: ["tasty", "scrumptious", "yummy", "mouthwatering", "lovely"],
-dirty: ["filthy", "grimy", "messy", "nasty", "gross"],
-dumb: ["stupid", "daft", "idiotic", "dense", "clueless"],
-easy: ["simple", "effortless", "piece-of-cake", "straightforward", "smooth"],
-empty: ["bare", "vacant", "hollow", "void", "bare-ass"],
-excited: ["hyped", "pumped", "stoked", "thrilled", "chuffed"],
-fast: ["quick", "rapid", "speedy", "nippy", "swift"],
-fat: ["chunky", "thick", "meaty", "plump", "solid"],
-fierce: ["ferocious", "savage", "wild", "intense", "vicious"],
-friendly: ["kind", "amiable", "pleasant", "chill", "cool"],
-fun: ["dope", "lit", "amazing", "funny", "epic"],
-funny: ["hilarious", "witty", "comic", "joke-y", "goofy"],
-good: ["brilliant", "smashing", "lovely", "top-notch", "proper"],
-happy: ["joyful", "cheerful", "chuffed", "delighted", "elated"],
-hard: ["tough", "rigid", "solid", "rough", "gritty"],
-hardcore: ["extreme", "intense", "brutal", "fierce", "mad"],
-hot: ["blazing", "fiery", "steamy", "banging", "spicy"],
-hungry: ["starving", "famished", "peckish", "ravenous", "craving"],
-important: ["vital", "crucial", "key", "essential", "critical"],
-interesting: ["fascinating", "cool", "captivating", "awesome", "wild"],
-jealous: ["envious", "green-eyed", "resentful", "covetous", "bitter"],
-lazy: ["slothful", "slow", "unmotivated", "dragging", "lethargic"],
-light: ["bright", "luminous", "radiant", "glowy", "airy"],
-little: ["tiny", "wee", "small", "mini", "pocket"],
-lonely: ["alone", "isolated", "solo", "forsaken", "abandoned"],
-loud: ["booming", "blaring", "rowdy", "thundering", "raging"],
-love: ["adore", "cherish", "fancy", "dig", "worship"],
-mad: ["angry", "cross", "fuming", "irate", "livid"],
-mean: ["cruel", "ruthless", "harsh", "spiteful", "evil"],
-nice: ["pleasant", "friendly", "sweet", "cool", "decent"],
-old: ["ancient", "aged", "vintage", "elderly", "retro"],
-poor: ["skint", "broke", "hard-up", "destitute", "low-cash"],
-pretty: ["cute", "beautiful", "stunning", "lovely", "mint"],
-rich: ["wealthy", "loaded", "flush", "well-off", "stacked"],
-sad: ["down", "blue", "unhappy", "gloomy", "depressed"],
-safe: ["secure", "protected", "solid", "stable", "locked"],
-scary: ["frightening", "terrifying", "creepy", "spooky", "hair-raising"],
-serious: ["grave", "stern", "intense", "important", "solemn"],
-short: ["tiny", "mini", "brief", "compact", "little"],
-shy: ["timid", "bashful", "reserved", "quiet"],
-sick: ["ill", "poorly", "unwell", "dodgy", "off-color"],
-slow: ["sluggish", "laggy", "lazy", "dragging", "slowed"],
-small: ["tiny", "wee", "mini", "compact", "short"],
-smart: ["clever", "bright", "sharp", "brainy"],
-strong: ["powerful", "tough", "mighty", "solid", "sturdy"],
-stupid: ["daft", "dumb", "idiotic", "clueless", "foolish"],
-sweet: ["nice", "cute", "adorable", "pleasant", "sugary"],
-tough: ["hard", "durable", "resilient", "gritty", "rough"],
-ugly: ["hideous", "gross", "nasty", "rough"],
-weak: ["frail", "soft", "fragile", "flimsy", "squishy"],
-weird: ["strange", "bizarre", "wacky", "odd", "quirky"],
-wet: ["damp", "moist", "soggy", "drippy", "sloppy"],
-wild: ["mad", "insane", "feral", "unhinged", "bonkers"],
-young: ["youthful", "juvenile", "fresh", "new", "teeny"],
-zany: ["crazy", "wacky", "odd", "quirky", "funny"],
-zoom: ["speed", "dash", "rush", "blast", "jet"] 
-    };
+    const synonymsUK = {
+  awesome: ["brilliant", "wicked", "smashing", "ace", "mint", "top-notch"],
+  angry: ["fuming", "livid", "pissed", "irate", "raging"],
+  fast: ["quick", "rapid", "nippy", "swift", "speedy"],
+  good: ["great", "solid", "excellent", "decent", "spot-on"],
+  bad: ["rubbish", "rough", "awful", "poor", "dire"],
+  big: ["huge", "massive", "giant", "enormous", "colossal"],
+  small: ["tiny", "little", "wee", "mini", "compact"],
+  smart: ["clever", "bright", "sharp", "brainy"],
+  rich: ["loaded", "wealthy", "well-off", "flush", "minted"],
+  poor: ["broke", "skint", "hard-up", "penniless"],
+  ace: ["champ", "star", "legend", "top-dog"],
+  admire: ["respect", "look up to", "revere", "appreciate"],
+  alert: ["aware", "watchful", "attentive", "sharp"],
+  baby: ["baby", "child", "kid", "little one"],
+  badass: ["legend", "beast", "hero", "machine"],
+  beautiful: ["gorgeous", "stunning", "lovely", "fit", "banging"],
+  boring: ["dull", "dead", "dry", "naff", "meh"],
+  brave: ["fearless", "bold", "heroic", "gutsy"],
+  bright: ["luminous", "vivid", "radiant", "brilliant"],
+  broken: ["smashed", "knackered", "wrecked", "busted"],
+  busy: ["swamped", "snowed under", "tied up", "rammed"],
+  calm: ["chill", "relaxed", "mellow", "laid-back"],
+  cheap: ["budget", "low-cost", "affordable", "bargain"],
+  clean: ["tidy", "neat", "spotless", "fresh"],
+  cold: ["freezing", "icy", "chilly", "brass-monkeys"],
+  crazy: ["mental", "bonkers", "mad", "wild"],
+  dangerous: ["risky", "hazardous", "dodgy", "deadly"],
+  dark: ["gloomy", "murky", "dim", "black"],
+  dead: ["gone", "deceased", "done in", "finished"],
+  delicious: ["tasty", "lush", "scrummy", "bangin"],
+  dirty: ["filthy", "grimy", "messy", "rank"],
+  dumb: ["stupid", "thick", "clueless", "daft"],
+  easy: ["simple", "straightforward", "piece of cake", "easy-peasy"],
+  empty: ["bare", "vacant", "hollow"],
+  excited: ["buzzing", "chuffed", "gassed", "pumped"],
+  fat: ["chunky", "plump", "stocky", "heavyset"],
+  fierce: ["ferocious", "savage", "wild", "intense"],
+  friendly: ["kind", "nice", "sound", "pleasant"],
+  fun: ["brilliant", "class", "mint", "top"],
+  funny: ["hilarious", "banter", "witty", "comical"],
+  happy: ["happy", "cheerful", "chuffed", "buzzing"],
+  hard: ["tough", "solid", "rough", "gritty"],
+  hardcore: ["extreme", "brutal", "intense", "full-on"],
+  hot: ["boiling", "roasting", "banging", "fit"],
+  hungry: ["starving", "famished", "peckish", "ravenous"],
+  important: ["vital", "crucial", "key", "essential"],
+  interesting: ["fascinating", "cool", "proper", "sound"],
+  jealous: ["jealous", "envious", "green-eyed", "bitter"],
+  lazy: ["idle", "bone-idle", "slack", "unmotivated"],
+  light: ["bright", "airy", "pale", "soft"],
+  little: ["tiny", "wee", "small", "mini"],
+  lonely: ["alone", "isolated", "on your tod"],
+  loud: ["booming", "blaring", "rowdy", "raucous"],
+  love: ["adore", "fancy", "cherish", "worship"],
+  mean: ["cruel", "harsh", "nasty", "spiteful"],
+  nice: ["lovely", "pleasant", "sound", "decent"],
+  old: ["ancient", "aged", "vintage", "old-school"],
+  pretty: ["cute", "lovely", "fit", "gorgeous"],
+  sad: ["down", "blue", "gutted", "miserable"],
+  safe: ["secure", "sound", "protected", "solid"],
+  scary: ["frightening", "terrifying", "creepy", "spooky"],
+  serious: ["grave", "stern", "proper", "solemn"],
+  short: ["short", "brief", "tiny", "little"],
+  shy: ["quiet", "bashful", "reserved", "timid"],
+  sick: ["ill", "unwell", "rough", "poorly"],
+  slow: ["sluggish", "laggy", "dragging", "plodding"],
+  strong: ["powerful", "solid", "tough", "mighty"],
+  stupid: ["dumb", "idiotic", "thick", "clueless"],
+  sweet: ["lovely", "cute", "adorable", "nice"],
+  tough: ["hard", "durable", "resilient", "gritty"],
+  ugly: ["hideous", "rough", "minging", "rank"],
+  weak: ["frail", "feeble", "soft", "flimsy"],
+  weird: ["strange", "odd", "bizarre", "dodgy"],
+  wet: ["damp", "soaked", "soggy", "dripping"],
+  wild: ["mad", "mental", "feral", "unhinged"],
+  young: ["young", "youthful", "fresh", "new"],
+  zany: ["mad", "wacky", "odd", "quirky"],
+  zoom: ["dash", "rush", "speed", "blast"]
+};
 
     function searchSynonyms(world) {
       const input = world === 'us' ? document.getElementById('usSynonymInput') : document.getElementById('ukSynonymInput');
@@ -1450,7 +1431,7 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
         document.getElementById('ukSynonymResults').innerHTML = '';
       }
     }
-<!-- ===== Public Advice Box (Footer) ===== -->
+    <!-- ===== Footer Advice Box ===== -->
 <div class="footer-advice-box">
   <p class="advice-intro">
     💬 We've been given a lot of useful advice. Wanna give us some advice? Please, do.
@@ -1459,11 +1440,11 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
   <textarea id="adviceInput" placeholder="Write your advice here..."></textarea>
   <button onclick="submitAdvice()">Send</button>
 
-  <p id="thankYouMessage" class="thank-you hidden">
+  <p id="thankYouMessage" class="thank-you" style="display:none;">
     Thank you so much! We will definitely consider this 😊
   </p>
 
-  <div id="adviceWall" class="advice-wall"></div>
+  <div id="adviceWall"></div>
 </div>
 
 <script>
@@ -1477,7 +1458,7 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
     adviceList.push(text);
     input.value = "";
 
-    document.getElementById("thankYouMessage").classList.remove("hidden");
+    document.getElementById("thankYouMessage").style.display = "block";
     renderAdvice();
   }
 
@@ -1486,72 +1467,15 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
     wall.innerHTML = "";
     adviceList.forEach(a => {
       const div = document.createElement("div");
-      div.className = "advice-entry";
       div.textContent = a;
+      div.style.padding = "6px";
+      div.style.marginTop = "4px";
+      div.style.background = "#eee";
+      div.style.borderRadius = "6px";
       wall.appendChild(div);
     });
   }
 </script>
 
-<style>
-.footer-advice-box {
-  margin-top: 60px;
-  padding: 16px;
-  border-top: 1px solid #ddd;
-  background: #fafafa;
-  font-size: 14px;
-}
-
-.advice-intro {
-  margin-bottom: 8px;
-  color: #444;
-}
-
-.footer-advice-box textarea {
-  width: 100%;
-  height: 55px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  padding: 6px;
-  resize: none;
-  font-family: inherit;
-}
-
-.footer-advice-box button {
-  margin-top: 6px;
-  padding: 6px 12px;
-  border-radius: 6px;
-  border: none;
-  background: #111;
-  color: white;
-  cursor: pointer;
-}
-
-.thank-you {
-  margin-top: 6px;
-  color: green;
-  font-size: 13px;
-}
-
-.hidden {
-  display: none;
-}
-
-.advice-wall {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.advice-entry {
-  background: #eee;
-  padding: 6px;
-  border-radius: 6px;
-  font-size: 13px;
-}
-</style>
-
-</style>
   </script></body>
-            </html>
+  </html>
