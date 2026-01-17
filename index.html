@@ -1450,6 +1450,114 @@ zoom: ["speed", "dash", "rush", "blast", "jet"]
         document.getElementById('ukSynonymResults').innerHTML = '';
       }
     }
+<div class="site-comment-box">
+  <h4>💬 Got advice?</h4>
+  <textarea id="siteCommentInput" placeholder="Drop your thoughts..."></textarea>
+  <button onclick="submitSiteComment()">Send</button>
+  <div id="siteCommentResult"></div>
+</div>
 
+<script>
+  function submitSiteComment() {
+    const input = document.getElementById("siteCommentInput");
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = "";
+    document.getElementById("siteCommentResult").innerHTML =
+      "Thank you so much for the advice! We'll try to consider it 😊";
+  }
+</script>
+
+<style>
+.site-comment-box {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 230px;
+  padding: 10px;
+  background: #fffbe6;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  z-index: 9999;
+}
+.site-comment-box textarea {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 6px;
+  resize: none;
+}
+.site-comment-box button {
+  margin-top: 6px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}
+#siteCommentResult {
+  margin-top: 6px;
+  font-size: 12px;
+  color: green;
+}
+</style><div class="site-comment-box">
+  <h4>💬 Got advice?</h4>
+  <textarea id="siteCommentInput" placeholder="Drop your thoughts..."></textarea>
+  <button onclick="submitSiteComment()">Send</button>
+  <div id="siteCommentResult"></div>
+</div>
+
+<script>
+  function submitSiteComment() {
+    const input = document.getElementById("siteCommentInput");
+    const msg = input.value.trim();
+    if (!msg) return;
+    input.value = "";
+    document.getElementById("siteCommentResult").innerHTML =
+      "Thank you so much for the advice! We'll try to consider it 😊";
+  }
+</script>
+
+<style>
+.site-comment-box {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 230px;
+  padding: 10px;
+  background: #fffbe6;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+  z-index: 9999;
+}
+.site-comment-box textarea {
+  width: 100%;
+  height: 45px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 6px;
+  resize: none;
+}
+.site-comment-box button {
+  margin-top: 6px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  background: #111;
+  color: white;
+  padding: 6px;
+  cursor: pointer;
+}
+#siteCommentResult {
+  margin-top: 6px;
+  font-size: 12px;
+  color: green;
+}
+</style>
   </script></body>
             </html>
