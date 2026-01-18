@@ -1,810 +1,968 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AURA ENGLISH</title>
+  <title>Aura English — Dual World Platform</title>
+
+  <!-- =====================
+       FONTS
+  ====================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- =====================
+       GLOBAL STYLES
+  ====================== -->
   <style>
-    :root {
-      --bg: #0b0e14;
-      --card: #121826;
-      --text: #e9ecf1;
-      --muted: #8b93a7;
-      --accent: #6cf2c2;
-      --accent-uk: #f2c26c;
-      --danger: #ff5d5d;
-    }* {
-  box-sizing: border-box;
+
+/* ======================================================
+   ROOT VARIABLES
+====================================================== */
+
+:root {
+  --bg-main: #0e0f13;
+  --bg-soft: #151722;
+  --bg-card: #1b1e2e;
+  --bg-glass: rgba(255,255,255,0.04);
+
+  --text-main: #ffffff;
+  --text-soft: #b7bdd8;
+  --text-muted: #7d83a6;
+
+  --accent-us: #5ef3ff;
+  --accent-uk: #ffd27d;
+  --accent-glow: rgba(94,243,255,0.35);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+
+  --blur-soft: blur(14px);
+
+  --speed-fast: 0.2s;
+  --speed-mid: 0.4s;
+  --speed-slow: 0.8s;
+}
+
+/* ======================================================
+   RESET
+====================================================== */
+
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  background: radial-gradient(circle at top, #11162a, #05070c);
-  color: var(--text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  min-height: 100vh;
+  background: radial-gradient(circle at 20% 20%, #15182a, #090a12 70%);
+  font-family: Inter, system-ui, sans-serif;
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+button, input, textarea {
+  font-family: inherit;
+  outline: none;
 }
 
-button {
-  border: none;
-  background: none;
-  color: inherit;
-  cursor: pointer;
+.hidden {
+  display: none !important;
 }
 
-/* =======================
-   GLOBAL LAYOUT
-======================= */
+/* ======================================================
+   GLOBAL UTILITY
+====================================================== */
 
-.screen {
-  min-height: 100vh;
-  display: none;
+.glow-us {
+  box-shadow: 0 0 30px rgba(94,243,255,0.45);
+}
+
+.glow-uk {
+  box-shadow: 0 0 30px rgba(255,210,125,0.45);
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======================================================
+   ENTRY GATE SCREEN
+====================================================== */
+
+#gateScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 48px 24px 120px;
-  gap: 32px;
-  position: relative;
-  transition: background 0.6s ease;
+  gap: 40px;
+  background: radial-gradient(circle at center, #121428, #06070d);
 }
 
-.screen.active {
-  display: flex;
-}
-
-h1 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+#gateTitle {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
   text-align: center;
 }
 
-.subtitle {
-  color: var(--muted);
-  font-size: 1.1rem;
+#gateSubtitle {
+  font-size: 1.05rem;
+  color: var(--text-soft);
+  max-width: 520px;
   text-align: center;
-  max-width: 600px;
 }
 
-/* =======================
-   HOMEPAGE
-======================= */
-
-.world-gate {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  margin-top: 24px;
-  width: min(700px, 100%);
-}
-
-.world-btn {
-  position: relative;
-  padding: 28px 24px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #141a2b, #0c1020);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+#gateButtons {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  overflow: hidden;
-  isolation: isolate;
+  gap: 28px;
 }
 
-.world-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.08), transparent 80%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: -1;
-}
-
-.world-btn:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.world-btn:hover::before {
-  opacity: 1;
-}
-
-/* GLITCH EFFECT */
-.world-btn.glitch:hover {
-  animation: glitch-skew 0.35s steps(2, end);
-}
-
-.world-btn.glitch:hover span {
+.gateBtn {
   position: relative;
-}
-
-.world-btn.glitch:hover span::before,
-.world-btn.glitch:hover span::after {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  overflow: hidden;
-  clip-path: inset(0 0 0 0);
-  opacity: 0.8;
-}
-
-.world-btn.glitch:hover span::before {
-  transform: translate(2px, -2px);
-  color: #ff5df5;
-  animation: glitch-clip 0.4s infinite linear alternate-reverse;
-}
-
-.world-btn.glitch:hover span::after {
-  transform: translate(-2px, 2px);
-  color: #5dffff;
-  animation: glitch-clip 0.35s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-skew {
-  0% { transform: skew(0deg); }
-  20% { transform: skew(1deg); }
-  40% { transform: skew(-1deg); }
-  60% { transform: skew(0.5deg); }
-  80% { transform: skew(-0.5deg); }
-  100% { transform: skew(0deg); }
-}
-
-@keyframes glitch-clip {
-  0% { clip-path: inset(0 0 80% 0); }
-  20% { clip-path: inset(20% 0 60% 0); }
-  40% { clip-path: inset(40% 0 40% 0); }
-  60% { clip-path: inset(60% 0 20% 0); }
-  80% { clip-path: inset(80% 0 0 0); }
-  100% { clip-path: inset(0 0 0 0); }
-}
-
-/* =======================
-   SEARCH BAR (GLOBAL)
-======================= */
-
-.search-wrap {
-  width: min(900px, 100%);
-  margin-top: 40px;
-  position: sticky;
-  top: 24px;
-  z-index: 20;
-}
-
-.search-bar {
-  width: 100%;
-  padding: 20px 22px;
+  min-width: 200px;
+  padding: 18px 26px;
   border-radius: 18px;
-  background: linear-gradient(135deg, #10162a, #070b16);
-  border: 1px solid rgba(255,255,255,0.1);
-  font-size: 1.15rem;
-  color: var(--text);
-  outline: none;
-  transition: box-shadow 0.25s ease, border-color 0.25s ease, background 0.4s ease;
-}
-
-.search-bar::placeholder {
-  color: #7c86a3;
-}
-
-.search-bar:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(108,242,194,0.15), 0 10px 40px rgba(0,0,0,0.6);
-}
-
-/* =======================
-   SYNONYM PANEL
-======================= */
-
-.results {
-  width: min(900px, 100%);
-  margin-top: 28px;
-  display: grid;
-  gap: 20px;
-}
-
-.result-card {
-  background: linear-gradient(135deg, #121a30, #0a1020);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 20px;
-  padding: 22px 22px 20px;
-  display: grid;
-  gap: 14px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-  position: relative;
-  overflow: hidden;
-}
-
-.result-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  opacity: 0.9;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 12px;
-}
-
-.chip {
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
-  font-size: 0.9rem;
-  letter-spacing: 0.02em;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
-}
-
-.chip:hover {
-  transform: translateY(-1px) scale(1.03);
-  background: rgba(255,255,255,0.1);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-/* =======================
-   COURSES GRID
-======================= */
-
-.courses {
-  width: min(1100px, 100%);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 22px;
-  margin-top: 56px;
-}
-
-.course-card {
-  position: relative;
-  padding: 22px 20px 20px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, #121a30, #0a1020);
-  border: 1px solid rgba(255,255,255,0.08);
-  display: grid;
-  gap: 12px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  overflow: hidden;
-}
-
-.course-card:hover {
-  transform: translateY(-4px) scale(1.01);
-  box-shadow: 0 16px 50px rgba(0,0,0,0.5);
-}
-
-.course-title {
+  border: none;
   font-size: 1.05rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.course-desc {
-  font-size: 0.9rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-.course-status {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
-  color: #cdd3ff;
-  backdrop-filter: blur(6px);
-}
-
-.course-status.low { color: #ffb86c; border-color: rgba(255,184,108,0.35); }
-.course-status.classified { color: #6cf2c2; border-color: rgba(108,242,194,0.35); }
-
-/* =======================
-   COURSE PAGE
-======================= */
-
-.course-page {
-  width: min(900px, 100%);
-  display: grid;
-  gap: 26px;
-  margin-top: 40px;
-}
-
-.progress {
-  height: 10px;
-  width: 100%;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  background: linear-gradient(135deg, #1b1f33, #11131f);
+  color: white;
   overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.progress-inner {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #6cf2c2, #5da9ff);
+.gateBtn span {
+  position: relative;
+  z-index: 2;
 }
 
-.lesson {
-  border-radius: 18px;
-  background: linear-gradient(135deg, #121a30, #0a1020);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 20px;
-  display: grid;
-  gap: 12px;
-}
-
-.lesson-title {
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.lesson-placeholder {
-  color: var(--muted);
-  font-size: 0.9rem;
-}
-
-/* =======================
-   FOOTER + SECRET ADVICE BOX
-======================= */
-
-footer {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  z-index: 30;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-  font-size: 0.75rem;
-  color: #8f97ad;
-  opacity: 0.5;
-  user-select: none;
+.gateBtn::before,
+.gateBtn::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  opacity: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
   transition: opacity 0.3s ease;
 }
 
-footer:hover {
+.gateBtn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.gateBtn:hover::before {
   opacity: 1;
 }
 
-.advice-box {
-  width: 280px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #121a30, #0a1020);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 14px;
-  display: none;
-  gap: 10px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+/* ================= GLITCH EFFECT ================= */
+
+.gateBtn.glitch:hover {
+  animation: glitchPulse 0.4s steps(2, end);
 }
 
-.advice-box.active {
-  display: grid;
-}
-
-.advice-box textarea {
-  width: 100%;
-  min-height: 70px;
-  resize: vertical;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 12px;
-  padding: 10px;
-  color: var(--text);
-  font-size: 0.85rem;
-  outline: none;
-}
-
-.advice-box textarea::placeholder {
-  color: #8b93a7;
-}
-
-.advice-box button {
-  align-self: flex-end;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #6cf2c2, #5da9ff);
-  color: #05070c;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.advice-box button:hover {
-  transform: translateY(-1px) scale(1.03);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-.advice-confirm {
-  font-size: 0.75rem;
-  color: #6cf2c2;
-  display: none;
-}
-
-/* =======================
-   BUTTON VIBRATION (HUM)
-======================= */
-
-.vibe {
-  animation: vibe 2.2s infinite ease-in-out;
-}
-
-@keyframes vibe {
+@keyframes glitchPulse {
   0% { transform: translate(0,0); }
-  25% { transform: translate(0.3px,-0.4px); }
-  50% { transform: translate(-0.3px,0.3px); }
-  75% { transform: translate(0.4px,0.2px); }
+  20% { transform: translate(-2px,1px); }
+  40% { transform: translate(2px,-1px); }
+  60% { transform: translate(-1px,2px); }
+  80% { transform: translate(1px,-2px); }
   100% { transform: translate(0,0); }
 }
 
-/* =======================
-   US / UK TYPOGRAPHY MODES
-======================= */
-
-body.us-mode {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+.gate-us:hover {
+  box-shadow: 0 0 35px rgba(94,243,255,0.55);
 }
 
-body.uk-mode {
-  font-family: "Georgia", "Times New Roman", serif;
+.gate-uk:hover {
+  box-shadow: 0 0 35px rgba(255,210,125,0.55);
 }
 
-/* =======================
-   BACKGROUND AURA STATES
-======================= */
+/* ======================================================
+   MAIN APP WRAPPER
+====================================================== */
 
-body.aura-high {
-  background: radial-gradient(circle at top, #122f2a, #05070c);
-}
-
-body.aura-low {
-  background: radial-gradient(circle at top, #2a1212, #05070c);
-}
-
-/* =======================
-   NAV BAR
-======================= */
-
-.top-nav {
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  z-index: 40;
+#app {
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+/* ======================================================
+   TOP NAV BAR
+====================================================== */
+
+#topBar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  padding: 18px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10,12,20,0.8);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+#brand {
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  font-size: 1.2rem;
+}
+
+#brand span {
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+#worldBadge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.08);
+}
+
+#backBtn {
+  border: none;
+  background: rgba(255,255,255,0.06);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+#backBtn:hover {
+  background: rgba(255,255,255,0.12);
+}
+
+/* ======================================================
+   HERO SEARCH SECTION
+====================================================== */
+
+#hero {
+  padding: 70px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+#heroTitle {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+#heroSubtitle {
+  color: var(--text-soft);
+  max-width: 620px;
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+#searchWrap {
+  width: 100%;
+  max-width: 720px;
+  position: relative;
+}
+
+#synonymInput {
+  width: 100%;
+  padding: 18px 22px;
+  border-radius: 18px;
+  border: none;
+  font-size: 1.05rem;
+  background: rgba(255,255,255,0.06);
+  color: white;
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+#synonymInput::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+#synonymInput:focus {
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 35px rgba(255,255,255,0.12);
+}
+
+#synonymResults {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 820px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.synonymCard {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  font-size: 0.85rem;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.synonymCard:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.1);
+  box-shadow: 0 0 20px rgba(255,255,255,0.12);
+}
+
+/* ======================================================
+   COURSES SECTION
+====================================================== */
+
+#coursesSection {
+  padding: 60px 26px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.courseGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.groupTitle {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  opacity: 0.9;
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.courseCard {
+  position: relative;
+  padding: 20px 18px 24px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.courseCard:hover {
+  transform: translateY(-4px) scale(1.01);
+  background: linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+}
+
+.courseCard h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.courseCard p {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.statusTag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* ======================================================
+   COURSE PAGE
+====================================================== */
+
+#coursePage {
+  padding: 60px 24px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+#courseHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#courseTitle {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+#courseTagline {
+  font-size: 1rem;
+  color: var(--text-soft);
+}
+
+#progressWrap {
+  width: 100%;
+  max-width: 420px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #5ef3ff, #ffd27d);
+}
+
+.lessonBlock {
+  padding: 20px 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.nav-btn {
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #d8dcff;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+.lessonBlock h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
-.nav-btn:hover {
-  transform: translateY(-1px) scale(1.03);
+.lessonBlock .lessonBody {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  font-style: italic;
+}
+
+/* ======================================================
+   FOOTER
+====================================================== */
+
+footer {
+  margin-top: auto;
+  padding: 50px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+footer p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+#feedbackToggle {
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+#feedbackBox {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#feedbackBox textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 12px;
+  border: none;
+  padding: 10px 12px;
+  font-size: 0.8rem;
+  background: rgba(255,255,255,0.08);
+  color: white;
+}
+
+#feedbackBox button {
+  align-self: flex-end;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
   background: rgba(255,255,255,0.12);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  color: white;
+  cursor: pointer;
+}
+
+#feedbackThanks {
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+#feedbackList {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedbackItem {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.06);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+/* ======================================================
+   US WORLD STYLE OVERRIDES
+====================================================== */
+
+.us-mode {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.us-mode #worldBadge {
+  background: rgba(94,243,255,0.2);
+  color: #5ef3ff;
+}
+
+.us-mode #synonymInput:focus {
+  box-shadow: 0 0 0 2px rgba(94,243,255,0.15), 0 0 40px rgba(94,243,255,0.25);
+}
+
+.us-mode .courseCard:hover {
+  box-shadow: 0 0 35px rgba(94,243,255,0.35);
+}
+
+.us-mode .synonymCard:hover {
+  box-shadow: 0 0 25px rgba(94,243,255,0.25);
+}
+
+/* ======================================================
+   UK WORLD STYLE OVERRIDES
+====================================================== */
+
+.uk-mode {
+  font-family: 'Merriweather', serif;
+}
+
+.uk-mode #worldBadge {
+  background: rgba(255,210,125,0.25);
+  color: #ffd27d;
+}
+
+.uk-mode #synonymInput:focus {
+  box-shadow: 0 0 0 2px rgba(255,210,125,0.15), 0 0 40px rgba(255,210,125,0.25);
+}
+
+.uk-mode .courseCard:hover {
+  box-shadow: 0 0 35px rgba(255,210,125,0.35);
+}
+
+.uk-mode .synonymCard:hover {
+  box-shadow: 0 0 25px rgba(255,210,125,0.25);
+}
+
+/* ======================================================
+   RESPONSIVE
+====================================================== */
+
+@media (max-width: 640px) {
+
+  #gateButtons {
+    flex-direction: column;
+  }
+
+  #topBar {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  #coursesSection {
+    padding: 40px 16px 60px;
+  }
+
 }
 
   </style>
 </head>
-<body>  <!-- NAV -->  <div class="top-nav">
-    <button class="nav-btn" id="homeBtn">HOME</button>
-    <button class="nav-btn" id="coursesBtn">COURSES</button>
-  </div>  <!-- =======================
-       HOMEPAGE
-  ======================= -->  <section class="screen active" id="homeScreen">
-    <h1>Learn Real English. Not Textbook English.</h1>
-    <p class="subtitle">Two worlds. Same respect. Pick your universe.</p><div class="world-gate">
-  <button class="world-btn glitch vibe" id="usGate">
-    <span data-text="🇺🇸 US English">🇺🇸 US English</span>
-  </button>
-  <button class="world-btn glitch vibe" id="ukGate">
-    <span data-text="🇬🇧 UK English">🇬🇧 UK English</span>
-  </button>
-</div>
+<body>
 
-<div class="search-wrap">
-  <input
-    type="text"
-    class="search-bar"
-    id="globalSearch"
-    placeholder="Type a word… we’ll make it better."
-  />
-</div>
+<!-- ======================================================
+     ENTRY GATE
+====================================================== -->
 
-<div class="results" id="resultsPanel"></div>
-
-  </section>  <!-- =======================
-       COURSES SCREEN
-  ======================= -->  <section class="screen" id="coursesScreen">
-    <h1>Courses</h1>
-    <p class="subtitle">Structured. Clean. Empty on purpose.</p><div class="courses" id="coursesGrid"></div>
-
-  </section>  <!-- =======================
-       COURSE PAGE
-  ======================= -->  <section class="screen" id="coursePage">
-    <h1 id="courseTitle">Course</h1>
-    <p class="subtitle" id="courseTagline">Course description.</p><div class="course-page">
-  <div class="progress"><div class="progress-inner"></div></div>
-
-  <div class="lesson">
-    <div class="lesson-title">▶ Lesson 1</div>
-    <div class="lesson-placeholder">[ ADD CONTENT HERE ]</div>
-  </div>
-
-  <div class="lesson">
-    <div class="lesson-title">▶ Lesson 2</div>
-    <div class="lesson-placeholder">[ ADD CONTENT HERE ]</div>
-  </div>
-
-  <div class="lesson">
-    <div class="lesson-title">▶ Lesson 3</div>
-    <div class="lesson-placeholder">[ ADD CONTENT HERE ]</div>
+<div id="gateScreen">
+  <div id="gateTitle">Learn Real English. Not Textbook English.</div>
+  <div id="gateSubtitle">Choose your world. Same platform. Two vibes.</div>
+  <div id="gateButtons">
+    <button class="gateBtn gate-us glitch" onclick="enterWorld('us')"><span>🇺🇸 US English</span></button>
+    <button class="gateBtn gate-uk glitch" onclick="enterWorld('uk')"><span>🇬🇧 UK English</span></button>
   </div>
 </div>
 
-  </section>  <!-- =======================
-       FOOTER / SECRET ADVICE BOX
-  ======================= -->  <footer id="footerHint">
-    <div id="secretHint">type: <strong>check this out</strong></div><div class="advice-box" id="adviceBox">
-  <textarea placeholder="Drop advice here…"></textarea>
-  <button id="adviceSubmit">SUBMIT</button>
-  <div class="advice-confirm" id="adviceConfirm">Thank you so much. We’ll definitely consider this.</div>
+<!-- ======================================================
+     MAIN APP
+====================================================== -->
+
+<div id="app" class="hidden">
+
+  <!-- ================= TOP BAR ================= -->
+  <div id="topBar">
+    <div id="brand">AURA <span>ENGLISH</span></div>
+    <div id="worldBadge">WORLD</div>
+    <button id="backBtn" onclick="goHome()">Back</button>
+  </div>
+
+  <!-- ================= HERO SEARCH ================= -->
+  <section id="hero">
+    <div id="heroTitle">Upgrade Your English</div>
+    <div id="heroSubtitle">Type any word. We’ll make it better.</div>
+
+    <div id="searchWrap">
+      <input id="synonymInput" type="text" placeholder="Type a word…" autocomplete="off" />
+    </div>
+
+    <div id="synonymResults"></div>
+  </section>
+
+  <!-- ================= COURSES ================= -->
+  <section id="coursesSection">
+
+    <!-- CORE -->
+    <div class="courseGroup">
+      <div class="groupTitle">CORE</div>
+      <div class="courseGrid">
+
+        <div class="courseCard" onclick="openCourse('Timeline Control', 'Tenses')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Timeline Control</h3>
+          <p>Tenses made clean and usable.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('The No-S Club', 'Uncountables')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>The No-S Club</h3>
+          <p>Uncountables that people mess up.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Brain-Rot Lore', 'Slang & Casual English')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Brain-Rot Lore</h3>
+          <p>Casual English people actually use.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Receiver Logic', 'Say vs Tell')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Receiver Logic</h3>
+          <p>Say vs tell and friends.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Spatial Funnel', 'Prepositions')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Spatial Funnel</h3>
+          <p>In, on, at without guessing.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Aura-Loss Log', 'Common Mistakes')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Aura-Loss Log</h3>
+          <p>Common errors people make.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- POWER -->
+    <div class="courseGroup">
+      <div class="groupTitle">POWER</div>
+      <div class="courseGrid">
+
+        <div class="courseCard" onclick="openCourse('Formal English', 'Professional & Academic English')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Formal English</h3>
+          <p>Emails, exams, serious situations.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Casual Combat', 'Phrasal Verbs')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Casual Combat</h3>
+          <p>Phrasal verbs made natural.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Street Protocol', 'Conversations')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Street Protocol</h3>
+          <p>Real conversations, real flow.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Connected Flow', 'Pronunciation & Linking')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Connected Flow</h3>
+          <p>Sound smoother when you speak.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ADVANCED -->
+    <div class="courseGroup">
+      <div class="groupTitle">ADVANCED</div>
+      <div class="courseGrid">
+
+        <div class="courseCard" onclick="openCourse('Confusion Matrix', 'Homophones')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Confusion Matrix</h3>
+          <p>Words that sound the same.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Weapon Engine', 'Parts of Speech')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Weapon Engine</h3>
+          <p>The core structure of English.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Lexical Supremacy', 'Advanced Vocabulary')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Lexical Supremacy</h3>
+          <p>High-level word power.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SPECIAL -->
+    <div class="courseGroup">
+      <div class="groupTitle">SPECIAL</div>
+      <div class="courseGrid">
+
+        <div class="courseCard" onclick="openCourse('Native Hacks', 'How natives actually speak')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Native Hacks</h3>
+          <p>Shortcuts natives use daily.</p>
+        </div>
+
+        <div class="courseCard" onclick="openCourse('Quiz Arena', 'Interactive Quizzes')">
+          <div class="statusTag">STATUS: CLASSIFIED</div>
+          <h3>Quiz Arena</h3>
+          <p>Test yourself and level up.</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ================= COURSE PAGE ================= -->
+  <section id="coursePage" class="hidden">
+
+    <div id="courseHeader">
+      <div id="courseTitle">Course Title</div>
+      <div id="courseTagline">Course description</div>
+      <div id="progressWrap"><div id="progressBar"></div></div>
+    </div>
+
+    <div class="lessonBlock">
+      <h4>Lesson 1</h4>
+      <div class="lessonBody">[ ADD CONTENT HERE ]</div>
+    </div>
+
+    <div class="lessonBlock">
+      <h4>Lesson 2</h4>
+      <div class="lessonBody">[ ADD CONTENT HERE ]</div>
+    </div>
+
+    <div class="lessonBlock">
+      <h4>Lesson 3</h4>
+      <div class="lessonBody">[ ADD CONTENT HERE ]</div>
+    </div>
+
+    <div class="lessonBlock">
+      <h4>Lesson 4</h4>
+      <div class="lessonBody">[ ADD CONTENT HERE ]</div>
+    </div>
+
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+
+    <button id="feedbackToggle" onclick="toggleFeedback()">We’ve received lots of helpful advice ❤️ Want to leave some?</button>
+
+    <div id="feedbackBox" class="hidden">
+      <textarea id="feedbackInput" placeholder="Write your advice here..."></textarea>
+      <button onclick="submitFeedback()">Send</button>
+      <div id="feedbackThanks" class="hidden">Thank you so much. We’ll definitely consider this.</div>
+    </div>
+
+    <div id="feedbackList"></div>
+
+    <p>© Aura English</p>
+
+  </footer>
+
 </div>
 
-  </footer>  <script>
-    /* =======================
-       DATA
-    ======================= */
+<!-- ======================================================
+     SCRIPT
+====================================================== -->
 
-    const synonyms = {
-      good: {
-        us: [
-          "awesome", "solid", "fire", "legit", "clean", "dope", "clutch", "elite",
-          "sick", "cracked", "goated", "top-tier", "smooth", "fresh", "strong",
-          "on point", "nice as hell", "heat", "vibes"
-        ],
-        uk: [
-          "brilliant", "sound", "proper nice", "tidy", "lovely", "smashing", "decent",
-          "spot-on", "lush", "class", "cracking", "peng", "top-notch", "unreal",
-          "mint", "sharp", "calm", "nice one", "sweet", "beaut"
-        ]
-      },
-      bad: {
-        us: ["rough", "mid", "trash", "weak", "messy", "off", "shaky", "busted"],
-        uk: ["rubbish", "dodgy", "naff", "poor", "ropey", "pants", "iffy"]
-      },
-      big: {
-        us: ["huge", "massive", "giant", "wild", "major", "heavy", "thick"],
-        uk: ["massive", "proper big", "huge", "giant", "hefty", "whopping"]
-      }
-    };
+<script>
 
-    const courses = [
-      { id: 1, title: "Timeline Control (Tenses)", tag: "Master time without thinking about time.", status: "classified" },
-      { id: 2, title: "The No-S Club (Uncountables)", tag: "Words that refuse plural chaos.", status: "low" },
-      { id: 3, title: "Brain-Rot Lore (Slang & Casual English)", tag: "How real humans actually talk.", status: "classified" },
-      { id: 4, title: "Receiver Logic (Say vs Tell etc.)", tag: "Who gets what in a sentence.", status: "low" },
-      { id: 5, title: "Spatial Funnel (Prepositions)", tag: "In, on, at… without pain.", status: "low" },
-      { id: 6, title: "Aura-Loss Log (Common Mistakes)", tag: "Fix what silently ruins sentences.", status: "classified" },
-      { id: 7, title: "Formal English", tag: "Professional without sounding stiff.", status: "classified" },
-      { id: 8, title: "Casual Combat (Phrasal Verbs)", tag: "Verb combos that actually land.", status: "low" },
-      { id: 9, title: "Street Protocol (Conversations)", tag: "Talk naturally, not robotically.", status: "classified" },
-      { id: 10, title: "Connected Flow (Pronunciation & Linking)", tag: "Sound smooth without effort.", status: "low" },
-      { id: 11, title: "Confusion Matrix (Homophones)", tag: "Their, there, they’re… solved.", status: "classified" },
-      { id: 12, title: "Weapon Engine (Parts of Speech)", tag: "Grammar without boredom.", status: "low" },
-      { id: 13, title: "Lexical Supremacy (Advanced Vocabulary)", tag: "Say more with fewer words.", status: "classified" },
-      { id: 14, title: "Native Hacks", tag: "Tiny tricks native speakers use.", status: "classified" },
-      { id: 15, title: "Quiz Arena", tag: "Test instincts, not memorization.", status: "classified" }
-    ];
+/* ======================================================
+   GLOBAL STATE
+====================================================== */
 
-    /* =======================
-       ELEMENTS
-    ======================= */
+let currentWorld = null;
 
-    const homeScreen = document.getElementById("homeScreen");
-    const coursesScreen = document.getElementById("coursesScreen");
-    const coursePage = document.getElementById("coursePage");
+/* ======================================================
+   SYNONYM DATABASE (PLACEHOLDERS)
+   Add your real data here later
+====================================================== */
 
-    const usGate = document.getElementById("usGate");
-    const ukGate = document.getElementById("ukGate");
+const synonymData = {
+  us: {
+    // EXAMPLE FORMAT
+    // good: ["awesome", "solid", "clean", "legit"],
+    // fast: ["quick", "speedy", "rapid"],
+  },
+  uk: {
+    // EXAMPLE FORMAT
+    // good: ["brilliant", "sound", "lovely"],
+    // fast: ["quick", "rapid", "speedy"],
+  }
+};
 
-    const searchInput = document.getElementById("globalSearch");
-    const resultsPanel = document.getElementById("resultsPanel");
+/* ======================================================
+   ENTRY WORLD SELECTION
+====================================================== */
 
-    const homeBtn = document.getElementById("homeBtn");
-    const coursesBtn = document.getElementById("coursesBtn");
+function enterWorld(world) {
+  currentWorld = world;
 
-    const coursesGrid = document.getElementById("coursesGrid");
+  document.getElementById('gateScreen').classList.add('hidden');
+  document.getElementById('app').classList.remove('hidden');
 
-    const courseTitle = document.getElementById("courseTitle");
-    const courseTagline = document.getElementById("courseTagline");
+  document.body.classList.remove('us-mode', 'uk-mode');
 
-    const footerHint = document.getElementById("footerHint");
-    const adviceBox = document.getElementById("adviceBox");
-    const adviceSubmit = document.getElementById("adviceSubmit");
-    const adviceConfirm = document.getElementById("adviceConfirm");
+  if (world === 'us') {
+    document.body.classList.add('us-mode');
+    document.getElementById('worldBadge').textContent = 'US WORLD';
+  } else {
+    document.body.classList.add('uk-mode');
+    document.getElementById('worldBadge').textContent = 'UK WORLD';
+  }
+}
 
-    let currentMode = null; // "us" or "uk"
+/* ======================================================
+   NAVIGATION
+====================================================== */
 
-    /* =======================
-       NAVIGATION
-    ======================= */
+function goHome() {
+  document.getElementById('coursePage').classList.add('hidden');
+  document.getElementById('coursesSection').classList.remove('hidden');
+  document.getElementById('hero').classList.remove('hidden');
+}
 
-    function showScreen(screen) {
-      [homeScreen, coursesScreen, coursePage].forEach(s => s.classList.remove("active"));
-      screen.classList.add("active");
-    }
+function openCourse(title, tagline) {
+  document.getElementById('courseTitle').textContent = title;
+  document.getElementById('courseTagline').textContent = tagline;
 
-    homeBtn.addEventListener("click", () => {
-      showScreen(homeScreen);
-    });
+  document.getElementById('coursesSection').classList.add('hidden');
+  document.getElementById('hero').classList.add('hidden');
+  document.getElementById('coursePage').classList.remove('hidden');
+}
 
-    coursesBtn.addEventListener("click", () => {
-      showScreen(coursesScreen);
-    });
+/* ======================================================
+   SYNONYM SEARCH LOGIC
+====================================================== */
 
-    /* =======================
-       WORLD GATES
-    ======================= */
+const input = document.getElementById('synonymInput');
+const resultsBox = document.getElementById('synonymResults');
 
-    usGate.addEventListener("click", () => {
-      currentMode = "us";
-      document.body.classList.add("us-mode");
-      document.body.classList.remove("uk-mode");
-      showScreen(homeScreen);
-      searchInput.focus();
-    });
+input.addEventListener('input', () => {
+  const query = input.value.trim().toLowerCase();
 
-    ukGate.addEventListener("click", () => {
-      currentMode = "uk";
-      document.body.classList.add("uk-mode");
-      document.body.classList.remove("us-mode");
-      showScreen(homeScreen);
-      searchInput.focus();
-    });
+  resultsBox.innerHTML = '';
 
-    /* =======================
-       SEARCH LOGIC + AURA BACKGROUND
-    ======================= */
+  if (!query || !currentWorld) return;
 
-    searchInput.addEventListener("input", () => {
-      const word = searchInput.value.trim().toLowerCase();
-      renderResults(word);
+  const data = synonymData[currentWorld][query];
 
-      // Aura background logic (demo heuristic)
-      if (!word) {
-        document.body.classList.remove("aura-high", "aura-low");
-      } else if (word.length >= 4) {
-        document.body.classList.add("aura-high");
-        document.body.classList.remove("aura-low");
-      } else {
-        document.body.classList.add("aura-low");
-        document.body.classList.remove("aura-high");
-      }
-    });
+  if (!data) return;
 
-    function renderResults(word) {
-      resultsPanel.innerHTML = "";
+  data.forEach(word => {
+    const card = document.createElement('div');
+    card.className = 'synonymCard fade-in';
+    card.textContent = word;
+    resultsBox.appendChild(card);
+  });
+});
 
-      if (!word || !currentMode) return;
+/* ======================================================
+   FEEDBACK BOX
+====================================================== */
 
-      const data = synonyms[word];
-      if (!data) return;
+const feedbackToggleBtn = document.getElementById('feedbackToggle');
+const feedbackBox = document.getElementById('feedbackBox');
+const feedbackInput = document.getElementById('feedbackInput');
+const feedbackThanks = document.getElementById('feedbackThanks');
+const feedbackList = document.getElementById('feedbackList');
 
-      const card = document.createElement("div");
-      card.className = "result-card";
+function toggleFeedback() {
+  feedbackBox.classList.toggle('hidden');
+}
 
-      const title = document.createElement("div");
-      title.className = "result-title";
-      title.textContent = currentMode === "us" ? "🇺🇸 US English" : "🇬🇧 UK English";
+function submitFeedback() {
+  const text = feedbackInput.value.trim();
+  if (!text) return;
 
-      const chips = document.createElement("div");
-      chips.className = "chips";
+  const div = document.createElement('div');
+  div.className = 'feedbackItem';
+  div.textContent = text;
+  feedbackList.prepend(div);
 
-      data[currentMode].forEach(w => {
-        const chip = document.createElement("div");
-        chip.className = "chip";
-        chip.textContent = w;
-        chips.appendChild(chip);
-      });
+  feedbackInput.value = '';
+  feedbackThanks.classList.remove('hidden');
 
-      card.appendChild(title);
-      card.appendChild(chips);
-      resultsPanel.appendChild(card);
-    }
+  setTimeout(() => {
+    feedbackThanks.classList.add('hidden');
+  }, 3000);
+}
 
-    /* =======================
-       COURSES RENDER
-    ======================= */
+</script>
 
-    function renderCourses() {
-      coursesGrid.innerHTML = "";
-
-      courses.forEach(course => {
-        const card = document.createElement("div");
-        card.className = "course-card";
-
-        const status = document.createElement("div");
-        status.className = `course-status ${course.status}`;
-        status.textContent = course.status === "classified" ? "STATUS: CLASSIFIED" : "AURA LEVEL: LOW";
-
-        const title = document.createElement("div");
-        title.className = "course-title";
-        title.textContent = course.title;
-
-        const desc = document.createElement("div");
-        desc.className = "course-desc";
-        desc.textContent = course.tag;
-
-        card.appendChild(status);
-        card.appendChild(title);
-        card.appendChild(desc);
-
-        card.addEventListener("click", () => openCourse(course));
-
-        coursesGrid.appendChild(card);
-      });
-    }
-
-    function openCourse(course) {
-      courseTitle.textContent = course.title;
-      courseTagline.textContent = course.tag;
-      showScreen(coursePage);
-    }
-
-    renderCourses();
-
-    /* =======================
-       SECRET COMMAND ADVICE BOX
-    ======================= */
-
-    let buffer = "";
-    const secretPhrase = "check this out";
-
-    window.addEventListener("keydown", e => {
-      if (e.key.length === 1) {
-        buffer += e.key.toLowerCase();
-        if (!secretPhrase.startsWith(buffer)) buffer = "";
-        if (buffer === secretPhrase) {
-          adviceBox.classList.toggle("active");
-          buffer = "";
-        }
-      }
-    });
-
-    adviceSubmit.addEventListener("click", () => {
-      adviceConfirm.style.display = "block";
-      setTimeout(() => {
-        adviceConfirm.style.display = "none";
-        adviceBox.classList.remove("active");
-      }, 1800);
-    });
-
-  </script></body>
-    </html>
+</body>
+</html>
