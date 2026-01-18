@@ -10,14 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@400;600&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-/* AURA ENGLISH CORE CSS 
-   Lines 30 - 300: Styling & Animations
-*/
-
 :root {
   --bg-main: #06070a;
   --bg-soft: #0d0f1a;
-  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-card: rgba(255,255,255,0.03);
   --accent-us: #00f2ff;
   --accent-uk: #ffbd4a;
   --text-main: #ffffff;
@@ -41,6 +37,8 @@ body {
   top: 0; left: 0;
   z-index: -1;
   opacity: 0.4;
+  width: 100%;
+  height: 100%;
 }
 
 /* GATE SCREEN */
@@ -80,10 +78,7 @@ body {
   transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.btn-choice:hover {
-  transform: translateY(-5px) scale(1.05);
-}
-
+.btn-choice:hover { transform: translateY(-5px) scale(1.05); }
 .btn-us:hover { box-shadow: 0 0 40px var(--accent-us); border-color: var(--accent-us); }
 .btn-uk:hover { box-shadow: 0 0 40px var(--accent-uk); border-color: var(--accent-uk); }
 
@@ -139,6 +134,9 @@ header {
   cursor: pointer;
   transition: 0.2s;
   animation: slideUp 0.4s ease forwards;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .synonym-chip:hover {
@@ -152,7 +150,7 @@ header {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* COURSE STYLING */
+/* COURSE GRID */
 .course-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -168,22 +166,13 @@ header {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-}
-
-.course-card::after {
-  content: "OPEN FILE";
-  position: absolute;
-  bottom: -50px;
-  right: 20px;
-  font-size: 40px;
-  font-weight: 900;
-  opacity: 0.03;
   transition: 0.3s;
 }
 
-.course-card:hover::after { bottom: 10px; }
+.course-card:hover { transform: translateY(-5px) scale(1.02); }
+.course-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+.course-card p { font-size: 0.9rem; color: var(--text-soft); }
 
-/* TOAST */
 #toast {
   position: fixed;
   bottom: 20px;
@@ -202,7 +191,6 @@ header {
 .us-world { font-family: 'JetBrains Mono', monospace; }
 .uk-world { font-family: 'Merriweather', serif; }
 
-/* ... (Remaining 600+ lines of CSS/Data would continue here in actual implementation) */
   </style>
 </head>
 <body class="us-world">
@@ -233,100 +221,92 @@ header {
 
   <section id="courses">
     <h3 style="color: var(--accent-us); letter-spacing: 2px;">AVAILABLE_COURSES</h3>
-    <div class="course-grid" id="courseGrid">
-      </div>
+    <div class="course-grid" id="courseGrid"></div>
   </section>
 </div>
 
 <div id="toast">Copied to Clipboard</div>
 
 <script>
-/* THE SYNDICATE ENGINE 
-   Lines 400 - 900: Data & Logic
-*/
-
 const US_DATA = {
-  good: ["cracked", "goated", "gas", "fire", "clutch", "legit", "clean", "top-tier", "valid", "pressure", "straight heat"],
-  bad: ["trash", "mid", "dub", "brick", "sketchy", "whack", "bogus", "janky", "corny", "baked", "L"],
-  // ... adding 100s of rows here to ensure data density
+  good: ["cracked","goated","gas","fire","clutch","legit","clean","top-tier","valid","pressure","straight heat"],
+  bad: ["trash","mid","dub","brick","sketchy","whack","bogus","janky","corny","baked","L"]
 };
 
 const UK_DATA = {
-  good: ["proper nice", "brilliant", "sound", "mint", "spot-on", "smashing", "lovely", "ace", "class"],
-  bad: ["rubbish", "dodgy", "pants", "cluttered", "mental", "grim", "rough", "ghastly"],
+  good: ["proper nice","brilliant","sound","mint","spot-on","smashing","lovely","ace","class"],
+  bad: ["rubbish","dodgy","pants","cluttered","mental","grim","rough","ghastly"]
 };
 
-// ... Imagine 400 more lines of data arrays for every category ...
+const COURSES = [
+  {title:"Timeline Control",desc:"Tenses made clean and usable."},
+  {title:"The No-S Club",desc:"Uncountables that people mess up."},
+  {title:"Brain-Rot Lore",desc:"Casual English people actually use."},
+  {title:"Receiver Logic",desc:"Say vs tell and friends."},
+  {title:"Spatial Funnel",desc:"In, on, at without guessing."},
+  {title:"Aura-Loss Log",desc:"Common errors people make."},
+  {title:"Formal English",desc:"Emails, exams, serious situations."},
+  {title:"Casual Combat",desc:"Phrasal verbs made natural."},
+  {title:"Street Protocol",desc:"Real conversations, real flow."},
+  {title:"Connected Flow",desc:"Sound smoother when you speak."},
+  {title:"Confusion Matrix",desc:"Words that sound the same."},
+  {title:"Weapon Engine",desc:"The core structure of English."},
+  {title:"Lexical Supremacy",desc:"High-level word power."},
+  {title:"Native Hacks",desc:"Shortcuts natives use daily."},
+  {title:"Quiz Arena",desc:"Test yourself and level up."}
+];
 
-function initApp(world) {
+function initApp(world){
   document.getElementById('gateScreen').style.opacity = '0';
-  setTimeout(() => {
+  setTimeout(()=>{
     document.getElementById('gateScreen').style.visibility = 'hidden';
     document.getElementById('app').classList.add('active');
-  }, 800);
-  
+  },800);
+
   const badge = document.getElementById('world-badge');
-  if(world === 'us') {
-    document.body.className = 'us-world';
-    badge.style.background = 'var(--accent-us)';
-    badge.style.color = 'black';
-    badge.innerText = 'US_CORE_ACTIVE';
-  } else {
-    document.body.className = 'uk-world';
-    badge.style.background = 'var(--accent-uk)';
-    badge.style.color = 'black';
-    badge.innerText = 'UK_CORE_ACTIVE';
-  }
+  if(world==='us'){document.body.className='us-world'; badge.style.background='var(--accent-us)'; badge.style.color='black'; badge.innerText='US_CORE_ACTIVE';}
+  else{document.body.className='uk-world'; badge.style.background='var(--accent-uk)'; badge.style.color='black'; badge.innerText='UK_CORE_ACTIVE';}
+
+  populateCourses();
 }
 
-// CANVAS PARTICLE SYSTEM (Sexy Code Requirement)
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-class Particle {
-  constructor() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.size = Math.random() * 2 + 1;
-    this.speedX = Math.random() * 1 - 0.5;
-    this.speedY = Math.random() * 1 - 0.5;
-  }
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-    if (this.size > 0.2) this.size -= 0.01;
-  }
-  draw() {
-    ctx.fillStyle = 'rgba(255,255,255,0.8)';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fill();
-  }
+function populateCourses(){
+  const grid = document.getElementById('courseGrid'); grid.innerHTML='';
+  COURSES.forEach(c=>{
+    const card=document.createElement('div'); card.className='course-card';
+    card.innerHTML=`<h3>${c.title}</h3><p>${c.desc}</p>`;
+    grid.appendChild(card);
+  });
 }
 
-function handleParticles() {
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].update();
-    particles[i].draw();
-    if (particles[i].size <= 0.3) {
-      particles.splice(i, 1);
-      i--;
-    }
-  }
+// Synonym search logic
+const input = document.getElementById('synonymInput'); const resultsBox = document.getElementById('synonymResults');
+input.addEventListener('input',()=>{
+  const query=input.value.trim().toLowerCase(); resultsBox.innerHTML='';
+  if(!query) return;
+  const world= document.body.className.includes('us')?US_DATA:UK_DATA;
+  const data=world[query]; if(!data) return;
+  data.forEach(w=>{
+    const chip=document.createElement('div'); chip.className='synonym-chip'; chip.textContent=w;
+    chip.onclick=()=>{navigator.clipboard.writeText(w); showToast('Copied: '+w);}
+    resultsBox.appendChild(chip);
+  });
+});
+
+function showToast(msg){
+  const toast=document.getElementById('toast'); toast.innerText=msg; toast.classList.add('show');
+  setTimeout(()=>{toast.classList.remove('show');},2000);
 }
 
-function animate() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  if (particles.length < 100) particles.push(new Particle());
-  handleParticles();
-  requestAnimationFrame(animate);
-}
+// Canvas particles
+const canvas=document.getElementById('bg-canvas'); const ctx=canvas.getContext('2d'); canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+let particles=[]; class Particle{constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.size=Math.random()*2+1;this.speedX=Math.random()*1-0.5;this.speedY=Math.random()*1-0.5;}
+update(){this.x+=this.speedX; this.y+=this.speedY; if(this.size>0.2)this.size-=0.01;}
+draw(){ctx.fillStyle='rgba(255,255,255,0.8)';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();}}
+function handleParticles(){for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw();if(particles[i].size<=0.3){particles.splice(i,1);i--;}}}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);if(particles.length<100)particles.push(new Particle());handleParticles();requestAnimationFrame(animate);}
 animate();
 
-// ... (Another 300 lines of logic for the searcher and course builder) ...
 </script>
 </body>
 </html>
